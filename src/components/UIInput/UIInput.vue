@@ -6,7 +6,7 @@ defineProps<UIInput>();
 defineEmits<UIInputEmits>();
 
 const onInputHandler = (event: Event): string => {
-  return (event.target as HTMLInputElement).value.replaceAll(/\s+/g, ' ').trim();
+  return (event.target as HTMLInputElement).value.replace(/\s+/g, ' ').trim();
 };
 </script>
 
