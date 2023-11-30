@@ -146,7 +146,7 @@ const navItems = [
 
     &--sunday {
       border: 1px solid var(--green-primary);
-      background: linear-gradient(to top, var(--green-primary) 50%, #2A2A2A 50%);
+      background: linear-gradient(to top, var(--green-primary) 50%, #2a2a2a 50%);
     }
   }
 
