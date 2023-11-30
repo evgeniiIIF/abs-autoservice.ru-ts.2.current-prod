@@ -41,5 +41,6 @@ module.exports = {
     'prefer-destructuring': 'off',
     'no-useless-return': 'off',
     'vue/v-on-event-hyphenation': 'off',
+    'vue/attribute-hyphenation': 'off',
   },
 };
