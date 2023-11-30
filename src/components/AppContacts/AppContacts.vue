@@ -62,6 +62,7 @@ defineProps<AppContacts>();
   &__socials {
     display: flex;
     gap: 10px;
+    list-style-type: none;
   }
 
   &__social {

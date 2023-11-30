@@ -144,9 +144,10 @@ const navItems = [
     background-color: var(--green-primary, #00a19c);
     border-radius: 50%;
 
-    //&--sunday {
-    //  background-color: linear-gradient(var(--green-primary) 50%, #2A2A2A 50%);
-    //}
+    &--sunday {
+      border: 1px solid var(--green-primary);
+      background: linear-gradient(to top, var(--green-primary) 50%, #2A2A2A 50%);
+    }
   }
 
   &__working {
@@ -184,7 +185,6 @@ const navItems = [
     text-decoration: underline;
 
     @include tablet {
-      //order: 2;
       margin: 0;
     }
   }
@@ -195,7 +195,6 @@ const navItems = [
     color: var(--black-black-60, #717171);
 
     @include tablet {
-      //order: 1;
       margin-bottom: 0;
     }
   }
@@ -204,11 +203,11 @@ const navItems = [
     display: flex;
     padding: 8px 35px;
     gap: 40px;
+    list-style-type: none;
     background-color: var(--black-black-80, #414141);
     border-radius: 10px;
 
     @include tablet {
-      //order: 3;
       padding: 8px 12px;
       gap: 9px;
     }
