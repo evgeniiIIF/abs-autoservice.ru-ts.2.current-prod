@@ -14,10 +14,13 @@ export default defineNuxtConfig({
   ],
 
   googleFonts: {
+    overwriting: true,
+    preload: true,
     families: {
-      Roboto: true,
+      Roboto: [100, 400, 500, 700],
       download: true,
     },
+    subsets: ['cyrillic', 'latin'],
   },
   svgo: {
     autoImportPath: './assets/icons/',
