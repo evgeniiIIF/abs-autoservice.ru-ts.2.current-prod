@@ -2,6 +2,7 @@
 
 <template>
   <div class="wrapper">
+    <AppHeader />
     <main>
       <slot />
     </main>
