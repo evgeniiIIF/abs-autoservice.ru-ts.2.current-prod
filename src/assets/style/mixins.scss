@@ -1,7 +1,4 @@
 @import './variables.scss';
-// typography
-
-
 
 @mixin scrollbar-y {
   &::-webkit-scrollbar {
@@ -95,8 +92,6 @@ $screen-desktop-to: 1280px;
 // </breakpoints Desktop First>
 // ==============================================================
 
-
-
 @mixin centered-flexbox {
   display: flex;
   align-items: center;
@@ -182,7 +177,7 @@ $screen-desktop-to: 1280px;
 @mixin mr($margin) {
   & > * {
     margin-right: $margin;
-    
+
     &:last-child {
       margin-right: 0;
     }

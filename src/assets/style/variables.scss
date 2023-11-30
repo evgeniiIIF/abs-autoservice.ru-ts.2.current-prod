@@ -1,3 +1,202 @@
+:root {
+  --white: #fff;
+  --black-black-04: #f6f6f6;
+  --black-black-10: #e5e5e5;
+  --black-black-20: #cbcccc;
+  --black-black-40: #999999;
+  --black-black-50: #898989;
+  --black-black-60: #717171;
+  --black-black-70: #4d4d4d;
+  --black-black-80: #414141;
+  --black-black-90: #2a2a2a;
+  --black-primary-black: #111212;
+  --green-green-80: #33b4b0;
+  --green-primary: #00a19c;
+}
+
+@mixin Title-M-Bold {
+  font-size: 40px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 52px;
+}
+
+@mixin Title-M-Regular {
+  font-size: 40px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 52px;
+}
+
+@mixin Title-S-Bold {
+  font-size: 32px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 44px;
+}
+
+@mixin Title-S-Regular {
+  font-size: 32px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 44px;
+}
+
+@mixin Title-XS-Bold {
+  font-size: 24px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 32px;
+}
+
+@mixin Title-XS-Regular {
+  font-size: 24px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 32px;
+}
+
+@mixin Subtitle-XL-Bold {
+  font-size: 24px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 32px;
+}
+
+@mixin Subtitle-L-Bold {
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 28px;
+}
+
+@mixin Subtitle-L-Regular {
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 28px;
+}
+
+@mixin Subtitle-M-Bold {
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 26px;
+}
+
+@mixin Subtitle-M-Medium {
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 26px;
+}
+
+@mixin Subtitle-M-Regular {
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 26px;
+}
+
+@mixin Subtitle-S-Bold {
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 24px;
+}
+
+@mixin Subtitle-S-Regular {
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 24px;
+}
+
+@mixin Subtitle-XS-Medium {
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 22px;
+}
+
+@mixin Subtitle-XS-Regular {
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 22px;
+}
+
+@mixin Body-XL-Bold {
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 26px;
+}
+
+@mixin Body-XL-Regular {
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 26px;
+}
+
+@mixin Body-L-Regular {
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 24px;
+}
+
+@mixin Body-M-Regular {
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 22px;
+}
+
+@mixin Body-S-Bold {
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 20px;
+}
+
+@mixin Body-S-Regular {
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 20px;
+}
+
+@mixin Body-XS-Regular {
+  font-size: 10px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 18px;
+}
+
+@mixin button-text {
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 16px;
+}
+
+@mixin button-text-large {
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 130%;
+}
+
+@mixin error-page-title {
+  font-size: 120px;
+  font-style: normal;
+  font-weight: 100;
+  line-height: 100%;
+  letter-spacing: -2.4px;
+}
+
 $color-main: #3f3f41;
 
 $color-second: #00a19c;
