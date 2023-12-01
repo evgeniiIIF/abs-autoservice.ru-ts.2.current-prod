@@ -57,6 +57,10 @@ ul {
   list-style: none;
 }
 
+body {
+  background: var(--black-primary-black, #111212);
+}
+
 .v-enter-active,
 .v-leave-active {
   transition: $transition-1;
@@ -97,7 +101,7 @@ ul {
   box-sizing: content-box;
   max-width: 1200px;
   margin: 0 auto;
-  padding: 0 16px;
+  padding: 0 20px;
 
   &--items-centered {
     height: 100%;
