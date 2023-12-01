@@ -22,4 +22,9 @@ const phoneLink = computed(() => {
   </a>
 </template>
 
-<style lang="scss"></style>
+<style lang="scss">
+.tel {
+  @include BodyXLBold;
+  color: var(--black-black-00, #fff);
+}
+</style>
