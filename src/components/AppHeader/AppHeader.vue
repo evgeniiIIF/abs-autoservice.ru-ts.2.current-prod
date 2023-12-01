@@ -1,7 +1,8 @@
 <script setup lang="ts">
-const { isMobile } = useMediaSizes();
+const { isDesktop } = useMediaSizes();
 </script>
 <template>
-  <AppHeaderMobile v-if="isMobile" />
+  <AppHeaderMobile v-if="!isDesktop" />
   <AppHeaderDesktop v-else />
 </template>
+<style lang="scss"></style>
