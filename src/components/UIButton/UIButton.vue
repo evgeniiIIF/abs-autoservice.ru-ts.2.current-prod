@@ -19,7 +19,12 @@ withDefaults(defineProps<UIButtonProps>(), {
 <template>
   <component
     :is="tag"
-    :class="{ button: true, 'button-wrapper': isWrapper, 'button--full-width': hasFullWidth, 'button--without-fill': withoutFill }"
+    :class="{
+      button: true,
+      'button-wrapper': isWrapper,
+      'button--full-width': hasFullWidth,
+      'button--without-fill': withoutFill,
+    }"
     :type="tag === 'a' ? '' : type"
   >
     <slot />
@@ -34,7 +39,7 @@ withDefaults(defineProps<UIButtonProps>(), {
   align-items: center;
   gap: 4px;
   border-radius: 10px;
-  border: 2px solid var(--green-primary, #00A19C);
+  border: 2px solid var(--green-primary, #00a19c);
   background: var(--green-primary, #00a19c);
   color: var(--black-black-00, #fff);
   transition: all 0.3s ease;
