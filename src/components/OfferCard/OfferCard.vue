@@ -17,7 +17,7 @@ const { isMobile } = useMediaSizes();
       <p v-if="!isMobile" class="offer-card__description">{{ description }}</p>
     </div>
     <NuxtLink class="offer-card__link" :to="link">
-      <UIButton :has-full-width="isMobile">Записаться</UIButton>
+      <UIButton :has-full-width="isMobile" :without-fill="!isMobile">Записаться</UIButton>
     </NuxtLink>
   </div>
 </template>
