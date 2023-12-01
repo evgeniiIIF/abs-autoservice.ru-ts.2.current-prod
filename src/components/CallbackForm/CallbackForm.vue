@@ -16,10 +16,16 @@ const phone = ref('');
       <p class="callback-form__description">Оставьте заявку или просто напишите нам в мессенджеры</p>
       <form class="callback-form__form">
         <div class="callback-form__inputs">
-          <UIInput v-model="name" type="text" title="Имя" placeholder="Введите имя" />
-          <UIInput v-model="phone" type="phone" title="Телефон" />
+          <div class="callback-form__input">
+            <UIInput v-model="name" type="text" title="Имя" placeholder="Введите имя" />
+          </div>
+          <div class="callback-form__input">
+            <UIInput v-model="phone" type="phone" title="Телефон" />
+          </div>
         </div>
-        <button class="callback-form__button" type="submit">Оставить заявку</button>
+        <div class="callback-form__button">
+          <UIButton tag="button" type="submit" has-full-width>Оставить заявку</UIButton>
+        </div>
       </form>
       <p class="callback-form__policy">Нажимая кнопку, вы соглашаетесь с нашей Политикой конфиденциальности</p>
       <ul class="callback-form__socials">
@@ -92,8 +98,30 @@ const phone = ref('');
     margin-bottom: 40px;
 
     @include desktop {
+      width: 100%;
+      max-width: 460px;
       flex-direction: inherit;
       margin-bottom: 0;
+    }
+  }
+
+  &__input {
+    @include desktop {
+      width: 100%;
+      max-width: 220px;
+    }
+  }
+
+  &__button {
+    button {
+      line-height: 130%;
+    }
+
+    @include desktop {
+      width: 100%;
+      max-width: 158px;
+      display: flex;
+      align-items: flex-end;
     }
   }
 
