@@ -6,6 +6,8 @@
     <main>
       <slot />
     </main>
+    <AppFooter />
+    <FooterMobileMenu />
   </div>
 </template>
 

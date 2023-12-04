@@ -11,46 +11,58 @@ const phone = ref('');
 
 <template>
   <section class="callback-form">
-    <div class="callback-form__content">
-      <h2 class="callback-form__title">Закажите обратный звонок&nbsp;из&nbsp;автосервиса</h2>
-      <p class="callback-form__description">Оставьте заявку или просто напишите нам в мессенджеры</p>
-      <form class="callback-form__form">
-        <div class="callback-form__inputs">
-          <div class="callback-form__input">
-            <UIInput v-model="name" type="text" title="Имя" placeholder="Введите имя" />
+    <div class="callback-form__container">
+      <div class="callback-form__content">
+        <h2 class="callback-form__title">Закажите обратный звонок&nbsp;из&nbsp;автосервиса</h2>
+        <p class="callback-form__description">Оставьте заявку или просто напишите нам в мессенджеры</p>
+        <form class="callback-form__form">
+          <div class="callback-form__inputs">
+            <div class="callback-form__input">
+              <UIInput v-model="name" type="text" title="Имя" placeholder="Введите имя" />
+            </div>
+            <div class="callback-form__input">
+              <UIInput v-model="phone" type="phone" title="Телефон" />
+            </div>
           </div>
-          <div class="callback-form__input">
-            <UIInput v-model="phone" type="phone" title="Телефон" />
+          <div class="callback-form__button">
+            <UIButton tag="button" type="submit" has-full-width>Оставить заявку</UIButton>
           </div>
-        </div>
-        <div class="callback-form__button">
-          <UIButton tag="button" type="submit" has-full-width>Оставить заявку</UIButton>
-        </div>
-      </form>
-      <p class="callback-form__policy">Нажимая кнопку, вы соглашаетесь с нашей Политикой конфиденциальности</p>
-      <ul class="callback-form__socials">
-        <li v-for="social in 2" :key="social" class="callback-form__social">
-          <AppSocial link="#" :img="vk" background="green" />
-        </li>
-      </ul>
-    </div>
-    <div v-if="!isLessThanDesktop" class="callback-form__image">
-      <NuxtPicture src="/images/callback-form.png" format="webp,png,jpg" loading="lazy" />
+        </form>
+        <p class="callback-form__policy">Нажимая кнопку, вы соглашаетесь с нашей Политикой конфиденциальности</p>
+        <ul class="callback-form__socials">
+          <li v-for="social in 2" :key="social" class="callback-form__social">
+            <AppSocial link="#" :img="vk" background="green" />
+          </li>
+        </ul>
+      </div>
+      <div v-if="!isLessThanDesktop" class="callback-form__image">
+        <NuxtPicture src="/images/callback-form.png" format="webp,png,jpg" loading="lazy" />
+      </div>
     </div>
   </section>
 </template>
 
 <style lang="scss">
 .callback-form {
-  position: relative;
   margin: 0 10px;
-  padding: 30px 20px;
-  border-radius: 20px;
-  border-top: 1px solid var(--black-black-80, #414141);
-  background: var(--black-black-90, #2a2a2a);
+  padding: 20px 0;
 
   @include desktop {
-    padding: 40px;
+    margin: 0 40px;
+  }
+
+  &__container {
+    position: relative;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 30px 20px;
+    border-radius: 20px;
+    border-top: 1px solid var(--black-black-80, #414141);
+    background: var(--black-black-90, #2a2a2a);
+
+    @include desktop {
+      padding: 40px;
+    }
   }
 
   &__content {
