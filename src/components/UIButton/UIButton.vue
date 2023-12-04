@@ -39,7 +39,7 @@ withDefaults(defineProps<UIButtonProps>(), {
   align-items: center;
   gap: 4px;
   border-radius: 10px;
-  border: 2px solid var(--green-primary, #00a19c);
+  border: 2px solid transparent;
   background: var(--green-primary, #00a19c);
   color: var(--black-black-00, #fff);
   transition: all 0.3s ease;
@@ -53,6 +53,7 @@ withDefaults(defineProps<UIButtonProps>(), {
 
   &--without-fill {
     background: transparent;
+    border-color: var(--green-primary, #00a19c);
 
     &:hover {
       background: var(--green-primary, #00a19c);
