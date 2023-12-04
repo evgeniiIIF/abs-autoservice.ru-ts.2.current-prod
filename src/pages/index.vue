@@ -6,7 +6,7 @@
     <CompanyPicture src="/images/company-1.png" alt="Ресепшен" />
     <PopularServices />
     <CallbackForm />
-    <CompanyPicture src="/images/company-2.png" alt="Зал автосервиса"/>
+    <CompanyPicture src="/images/company-2.png" alt="Зал автосервиса" />
     <AboutCompany />
   </div>
 </template>
