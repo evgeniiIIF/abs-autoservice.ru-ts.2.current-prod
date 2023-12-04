@@ -1,13 +1,18 @@
 <script lang="ts" setup>
 import type { AppContacts } from '@/components/AppContacts/AppContacts.types';
+import { useMediaSizes } from '@/composables/useMediaSizes';
 
 defineProps<AppContacts>();
+
+const { isMobile } = useMediaSizes();
 </script>
 
 <template>
   <div class="contacts" :class="{ 'contacts--in-mobile-menu': inMobileMenu }">
     <a class="contacts__phone" href="tel:88652500520">8 (8652) 500-520</a>
-    <button class="contacts__callback" type="button">Заказать звонок</button>
+    <div class="contacts__callback">
+      <UIButton :has-full-width="isMobile">Заказать звонок</UIButton>
+    </div>
     <a class="contacts__email" href="mailto:info@abs-autoservice.ru">info@abs-autoservice.ru</a>
     <ul class="contacts__socials">
       <li v-for="social in 3" :key="social" class="contacts__social">
@@ -24,6 +29,7 @@ defineProps<AppContacts>();
   display: flex;
   flex-direction: column;
   align-items: center;
+  width: 100%;
   padding: 20px 0;
 
   &--in-mobile-menu {
@@ -45,6 +51,7 @@ defineProps<AppContacts>();
   }
 
   &__callback {
+    width: 100%;
     margin-bottom: 43px;
 
     @include tablet {
