@@ -1,7 +1,7 @@
 <script setup lang="ts"></script>
 
 <template>
-  <div></div>
+  <div><AboutCompany /></div>
 </template>
 
 <style lang="scss"></style>
