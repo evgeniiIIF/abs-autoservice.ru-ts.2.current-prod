@@ -1,7 +1,7 @@
 <script setup lang="ts">
 defineProps<{
   link: string;
-  img: string;
+  img: string | Object;
   background?: 'gray' | 'green';
 }>();
 </script>

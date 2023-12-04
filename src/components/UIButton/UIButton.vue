@@ -3,7 +3,7 @@ interface UIButtonProps {
   tag?: 'a' | 'button';
   type?: 'button' | 'submit';
   hasFullWidth?: boolean;
-  isWrapper: boolean;
+  isWrapper?: boolean;
 }
 
 withDefaults(defineProps<UIButtonProps>(), {
