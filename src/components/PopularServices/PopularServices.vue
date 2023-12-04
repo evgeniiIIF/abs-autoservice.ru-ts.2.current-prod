@@ -32,7 +32,7 @@ const services = [
   padding: 40px 0 20px 0;
 
   @include tablet {
-    padding: 0;
+    padding: 76px 0 40px 0;
   }
 
   &__top-background {
@@ -63,6 +63,7 @@ const services = [
 
     @include tablet {
       margin-left: 0;
+      @include TitleXSBold;
     }
 
     @include desktop {

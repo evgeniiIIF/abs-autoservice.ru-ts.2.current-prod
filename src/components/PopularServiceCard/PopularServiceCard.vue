@@ -74,7 +74,10 @@ const { isMobile } = useMediaSizes();
 
   &__content {
     @include tablet {
-      padding: 12px 0;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      padding: 6px 0;
     }
   }
 
@@ -84,8 +87,8 @@ const { isMobile } = useMediaSizes();
     color: var(--white, #fff);
 
     @include tablet {
-      margin-bottom: 30px;
       text-align: inherit;
+      @include SubtitleMBold;
     }
   }
 }
