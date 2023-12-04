@@ -2,6 +2,8 @@
 
 <template>
   <div>
+    <SpecialOffers />
+    <CompanyPicture src="/images/company-1.png" alt="Ресепшен" />
     <PopularServices />
     <CallbackForm />
   </div>

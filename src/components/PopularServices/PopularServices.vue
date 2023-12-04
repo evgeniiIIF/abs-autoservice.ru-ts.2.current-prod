@@ -29,7 +29,7 @@ const services = [
 <style lang="scss">
 .popular-services {
   position: relative;
-  padding: 40px 0 20px 0;
+  padding: 80px 0 20px 0;
 
   @include tablet {
     padding: 76px 0 40px 0;
@@ -37,7 +37,7 @@ const services = [
 
   &__top-background {
     position: absolute;
-    top: 0;
+    top: 40px;
     left: 10px;
     z-index: -1;
     max-width: calc(100% - 20px);
