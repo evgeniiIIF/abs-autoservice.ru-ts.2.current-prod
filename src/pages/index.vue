@@ -1,7 +1,10 @@
 <script setup lang="ts"></script>
 
 <template>
-  <div><CallbackForm /></div>
+  <div>
+    <PopularServices />
+    <CallbackForm />
+  </div>
 </template>
 
 <style lang="scss"></style>
