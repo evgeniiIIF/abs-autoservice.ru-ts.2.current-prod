@@ -89,6 +89,7 @@ const { isMobile } = useMediaSizes();
 
     @include tablet {
       margin-bottom: 8px;
+      @include SubtitleMBold;
     }
   }
 

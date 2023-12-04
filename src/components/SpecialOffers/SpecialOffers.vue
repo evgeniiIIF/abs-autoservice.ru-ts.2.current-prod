@@ -72,6 +72,10 @@ const offers = [
     margin-bottom: 20px;
     @include SubtitleLBold;
     color: var(--white, #fff);
+
+    @include tablet {
+      @include TitleSBold;
+    }
   }
 
   &__offers {
