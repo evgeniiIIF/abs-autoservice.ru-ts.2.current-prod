@@ -2,6 +2,7 @@
 interface UIButtonProps {
   tag?: 'a' | 'button';
   type?: 'button' | 'submit';
+  hasFullWidth?: boolean;
   isWrapper?: boolean;
 }
 
@@ -9,11 +10,16 @@ withDefaults(defineProps<UIButtonProps>(), {
   type: 'button',
   tag: 'button',
   isWrapper: false,
+  hasFullWidth: false,
 });
 </script>
 
 <template>
-  <component :is="tag" :class="{ button: true, 'button-wrapper': isWrapper }" :type="tag === 'a' ? '' : type">
+  <component
+    :is="tag"
+    :class="{ button: true, 'button-wrapper': isWrapper, 'button--full-width': hasFullWidth }"
+    :type="tag === 'a' ? '' : type"
+  >
     <slot />
   </component>
 </template>
@@ -33,6 +39,10 @@ withDefaults(defineProps<UIButtonProps>(), {
 
   cursor: pointer;
   @include buttonText;
+
+  &--full-width {
+    width: 100%;
+  }
 }
 
 .button-wrapper {
