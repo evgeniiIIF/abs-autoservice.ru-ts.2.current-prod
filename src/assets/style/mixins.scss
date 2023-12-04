@@ -7,11 +7,11 @@
   }
 
   &::-webkit-scrollbar-thumb {
-    background-color: $color-second;
+    background-color: var(--green-primary);
   }
 
   &::-webkit-scrollbar-track {
-    background-color: $color-white-lighter;
+    background-color: var(--black-black-80);
   }
 }
 
@@ -22,11 +22,11 @@
   }
 
   &::-webkit-scrollbar-thumb {
-    background-color: $color-second;
+    background-color: var(--green-primary);
   }
 
   &::-webkit-scrollbar-track {
-    background-color: $color-white-lighter;
+    background-color: transparent;
   }
 }
 // ==============================================================

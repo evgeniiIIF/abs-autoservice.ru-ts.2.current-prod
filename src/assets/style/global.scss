@@ -11,6 +11,7 @@ html {
 
 body {
   height: inherit;
+  background: var(--black-primary-black, #111212);
 }
 
 div#__nuxt {
@@ -55,6 +56,10 @@ body {
 
 ul {
   list-style: none;
+}
+
+body {
+  background: var(--black-primary-black, #111212);
 }
 
 .v-enter-active,
