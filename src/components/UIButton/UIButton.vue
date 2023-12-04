@@ -2,7 +2,7 @@
 interface UIButtonProps {
   tag?: 'a' | 'button';
   type?: 'button' | 'submit';
-  isWrapper: boolean;
+  isWrapper?: boolean;
 }
 
 withDefaults(defineProps<UIButtonProps>(), {

@@ -8,7 +8,15 @@ const { isMobile } = useMediaSizes();
 </script>
 
 <template>
-  <NuxtLink class="popular-service-card" :to="isMobile && service.link">
+  <NuxtLink v-if="isMobile" class="popular-service-card" :to="service.link">
+    <div class="popular-service-card__image">
+      <NuxtPicture :src="service.img" format="webp,png,jpg" loading="lazy" />
+    </div>
+    <div class="popular-service-card__content">
+      <h3 class="popular-service-card__title">{{ service.title }}</h3>
+    </div>
+  </NuxtLink>
+  <div v-else class="popular-service-card">
     <div class="popular-service-card__image">
       <NuxtPicture :src="service.img" format="webp,png,jpg" loading="lazy" />
     </div>
@@ -18,7 +26,7 @@ const { isMobile } = useMediaSizes();
         <UIButton>Записаться</UIButton>
       </NuxtLink>
     </div>
-  </NuxtLink>
+  </div>
 </template>
 
 <style lang="scss">
