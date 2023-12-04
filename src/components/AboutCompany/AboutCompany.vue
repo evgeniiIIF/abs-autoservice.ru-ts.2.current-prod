@@ -26,7 +26,7 @@ watch(
           <li v-for="reviewService in 2" :key="reviewService" class="about-company__review-service">
             <NuxtPicture src="/images/yandex-review.png" loading="lazy" alt="Яндекс" />
             <div class="about-company__review-service-rating">
-              <IcStar v-for="star in 5" :key="star" :font-controlled="false" :filled="true" />
+              <IcStarRating v-for="star in 5" :key="star" :font-controlled="false" :filled="true" />
             </div>
           </li>
         </ul>
