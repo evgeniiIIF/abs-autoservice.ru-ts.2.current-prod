@@ -1,3 +1,5 @@
-<svg width="13" height="11" viewBox="0 0 13 11" fill="none" xmlns="http://www.w3.org/2000/svg">
-<path id="Star 1" d="M6.61536 0L8.37871 3.57295L12.3217 4.1459L9.46853 6.92705L10.1421 10.8541L6.61536 9L3.08864 10.8541L3.76219 6.92705L0.909018 4.1459L4.852 3.57295L6.61536 0Z" fill="#F2E291"/>
+<svg width="10" height="10" viewBox="0 0 10 10" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g id="Frame">
+<path id="Vector" d="M7.70375 8.9375L6.98812 5.8625L9.375 3.79375L6.22875 3.525L5 0.625L3.77125 3.52437L0.625 3.79375L3.01187 5.8625L2.29625 8.9375L5 7.30625L7.70375 8.9375Z" fill="#FFB81C" fill-opacity="0.3"/>
+</g>
 </svg>

@@ -2,18 +2,31 @@
 interface UIButtonProps {
   tag?: 'a' | 'button';
   type?: 'button' | 'submit';
-  isWrapper: boolean;
+  hasFullWidth?: boolean;
+  withoutFill?: boolean;
+  isWrapper?: boolean;
 }
 
 withDefaults(defineProps<UIButtonProps>(), {
   type: 'button',
   tag: 'button',
   isWrapper: false,
+  hasFullWidth: false,
+  withoutFill: false,
 });
 </script>
 
 <template>
-  <component :is="tag" :class="{ button: true, 'button-wrapper': isWrapper }" :type="tag === 'a' ? '' : type">
+  <component
+    :is="tag"
+    :class="{
+      button: true,
+      'button-wrapper': isWrapper,
+      'button--full-width': hasFullWidth,
+      'button--without-fill': withoutFill,
+    }"
+    :type="tag === 'a' ? '' : type"
+  >
     <slot />
   </component>
 </template>
@@ -21,7 +34,7 @@ withDefaults(defineProps<UIButtonProps>(), {
 <style lang="scss">
 .button {
   display: flex;
-  padding: 12px 20px;
+  padding: 10px 18px;
   justify-content: center;
   align-items: center;
   gap: 4px;
@@ -30,9 +43,23 @@ withDefaults(defineProps<UIButtonProps>(), {
 
   background: var(--green-primary, #00a19c);
   color: var(--black-black-00, #fff);
+  transition: all 0.3s ease;
 
   cursor: pointer;
   @include buttonText;
+
+  &--full-width {
+    width: 100%;
+  }
+
+  &--without-fill {
+    background: transparent;
+    border-color: var(--green-primary, #00a19c);
+
+    &:hover {
+      background: var(--green-primary, #00a19c);
+    }
+  }
 }
 
 .button-wrapper {

@@ -11,7 +11,7 @@ html {
 
 body {
   height: inherit;
-  background-color: var(--black-primary-black, #111212);
+  background: var(--black-primary-black, #111212);
 }
 
 div#__nuxt {
@@ -98,7 +98,7 @@ ul {
   box-sizing: content-box;
   max-width: 1200px;
   margin: 0 auto;
-  padding: 0 16px;
+  padding: 0 20px;
 
   &--items-centered {
     height: 100%;
