@@ -78,7 +78,6 @@ const navItems = [
 
   @include tablet {
     padding: 60px 0 40px 0;
-    margin: 0 20px;
   }
 
   @include desktop {
