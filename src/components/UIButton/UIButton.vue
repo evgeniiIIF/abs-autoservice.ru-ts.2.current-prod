@@ -40,6 +40,7 @@ withDefaults(defineProps<UIButtonProps>(), {
   gap: 4px;
   border-radius: 10px;
   border: 2px solid transparent;
+  outline: none;
 
   background: var(--green-primary, #00a19c);
   color: var(--black-black-00, #fff);
