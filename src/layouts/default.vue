@@ -1,8 +1,7 @@
 <script lang="ts" setup>
-import {useMediaSizes} from "@/composables/useMediaSizes";
+import { useMediaSizes } from '@/composables/useMediaSizes';
 
-const { isDesktop } = useMediaSizes()
-
+const { isDesktop } = useMediaSizes();
 </script>
 
 <template>
@@ -12,7 +11,7 @@ const { isDesktop } = useMediaSizes()
       <slot />
     </main>
     <AppFooter />
-    <FooterMobileMenu v-if="!isDesktop"/>
+    <FooterMobileMenu v-if="!isDesktop" />
   </div>
 </template>
 

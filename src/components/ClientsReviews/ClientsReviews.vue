@@ -11,8 +11,8 @@ import 'swiper/scss/pagination';
       <div class="clients-reviews__content-top">
         <h2 class="clients-reviews__title">Отзывы клиентов</h2>
         <div class="clients-reviews__slider-navigation">
-          <UIArrowButton arrow-direction="left" :class-for-swiper="'clients-reviews__slider-button-prev'"/>
-          <UIArrowButton arrow-direction="right" :class-for-swiper="'clients-reviews__slider-button-next'"/>
+          <UIArrowButton arrow-direction="left" :class-for-swiper="'clients-reviews__slider-button-prev'" />
+          <UIArrowButton arrow-direction="right" :class-for-swiper="'clients-reviews__slider-button-next'" />
         </div>
       </div>
       <Swiper
@@ -27,9 +27,9 @@ import 'swiper/scss/pagination';
         :space-between="20"
         :slides-per-view="'auto'"
         :navigation="{
-            prevEl: '.clients-reviews__slider-button-prev',
-            nextEl: '.clients-reviews__slider-button-next',
-          }"
+          prevEl: '.clients-reviews__slider-button-prev',
+          nextEl: '.clients-reviews__slider-button-next',
+        }"
       >
         <SwiperSlide v-for="slide in 4" :key="slide" class="clients-reviews__slide">
           <ReviewCard />
@@ -90,7 +90,7 @@ import 'swiper/scss/pagination';
         width: 40px;
         height: 4px;
         border-radius: 10px;
-        background: var(--black-black-90, #2A2A2A);
+        background: var(--black-black-90, #2a2a2a);
         opacity: inherit;
 
         &::after {
@@ -100,7 +100,7 @@ import 'swiper/scss/pagination';
           width: 0;
           height: 4px;
           border-radius: 10px;
-          background: var(--green-primary, #00A19C);
+          background: var(--green-primary, #00a19c);
           content: '';
           z-index: 1;
         }
@@ -114,7 +114,6 @@ import 'swiper/scss/pagination';
       }
     }
   }
-
 
   &__slide {
     max-width: 240px;

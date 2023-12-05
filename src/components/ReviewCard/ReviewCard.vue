@@ -12,7 +12,7 @@ const { isMobile } = useMediaSizes();
       </div>
       <div v-if="isMobile" class="review-card__review-app">
         <div class="review-card__review-rating">
-          <AppRating :rating="5"/>
+          <AppRating :rating="5" />
         </div>
         <div class="review-card__review-app-image">
           <NuxtPicture src="/images/2gis-black.png" loading="lazy" alt="Приложение" />
@@ -38,8 +38,8 @@ const { isMobile } = useMediaSizes();
         <div class="review-card__review-button">
           <UIButton with-arrow :has-full-width="isMobile">
             <span>Читать весь отзыв</span>
-            <IcArrowRight v-if="isMobile" :font-controlled="false" :filled="true"/>
-            <IcArrowUpRight v-else :font-controlled="false" :filled="true"/>
+            <IcArrowRight v-if="isMobile" :font-controlled="false" :filled="true" />
+            <IcArrowUpRight v-else :font-controlled="false" :filled="true" />
           </UIButton>
         </div>
         <div v-if="!isMobile" class="review-card__review-app-image">
