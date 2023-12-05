@@ -11,8 +11,6 @@ defineProps<{ title: string; type: string; label: string; placeholder: string }>
 </template>
 <style lang="scss">
 .question {
-  min-height: 109px;
-
   &__title {
     @include SubtitleMBold;
     color: var(--black-black-00, #fff);
