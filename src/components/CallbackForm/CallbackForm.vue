@@ -48,7 +48,7 @@ const phone = ref('');
   padding: 20px 0;
 
   @include desktop {
-    margin: 0 40px;
+    margin: 0 20px;
   }
 
   &__container {

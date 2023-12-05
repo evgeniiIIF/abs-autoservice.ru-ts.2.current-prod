@@ -81,6 +81,10 @@ const navItems = [
   }
 
   @include desktop {
+    margin: 0 20px;
+  }
+
+  @include from(1400px) {
     margin: 0 40px;
   }
 
