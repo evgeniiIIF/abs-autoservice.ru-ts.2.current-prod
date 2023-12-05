@@ -9,9 +9,9 @@ const navItems = [
 </script>
 <template>
   <header class="header-desktop">
-    <div class="header-desktop__logo">
-      <AppLogo />
-    </div>
+    <NuxtLink to="/" class="header-desktop__logo">
+      <IcLogoDesktop :font-controlled="false" :filled="true" />
+    </NuxtLink>
     <div class="header-desktop__nav">
       <AppNavigation :items="navItems" />
     </div>
@@ -42,17 +42,33 @@ const navItems = [
 
 <style lang="scss">
 .header-desktop {
+  position: fixed;
+  left: 0;
+  top: 0;
+  right: 0;
+  z-index: $z-header;
   display: flex;
   align-items: center;
-  padding-left: 40px;
-  background: var(--black-primary-black, #111212);
+  padding-left: 20px;
   border-bottom: 1px solid var(--black-black-90, #2a2a2a);
+  background: rgba(17, 18, 18, 0.95);
+  backdrop-filter: blur(10px);
+
+  @include media($xl) {
+    padding-left: 40px;
+  }
 
   &__logo {
-    margin-right: 40px;
+    flex: 0 0 150px;
+    margin-right: 20px;
 
-    @include media(1150px) {
-      margin-right: 105px;
+    @include media($xl) {
+      flex: 0 0 212px;
+      margin-right: 40px;
+    }
+
+    svg {
+      width: 100%;
     }
   }
 
@@ -73,11 +89,11 @@ const navItems = [
         @include BodyLRegular;
         font-size: 14px;
 
-        @include media(1150px) {
+        @include media($xl) {
           font-size: 16px;
         }
 
-        &:hover {
+        @include hover {
           border-bottom: 2px solid var(--green-primary, #00a19c);
           background: radial-gradient(59.75% 50.89% at 50% 100%, rgba(0, 161, 156, 0.22) 0%, rgba(0, 161, 156, 0) 100%);
         }

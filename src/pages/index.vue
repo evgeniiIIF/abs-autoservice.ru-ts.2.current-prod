@@ -2,6 +2,7 @@
 
 <template>
   <div>
+    <SectionBanner />
     <SpecialOffers />
     <CompanyPicture src="/images/company-1.png" alt="Ресепшен" />
     <PopularServices />
