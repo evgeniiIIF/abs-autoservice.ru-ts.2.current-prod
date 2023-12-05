@@ -6,6 +6,7 @@
     <CompanyPicture src="/images/company-1.png" alt="Ресепшен" />
     <PopularServices />
     <CallbackForm />
+    <ClientsReviews />
   </div>
 </template>
 
