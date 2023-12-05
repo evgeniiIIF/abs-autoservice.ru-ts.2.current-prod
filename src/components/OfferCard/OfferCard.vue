@@ -45,6 +45,12 @@ const { isMobile } = useMediaSizes();
   @include desktop {
     &:hover {
       background: rgba(42, 42, 42, 0.5);
+
+      .offer-card__image {
+        img {
+          transform: scale(0.97);
+        }
+      }
     }
   }
 
@@ -68,6 +74,7 @@ const { isMobile } = useMediaSizes();
 
     img {
       width: 100%;
+      transition: all 0.3s ease;
 
       @include tablet {
         border-radius: 20px;
