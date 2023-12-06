@@ -1,7 +1,7 @@
 <script lang="ts" setup>
-  import type {ServicePopularServiceCard} from "@/components/ServicePopularServiceCard/ServicePopularServiceCard.types";
+import type { ServicePopularServiceCard } from '@/components/ServicePopularServiceCard/ServicePopularServiceCard.types';
 
-  defineProps<ServicePopularServiceCard>()
+defineProps<ServicePopularServiceCard>();
 </script>
 
 <template>
@@ -12,41 +12,41 @@
 </template>
 
 <style lang="scss">
- .service-popular-service-card {
-   display: flex;
-   flex-direction: column;
-   justify-content: space-between;
-   width: 100%;
-   min-height: 150px;
-   padding: 20px;
-   border-radius: 20px;
-   border: 1px solid var(--black-black-90, #2A2A2A);
-   background: var(--linear, linear-gradient(180deg, rgba(42, 42, 42, 0.00) 0%, rgba(42, 42, 42, 0.40) 100%));
-   backdrop-filter: blur(80px);
-   transition: all 0.3s ease;
+.service-popular-service-card {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 100%;
+  min-height: 150px;
+  padding: 20px;
+  border-radius: 20px;
+  border: 1px solid var(--black-black-90, #2a2a2a);
+  background: var(--linear, linear-gradient(180deg, rgba(42, 42, 42, 0) 0%, rgba(42, 42, 42, 0.4) 100%));
+  backdrop-filter: blur(80px);
+  transition: all 0.3s ease;
 
-   @include desktop {
-     &:hover {
-       background: var(--black-black-90, #2A2A2A);
-     }
-   }
+  @include desktop {
+    &:hover {
+      background: var(--black-black-90, #2a2a2a);
+    }
+  }
 
-   &__title {
-     @include SubtitleSRegular;
-     color: var(--white, #fff);
+  &__title {
+    @include SubtitleSRegular;
+    color: var(--white, #fff);
 
-     @include desktop {
-       @include SubtitleLRegular;
-     }
-   }
+    @include desktop {
+      @include SubtitleLRegular;
+    }
+  }
 
-   &__price {
-     @include SubtitleMRegular;
-     color: var(--black-black-50, #898989);
+  &__price {
+    @include SubtitleMRegular;
+    color: var(--black-black-50, #898989);
 
-     @include desktop {
-       @include TitleXSRegular;
-     }
-   }
- }
+    @include desktop {
+      @include TitleXSRegular;
+    }
+  }
+}
 </style>
