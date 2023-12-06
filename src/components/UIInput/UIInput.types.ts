@@ -1,8 +1,11 @@
-export type UIInput = {
-  title: string;
-  type: 'phone' | 'text';
-  modelValue: string;
+export interface UIInputProps {
+  type: 'phone' | 'text' | 'textarea' | 'tel';
+  value: string;
+  label?: string;
   errorMessage?: string;
-};
+}
 
-export type UIInputEmits = (event: 'update:modelValue', value: string) => string;
+export interface UIInputEmits {
+  (event: 'onInput', value: string): string;
+  (event: 'onChange', value: string): string;
+}

@@ -1,11 +1,20 @@
 <script setup lang="ts">
-defineProps<{ title: string; type: string; label: string; placeholder: string }>();
+defineProps<{ title: string; inputProps: any }>();
+const carBrand = ref('');
+const onInput = (value: string) => console.log(value);
 </script>
 <template>
   <div class="question">
     <h6 class="question__title">{{ title }}</h6>
     <div class="question__input">
-      <UIInputEvg :type="type" :label="label" :placeholder="placeholder" />
+      <UIInput
+        :type="inputProps.type"
+        :label="inputProps.label"
+        :placeholder="inputProps.placeholder"
+        :value="carBrand"
+        :name="inputProps.name"
+        @onInput="onInput"
+      />
     </div>
   </div>
 </template>
