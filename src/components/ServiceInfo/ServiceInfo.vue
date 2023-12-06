@@ -16,6 +16,8 @@ const {
   questionTitle,
   questionFootnote,
 } = data;
+
+const descriptionIsOpen = ref(false);
 </script>
 
 <template>
@@ -23,17 +25,40 @@ const {
     <div class="container">
       <h1 v-if="!isDesktop" class="service-info__title">{{ title }}</h1>
       <div class="service-info__wrapper">
-        <div class="service-info__info">
-          <h1 v-if="isDesktop" class="service-info__title">{{ title }}</h1>
-          <div class="service-info__description">
-            <p class="service-info__description-text">{{ firstParagraph }}</p>
-            <ul class="service-info__description-list">
-              <li v-for="(item, i) in list" :key="item" class="service-info__description-list-item">
-                <span class="service-info__description-list-item-index">{{ i + 1 }}.</span>
-                <span class="service-info__description-list-item-text">{{ item }}</span>
-              </li>
-            </ul>
-            <p class="service-info__description-text">{{ lastParagraph }}</p>
+        <div class="service-info__content">
+          <div class="service-info__info">
+            <h1 v-if="isDesktop" class="service-info__title">{{ title }}</h1>
+            <div class="service-info__description">
+              <p class="service-info__description-text">{{ firstParagraph }}</p>
+              <ul class="service-info__description-list">
+                <template v-for="(item, i) in list" :key="item">
+                  <li v-if="descriptionIsOpen || isDesktop ? true : i === 0" class="service-info__description-list-item">
+                    <span class="service-info__description-list-item-index">{{ i + 1 }}.</span>
+                    <span class="service-info__description-list-item-text">{{ item }}</span>
+                  </li>
+                </template>
+              </ul>
+              <p v-if="descriptionIsOpen || isDesktop" class="service-info__description-text">{{ lastParagraph }}</p>
+              <button
+                  v-if="!isDesktop"
+                  class="service-info__description-button"
+                  :class="{ 'service-info__description-button--close': descriptionIsOpen }"
+                  type="button"
+                  @click="descriptionIsOpen = !descriptionIsOpen"
+              >
+                <span>{{ descriptionIsOpen ? 'Свернуть' : 'Читать далее' }}</span>
+                <IcArrowDown :font-controlled="false" :filled="true" />
+              </button>
+            </div>
+          </div>
+          <div class="service-info__callback">
+            <h2 class="service-info__callback-title">Для записи в автосервис ABS-AUTO</h2>
+            <p class="service-info__callback-subtitle">звоните нам по телефону</p>
+            <div class="service-info__callback-separator"></div>
+            <div class="service-info__callback-row">
+              <h3 class="service-info__callback-phone">+7 8652 500 520</h3>
+              <UIButton :has-full-width="!isDesktop">Позвонить</UIButton>
+            </div>
           </div>
         </div>
         <div class="service-info__aside">
@@ -88,10 +113,13 @@ const {
   }
 
   &__info {
+    margin-bottom: 40px;
+
     @include desktop {
       width: 100%;
       max-width: 796px;
       padding: 40px 40px 60px 40px;
+      margin-bottom: 20px;
       border: 1px solid var(--black-black-90, #2a2a2a);
       background: var(--linear, linear-gradient(180deg, rgba(42, 42, 42, 0) 0%, rgba(42, 42, 42, 0.4) 100%));
       backdrop-filter: blur(80px);
@@ -121,6 +149,86 @@ const {
           @include BodyXLBold;
           color: var(--green-primary, #00a19c);
         }
+      }
+    }
+
+    &-button {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      color: var(--white, #fff);
+      border: none;
+      background-color: transparent;
+
+      svg {
+        transition: all 0.3s ease;
+      }
+
+      &--close {
+        svg {
+          transform: rotate(180deg);
+        }
+      }
+    }
+  }
+
+  &__callback {
+    padding: 20px;
+    border-radius: 20px;
+    border: 1px solid var(--black-black-90, #2A2A2A);
+    background: var(--linear, linear-gradient(180deg, rgba(42, 42, 42, 0.00) 0%, rgba(42, 42, 42, 0.40) 100%));
+
+    @include desktop {
+      padding: 40px;
+    }
+
+    &-title {
+      margin-bottom: 8px;
+
+      @include SubtitleLBold;
+      color: var(--white, #fff);
+
+      @include desktop {
+        @include TitleXSBold;
+      }
+    }
+
+    &-subtitle {
+      margin-bottom: 20px;
+
+      @include BodyLRegular;
+      color: var(--green-primary, #00A19C);
+
+      @include desktop {
+        @include BodyXLRegular;
+      }
+    }
+
+    &-separator {
+      width: 100%;
+      height: 1px;
+      margin-bottom: 20px;
+      background: var(--black-black-80, #414141);
+    }
+
+    &-row {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+
+      @include desktop {
+        flex-direction: inherit;
+        justify-content: space-between;
+        align-items: center;
+      }
+    }
+
+    &-phone {
+      @include TitleXSRegular;
+      color: var(--white, #fff);
+
+      @include desktop {
+        @include TitleSRegular;
       }
     }
   }
