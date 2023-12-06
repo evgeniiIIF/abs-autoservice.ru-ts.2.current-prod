@@ -1,48 +1,62 @@
 <script lang="ts" setup>
 import { vMaska } from 'maska';
-import type { UIInputEmits, UIInput } from '@/components/UIInput/UIInput.types';
+import type { UIInputEmits, UIInputProps } from '@/components/UIInput/UIInput.types';
 
-defineProps<UIInput>();
-defineEmits<UIInputEmits>();
+defineProps<UIInputProps>();
+const emits = defineEmits<UIInputEmits>();
 
-const onInputHandler = (event: Event): string => {
-  return (event.target as HTMLInputElement).value.replace(/\s+/g, ' ').trim();
+const onInputHandler = (event: Event): void => {
+  const value = (event.target as HTMLInputElement).value.replace(/\s+/g, ' ').trim();
+  emits('onInput', value);
+};
+const onChangeHandler = (event: Event): void => {
+  const value = (event.target as HTMLInputElement).value.replace(/\s+/g, ' ').trim();
+  emits('onChange', value);
 };
 </script>
 
 <template>
-  <div class="input" :class="{ 'input--error': errorMessage }">
-    <label class="input__label">
-      <span class="input__title">{{ title }}</span>
-      <input
-        v-if="type === 'phone'"
-        v-maska
-        class="input__input"
-        :data-maska="'+7 (###) ###-##-##'"
-        type="tel"
-        placeholder="+7 (___) __-__-__"
-        :value="modelValue"
-        v-bind="$attrs"
-        @input="$emit('update:modelValue', onInputHandler($event))"
-      />
-      <input
-        v-else
-        class="input__input"
-        :type="type"
-        :value="modelValue"
-        v-bind="$attrs"
-        @input="$emit('update:modelValue', onInputHandler($event))"
-      />
-      <span v-if="errorMessage" class="input__error">{{ errorMessage }}</span>
-    </label>
-  </div>
+  <label class="input" :class="{ 'input--error': errorMessage }">
+    <span class="input__label">{{ label }}</span>
+    <textarea
+      v-if="type === 'textarea'"
+      class="input__input"
+      :value="value"
+      v-bind="$attrs"
+      @input="onInputHandler"
+      @change="onChangeHandler"
+    >
+    </textarea>
+    <input
+      v-if="type === 'tel'"
+      v-maska
+      class="input__input"
+      :data-maska="'+7 (###) ###-##-##'"
+      type="tel"
+      placeholder="+7 (___) __-__-__"
+      :value="value"
+      v-bind="$attrs"
+      @input="onInputHandler"
+      @change="onChangeHandler"
+    />
+    <input
+      v-if="type === 'text'"
+      class="input__input"
+      :type="type"
+      :value="value"
+      v-bind="$attrs"
+      @input="onInputHandler"
+      @change="onChangeHandler"
+    />
+    <span v-if="errorMessage" class="input__error">{{ errorMessage }}</span>
+  </label>
 </template>
 
 <style lang="scss">
 .input {
   position: relative;
 
-  &__title {
+  &__label {
     @include BodySRegular;
     color: var(--black-black-40, #999);
   }
@@ -73,7 +87,7 @@ const onInputHandler = (event: Event): string => {
 
   &--error {
     .input {
-      &__title {
+      &__label {
         color: red;
       }
 

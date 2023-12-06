@@ -45,7 +45,6 @@ export const QUEST_ITEMS = [
         type: 'tel',
         name: 'phone',
         label: 'Телефон',
-        placeholder: '+7 (___) ___-__-__',
         pattern: /[^0-9+]/g,
       },
     },

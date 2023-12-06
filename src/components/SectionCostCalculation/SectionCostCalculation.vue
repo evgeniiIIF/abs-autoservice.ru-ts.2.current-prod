@@ -42,9 +42,7 @@ const currentQuestItem = computed(() => {
                 <component
                   :is="currentQuestItem.component"
                   :title="currentQuestItem.title"
-                  :type="currentQuestItem.inputProps?.type"
-                  :label="currentQuestItem.inputProps?.label"
-                  :placeholder="currentQuestItem.inputProps?.placeholder"
+                  :inputProps="currentQuestItem.inputProps"
                 ></component>
               </Transition>
             </div>
@@ -112,7 +110,7 @@ const currentQuestItem = computed(() => {
     @include BodySRegular;
   }
   &__current {
-    min-height: 109px;
+    min-height: 173px;
     margin-bottom: 50px;
   }
   &__image {
