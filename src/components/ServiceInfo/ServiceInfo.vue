@@ -32,7 +32,10 @@ const descriptionIsOpen = ref(false);
               <p class="service-info__description-text">{{ firstParagraph }}</p>
               <ul class="service-info__description-list">
                 <template v-for="(item, i) in list" :key="item">
-                  <li v-if="descriptionIsOpen || isDesktop ? true : i === 0" class="service-info__description-list-item">
+                  <li
+                    v-if="descriptionIsOpen || isDesktop ? true : i === 0"
+                    class="service-info__description-list-item"
+                  >
                     <span class="service-info__description-list-item-index">{{ i + 1 }}.</span>
                     <span class="service-info__description-list-item-text">{{ item }}</span>
                   </li>
@@ -40,11 +43,11 @@ const descriptionIsOpen = ref(false);
               </ul>
               <p v-if="descriptionIsOpen || isDesktop" class="service-info__description-text">{{ lastParagraph }}</p>
               <button
-                  v-if="!isDesktop"
-                  class="service-info__description-button"
-                  :class="{ 'service-info__description-button--close': descriptionIsOpen }"
-                  type="button"
-                  @click="descriptionIsOpen = !descriptionIsOpen"
+                v-if="!isDesktop"
+                class="service-info__description-button"
+                :class="{ 'service-info__description-button--close': descriptionIsOpen }"
+                type="button"
+                @click="descriptionIsOpen = !descriptionIsOpen"
               >
                 <span>{{ descriptionIsOpen ? 'Свернуть' : 'Читать далее' }}</span>
                 <IcArrowDown :font-controlled="false" :filled="true" />
@@ -175,8 +178,8 @@ const descriptionIsOpen = ref(false);
   &__callback {
     padding: 20px;
     border-radius: 20px;
-    border: 1px solid var(--black-black-90, #2A2A2A);
-    background: var(--linear, linear-gradient(180deg, rgba(42, 42, 42, 0.00) 0%, rgba(42, 42, 42, 0.40) 100%));
+    border: 1px solid var(--black-black-90, #2a2a2a);
+    background: var(--linear, linear-gradient(180deg, rgba(42, 42, 42, 0) 0%, rgba(42, 42, 42, 0.4) 100%));
 
     @include desktop {
       padding: 40px;
@@ -197,7 +200,7 @@ const descriptionIsOpen = ref(false);
       margin-bottom: 20px;
 
       @include BodyLRegular;
-      color: var(--green-primary, #00A19C);
+      color: var(--green-primary, #00a19c);
 
       @include desktop {
         @include BodyXLRegular;
