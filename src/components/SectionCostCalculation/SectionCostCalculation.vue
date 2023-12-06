@@ -23,9 +23,10 @@ const currentQuestItem = computed(() => {
           </p>
         </div>
         <form class="cost-calculation__quest quest">
+          <div class="quest__blur"></div>
           <div class="quest__content">
-            <div class="quest__top">
-              <div class="quest__text">ШАГ 1</div>
+            <div v-if="currentStepIndex !== QUEST_ITEMS.length - 1" class="quest__top">
+              <div class="quest__text">ШАГ {{ currentStepIndex + 1 }}</div>
               <div class="quest__steps steps-quest">
                 <div
                   v-for="(item, index) in QUEST_ITEMS.length"
@@ -43,11 +44,17 @@ const currentQuestItem = computed(() => {
                   :is="currentQuestItem.component"
                   :title="currentQuestItem.title"
                   :inputProps="currentQuestItem.inputProps"
+                  :titleTop="currentQuestItem.titleTop"
+                  :titleBottom="currentQuestItem.titleBottom"
+                  :text="currentQuestItem.text"
                 ></component>
               </Transition>
             </div>
             <div class="quest__buttons">
-              <div v-if="currentStepIndex > 0" class="quest__button--back">
+              <div
+                v-if="currentStepIndex > 0 && !(currentStepIndex > QUEST_ITEMS.length - 2)"
+                class="quest__button--back"
+              >
                 <UIButton @click="goBackQuestion">
                   <span class="button__arrow">
                     <IcArrowLeft />
@@ -55,10 +62,12 @@ const currentQuestItem = computed(() => {
                   <span class="button__text">Назад</span>
                 </UIButton>
               </div>
-              <div class="quest__button--next">
+              <div v-if="currentStepIndex !== QUEST_ITEMS.length - 1" class="quest__button--next">
                 <UIButton @click="goNextQuestion">
-                  <span class="button__text">Далее</span>
-                  <span class="button__arrow">
+                  <span class="button__text">{{
+                    currentStepIndex < QUEST_ITEMS.length - 2 ? 'Далее' : ' Завершить '
+                  }}</span>
+                  <span v-if="currentStepIndex < QUEST_ITEMS.length - 2" class="button__arrow">
                     <IcArrowRight />
                   </span>
                 </UIButton>
@@ -99,28 +108,86 @@ const currentQuestItem = computed(() => {
 }
 
 .quest {
+  background: var(--black-black-90, #2a2a2a);
+  border-radius: 16px;
+  overflow: hidden;
+  @include media(650px) {
+    position: relative;
+  }
+  @include media(880px) {
+    display: flex;
+  }
+
   &__top {
     display: flex;
     justify-content: space-between;
     align-items: center;
     margin-bottom: 20px;
+    @include media(880px) {
+      max-width: 232px;
+      margin-bottom: 36px;
+    }
   }
   &__text {
     color: var(--black-black-00, #fff);
     @include BodySRegular;
   }
+  &__content {
+    padding: 20px 20px 0;
+    margin-bottom: 40px;
+    @include media(650px) {
+      padding-bottom: 20px;
+      margin-bottom: 0;
+    }
+    @include media(880px) {
+      flex: 1 1 auto;
+      padding: 30px 0px 30px 40px;
+      .question__title {
+        margin-bottom: 24px;
+      }
+    }
+  }
   &__current {
-    min-height: 173px;
     margin-bottom: 50px;
   }
   &__image {
     padding-top: 60.6779661%;
+
+    @include media(650px) {
+      position: absolute;
+      right: 0;
+      bottom: 0;
+      padding-top: 26.8333333%;
+      width: 47%;
+    }
+    @include media(880px) {
+      position: relative;
+      padding-top: 0;
+      flex: 0 0 49.1666667%;
+      display: flex;
+      min-height: 358px;
+
+      img {
+        top: auto;
+        bottom: 0;
+        height: auto;
+      }
+    }
   }
   &__buttons {
     display: flex;
+    justify-content: space-between;
+    max-width: 265px;
+
+    .button {
+      height: 100%;
+    }
+    svg {
+      width: 24px;
+      height: 24px;
+    }
   }
   &__button--back {
-    margin-right: 20px;
     .button {
       &__arrow {
         margin-right: 8px;
@@ -129,8 +196,8 @@ const currentQuestItem = computed(() => {
   }
   &__button--next {
     .button {
-      &__text {
-        margin-right: 8px;
+      &__arrow {
+        margin-left: 8px;
       }
     }
   }
@@ -180,11 +247,21 @@ const currentQuestItem = computed(() => {
 }
 
 .fade-in-enter-from {
-  transform: translate(50px);
+  transform: translate(20px);
   opacity: 0;
 }
 
 .fade-in-enter-to {
   transition: all 0.5s ease 0s;
+}
+
+.quest__blur {
+  position: absolute;
+  width: 227px;
+  height: 227px;
+  right: 0;
+  top: -65px;
+  background: #00a19c;
+  filter: blur(150px);
 }
 </style>

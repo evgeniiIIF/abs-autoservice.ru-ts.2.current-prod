@@ -1,5 +1,7 @@
 <script setup lang="ts">
-defineProps<{ title: string; inputProps: any }>();
+import type { QuestionProps } from '@/components/SectionCostCalculation/SectionCostCalculation.types';
+
+defineProps<QuestionProps>();
 const carBrand = ref('');
 const onInput = (value: string) => console.log(value);
 </script>
