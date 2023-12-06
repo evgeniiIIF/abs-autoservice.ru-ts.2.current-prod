@@ -86,6 +86,7 @@ const currentQuestItem = computed(() => {
 <style lang="scss">
 .cost-calculation {
   &__body {
+    position: relative;
     padding: 60px 0 80px;
   }
   &__top {
@@ -256,6 +257,7 @@ const currentQuestItem = computed(() => {
 }
 
 .quest__blur {
+  display: none;
   position: absolute;
   width: 227px;
   height: 227px;
@@ -263,5 +265,9 @@ const currentQuestItem = computed(() => {
   top: -65px;
   background: #00a19c;
   filter: blur(150px);
+
+  @include media(650px) {
+    display: block;
+  }
 }
 </style>
