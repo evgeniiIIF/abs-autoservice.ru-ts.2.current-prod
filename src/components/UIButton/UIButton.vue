@@ -52,6 +52,24 @@ withDefaults(defineProps<UIButtonProps>(), {
   cursor: pointer;
   @include buttonText;
 
+  &:hover {
+    background: var(--green-green-90, #1aaba6);
+  }
+
+  &:focus {
+    border: 2px solid var(--green-green-40, #99d9d7);
+  }
+  &:active {
+    background: var(--green-green-110, #00918d);
+  }
+  &:disabled {
+    background: var(--green-green-40, #99d9d7);
+    cursor: not-allowed;
+    &:active {
+      background: var(--green-green-40, #99d9d7);
+    }
+  }
+
   &--full-width {
     width: 100%;
   }
@@ -61,7 +79,24 @@ withDefaults(defineProps<UIButtonProps>(), {
     border-color: var(--green-primary, #00a19c);
 
     &:hover {
-      background: var(--green-primary, #00a19c);
+      border: 2px solid var(--green-green-40, #99d9d7);
+      background: var(--green-green-160, #00403e);
+    }
+
+    &:focus {
+      border: 2px solid var(--green-green-40, #99d9d7);
+      background: var(--green-green-160, #00403e);
+    }
+    &:active {
+      border: 2px solid var(--green-green-40, #99d9d7);
+      background: var(--green-green-140, #00615e);
+    }
+    &:disabled {
+      background: var(--green-green-40, #99d9d7);
+      cursor: not-allowed;
+      &:active {
+        background: var(--green-green-40, #99d9d7);
+      }
     }
   }
 

@@ -18,12 +18,12 @@ defineProps<QuestionProps>();
     margin-bottom: 16px;
   }
   &__title {
-    font-family: Roboto;
-    font-style: normal;
-    font-weight: 700;
-    font-size: 20px;
-    line-height: 138%;
-    color: #fff;
+    @include SubtitleLBold;
+    color: var(--1, #fff);
+
+    @include desktop {
+      @include TitleSBold;
+    }
   }
   &__title--top {
   }
@@ -33,10 +33,17 @@ defineProps<QuestionProps>();
     font-family: Roboto;
     font-style: normal;
     font-weight: 700;
-    font-size: 18px;
     line-height: 133%;
+    font-size: 18px;
     color: #00a19c;
     max-width: 350px;
+    // @include tablet {
+    //   font-size: 24px;
+    // }
+    @include desktop {
+      font-size: 29px;
+      max-width: 500px;
+    }
   }
 }
 </style>
