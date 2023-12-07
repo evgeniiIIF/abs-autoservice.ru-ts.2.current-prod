@@ -57,10 +57,6 @@ ul {
   list-style: none;
 }
 
-body {
-  background: var(--black-primary-black, #111212);
-}
-
 .v-enter-active,
 .v-leave-active {
   transition: $transition-1;

@@ -13,7 +13,7 @@ const services = [
 </script>
 
 <template>
-  <div class="popular-services">
+  <section class="popular-services">
     <div class="container">
       <div class="popular-services__top-background"></div>
       <h2 class="popular-services__title">Популярные услуги в&nbsp;ABS-AUTO</h2>
@@ -23,7 +23,7 @@ const services = [
         </li>
       </ul>
     </div>
-  </div>
+  </section>
 </template>
 
 <style lang="scss">
