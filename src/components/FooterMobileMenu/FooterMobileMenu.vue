@@ -42,6 +42,12 @@ const onClickItem = (item) => {
 
 <style lang="scss">
 .footer-mobile-menu {
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  z-index: $z-header;
+
   margin-top: 31px;
   border-radius: 10px 10px 0px 0px;
   border-top: 1px solid var(--black-black-80, #414141);

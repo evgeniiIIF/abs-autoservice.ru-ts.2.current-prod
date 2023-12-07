@@ -15,4 +15,10 @@ defineProps<AppNavigationProps>();
   </nav>
 </template>
 
-<style lang="scss"></style>
+<style lang="scss">
+.nav {
+  &__link {
+    cursor: pointer;
+  }
+}
+</style>

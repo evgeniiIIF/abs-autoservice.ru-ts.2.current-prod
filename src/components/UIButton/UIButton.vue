@@ -109,7 +109,7 @@ withDefaults(defineProps<UIButtonProps>(), {
 
 .button-wrapper {
   padding: 0;
-  background: none;
-  border: none;
+  background: none !important;
+  border: none !important;
 }
 </style>
