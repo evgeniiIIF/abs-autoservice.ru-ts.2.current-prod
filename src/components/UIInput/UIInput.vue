@@ -78,10 +78,11 @@ const onChangeHandler = (event: Event): void => {
 
   &__error {
     position: absolute;
-    bottom: -16px;
+    top: 70px;
     left: 0;
 
     @include BodyXSRegular;
+    line-height: 1;
     color: red;
   }
 
