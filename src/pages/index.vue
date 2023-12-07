@@ -10,6 +10,7 @@
     <CallbackForm />
     <CompanyPicture src="/images/company-2.png" alt="Зал автосервиса" />
     <AboutCompany />
+    <ClientsReviews />
   </div>
 </template>
 

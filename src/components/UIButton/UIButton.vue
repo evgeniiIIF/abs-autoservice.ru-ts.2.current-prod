@@ -5,6 +5,7 @@ interface UIButtonProps {
   hasFullWidth?: boolean;
   withoutFill?: boolean;
   isWrapper?: boolean;
+  withArrow?: boolean;
 }
 
 withDefaults(defineProps<UIButtonProps>(), {
@@ -13,6 +14,7 @@ withDefaults(defineProps<UIButtonProps>(), {
   isWrapper: false,
   hasFullWidth: false,
   withoutFill: false,
+  withArrow: false,
 });
 </script>
 
@@ -24,6 +26,7 @@ withDefaults(defineProps<UIButtonProps>(), {
       'button-wrapper': isWrapper,
       'button--full-width': hasFullWidth,
       'button--without-fill': withoutFill,
+      'button--with-arrow': withArrow,
     }"
     :type="tag === 'a' ? '' : type"
   >
@@ -60,6 +63,12 @@ withDefaults(defineProps<UIButtonProps>(), {
     &:hover {
       background: var(--green-primary, #00a19c);
     }
+  }
+
+  &--with-arrow {
+    align-items: center;
+    gap: 8px;
+    background: var(--black-black-80, #414141);
   }
 }
 
