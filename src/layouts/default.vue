@@ -1,4 +1,8 @@
-<script lang="ts" setup></script>
+<script lang="ts" setup>
+import { useMediaSizes } from '@/composables/useMediaSizes';
+
+const { isDesktop } = useMediaSizes();
+</script>
 
 <template>
   <div class="wrapper">
@@ -7,16 +11,16 @@
       <slot />
     </main>
     <AppFooter />
-    <FooterMobileMenu />
+    <FooterMobileMenu v-if="!isDesktop" />
   </div>
 </template>
 
 <style lang="scss">
 .main {
-  margin-top: 67.75px;
+  // margin-top: 67.75px;
 
   @include desktop {
-    margin-top: 89px;
+    // margin-top: 89px;
   }
 }
 </style>

@@ -2,11 +2,48 @@
 import AppSocial from '@/components/AppSocial/AppSocial.vue';
 import vk from '@/assets/icons/vk.svg';
 import { useMediaSizes } from '@/composables/useMediaSizes';
+import { validateNameInput } from '@/utils/validateNameInput/validateNameInput';
+import { validatePhoneInput } from '@/utils/validatePhoneInput/validatePhoneInput';
 
 const { isLessThanDesktop } = useMediaSizes();
 
 const name = ref('');
 const phone = ref('');
+const hasError = ref(false);
+const errorNameInput = ref('');
+const errorPhoneInput = ref('');
+
+const onSubmit = () => {
+  errorNameInput.value = validateNameInput(name.value);
+  errorPhoneInput.value = validatePhoneInput(phone.value);
+
+  if (errorNameInput.value || errorPhoneInput.value) {
+    hasError.value = true;
+    return;
+  }
+
+  hasError.value = false;
+  name.value = '';
+  phone.value = '';
+};
+
+watch(
+  () => [name.value, hasError.value],
+  () => {
+    if (hasError.value) {
+      errorNameInput.value = validateNameInput(name.value);
+    }
+  },
+);
+
+watch(
+  () => [phone.value, hasError.value],
+  () => {
+    if (hasError.value) {
+      errorPhoneInput.value = validatePhoneInput(phone.value);
+    }
+  },
+);
 </script>
 
 <template>
@@ -15,13 +52,26 @@ const phone = ref('');
       <div class="callback-form__content">
         <h2 class="callback-form__title">Закажите обратный звонок&nbsp;из&nbsp;автосервиса</h2>
         <p class="callback-form__description">Оставьте заявку или просто напишите нам в мессенджеры</p>
-        <form class="callback-form__form">
+        <form class="callback-form__form" @submit.prevent="onSubmit">
           <div class="callback-form__inputs">
             <div class="callback-form__input">
-              <UIInput v-model="name" type="text" title="Имя" placeholder="Введите имя" />
+              <UIInput
+                :value="name"
+                type="text"
+                label="Имя"
+                placeholder="Введите имя"
+                :error-message="errorNameInput"
+                @on-input="name = $event"
+              />
             </div>
             <div class="callback-form__input">
-              <UIInput v-model="phone" type="phone" title="Телефон" />
+              <UIInput
+                :value="phone"
+                type="tel"
+                label="Телефон"
+                :error-message="errorPhoneInput"
+                @on-input="phone = $event"
+              />
             </div>
           </div>
           <div class="callback-form__button">
@@ -48,7 +98,7 @@ const phone = ref('');
   padding: 20px 0;
 
   @include desktop {
-    margin: 0 40px;
+    margin: 0 20px;
   }
 
   &__container {
@@ -99,7 +149,7 @@ const phone = ref('');
     @include desktop {
       display: flex;
       gap: 20px;
-      margin-bottom: 6px;
+      margin-bottom: 20px;
     }
   }
 

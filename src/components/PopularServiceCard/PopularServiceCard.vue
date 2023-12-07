@@ -54,6 +54,14 @@ const { isMobile } = useMediaSizes();
 
     &:hover {
       background: var(--black-black-90, #2a2a2a);
+
+      .popular-service-card {
+        &__image {
+          img {
+            transform: scale(0.9);
+          }
+        }
+      }
     }
   }
 
@@ -63,6 +71,7 @@ const { isMobile } = useMediaSizes();
       max-width: 115px;
       height: 60px;
       object-fit: cover;
+      transition: all 0.3s ease;
 
       @include tablet {
         width: 120px;

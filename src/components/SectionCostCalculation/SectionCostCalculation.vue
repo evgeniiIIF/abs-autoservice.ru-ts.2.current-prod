@@ -75,7 +75,7 @@ const currentQuestItem = computed(() => {
             </div>
           </div>
           <div class="quest__image ibg">
-            <NuxtPicture src="images/quest.png" format="webp" />
+            <NuxtPicture src="images/quest.png" format="webp" loading="lazy" />
           </div>
         </form>
       </div>
@@ -90,6 +90,7 @@ const currentQuestItem = computed(() => {
     padding: 60px 0 80px;
   }
   &__top {
+    max-width: 688px;
     margin-bottom: 20px;
     @include mb(8px);
   }
