@@ -80,7 +80,11 @@ const navItems = [
     padding: 60px 0 40px 0;
   }
 
-  @include desktop {
+  //@include desktop {
+  //  margin: 0 40px;
+  //}
+
+  @include from(1440px) {
     margin: 0 40px;
   }
 
