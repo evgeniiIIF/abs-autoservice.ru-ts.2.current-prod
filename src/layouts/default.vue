@@ -17,10 +17,10 @@ const { isDesktop } = useMediaSizes();
 
 <style lang="scss">
 .main {
-  margin-top: 67.75px;
+  // margin-top: 67.75px;
 
   @include desktop {
-    margin-top: 89px;
+    // margin-top: 89px;
   }
 }
 </style>
