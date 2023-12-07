@@ -41,7 +41,7 @@ const TICKER_ITEMS = ['Любая сложность', 'Честные цены'
               <UIButton>Расситать стоимость</UIButton>
             </div>
             <div class="banner__button banner__button--bd">
-              <UIButton>Записаться на сервис</UIButton>
+              <UIButton :withoutFill="true">Записаться на сервис</UIButton>
             </div>
           </div>
         </div>
@@ -124,19 +124,6 @@ const TICKER_ITEMS = ['Любая сложность', 'Честные цены'
   &__button {
     .button {
       width: 100%;
-    }
-  }
-  &__button--bg {
-    @include hover {
-      .banner__image {
-        filter: grayscale(0%);
-      }
-    }
-  }
-  &__button--bd {
-    .button {
-      background: transparent;
-      border-color: var(--green-green-80, #33b4b0);
     }
   }
 
