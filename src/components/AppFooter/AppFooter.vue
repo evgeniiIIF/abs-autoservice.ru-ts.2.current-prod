@@ -84,7 +84,7 @@ const navItems = [
     margin: 0 20px;
   }
 
-  @include from(1400px) {
+  @include from(1440px) {
     margin: 0 40px;
   }
 

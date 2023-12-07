@@ -33,7 +33,6 @@ div#__nuxt {
 }
 
 main {
-  margin-top: 100px;
   flex: 1 1 auto;
 }
 
@@ -56,10 +55,6 @@ body {
 
 ul {
   list-style: none;
-}
-
-body {
-  background: var(--black-primary-black, #111212);
 }
 
 .v-enter-active,
