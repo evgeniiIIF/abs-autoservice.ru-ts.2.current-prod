@@ -24,7 +24,7 @@ const navItems = [
 ];
 </script>
 <template>
-  <header :class="{ 'header-mobile': true, 'header-mobile-menu--open': isOpenMobileMenu }">
+  <header :class="{ 'header-mobile': true, 'js-header': true, 'header-mobile-menu--open': isOpenMobileMenu }">
     <div class="container">
       <div class="header-mobile__body">
         <div class="header-mobile__logo">

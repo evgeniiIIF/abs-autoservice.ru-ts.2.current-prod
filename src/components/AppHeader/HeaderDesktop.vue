@@ -17,11 +17,13 @@ const topNavItems = [
 const headerDesktopNode = ref(null);
 const headerTopNode = ref(null);
 const bodyNode = ref();
+const wrapper = ref();
 
 const currentScrollPosition = ref(0);
 const lastScrollPosition = ref(0);
 
-const getScrollPosition = () => document.body.scrollTop || document.documentElement.scrollTop;
+// const getScrollPosition = () => document.body.scrollTop || document.documentElement.scrollTop;
+const getScrollPosition = () => wrapper.value.scrollTop;
 
 const addClassByScroll = () => {
   currentScrollPosition.value = getScrollPosition();
@@ -34,12 +36,26 @@ const addClassByScroll = () => {
 };
 
 onMounted(() => {
+  wrapper.value = document.querySelector('.wrapper');
+
+  // wrapper.value.addEventListener('scroll', function () {
+  //   currentScrollPosition.value = getScrollPosition();
+
+  //   lastScrollPosition.value < currentScrollPosition.value
+  //     ? bodyNode.value.classList.add('hide-header-top')
+  //     : bodyNode.value.classList.remove('hide-header-top');
+
+  //   lastScrollPosition.value = getScrollPosition();
+
+  //   console.log(getScrollPosition());
+  // });
+
   bodyNode.value = document.querySelector('body');
-  window.addEventListener('scroll', addClassByScroll);
+  wrapper.value.addEventListener('scroll', addClassByScroll);
 });
 </script>
 <template>
-  <header ref="headerDesktopNode" class="header-desktop">
+  <header ref="headerDesktopNode" class="header-desktop js-header">
     <div ref="headerTopNode" class="header-desktop__top header-desktop-top">
       <address class="header-desktop-top__address">
         <div class="header-desktop-top__address-icon"><IcNavigation :font-controlled="false" :filled="true" /></div>
