@@ -19,7 +19,7 @@ const { isMobile } = useMediaSizes();
             <NuxtPicture src="images/get-card.png" format="webp" loading="lazy" />
           </div>
           <div class="get-card__button">
-            <UIButton>Получить карту бесплатно</UIButton>
+            <UIButton>{{ isMobile ? 'Получить карту бесплатно' : 'Получить карту' }}</UIButton>
           </div>
         </div>
         <div v-if="!isMobile" class="get-card__image">
@@ -57,6 +57,7 @@ const { isMobile } = useMediaSizes();
       margin-right: 20px;
     }
     @include desktop {
+      padding-bottom: 24px;
       margin-right: 36px;
     }
   }

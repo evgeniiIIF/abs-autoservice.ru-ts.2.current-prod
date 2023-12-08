@@ -28,3 +28,10 @@ export const bodyUnlock = () => {
     headerNode.style.paddingRight = '';
   }
 };
+
+export const setHeaderWidth = (selectorHeader: string) => {
+  nextTick(() => {
+    const headerNode: HTMLElement | null = document.querySelector(selectorHeader);
+    if (headerNode) headerNode.style.width = `calc(100% - ${getScrollWidth()}px)`;
+  });
+};

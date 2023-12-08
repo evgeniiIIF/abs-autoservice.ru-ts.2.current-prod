@@ -1,5 +1,6 @@
 <script lang="ts" setup>
 import { bodyLock, bodyUnlock } from './AppHeader.utils';
+import { setHeaderWidth } from './AppHeader.utils';
 
 const [isOpenMobileMenu, useOpenMobileMenu, useCloseMobileMenu] = useBooleanState(false);
 
@@ -22,9 +23,12 @@ const navItems = [
   { name: 'О автосервисе', link: '' },
   { name: 'Контакты', link: '' },
 ];
+onBeforeMount(() => {
+  setHeaderWidth('.js-header-mobile');
+});
 </script>
 <template>
-  <header :class="{ 'header-mobile': true, 'js-header': true, 'header-mobile-menu--open': isOpenMobileMenu }">
+  <header :class="{ 'header-mobile': true, 'js-header-mobile': true, 'header-mobile-menu--open': isOpenMobileMenu }">
     <div class="container">
       <div class="header-mobile__body">
         <div class="header-mobile__logo">
