@@ -27,15 +27,14 @@ const { isMobile } = useMediaSizes();
   display: grid;
   grid-template-rows: 160px auto 40px;
   grid-row-gap: 10px;
-  width: 205px;
+  width: 100%;
   height: 100%;
+  min-width: 205px;
   padding: 12px;
   border-radius: 20px;
   background: rgba(42, 42, 42, 0.5);
 
   @include tablet {
-    width: 387px;
-    min-height: 374px;
     padding: 16px;
     grid-row-gap: 12px;
     border: 1px solid var(--black-black-90);
@@ -58,28 +57,26 @@ const { isMobile } = useMediaSizes();
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 181px;
-    height: 160px;
 
     @include tablet {
       width: 100%;
-      max-width: 355px;
       margin-bottom: 12px;
     }
 
     picture {
       display: flex;
       width: 100%;
+      height: 100%;
     }
 
     img {
       width: 100%;
       transition: all 0.3s ease;
+      object-fit: contain;
 
       @include tablet {
+        aspect-ratio: 355 / 160;
         border-radius: 20px;
-        width: 355px;
-        height: 160px;
       }
     }
   }
