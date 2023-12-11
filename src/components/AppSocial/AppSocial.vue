@@ -3,6 +3,7 @@ defineProps<{
   link: string;
   img: string | Object;
   background?: 'gray' | 'green';
+  withBorder?: boolean;
 }>();
 </script>
 
@@ -12,7 +13,11 @@ defineProps<{
     :href="link || '#'"
     target="_blank"
     rel="noopener"
-    :class="{ 'social--background-gray': background === 'gray', 'social--background-green': background === 'green' }"
+    :class="{
+      'social--background-gray': background === 'gray',
+      'social--background-green': background === 'green',
+      'social--with-border': withBorder,
+    }"
   >
     <component :is="img" class="social__icon" :font-controlled="false" :filled="true" />
   </a>
@@ -33,6 +38,11 @@ defineProps<{
 
   &--background-green {
     background-color: var(--green-primary, #00a19c);
+  }
+
+  &--with-border {
+    border-radius: 10px;
+    border: 2px solid var(--green-primary, #00a19c);
   }
 }
 </style>
