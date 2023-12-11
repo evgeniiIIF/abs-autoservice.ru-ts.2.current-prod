@@ -1,6 +1,5 @@
 <script lang="ts" setup>
-import { bodyLock, bodyUnlock } from './AppHeader.utils';
-import { setHeaderWidth } from './AppHeader.utils';
+import { bodyLock, bodyUnlock, setHeaderWidth } from './AppHeader.utils';
 
 const [isOpenMobileMenu, useOpenMobileMenu, useCloseMobileMenu] = useBooleanState(false);
 
