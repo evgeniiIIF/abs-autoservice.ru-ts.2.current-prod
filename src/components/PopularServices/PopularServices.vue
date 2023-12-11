@@ -1,14 +1,14 @@
 <script setup lang="ts">
 const services = [
-  { title: 'Техническое обслуживание', link: '#', img: '/images/popular-service.png' },
-  { title: 'Диагностика автомобиля', link: '#', img: '/images/popular-service.png' },
-  { title: '3D развал-схождение', link: '#', img: '/images/popular-service.png' },
-  { title: 'Ремонт двигателей', link: '#', img: '/images/popular-service.png' },
-  { title: 'Ремонт Акпп', link: '#', img: '/images/popular-service.png' },
-  { title: 'Ремонт электрики', link: '#', img: '/images/popular-service.png' },
-  { title: 'Ремонт подвески', link: '#', img: '/images/popular-service.png' },
-  { title: 'Ремонт тормозной системы', link: '#', img: '/images/popular-service.png' },
-  { title: 'Шиномонтаж', link: '#', img: '/images/popular-service.png' },
+  { title: 'Техническое обслуживание', link: '#', img: '/images/popular-services-items/1.png' },
+  { title: 'Диагностика автомобиля', link: '#', img: '/images/popular-services-items/2.png' },
+  { title: '3D развал-схождение', link: '#', img: '/images/popular-services-items/3.png' },
+  { title: 'Ремонт двигателей', link: '#', img: '/images/popular-services-items/4.png' },
+  { title: 'Ремонт Акпп', link: '#', img: '/images/popular-services-items/5.png' },
+  { title: 'Ремонт электрики', link: '#', img: '/images/popular-services-items/6.png' },
+  { title: 'Ремонт подвески', link: '#', img: '/images/popular-services-items/7.png' },
+  { title: 'Ремонт тормозной системы', link: '#', img: '/images/popular-services-items/8.png' },
+  { title: 'Шиномонтаж', link: '#', img: '/images/popular-services-items/9.png' },
 ];
 </script>
 
@@ -57,10 +57,6 @@ const services = [
     @include SubtitleLBold;
     color: var(--white, #fff);
 
-    @include from(480px) {
-      text-align: center;
-    }
-
     @include tablet {
       margin-left: 0;
       @include TitleXSBold;
@@ -75,15 +71,18 @@ const services = [
     display: flex;
     flex-wrap: wrap;
     gap: 10px;
+    justify-content: space-between;
 
-    @include from(480px) {
-      justify-content: center;
+    @include desktop {
+      gap: 20px;
     }
+  }
 
-    @include from(1210px) {
-      column-gap: 0;
-      row-gap: 20px;
-      justify-content: space-between;
+  &__service {
+    flex-basis: calc(50% - 5px);
+
+    @include desktop {
+      flex-basis: calc(33% - 13.3px);
     }
   }
 }

@@ -34,16 +34,16 @@ const { isMobile } = useMediaSizes();
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: 135px;
-  height: 130px;
+  width: 100%;
+  min-width: 135px;
+  min-height: 130px;
+  height: 100%;
   padding: 10px 8px;
   gap: 10px;
   border-radius: 20px;
   background-color: rgba(42, 42, 42, 0.5);
 
   @include tablet {
-    width: 387px;
-    height: 144px;
     padding: 12px;
     gap: 16px;
     flex-direction: inherit;
@@ -70,7 +70,7 @@ const { isMobile } = useMediaSizes();
       width: 100%;
       max-width: 115px;
       height: 60px;
-      object-fit: cover;
+      object-fit: contain;
       transition: all 0.3s ease;
 
       @include tablet {
