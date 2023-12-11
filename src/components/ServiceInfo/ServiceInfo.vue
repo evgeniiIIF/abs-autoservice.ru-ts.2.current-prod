@@ -92,7 +92,7 @@ const descriptionIsOpen = ref(false);
 <style lang="scss">
 .service-info {
   position: relative;
-  padding: 20px 0;
+  padding: 30px 0;
 
   &__title {
     margin-bottom: 20px;

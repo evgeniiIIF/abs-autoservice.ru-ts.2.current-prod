@@ -74,7 +74,7 @@ const navItems = [
   background: var(--black-black-90, #2a2a2a);
   border-radius: 40px;
   padding: 30px 0;
-  margin: 0 10px;
+  margin: 0 10px 80px 10px;
 
   @include tablet {
     padding: 60px 0 40px 0;

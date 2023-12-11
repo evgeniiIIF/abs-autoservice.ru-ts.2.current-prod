@@ -48,8 +48,7 @@ const onClickItem = (item) => {
   width: 100%;
   z-index: $z-header;
 
-  margin-top: 31px;
-  border-radius: 10px 10px 0px 0px;
+  border-radius: 10px 10px 0 0;
   border-top: 1px solid var(--black-black-80, #414141);
   background-color: var(--black-black-90, #2a2a2a);
 
