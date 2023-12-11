@@ -8,9 +8,11 @@
     <CompanyPicture src="/images/company-1.png" alt="Ресепшен" />
     <PopularServices />
     <CallbackForm />
+    <SectionGetCard />
     <CompanyPicture src="/images/company-2.png" alt="Зал автосервиса" />
     <AboutCompany />
     <ClientsReviews />
+    <SectionServices />
   </div>
 </template>
 

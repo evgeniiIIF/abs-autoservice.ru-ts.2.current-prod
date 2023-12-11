@@ -1,4 +1,6 @@
 <script lang="ts" setup>
+import { setHeaderWidth } from './AppHeader.utils';
+
 const navItems = [
   { name: 'Акции', link: '' },
   { name: 'Услуги', link: '' },
@@ -17,13 +19,15 @@ const topNavItems = [
 const headerDesktopNode = ref(null);
 const headerTopNode = ref(null);
 const bodyNode = ref();
+const wrapper = ref();
 
 const currentScrollPosition = ref(0);
 const lastScrollPosition = ref(0);
 
-const getScrollPosition = () => document.body.scrollTop || document.documentElement.scrollTop;
+// const getScrollPosition = () => document.body.scrollTop || document.documentElement.scrollTop;
+const getScrollPosition = () => wrapper.value.scrollTop;
 
-const addClassByScroll = () => {
+const addClassInBodyByScroll = () => {
   currentScrollPosition.value = getScrollPosition();
 
   lastScrollPosition.value < currentScrollPosition.value
@@ -33,13 +37,19 @@ const addClassByScroll = () => {
   lastScrollPosition.value = getScrollPosition();
 };
 
+onBeforeMount(() => {
+  setHeaderWidth('.js-header-desktop');
+  console.log('bmDe');
+});
+
 onMounted(() => {
+  wrapper.value = document.querySelector('.wrapper');
   bodyNode.value = document.querySelector('body');
-  window.addEventListener('scroll', addClassByScroll);
+  wrapper.value.addEventListener('scroll', addClassInBodyByScroll);
 });
 </script>
 <template>
-  <header ref="headerDesktopNode" class="header-desktop">
+  <header ref="headerDesktopNode" class="header-desktop js-header-desktop">
     <div ref="headerTopNode" class="header-desktop__top header-desktop-top">
       <address class="header-desktop-top__address">
         <div class="header-desktop-top__address-icon"><IcNavigation :font-controlled="false" :filled="true" /></div>

@@ -258,17 +258,18 @@ const currentQuestItem = computed(() => {
 }
 
 .quest__blur {
-  display: none;
   position: absolute;
   width: 227px;
   height: 227px;
-  right: 0;
   top: -65px;
+  right: -235px;
+  z-index: -1;
   background: #00a19c;
   filter: blur(150px);
 
   @include media(650px) {
-    display: block;
+    right: 0;
+    z-index: 0;
   }
 }
 </style>

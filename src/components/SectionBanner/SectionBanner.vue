@@ -105,8 +105,8 @@ const TICKER_ITEMS = ['Любая сложность', 'Честные цены'
   }
   &__tickers {
     margin-bottom: 20px;
-    margin-left: -20px;
-    margin-right: -20px;
+    // margin-left: -20px;
+    // margin-right: -20px;
     @include tablet {
       margin-bottom: 48px;
     }
