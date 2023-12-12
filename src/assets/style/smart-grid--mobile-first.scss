@@ -352,11 +352,11 @@ $fields_lg: 15px;
   @include xxl(padding-right, #{calc(#{$val} + #{$offset_xxl_one_side})});
 }
 
-@mixin xs($name, $value) {
-  @media screen and (min-width: $break_xs) {
-    #{$name}: $value;
-  }
-}
+// @mixin xs($name, $value) {
+//   @media screen and (min-width: $break_xs) {
+//     #{$name}: $value;
+//   }
+// }
 
 @mixin xs-block() {
   @media screen and (min-width: $break_xs) {
@@ -364,11 +364,11 @@ $fields_lg: 15px;
   }
 }
 
-@mixin sm($name, $value) {
-  @media screen and (min-width: $break_sm) {
-    #{$name}: $value;
-  }
-}
+// @mixin sm($name, $value) {
+//   @media screen and (min-width: $break_sm) {
+//     #{$name}: $value;
+//   }
+// }
 
 @mixin sm-block() {
   @media screen and (min-width: $break_sm) {
@@ -376,11 +376,11 @@ $fields_lg: 15px;
   }
 }
 
-@mixin md($name, $value) {
-  @media screen and (min-width: $break_md) {
-    #{$name}: $value;
-  }
-}
+// @mixin md($name, $value) {
+//   @media screen and (min-width: $break_md) {
+//     #{$name}: $value;
+//   }
+// }
 
 @mixin md-block() {
   @media screen and (min-width: $break_md) {
@@ -388,11 +388,11 @@ $fields_lg: 15px;
   }
 }
 
-@mixin lg($name, $value) {
-  @media screen and (min-width: $break_lg) {
-    #{$name}: $value;
-  }
-}
+// @mixin lg($name, $value) {
+//   @media screen and (min-width: $break_lg) {
+//     #{$name}: $value;
+//   }
+// }
 
 @mixin lg-block() {
   @media screen and (min-width: $break_lg) {
@@ -400,11 +400,11 @@ $fields_lg: 15px;
   }
 }
 
-@mixin xl($name, $value) {
-  @media screen and (min-width: $break_xl) {
-    #{$name}: $value;
-  }
-}
+// @mixin xl($name, $value) {
+//   @media screen and (min-width: $break_xl) {
+//     #{$name}: $value;
+//   }
+// }
 
 @mixin xl-block() {
   @media screen and (min-width: $break_xl) {
@@ -412,11 +412,11 @@ $fields_lg: 15px;
   }
 }
 
-@mixin xxl($name, $value) {
-  @media screen and (min-width: $break_xxl) {
-    #{$name}: $value;
-  }
-}
+// @mixin xxl($name, $value) {
+//   @media screen and (min-width: $break_xxl) {
+//     #{$name}: $value;
+//   }
+// }
 
 @mixin xxl-block() {
   @media screen and (min-width: $break_xxl) {
