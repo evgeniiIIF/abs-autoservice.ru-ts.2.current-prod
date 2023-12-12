@@ -1,11 +1,7 @@
 <script setup lang="ts">
-defineProps<{
-  item: {
-    image: string;
-    title: string;
-    text: string;
-  };
-}>();
+import type { SectionServicesItemProps } from './SectionServices.types';
+
+defineProps<SectionServicesItemProps>();
 </script>
 <template>
   <div class="section-service-item-mobile">
@@ -36,7 +32,6 @@ defineProps<{
     overflow: hidden;
     background:
       linear-gradient(0deg, rgba(0, 161, 156, 0.5) 0%, rgba(0, 161, 156, 0.5) 100%),
-      url(<path-to-image>),
       lightgray 50% / cover no-repeat;
     background-blend-mode: soft-light, normal;
   }
