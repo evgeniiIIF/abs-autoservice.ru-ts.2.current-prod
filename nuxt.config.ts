@@ -91,6 +91,6 @@ export default defineNuxtConfig({
       xl: 'xl',
       xxl: 'xxl',
     },
-    fallbackBreakpoint: 'desktop',
+    fallbackBreakpoint: 'xl',
   },
 });

@@ -4,6 +4,7 @@ import search from '@/assets/icons/search.svg';
 import navigation from '@/assets/icons/navigation.svg';
 import star from '@/assets/icons/star.svg';
 import { useClickOutside } from '@/composables/useClickOutside';
+import { setHeaderWidth } from '../AppHeader/AppHeader.utils';
 
 const items = [
   { id: 1, icon: chat },
@@ -18,21 +19,19 @@ const menuRef = ref<HTMLDivElement | null>(null);
 useClickOutside(menuRef, () => {
   activeItem.value = null;
 });
-
-const onClickItem = (item) => {
-  activeItem.value = item.id;
-};
+onBeforeMount(() => {
+  setHeaderWidth('.js-footer-mobile-menu');
+});
 </script>
 
 <template>
-  <div ref="menuRef" class="footer-mobile-menu">
+  <div ref="menuRef" class="footer-mobile-menu js-footer-mobile-menu">
     <ul class="footer-mobile-menu__list">
       <li
         v-for="item in items"
         :key="item.id"
         class="footer-mobile-menu__item"
         :class="{ 'footer-mobile-menu__item--active': activeItem === item.id }"
-        @click="onClickItem(item)"
       >
         <component :is="item.icon" :font-controlled="false" :filled="true" />
       </li>

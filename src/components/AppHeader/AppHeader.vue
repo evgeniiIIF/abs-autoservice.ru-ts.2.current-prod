@@ -5,10 +5,10 @@ const { isMobile, isTablet, isDesktop } = useMediaSizes();
   <AppHeaderMobile v-if="isTablet || isMobile || isDesktop" />
   <AppHeaderDesktop v-else />
 </template>
+
 <style>
 /* <h1 class="h">
-  <!-- {{ isMobile + '  ' + isTablet + ' ' + isDesktop + ' ' + isXl + ' ' + isXxl }} -->
-  {{ isTablet || isMobile || isDesktop }}
+  {{ isMobile + '  ' + isTablet + ' ' + isDesktop + ' ' + isXl + ' ' + isXxl }}
 </h1>
 .h {
   margin-top: 300px;

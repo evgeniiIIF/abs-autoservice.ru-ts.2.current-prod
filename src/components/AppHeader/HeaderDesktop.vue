@@ -39,7 +39,6 @@ const addClassInBodyByScroll = () => {
 
 onBeforeMount(() => {
   setHeaderWidth('.js-header-desktop');
-  console.log('bmDe');
 });
 
 onMounted(() => {
