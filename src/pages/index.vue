@@ -13,6 +13,7 @@
     <AboutCompany />
     <ClientsReviews />
     <SectionServices />
+    <SectionBrandIconsRow />
   </div>
 </template>
 

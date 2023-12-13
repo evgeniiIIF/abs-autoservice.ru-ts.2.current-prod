@@ -12,8 +12,10 @@ export const getScrollWidth = () => {
 };
 
 export const bodyLock = () => {
-  document.body.style.overflow = 'hidden';
-  document.body.style.paddingRight = `${getScrollWidth()}px`;
+  const wrapperNode: HTMLDivElement | null = document.querySelector('.wrapper');
+  if (!wrapperNode) return;
+  wrapperNode.style.overflow = 'hidden';
+  wrapperNode.style.paddingRight = `${getScrollWidth()}px`;
   const headerNode = document.querySelector('header');
   if (headerNode) {
     headerNode.style.paddingRight = `${getScrollWidth()}px`;
@@ -21,8 +23,10 @@ export const bodyLock = () => {
 };
 
 export const bodyUnlock = () => {
-  document.body.style.overflow = '';
-  document.body.style.paddingRight = '';
+  const wrapperNode: HTMLDivElement | null = document.querySelector('.wrapper');
+  if (!wrapperNode) return;
+  wrapperNode.style.overflow = '';
+  wrapperNode.style.paddingRight = '';
   const headerNode = document.querySelector('header');
   if (headerNode) {
     headerNode.style.paddingRight = '';

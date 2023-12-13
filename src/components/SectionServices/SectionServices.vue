@@ -133,10 +133,12 @@ const items = [
     margin: -5px;
     @include tablet {
       margin: 0;
-      // @include mb(20px);
+      @include mb(20px);
     }
     @include desktop {
+      @include mb(0px);
       position: relative;
+      margin-top: -70px;
     }
   }
   &__item {
@@ -150,7 +152,8 @@ const items = [
     }
     @include desktop {
       position: sticky;
-      top: 60px;
+      top: 70px;
+      margin-bottom: -26px;
 
       @for $i from 0 through 4 {
         &:nth-of-type(#{$i}) {
@@ -158,7 +161,7 @@ const items = [
         }
       }
       &:last-child {
-        transform: translateY(300px);
+        transform: translateY(325px);
       }
       // position: sticky;
       // left: 0;
