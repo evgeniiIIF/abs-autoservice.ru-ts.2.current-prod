@@ -15,9 +15,19 @@ const { isMobile } = useMediaSizes();
     </div>
     <a class="contacts__email" href="mailto:info@abs-autoservice.ru">info@abs-autoservice.ru</a>
     <ul class="contacts__socials">
-      <li v-for="social in 3" :key="social" class="contacts__social">
+      <li class="contacts__social">
         <a class="contacts__social-link" href="#" target="_blank" rel="noopener">
           <IcVk :font-controlled="false" :filled="true" />
+        </a>
+      </li>
+      <li class="contacts__social">
+        <a class="contacts__social-link" href="#" target="_blank" rel="noopener">
+          <IcTelegram :font-controlled="false" :filled="true" />
+        </a>
+      </li>
+      <li class="contacts__social">
+        <a class="contacts__social-link" href="#" target="_blank" rel="noopener">
+          <IcWhatsapp :font-controlled="false" :filled="true" />
         </a>
       </li>
     </ul>
@@ -30,18 +40,16 @@ const { isMobile } = useMediaSizes();
   flex-direction: column;
   align-items: center;
   width: 100%;
-  padding: 20px 0;
+  padding: 20px;
+  border-radius: 20px;
+  border-top: 1px solid var(--black-black-70, #4d4d4d);
+  background: var(--black-black-80, #414141);
 
   &--in-mobile-menu {
     padding: 20px;
     border-radius: 20px;
     border-top: 1px solid var(--black-black-70, #4d4d4d);
     background-color: var(--black-black-80, #414141);
-  }
-
-  @include tablet {
-    padding: 0;
-    align-items: flex-start;
   }
 
   &__phone {
@@ -51,11 +59,10 @@ const { isMobile } = useMediaSizes();
   }
 
   &__callback {
-    width: 100%;
-    margin-bottom: 43px;
-
-    @include tablet {
-      margin-bottom: 60px;
+    min-width: 220px;
+    margin-bottom: 30px;
+    .button {
+      width: 100%;
     }
   }
 

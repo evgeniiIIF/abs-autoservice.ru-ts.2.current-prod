@@ -74,14 +74,22 @@ export default defineNuxtConfig({
   viewport: {
     breakpoints: {
       mobile: 0,
+      // xs: 320,
+      // sm: 640,
       tablet: 768,
       desktop: 1024,
+      xl: 1280,
+      xxl: 1536,
     },
     cookieName: 'viewport',
     defaultBreakpoints: {
       mobile: 'mobile',
+      // xs: 'xs',
+      // sm: 'sm',
       tablet: 'tablet',
       desktop: 'desktop',
+      xl: 'xl',
+      xxl: 'xxl',
     },
     fallbackBreakpoint: 'desktop',
   },
