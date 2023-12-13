@@ -1,7 +1,17 @@
 <script setup lang="ts">
-const { isDesktop } = useMediaSizes();
+const { isMobile, isTablet, isDesktop } = useMediaSizes();
 </script>
 <template>
-  <AppHeaderMobile v-if="!isDesktop" />
+  <AppHeaderMobile v-if="isTablet || isMobile || isDesktop" />
   <AppHeaderDesktop v-else />
 </template>
+<style>
+/* <h1 class="h">
+  <!-- {{ isMobile + '  ' + isTablet + ' ' + isDesktop + ' ' + isXl + ' ' + isXxl }} -->
+  {{ isTablet || isMobile || isDesktop }}
+</h1>
+.h {
+  margin-top: 300px;
+  font-size: 145px;
+} */
+</style>

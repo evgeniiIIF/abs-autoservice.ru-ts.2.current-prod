@@ -28,28 +28,53 @@ onBeforeMount(() => {
 </script>
 <template>
   <header :class="{ 'header-mobile': true, 'js-header-mobile': true, 'header-mobile-menu--open': isOpenMobileMenu }">
-    <div class="container">
-      <div class="header-mobile__body">
-        <div class="header-mobile__logo">
-          <IcLogoMobile :font-controlled="false" :filled="true" />
-        </div>
-        <div class="header-mobile__buttons">
-          <div class="header-mobile__button header-mobile__button--phone">
-            <UIButton><IcPhone /></UIButton>
+    <div class="mobile-header">
+      <div class="container">
+        <div class="mobile-header__body">
+          <div class="mobile-header__logo">
+            <IcLogoMobile :font-controlled="false" :filled="true" />
           </div>
-          <div class="header-mobile__button header-mobile__button--burger">
-            <UIButton @click="toggleMobileMenu">
-              <AppHeaderBurgerIcon />
-            </UIButton>
+          <div class="mobile-header__buttons">
+            <div class="mobile-header__button mobile-header__button--phone">
+              <UIButton><IcPhone /></UIButton>
+            </div>
+            <div class="mobile-header__button mobile-header__button--burger">
+              <UIButton @click="toggleMobileMenu">
+                <IcBurger />
+              </UIButton>
+            </div>
           </div>
         </div>
       </div>
-      <div class="header-mobile-menu">
-        <div class="header-mobile-menu__mask" @click="closeMobileMenu"></div>
-        <div class="header-mobile-menu__body">
-          <div class="header-mobile-menu__nav">
-            <AppNavigation :items="navItems" />
+    </div>
+
+    <div class="header-mobile-menu">
+      <div class="header-mobile-menu__mask" @click="closeMobileMenu"></div>
+      <div class="mobile-header">
+        <div class="container">
+          <div class="mobile-header__body">
+            <div class="mobile-header__logo">
+              <IcLogoMobile :font-controlled="false" :filled="true" />
+            </div>
+            <div class="mobile-header__buttons">
+              <div class="mobile-header__button mobile-header__button--phone">
+                <UIButton><IcPhone /></UIButton>
+              </div>
+              <div class="mobile-header__button mobile-header__button--burger">
+                <UIButton @click="toggleMobileMenu">
+                  <IcClose />
+                </UIButton>
+              </div>
+            </div>
           </div>
+        </div>
+      </div>
+      <div class="header-mobile-menu__body">
+        <div class="header-mobile-menu__nav">
+          <AppNavigation :items="navItems" />
+        </div>
+        <div class="header-mobile-menu__contacts">
+          <AppContacts />
         </div>
       </div>
     </div>
@@ -60,9 +85,10 @@ onBeforeMount(() => {
 .header-mobile-menu {
   position: absolute;
   left: -100%;
-  top: 100%;
+  top: 0;
   width: 100%;
-  height: calc(100vh - 67.75px);
+  height: 100vh;
+  transition: all 0s ease 0.2s;
 
   &__mask {
     position: absolute;
@@ -76,11 +102,14 @@ onBeforeMount(() => {
   &__body {
     position: absolute;
     left: -100%;
+    top: 68px;
     z-index: 1;
     height: inherit;
     background: var(--black-black-90, #2a2a2a);
-    padding: 17px 10px 128px;
+    padding: 17px 10px 178px;
     transition: all 0.2s ease 0s;
+    overflow-x: hidden;
+    overflow-y: auto;
   }
 
   &__nav {
@@ -108,28 +137,33 @@ onBeforeMount(() => {
     }
   }
 
-  &--open {
-    .header-mobile-menu,
-    .header-mobile-menu__body {
-      left: 0;
-    }
+  & .mobile-header {
+    position: absolute;
+    left: -100%;
+    top: 0;
+    width: 100%;
+    z-index: 6;
+    border-bottom: 1px solid var(--black-black-90, #2a2a2a);
+    background: #3b3b3b;
 
-    .burger-icon__item--top,
-    .burger-icon__item--middle,
-    .burger-icon__item--bottom {
-      top: 50%;
-      transform: translateY(-50%);
+    backdrop-filter: blur(10px);
+    transition: all 0.2s ease 0s;
+    &__button--burger {
+      .button {
+        background: var(--black-black-90, #2a2a2a);
+      }
+    }
+  }
+
+  &--open {
+    .header-mobile-menu__body,
+    .mobile-header {
+      left: 0;
       transition: all 0.2s ease 0s;
     }
-    .burger-icon__item--middle {
-      display: none;
-    }
-    .burger-icon__item--top {
-      transform: translateY(-50%) rotate(45deg);
-    }
-    .burger-icon__item--bottom {
-      width: 100%;
-      transform: translateY(-50%) rotate(-45deg);
+    .header-mobile-menu {
+      left: 0;
+      transition: all 0s ease 0s;
     }
   }
 }
@@ -147,6 +181,9 @@ onBeforeMount(() => {
   .container {
     padding: 0 10px;
   }
+}
+
+.mobile-header {
   &__body {
     display: flex;
     align-items: center;
@@ -175,6 +212,10 @@ onBeforeMount(() => {
   &__button--burger {
     .button {
       background: var(--black-black-90, #2a2a2a);
+      svg {
+        width: 24px;
+        height: 24px;
+      }
     }
   }
 }

@@ -70,11 +70,15 @@ onMounted(() => {
         </li>
       </ul>
     </div>
+
     <div class="header-desktop__body">
       <NuxtLink to="/" class="header-desktop__logo">
         <IcLogoDesktop :font-controlled="false" :filled="true" />
       </NuxtLink>
       <div class="header-desktop__nav">
+        <div class="header-desktop__nav-button">
+          <UIButton><IcBurger :font-controlled="false" :filled="true" /></UIButton>
+        </div>
         <AppNavigation :items="navItems" />
       </div>
       <div class="header-desktop__contacts contacts-header-desktop">
@@ -86,17 +90,9 @@ onMounted(() => {
             <UIButton :isWrapper="true">обратный звонок</UIButton>
           </div>
         </div>
-        <div class="contacts-header-desktop__buttons">
-          <div class="contacts-header-desktop__button">
-            <AppButtonPopUp>
-              <IcWhatsapp />
-            </AppButtonPopUp>
-          </div>
-          <div class="contacts-header-desktop__button">
-            <AppButtonPopUp>
-              <IcTelegram />
-            </AppButtonPopUp>
-          </div>
+        <div class="contacts-header-desktop__button"><UIButton>Записаться на сервис</UIButton></div>
+        <div class="contacts-header-desktop__search">
+          <UIButton><IcSearch :font-controlled="false" :filled="true" /></UIButton>
         </div>
       </div>
     </div>
@@ -127,7 +123,7 @@ onMounted(() => {
   height: 40px;
   padding-left: 40px;
   padding-right: 20px;
-  border-radius: 10px;
+  border-radius: 0px 0px 10px 10px;
   background: var(--black-black-90, #2a2a2a);
 
   &__address {
@@ -194,12 +190,12 @@ onMounted(() => {
   &__body {
     display: flex;
     align-items: center;
-    padding-left: 20px;
+    padding: 0px 20px;
     border-bottom: 1px solid var(--black-black-90, #2a2a2a);
     background: rgba(17, 18, 18, 0.95);
     backdrop-filter: blur(10px);
-    @include media($xl) {
-      padding-left: 40px;
+    @include media($xxl) {
+      padding: 0px 40px;
     }
   }
 
@@ -207,34 +203,50 @@ onMounted(() => {
     flex: 0 0 150px;
     margin-right: 20px;
 
-    @include media($xl) {
+    @include media($xxl) {
       flex: 0 0 212px;
-      margin-right: 40px;
+      margin-right: 105px;
     }
 
     svg {
       width: 100%;
     }
   }
+  &__nav-button {
+    display: flex;
+    align-items: center;
+    margin-right: 40px;
+    svg {
+      width: 24px;
+      height: 24px;
+    }
+    .button {
+      padding: 12px;
+      border-radius: 10px;
+      background: var(--black-black-90, #2a2a2a);
+    }
+  }
 
   &__nav {
     flex: 1 1 auto;
     align-self: end;
+    display: flex;
 
     .nav {
       &__list {
         display: flex;
       }
       &__link {
-        padding: 0px 8px 32px 8px;
+        padding: 30px 8px 32px 8px;
         border-bottom: 2px solid transparent;
+        margin-bottom: -1px;
         color: var(--black-black-40, #999);
         transition: $transition-1;
         cursor: pointer;
         @include BodyLRegular;
         font-size: 14px;
 
-        @include media($xl) {
+        @include media($xxl) {
           font-size: 16px;
         }
 
@@ -251,20 +263,26 @@ onMounted(() => {
 .contacts-header-desktop {
   display: flex;
 
-  &__buttons {
-    display: flex;
-    .button-pop-up__items {
-      &:first-child {
-        border-left: 1px solid var(--black-black-90, #2a2a2a);
-        border-right: 1px solid var(--black-black-90, #2a2a2a);
-      }
-    }
+  &__feedback {
+    margin-right: 20px;
   }
 
   &__button {
+    margin-right: 40px;
     .button {
-      color: var(--green-primary, #00a19c);
-      @include BodySRegular();
+      height: 48px;
+    }
+  }
+
+  &__search {
+    .button {
+      padding: 12px;
+      border-radius: 10px;
+      background: var(--black-black-90, #2a2a2a);
+      svg {
+        width: 24px;
+        height: 24px;
+      }
     }
   }
 }
@@ -274,7 +292,6 @@ onMounted(() => {
   flex-direction: column;
   align-items: flex-end;
   justify-content: center;
-  margin-right: 43px;
 
   &__button {
     .button {

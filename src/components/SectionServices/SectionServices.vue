@@ -98,6 +98,7 @@ const items = [
     @include desktop {
       display: flex;
       padding: 80px 0;
+      margin-bottom: 272px;
     }
   }
   &__title-wrapper {
@@ -132,7 +133,7 @@ const items = [
     margin: -5px;
     @include tablet {
       margin: 0;
-      @include mb(20px);
+      // @include mb(20px);
     }
     @include desktop {
       position: relative;
@@ -149,12 +150,15 @@ const items = [
     }
     @include desktop {
       position: sticky;
-      top: 160px;
+      top: 60px;
 
-      @for $i from 0 through 5 {
+      @for $i from 0 through 4 {
         &:nth-of-type(#{$i}) {
-          top: calc(160px + (#{$i - 1} * 70px));
+          transform: translateY(calc((#{$i} * 70px)));
         }
+      }
+      &:last-child {
+        transform: translateY(300px);
       }
       // position: sticky;
       // left: 0;
