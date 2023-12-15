@@ -1,0 +1,74 @@
+import { ref } from 'vue';
+import { defineStore } from 'pinia';
+import { homeHttp } from '@/api/http';
+
+import type {
+  HomeData,
+  HomeSeo,
+  HomeWelcome,
+  HomeOffers,
+  HomeOffersItem,
+  HomePopularServices,
+  HomePopularServicesItem,
+  HomeAbout,
+  HomeReviews,
+  HomeReviewItem,
+} from '@/api/http/homeHttp/homeHttp.types';
+
+const DEFAULT_STATE: HomeData = {
+  seo: {} as HomeSeo,
+  welcome: [],
+  welcome_img: '',
+  offers: {} as HomeOffers,
+  offers_items: [],
+  popular_services: {} as HomePopularServices,
+  popular_services_items: [],
+  about: {} as HomeAbout,
+  about_img: '',
+  reviews: {} as HomeReviews,
+  review_items: [],
+};
+
+export const homeStore = defineStore('homeStore', () => {
+  const state = ref(DEFAULT_STATE);
+
+  const setSeo = (data: HomeSeo) => (state.value.seo = data);
+  const setWelcome = (data: HomeWelcome[]) => (state.value.welcome = data);
+  const setWelcomeImg = (data: string) => (state.value.welcome_img = data);
+  const setOffers = (data: HomeOffers) => (state.value.offers = data);
+  const setOffersItems = (data: HomeOffersItem[]) => (state.value.offers_items = data);
+  const setPopularServices = (data: HomePopularServices) => (state.value.popular_services = data);
+  const setPopularServicesItems = (data: HomePopularServicesItem[]) => (state.value.popular_services_items = data);
+  const setAbout = (data: HomeAbout) => (state.value.about = data);
+  const setAboutImg = (data: string) => (state.value.about_img = data);
+  const setReviews = (data: HomeReviews) => (state.value.reviews = data);
+  const setReviewsItems = (data: HomeReviewItem[]) => (state.value.review_items = data);
+
+  const fetchHome = async () => {
+    try {
+      const response = await homeHttp.fetchHome();
+      const data = response.data.value?.data;
+      if (data?.seo) setSeo(data.seo);
+      if (data?.welcome) setWelcome(data.welcome);
+      if (data?.welcome_img) setWelcomeImg(data.welcome_img);
+      if (data?.offers) setOffers(data.offers);
+      if (data?.offers_items) setOffersItems(data.offers_items);
+      if (data?.popular_services) setPopularServices(data.popular_services);
+      if (data?.popular_services_items) setPopularServicesItems(data.popular_services_items);
+      if (data?.about) setAbout(data.about);
+      if (data?.about_img) setAboutImg(data.about_img);
+      if (data?.reviews) setReviews(data.reviews);
+      if (data?.review_items) setReviewsItems(data.review_items);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  return {
+    state,
+    actions: {},
+    effects: {
+      fetchHome,
+    },
+  };
+});

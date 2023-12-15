@@ -35,6 +35,7 @@ export default defineNuxtConfig({
               // or disable plugins
               removeDoctype: false,
               removeViewBox: false,
+              cleanupIds: false,
             },
           },
         },

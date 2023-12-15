@@ -1,27 +1,32 @@
 <script setup lang="ts">
-import { useMediaSizes } from '@/composables/useMediaSizes';
+// import { useMediaSizes } from '@/composables/useMediaSizes';
 
+import { useHomeStore } from '~/store/home';
+
+const { homeState } = useHomeStore();
+
+const aboutContent = computed(() => homeState.value.about);
 const descriptionIsOpen = ref(false);
 const descriptionRef = ref<HTMLDivElement | null>(null);
 const descriptionHasFixedHeight = ref(false);
 
-const { isDesktop } = useMediaSizes();
+// const { isDesktop } = useMediaSizes();
 
-watch(
-  () => [descriptionRef.value, isDesktop.value],
-  () => {
-    descriptionHasFixedHeight.value = descriptionRef.value.clientHeight >= 88 && !isDesktop.value;
-    console.log(descriptionRef.value.clientHeight);
-  },
-);
+// watch(
+//   () => [descriptionRef.value, isDesktop.value],
+//   () => {
+//     descriptionHasFixedHeight.value = descriptionRef.value.clientHeight >= 88 && !isDesktop.value;
+//     console.log(descriptionRef.value.clientHeight);
+//   },
+// );
 </script>
 
 <template>
   <section class="about-company">
     <div class="container">
       <div class="about-company__content">
-        <h2 class="about-company__title">Автосервис ABS-AUTO</h2>
-        <p class="about-company__subtitle">– более 15 лет с заботой о ваших автомобилях</p>
+        <h2 class="about-company__title">{{ aboutContent.title }}</h2>
+        <p class="about-company__subtitle">{{ aboutContent.subtitle }}</p>
         <ul class="about-company__review-services">
           <li v-for="reviewService in 2" :key="reviewService" class="about-company__review-service">
             <NuxtPicture src="/images/yandex-review.png" loading="lazy" alt="Яндекс" />
@@ -37,15 +42,8 @@ watch(
             'about-company__description--fixed-height': descriptionHasFixedHeight,
             'about-company__description--opened': descriptionIsOpen,
           }"
-          @click="() => console.log(descriptionRef.clientHeight)"
-        >
-          Автосервис ABS-AUTO – сервисный центр в Ставрополе, который входит в состав торгово-инвестиционной группы
-          компаний ABS GROUP. Холдинг является одним из крупнейших поставщиков автомобильных запчастей и смазочных
-          материалов в СНГ, занимается производством собственных запчастей под брендом ABSEL, а также создает
-          современные технологичные решения для автобизнеса. В автосервисе ABS-AUTOмы собрали команду настоящих
-          профессионалов, которых объединяет искренняя любовь к автомобилям. Мы предлагаем комплексные услуги по ремонту
-          и полноценному обслуживанию Вашего авто с применением только высококачественных средств и оборудования.
-        </div>
+          v-html="aboutContent.content"
+        ></div>
         <button
           v-if="descriptionHasFixedHeight"
           class="about-company__button"

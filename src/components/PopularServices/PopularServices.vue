@@ -1,24 +1,31 @@
 <script setup lang="ts">
-const services = [
-  { title: 'Техническое обслуживание', link: '#', img: '/images/popular-services-items/1.png' },
-  { title: 'Диагностика автомобиля', link: '#', img: '/images/popular-services-items/2.png' },
-  { title: '3D развал-схождение', link: '#', img: '/images/popular-services-items/3.png' },
-  { title: 'Ремонт двигателей', link: '#', img: '/images/popular-services-items/4.png' },
-  { title: 'Ремонт Акпп', link: '#', img: '/images/popular-services-items/5.png' },
-  { title: 'Ремонт электрики', link: '#', img: '/images/popular-services-items/6.png' },
-  { title: 'Ремонт подвески', link: '#', img: '/images/popular-services-items/7.png' },
-  { title: 'Ремонт тормозной системы', link: '#', img: '/images/popular-services-items/8.png' },
-  { title: 'Шиномонтаж', link: '#', img: '/images/popular-services-items/9.png' },
-];
+import { useHomeStore } from '~/store/home';
+
+const { homeState } = useHomeStore();
+
+const popularServicesTitle = computed(() => homeState.value.popular_services.title);
+const popularServicesItems = computed(() => homeState.value.popular_services_items);
+
+// const services = [
+//   { title: 'Техническое обслуживание', link: '#', img: '/images/popular-services-items/1.png' },
+//   { title: 'Диагностика автомобиля', link: '#', img: '/images/popular-services-items/2.png' },
+//   { title: '3D развал-схождение', link: '#', img: '/images/popular-services-items/3.png' },
+//   { title: 'Ремонт двигателей', link: '#', img: '/images/popular-services-items/4.png' },
+//   { title: 'Ремонт Акпп', link: '#', img: '/images/popular-services-items/5.png' },
+//   { title: 'Ремонт электрики', link: '#', img: '/images/popular-services-items/6.png' },
+//   { title: 'Ремонт подвески', link: '#', img: '/images/popular-services-items/7.png' },
+//   { title: 'Ремонт тормозной системы', link: '#', img: '/images/popular-services-items/8.png' },
+//   { title: 'Шиномонтаж', link: '#', img: '/images/popular-services-items/9.png' },
+// ];
 </script>
 
 <template>
   <section class="popular-services">
     <div class="container">
       <div class="popular-services__top-background"></div>
-      <h2 class="popular-services__title">Популярные услуги в&nbsp;ABS-AUTO</h2>
+      <h2 class="popular-services__title">{{ popularServicesTitle }}</h2>
       <ul class="popular-services__services">
-        <li v-for="service in services" :key="service.title" class="popular-services__service">
+        <li v-for="service in popularServicesItems" :key="service.title" class="popular-services__service">
           <PopularServiceCard :service="service" />
         </li>
       </ul>

@@ -1,6 +1,10 @@
 <script setup lang="ts">
 import { useMediaSizes } from '@/composables/useMediaSizes';
 
+import type { HomeReviewItem } from '~/api/http/homeHttp/homeHttp.types';
+
+defineProps<{ item: HomeReviewItem }>();
+
 const { isMobile } = useMediaSizes();
 </script>
 
@@ -8,42 +12,37 @@ const { isMobile } = useMediaSizes();
   <div class="review-card">
     <div class="review-card__aside">
       <div class="review-card__review-avatar">
-        <NuxtPicture src="/images/avatar.png" loading="lazy" alt="Аватар клиента" />
+        <NuxtPicture :src="item.avatar" loading="lazy" alt="Аватар клиента" />
       </div>
       <div v-if="isMobile" class="review-card__review-app">
         <div class="review-card__review-rating">
-          <AppRating :rating="5" />
+          <AppRating :rating="Number(item.rating)" />
         </div>
         <div class="review-card__review-app-image">
-          <NuxtPicture src="/images/2gis-black.png" loading="lazy" alt="Приложение" />
+          <NuxtPicture :src="item.review_service[0].icon" loading="lazy" alt="Приложение" />
         </div>
       </div>
     </div>
     <div class="review-card__content">
       <div class="review-card__content-top">
-        <h3 class="review-card__review-name">Андрей Константинопольский</h3>
+        <h3 class="review-card__review-name">{{ item.name }}</h3>
         <div v-if="!isMobile" class="review-card__review-rating">
-          <IcStarRating v-for="star in 5" :key="star" :font-controlled="false" :filled="true" />
+          <IcStarRating v-for="star in Number(item.rating)" :key="star" :font-controlled="false" :filled="true" />
         </div>
       </div>
-      <p class="review-card__review-text">
-        Это восторг!😍 19.10.2022 г. мы провели свою свадьбу в ресторане Paradise в Park Hotel на Доваторцев. Увидела
-        рекламу ресторана в интернете, решили приехать, посмотреть локацию. Сначала сомневалась, стоит ли устраивать
-        свадьбу в отеле, да еще и на 4 этаже, боялась, что не сможем как следует повеселиться, пошуметь, короче отметить
-        с размахом. НО! Как только мы приехали на место, все сомнения вообще отпали! Администратор Мария, очень милая
-        девушка все объяснила, рассказала и показала. Шумоизоляция тут отличная, есть вообще все удобства на этаже, даже
-        выходить никуда не надо! И очень крутой вид! Особенно вечером…
-      </p>
+      <div class="review-card__review-text" v-html="item.content"></div>
       <div class="review-card__content-bottom">
         <div class="review-card__review-button">
-          <UIButton with-arrow :has-full-width="isMobile">
-            <span>Читать весь отзыв</span>
-            <IcArrowRight v-if="isMobile" :font-controlled="false" :filled="true" />
-            <IcArrowUpRight v-else :font-controlled="false" :filled="true" />
-          </UIButton>
+          <NuxtLink :to="item.review_service[0].link" target="_blank">
+            <UIButton with-arrow :has-full-width="isMobile">
+              <span>Читать весь отзыв</span>
+              <IcArrowRight v-if="isMobile" :font-controlled="false" :filled="true" />
+              <IcArrowUpRight v-else :font-controlled="false" :filled="true" />
+            </UIButton>
+          </NuxtLink>
         </div>
         <div v-if="!isMobile" class="review-card__review-app-image">
-          <NuxtPicture src="/images/2gis-black.png" loading="lazy" alt="Приложение" />
+          <NuxtPicture :src="item.review_service[0].icon" alt="Приложение" />
         </div>
       </div>
     </div>

@@ -1,48 +1,35 @@
-<script setup lang="ts">
-defineProps<{
-  link: string;
-  img: string | Object;
-  background?: 'gray' | 'green';
-  withBorder?: boolean;
-}>();
-</script>
-
+<script setup lang="ts"></script>
 <template>
-  <a
-    class="social"
-    :href="link || '#'"
-    target="_blank"
-    rel="noopener"
-    :class="{
-      'social--background-gray': background === 'gray',
-      'social--background-green': background === 'green',
-      'social--with-border': withBorder,
-    }"
-  >
-    <component :is="img" class="social__icon" :font-controlled="false" :filled="true" />
-  </a>
+  <ul class="social">
+    <li class="social__item">
+      <IcVk :font-controlled="false" :filled="true" />
+    </li>
+    <li class="social__item">
+      <IcTelegram :font-controlled="false" :filled="true" />
+    </li>
+    <li class="social__item">
+      <IcWhatsapp :font-controlled="false" :filled="true" />
+    </li>
+  </ul>
 </template>
 
 <style lang="scss">
 .social {
   display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 48px;
-  height: 48px;
-  border-radius: 10px;
+  align-items: flex-start;
+  gap: 10px;
 
-  &--background-gray {
-    background-color: var(--black-black-80, #414141);
-  }
-
-  &--background-green {
-    background-color: var(--green-primary, #00a19c);
-  }
-
-  &--with-border {
+  &__item {
+    display: flex;
+    padding: 12px;
+    align-items: flex-start;
     border-radius: 10px;
-    border: 2px solid var(--green-primary, #00a19c);
+    transition: $transition-1;
+    cursor: pointer;
+
+    &:hover {
+      background: var(--Black-Black-80, #414141);
+    }
   }
 }
 </style>

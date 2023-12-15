@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { useMediaSizes } from '@/composables/useMediaSizes';
 
-const { isMobile, isTablet, isDesktop } = useMediaSizes();
+const { isMobile } = useMediaSizes();
 
 const navItems = [
   { name: 'Акции', link: '' },
@@ -13,12 +13,43 @@ const navItems = [
 </script>
 
 <template>
-  <AppFooterMobile v-if="isMobile || isTablet || isDesktop" />
-  <AppFooterDesktop v-else />
+  <footer class="footer-mobile">
+    <div class="container">
+      <div class="footer-mobile__body">
+        <div class="footer-mobile__c1">
+          <div class="footer-mobile__circles">
+            <span v-for="circle in 6" :key="circle" class="footer-mobile__circle"></span>
+            <span class="footer-mobile__circle footer-mobile__circle--sunday"></span>
+          </div>
+          <div class="footer-mobile__working-hours">
+            <div v-for="time in 2" :key="time" class="footer-mobile__working-hours-col">
+              <span class="footer-mobile__working-hours-days">пн-сб</span>
+              <span class="footer-mobile__working-hours-time">9:00-19:00</span>
+            </div>
+          </div>
+          <div v-if="!isMobile" class="footer-mobile__row-bottom">
+            <span class="footer-mobile__copyright">© Автосервис ABS-AUTO, 2023</span>
+          </div>
+        </div>
+        <div class="footer-mobile__c2">
+          <AppContacts />
+        </div>
+        <div class="footer-mobile__c3">
+          <div class="footer-mobile__top">
+            <a class="footer-mobile__privacy-policy" href="#" target="_blank" rel="noopener">
+              Политика конфиденциальности
+            </a>
+            <p class="footer-mobile__copyright">© Автосервис ABS-AUTO, 2023</p>
+            <AppCards />
+          </div>
+        </div>
+      </div>
+    </div>
+  </footer>
 </template>
 
 <style lang="scss">
-.footer {
+.footer-mobile {
   padding: 30px 0 100px 0;
   @include media($xl) {
     padding: 20px 0 30px 0;

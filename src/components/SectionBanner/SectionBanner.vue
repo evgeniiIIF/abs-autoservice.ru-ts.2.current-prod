@@ -1,10 +1,13 @@
 <script setup lang="ts">
 import { Vue3Marquee } from 'vue3-marquee';
 
+import { useHomeStore } from '~/store/home';
+
+const { homeState } = useHomeStore();
+const welcomeState = computed(() => homeState.value.welcome[0]);
+
 const { isMobile } = useMediaSizes();
 const [isHovered, hoverElement, leaveElement] = useBooleanState();
-
-const TICKER_ITEMS = ['Любая сложность', 'Честные цены', 'Гарантия на все виды работ'];
 </script>
 
 <template>
@@ -12,14 +15,14 @@ const TICKER_ITEMS = ['Любая сложность', 'Честные цены'
     <div class="container">
       <div class="banner__body">
         <div class="banner__image ibg" :style="{ filter: isHovered ? 'grayscale(0%)' : 'grayscale(80%)' }">
-          <NuxtPicture format="webp" src="images/banner.jpg" />
+          <NuxtPicture format="webp" :src="homeState.welcome_img" />
         </div>
         <div class="banner__content">
-          <h1 class="banner__title">Обслуживание и ремонт вашего автомобиля в ABS-AUTO.</h1>
+          <h1 class="banner__title">{{ welcomeState.title }}</h1>
           <div class="banner__tickers tickers">
             <ClientOnly v-if="isMobile">
               <Vue3Marquee :duration="8">
-                <div v-for="tickerItem in TICKER_ITEMS" :key="tickerItem" class="tickers__column">
+                <div v-for="tickerItem in welcomeState.advantage_tags" :key="tickerItem" class="tickers__column">
                   <div class="tickers__item">
                     {{ tickerItem }}
                   </div>
@@ -27,7 +30,7 @@ const TICKER_ITEMS = ['Любая сложность', 'Честные цены'
               </Vue3Marquee>
             </ClientOnly>
             <template v-else>
-              <div v-for="tickerItem in TICKER_ITEMS" :key="tickerItem" class="tickers__column">
+              <div v-for="tickerItem in welcomeState.advantage_tags" :key="tickerItem" class="tickers__column">
                 <div class="tickers__item">
                   {{ tickerItem }}
                 </div>
@@ -38,10 +41,10 @@ const TICKER_ITEMS = ['Любая сложность', 'Честные цены'
           <div class="banner__buttons">
             <!-- eslint-disable-next-line vuejs-accessibility/mouse-events-have-key-events -->
             <div class="banner__button banner__button--bg" @mouseover="hoverElement" @mouseleave="leaveElement">
-              <UIButton>Расситать стоимость</UIButton>
+              <UIButton>{{ welcomeState.btn[0].title }}</UIButton>
             </div>
             <div class="banner__button banner__button--bd">
-              <UIButton :withoutFill="true">Записаться на сервис</UIButton>
+              <UIButton :withoutFill="true">{{ welcomeState.btn[1].title }}</UIButton>
             </div>
           </div>
         </div>

@@ -3,13 +3,19 @@ import { Pagination, Autoplay, Navigation } from 'swiper/modules';
 
 import 'swiper/scss';
 import 'swiper/scss/pagination';
+
+import { useHomeStore } from '~/store/home';
+
+const { homeState } = useHomeStore();
+const reviewsTitle = computed(() => homeState.value.reviews.title);
+const reviewItems = computed(() => homeState.value.review_items);
 </script>
 
 <template>
   <section class="clients-reviews">
     <div class="container">
       <div class="clients-reviews__content-top">
-        <h2 class="clients-reviews__title">Отзывы клиентов</h2>
+        <h2 class="clients-reviews__title">{{ reviewsTitle }}</h2>
         <div class="clients-reviews__slider-navigation">
           <UIArrowButton arrow-direction="left" :class-for-swiper="'clients-reviews__slider-button-prev'" />
           <UIArrowButton arrow-direction="right" :class-for-swiper="'clients-reviews__slider-button-next'" />
@@ -31,8 +37,8 @@ import 'swiper/scss/pagination';
           nextEl: '.clients-reviews__slider-button-next',
         }"
       >
-        <SwiperSlide v-for="slide in 4" :key="slide" class="clients-reviews__slide">
-          <ReviewCard />
+        <SwiperSlide v-for="item in reviewItems" :key="item.name" class="clients-reviews__slide">
+          <ReviewCard :item="item" />
         </SwiperSlide>
       </Swiper>
       <div class="clients-reviews__slider-pagination"></div>
