@@ -1,15 +1,20 @@
 <script setup lang="ts">
 import { useHomeStore } from '~/store/home';
 import { useCalculatorBlockStore } from '~/store/calculatorBlock';
+import { useBonusCardStore } from '~/store/bonusCard';
+import { useCallBackFormStore } from '~/store/callBackForm';
 
 const { isMobile, isTablet } = useMediaSizes();
 
 const { homeEffects } = useHomeStore();
 const { calculatorBlockEffects } = useCalculatorBlockStore();
+const { bonusCardEffects } = useBonusCardStore();
+const { callBackFormEffects } = useCallBackFormStore();
 
 homeEffects.fetchHome();
 calculatorBlockEffects.fetchCalculatorBlock();
-
+bonusCardEffects.fetchBonusCard();
+callBackFormEffects.fetchCallBackForm();
 // await useAsyncData('about', async () => {
 //   await Promise.all([
 //     Object.keys(aboutState.value.about).length === 0 && aboutEffects.fetchAbout(),
