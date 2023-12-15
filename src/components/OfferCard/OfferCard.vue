@@ -10,13 +10,13 @@ const { isMobile } = useMediaSizes();
 <template>
   <div class="offer-card">
     <div class="offer-card__image">
-      <NuxtPicture :src="img" loading="lazy" />
+      <NuxtPicture :src="image" loading="lazy" format="webp" />
     </div>
     <div class="offer-card__info">
       <h3 class="offer-card__title">{{ title }}</h3>
-      <p v-if="!isMobile" class="offer-card__description">{{ description }}</p>
+      <p v-if="!isMobile" class="offer-card__description">{{ descriptions }}</p>
     </div>
-    <NuxtLink class="offer-card__link" :to="link">
+    <NuxtLink class="offer-card__link">
       <UIButton :has-full-width="isMobile" :without-fill="!isMobile">Записаться</UIButton>
     </NuxtLink>
   </div>

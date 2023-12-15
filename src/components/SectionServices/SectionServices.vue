@@ -98,7 +98,7 @@ const items = [
     @include desktop {
       display: flex;
       padding: 80px 0;
-      margin-bottom: 272px;
+      margin-bottom: 370px;
     }
   }
   &__title-wrapper {

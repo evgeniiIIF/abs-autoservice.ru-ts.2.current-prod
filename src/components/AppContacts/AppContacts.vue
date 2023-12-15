@@ -15,21 +15,7 @@ const { isMobile } = useMediaSizes();
     </div>
     <a class="contacts__email" href="mailto:info@abs-autoservice.ru">info@abs-autoservice.ru</a>
     <ul class="contacts__socials">
-      <li class="contacts__social">
-        <a class="contacts__social-link" href="#" target="_blank" rel="noopener">
-          <IcVk :font-controlled="false" :filled="true" />
-        </a>
-      </li>
-      <li class="contacts__social">
-        <a class="contacts__social-link" href="#" target="_blank" rel="noopener">
-          <IcTelegram :font-controlled="false" :filled="true" />
-        </a>
-      </li>
-      <li class="contacts__social">
-        <a class="contacts__social-link" href="#" target="_blank" rel="noopener">
-          <IcWhatsapp :font-controlled="false" :filled="true" />
-        </a>
-      </li>
+      <AppSocial />
     </ul>
   </div>
 </template>

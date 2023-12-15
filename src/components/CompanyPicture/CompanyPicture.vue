@@ -1,13 +1,14 @@
 <script lang="ts" setup>
-import type { CompanyPicture } from '~/components/CompanyPicture/CompanyPicture.types';
+import { useHomeStore } from '~/store/home';
 
-defineProps<CompanyPicture>();
+const { homeState } = useHomeStore();
+const aboutImg = computed(() => homeState.value.about_img);
 </script>
 
 <template>
   <div class="company-picture">
     <div class="container">
-      <NuxtPicture :src="src" loading="lazy" :alt="alt" />
+      <NuxtPicture :src="aboutImg" loading="lazy" alt="автосервис ставрополь" />
     </div>
   </div>
 </template>

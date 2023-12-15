@@ -6,8 +6,7 @@ defineProps<QuestionProps>();
 <template>
   <div class="question-end">
     <div class="question-end__title-group">
-      <div class="question-end__title question-end__title--top">{{ titleTop }}</div>
-      <div class="question-end__title question-end__title--bottom">{{ titleBottom }}</div>
+      <div class="question-end__title" v-html="titleTop"></div>
     </div>
     <div class="question-end__text">{{ text }}</div>
   </div>

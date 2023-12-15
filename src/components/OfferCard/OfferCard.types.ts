@@ -1,6 +1,6 @@
 export type OfferCard = {
-  title: string;
-  description: string;
-  link: string;
-  img: string;
+  id?: number;
+  title?: string;
+  descriptions?: number;
+  image?: string;
 };

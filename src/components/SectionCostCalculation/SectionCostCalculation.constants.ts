@@ -6,7 +6,7 @@ import SectionCostCalculationQuestion4 from './SectionCostCalculationQuestion4.v
 export const QUEST_ITEMS = [
   {
     component: SectionCostCalculationQuestion1,
-    title: '1. Заполните информацию об автомобиле',
+    title: 'dd',
     inputProps: {
       value: '',
       type: 'text',

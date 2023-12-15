@@ -1,5 +1,65 @@
 <script setup lang="ts">
-import { QUEST_ITEMS } from './SectionCostCalculation.constants';
+import { useCalculatorBlockStore } from '~/store/calculatorBlock';
+
+import SectionCostCalculationQuestion1 from './SectionCostCalculationQuestion1.vue';
+import SectionCostCalculationQuestion2 from './SectionCostCalculationQuestion2.vue';
+import SectionCostCalculationQuestion3 from './SectionCostCalculationQuestion3.vue';
+import SectionCostCalculationQuestion4 from './SectionCostCalculationQuestion4.vue';
+// import { QUEST_ITEMS } from './SectionCostCalculation.constants';
+const { calculatorBlockState } = useCalculatorBlockStore();
+
+const QUEST_ITEMS = [
+  {
+    component: SectionCostCalculationQuestion1,
+    title: calculatorBlockState.value.title_step_1,
+    inputProps: {
+      value: '',
+      type: 'text',
+      name: 'auto',
+      label: calculatorBlockState.value.title_input_step_1,
+      placeholder: calculatorBlockState.value.title_input_placeholder_step_1,
+      maxlength: 128,
+    },
+  },
+  {
+    component: SectionCostCalculationQuestion2,
+    title: calculatorBlockState.value.title_step_2,
+    inputProps: {
+      value: '',
+      type: 'textarea',
+      name: 'problem',
+      label: calculatorBlockState.value.title_input_step_2,
+      placeholder: calculatorBlockState.value.title_input_placeholder_step_2,
+      maxlength: 128,
+    },
+  },
+  {
+    component: SectionCostCalculationQuestion3,
+    title: calculatorBlockState.value.title_step_3,
+    inputProps: {
+      inputName: {
+        value: '',
+        type: 'text',
+        name: 'name',
+        label: 'Имя',
+        placeholder: 'Введите имя',
+        maxlength: 32,
+      },
+      inputTel: {
+        value: '',
+        type: 'tel',
+        name: 'phone',
+        label: 'Телефон',
+        pattern: /[^0-9+]/g,
+      },
+    },
+  },
+  {
+    component: SectionCostCalculationQuestion4,
+    titleTop: calculatorBlockState.value.title_step_4,
+    text: calculatorBlockState.value.title_input_step_4,
+  },
+];
 
 const { isMobile } = useMediaSizes();
 
@@ -17,9 +77,9 @@ const currentQuestItem = computed(() => {
     <div class="container">
       <div class="cost-calculation__body">
         <div class="cost-calculation__top">
-          <h2 class="cost-calculation__title">Быстрый и простой расчет стоимости ремонта и обслуживания автомобиля</h2>
+          <h2 class="cost-calculation__title">{{ calculatorBlockState.title_form }}</h2>
           <p v-if="!isMobile" class="cost-calculation__text">
-            Ответьте на несколько вопросов и получите точную стоимость у нашего специалиста
+            {{ calculatorBlockState.subtitle_form }}
           </p>
         </div>
         <form class="cost-calculation__quest quest">
