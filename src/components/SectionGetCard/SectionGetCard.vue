@@ -1,4 +1,7 @@
 <script lang="ts" setup>
+import { useBonusCardStore } from '~/store/bonusCard';
+
+const { bonusCardState } = useBonusCardStore();
 const { isMobile } = useMediaSizes();
 </script>
 
@@ -7,23 +10,20 @@ const { isMobile } = useMediaSizes();
     <div class="container">
       <div class="get-card__body">
         <div class="get-card__content">
-          <h3 class="get-card__title">Оплачивайте бонусами 30% от общей суммы чека или заказ-наряда</h3>
-          <p v-if="!isMobile" class="get-card__text--green">Выгода с ABS-AUTO – это просто!</p>
-          <p v-if="!isMobile" class="get-card__text">
-            При обслуживании от 3000 рублей Вы получаете персональную клубную карту совершенно бесплатно. Далее, покупая
-            автозапчасти или проходя обслуживание в нашем автотехцентре, мы возвращаем 10% от каждого чека на Вашу
-            бонусную карту в виде баллов (1 балл = 1 рубль). Бонусные баллы начисляются через 14 дней после покупки и
-            сохраняются в течение 6 месяцев.
-          </p>
+          <h3 class="get-card__title">{{ bonusCardState.title }}</h3>
+          <p v-if="!isMobile" class="get-card__text--green">{{ bonusCardState.subtitle }}</p>
+          <p v-if="!isMobile" class="get-card__text">{{ bonusCardState.text }}</p>
           <div v-if="isMobile" class="get-card__image get-card__image--mobile">
             <NuxtPicture src="images/get-card.png" format="webp" loading="lazy" />
           </div>
           <div class="get-card__button">
-            <UIButton>{{ isMobile ? 'Получить карту бесплатно' : 'Получить карту' }}</UIButton>
+            <NuxtLink :to="bonusCardState.btn_link">
+              <UIButton>{{ isMobile ? 'Получить карту бесплатно' : bonusCardState.btn_title }}</UIButton>
+            </NuxtLink>
           </div>
         </div>
         <div v-if="!isMobile" class="get-card__image">
-          <NuxtPicture src="images/get-card.png" format="webp" loading="lazy" />
+          <NuxtPicture :src="bonusCardState.image" format="webp" loading="lazy" />
         </div>
       </div>
     </div>

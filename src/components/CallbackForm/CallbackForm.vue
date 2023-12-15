@@ -1,9 +1,15 @@
 <script setup lang="ts">
+// import type { CallBackForm } from '~/api/http/callBackForm/callBackFormHttp.types';
+
+import { useCallBackFormStore } from '~/store/callBackForm';
+
 import AppSocial from '@/components/AppSocial/AppSocial.vue';
 import vk from '@/assets/icons/vk.svg';
 import { useMediaSizes } from '@/composables/useMediaSizes';
 import { validateNameInput } from '@/utils/validateNameInput/validateNameInput';
 import { validatePhoneInput } from '@/utils/validatePhoneInput/validatePhoneInput';
+
+const { callBackFormState } = useCallBackFormStore();
 
 const { isLessThanDesktop } = useMediaSizes();
 
@@ -50,8 +56,8 @@ watch(
   <section class="callback-form">
     <div class="callback-form__container">
       <div class="callback-form__content">
-        <h2 class="callback-form__title">Закажите обратный звонок&nbsp;из&nbsp;автосервиса</h2>
-        <p class="callback-form__description">Оставьте заявку или просто напишите нам в мессенджеры</p>
+        <h2 class="callback-form__title">{{ callBackFormState.title }}</h2>
+        <p class="callback-form__description">{{ callBackFormState.text }}</p>
         <form class="callback-form__form" @submit.prevent="onSubmit">
           <div class="callback-form__inputs">
             <div class="callback-form__input">
