@@ -50,6 +50,9 @@ const reviewItems = computed(() => homeState.value.review_items);
 .clients-reviews {
   position: relative;
   padding: 30px 0;
+  @include tablet {
+    padding: 60px 0 85px 0;
+  }
 
   &::before {
     position: absolute;

@@ -1,46 +1,43 @@
 <script setup lang="ts">
+import { useAsyncData } from '#imports';
 import { useHomeStore } from '~/store/home';
 import { useCalculatorBlockStore } from '~/store/calculatorBlock';
 import { useBonusCardStore } from '~/store/bonusCard';
-import { useCallBackFormStore } from '~/store/callBackForm';
 
-const { isMobile, isTablet } = useMediaSizes();
-
-const { homeEffects } = useHomeStore();
+const { homeEffects, homeState } = useHomeStore();
 const { calculatorBlockEffects } = useCalculatorBlockStore();
 const { bonusCardEffects } = useBonusCardStore();
-const { callBackFormEffects } = useCallBackFormStore();
+// const { callBackFormEffects } = useCallBackFormStore();
 
-homeEffects.fetchHome();
-calculatorBlockEffects.fetchCalculatorBlock();
-bonusCardEffects.fetchBonusCard();
-callBackFormEffects.fetchCallBackForm();
-// await useAsyncData('about', async () => {
-//   await Promise.all([
-//     Object.keys(aboutState.value.about).length === 0 && aboutEffects.fetchAbout(),
-//     aboutState.value.aboutSlider.length === 0 && aboutEffects.fetchAboutSlider(),
-//     aboutState.value.aboutCertificates.length === 0 && aboutEffects.fetchAboutCertificates(),
-//     Object.keys(partnersState.value.partners).length === 0 && partnersEffects.fetchPartners(),
-//     partnersState.value.items.length === 0 && partnersEffects.fetchPartnersItems(),
-//   ]);
-// });
+await useAsyncData('home', async () => {
+  await Promise.all([
+    homeEffects.fetchHome(),
+    calculatorBlockEffects.fetchCalculatorBlock(),
+    bonusCardEffects.fetchBonusCard(),
+    // callBackFormEffects.fetchCallBackForm(),
+  ]);
+});
+
+useSeoMeta({
+  title: () => homeState.value.seo.meta_title,
+  description: () => homeState.value.seo.meta_description,
+  author: () => homeState.value.seo.meta_author,
+  robots: () => homeState.value.seo.meta_robots,
+});
 </script>
 
 <template>
-  <div>
-    <SectionBanner />
-    <SpecialOffers />
-    <SectionCostCalculation />
-    <CompanyPicture src="/images/company-1.png" alt="Ресепшен" />
-    <PopularServices />
-    <CallbackForm />
-    <SectionGetCard />
-    <CompanyPicture src="/images/company-2.png" alt="Зал автосервиса" />
-    <AboutCompany />
-    <ClientsReviews />
-    <SectionServices />
-    <SectionBrandIconsRow v-if="!isMobile && !isTablet" />
-  </div>
+  <SectionBanner />
+  <SpecialOffers />
+  <SectionCostCalculation />
+  <CompanyPicture image="/images/company-1.png" alt="АБС автосервис ставрополь" />
+  <PopularServices />
+  <CallbackForm />
+  <SectionGetCard />
+  <CompanyPicture :image="homeState.about_img" alt="АБС автосервис ставрополь" />
+  <AboutCompany />
+  <ClientsReviews />
+  <SectionServices />
 </template>
 
 <style lang="scss"></style>

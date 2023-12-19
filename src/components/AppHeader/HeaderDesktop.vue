@@ -2,19 +2,17 @@
 import { setHeaderWidth } from './AppHeader.utils';
 
 const navItems = [
-  { name: 'Акции', link: '' },
   { name: 'Услуги', link: '' },
-  { name: 'Бонусная программа', link: '' },
-  { name: 'О автосервисе', link: '' },
+  { name: 'Акции', link: '' },
+  { name: 'Об автосервисе', link: '' },
+  { name: 'Гарантии', link: '' },
+  { name: 'Преимущества', link: '' },
   { name: 'Контакты', link: '' },
 ];
 const topNavItems = [
-  { name: 'Бонусная программа', link: '' },
-  { name: 'Акции', link: '' },
+  { name: 'Бонусная программа', link: '/bonus' },
   { name: 'Отзовы', link: '' },
-  { name: 'Гарантия', link: '' },
   { name: 'Вакансии', link: '' },
-  { name: 'Преимущества', link: '' },
 ];
 const headerDesktopNode = ref(null);
 const headerTopNode = ref(null);
@@ -76,7 +74,7 @@ onMounted(() => {
       </NuxtLink>
       <div class="header-desktop__nav">
         <div class="header-desktop__nav-button">
-          <UIButton><IcBurger :font-controlled="false" :filled="true" /></UIButton>
+          <UIButton><IcSearch :font-controlled="false" :filled="true" /></UIButton>
         </div>
         <AppNavigation :items="navItems" />
       </div>
@@ -90,9 +88,6 @@ onMounted(() => {
           </div>
         </div>
         <div class="contacts-header-desktop__button"><UIButton>Записаться на сервис</UIButton></div>
-        <div class="contacts-header-desktop__search">
-          <UIButton><IcSearch :font-controlled="false" :filled="true" /></UIButton>
-        </div>
       </div>
     </div>
   </header>
@@ -120,10 +115,12 @@ onMounted(() => {
   display: flex;
   align-items: center;
   height: 40px;
-  padding-left: 40px;
-  padding-right: 20px;
+  padding: 0px 20px;
   border-radius: 0px 0px 10px 10px;
   background: var(--black-black-90, #2a2a2a);
+  @include media($xxl) {
+    padding: 0px 40px;
+  }
 
   &__address {
     display: flex;
@@ -155,6 +152,9 @@ onMounted(() => {
     .nav__link {
       color: var(--black-black-40, #999);
       @include BodySRegular;
+    }
+    .nav__link--active {
+      color: var(--Black-Black-00, #fff);
     }
   }
   &__social {
@@ -267,23 +267,22 @@ onMounted(() => {
   }
 
   &__button {
-    margin-right: 40px;
     .button {
       height: 48px;
     }
   }
 
-  &__search {
-    .button {
-      padding: 12px;
-      border-radius: 10px;
-      background: var(--black-black-90, #2a2a2a);
-      svg {
-        width: 24px;
-        height: 24px;
-      }
-    }
-  }
+  // &__search {
+  //   .button {
+  //     padding: 12px;
+  //     border-radius: 10px;
+  //     background: var(--black-black-90, #2a2a2a);
+  //     svg {
+  //       width: 24px;
+  //       height: 24px;
+  //     }
+  //   }
+  // }
 }
 
 .feedback {

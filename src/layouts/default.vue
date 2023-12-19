@@ -9,6 +9,7 @@ const { isTablet, isMobile, isDesktop } = useMediaSizes();
     <AppHeader />
     <main class="main">
       <slot />
+      <SectionBrandIconsRow v-if="!isMobile && !isTablet" />
     </main>
     <AppFooter />
     <FooterMobileMenu v-if="isTablet || isMobile || isDesktop" />

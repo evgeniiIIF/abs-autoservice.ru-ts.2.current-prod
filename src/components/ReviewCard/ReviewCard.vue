@@ -12,14 +12,14 @@ const { isMobile } = useMediaSizes();
   <div class="review-card">
     <div class="review-card__aside">
       <div class="review-card__review-avatar">
-        <NuxtPicture :src="item.avatar" loading="lazy" alt="Аватар клиента" />
+        <NuxtPicture :src="item.avatar ?? 'undefined'" loading="lazy" alt="Аватар клиента" />
       </div>
       <div v-if="isMobile" class="review-card__review-app">
         <div class="review-card__review-rating">
           <AppRating :rating="Number(item.rating)" />
         </div>
         <div class="review-card__review-app-image">
-          <NuxtPicture :src="item.review_service[0].icon" loading="lazy" alt="Приложение" />
+          <NuxtPicture :src="item.review_service[0].icon ?? 'undefined'" loading="lazy" alt="Приложение" />
         </div>
       </div>
     </div>
@@ -42,7 +42,7 @@ const { isMobile } = useMediaSizes();
           </NuxtLink>
         </div>
         <div v-if="!isMobile" class="review-card__review-app-image">
-          <NuxtPicture :src="item.review_service[0].icon" alt="Приложение" />
+          <NuxtPicture :src="item.review_service[0].icon ?? 'undefined'" alt="Приложение" />
         </div>
       </div>
     </div>
@@ -93,13 +93,23 @@ const { isMobile } = useMediaSizes();
         padding: 8px 16px;
         background-color: var(--black-black-04, #f6f6f6);
         border-radius: 10px;
+        @include tablet {
+          display: flex;
+          align-items: center;
+          max-width: 100%;
+        }
 
         picture {
           display: flex;
         }
 
         img {
-          width: 100%;
+          width: 50px;
+          height: 16px;
+          @include tablet {
+            width: auto;
+            height: auto;
+          }
         }
       }
     }
@@ -125,7 +135,7 @@ const { isMobile } = useMediaSizes();
     }
 
     &-text {
-      max-height: 100px;
+      height: 100px;
       margin-bottom: 10px;
       overflow: hidden;
       text-overflow: ellipsis;
@@ -134,7 +144,7 @@ const { isMobile } = useMediaSizes();
       color: var(--black-black-50, #898989);
 
       @include tablet {
-        max-height: 136px;
+        height: 136px;
         margin-bottom: 20px;
         @include BodyMRegular;
       }

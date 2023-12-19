@@ -15,7 +15,7 @@ const [isHovered, hoverElement, leaveElement] = useBooleanState();
     <div class="container">
       <div class="banner__body">
         <div class="banner__image ibg" :style="{ filter: isHovered ? 'grayscale(0%)' : 'grayscale(80%)' }">
-          <NuxtPicture format="webp" :src="homeState.welcome_img" />
+          <NuxtPicture format="webp" :src="homeState.welcome_img ?? 'undefined'" />
         </div>
         <div class="banner__content">
           <h1 class="banner__title">{{ welcomeState.title }}</h1>

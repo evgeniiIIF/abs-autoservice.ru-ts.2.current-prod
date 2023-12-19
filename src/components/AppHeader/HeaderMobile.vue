@@ -16,10 +16,11 @@ const toggleMobileMenu = () => {
 };
 
 const navItems = [
-  { name: 'Акции', link: '' },
   { name: 'Услуги', link: '' },
-  { name: 'Бонусная программа', link: '' },
-  { name: 'О автосервисе', link: '' },
+  { name: 'Акции', link: '' },
+  { name: 'Об автосервисе', link: '' },
+  { name: 'Гарантии', link: '' },
+  { name: 'Преимущества', link: '' },
   { name: 'Контакты', link: '' },
 ];
 onBeforeMount(() => {
@@ -102,11 +103,12 @@ onBeforeMount(() => {
   &__body {
     position: absolute;
     left: -100%;
-    top: 68px;
+    top: 0;
     z-index: 1;
     height: inherit;
-    background: var(--black-black-90, #2a2a2a);
-    padding: 17px 10px 178px;
+    background: rgba(42, 42, 42, 0.95);
+
+    padding: 92px 10px 178px;
     transition: all 0.2s ease 0s;
     overflow-x: hidden;
     overflow-y: auto;
@@ -144,7 +146,7 @@ onBeforeMount(() => {
     width: 100%;
     z-index: 6;
     border-bottom: 1px solid var(--black-black-90, #2a2a2a);
-    background: #3b3b3b;
+    background: rgba(59, 59, 59, 0.9);
 
     backdrop-filter: blur(10px);
     transition: all 0.2s ease 0s;
@@ -191,6 +193,11 @@ onBeforeMount(() => {
     padding: 8px 0;
   }
   &__logo {
+    width: 143px;
+    svg {
+      width: 100%;
+      height: auto;
+    }
   }
   &__buttons {
     display: flex;

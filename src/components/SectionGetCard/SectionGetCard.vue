@@ -23,7 +23,7 @@ const { isMobile } = useMediaSizes();
           </div>
         </div>
         <div v-if="!isMobile" class="get-card__image">
-          <NuxtPicture :src="bonusCardState.image" format="webp" loading="lazy" />
+          <NuxtPicture :src="bonusCardState.image ?? 'undefined'" format="webp" loading="lazy" />
         </div>
       </div>
     </div>

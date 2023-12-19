@@ -6,7 +6,7 @@ defineProps<SectionServicesItemProps>();
 <template>
   <div class="section-service-item-mobile">
     <div class="section-service-item-mobile__image ibg">
-      <NuxtPicture :src="item.image" format="webp" loading="lazy" />
+      <NuxtPicture :src="item.image ?? 'undefined'" format="webp" loading="lazy" />
     </div>
     <div class="section-service-item-mobile__title">{{ item.title }}</div>
     <div class="section-service-item-mobile__text">{{ item.text }}</div>

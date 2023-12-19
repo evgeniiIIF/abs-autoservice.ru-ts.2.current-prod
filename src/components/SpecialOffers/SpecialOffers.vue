@@ -65,7 +65,10 @@ const offersItems = computed(() => homeState.value.offers_items);
 <style lang="scss">
 .special-offers {
   position: relative;
-  padding-bottom: 10px;
+  padding-bottom: 30px;
+  @include tablet {
+    padding: 60px 0 80px 0;
+  }
 
   &::before {
     position: absolute;
@@ -90,9 +93,8 @@ const offersItems = computed(() => homeState.value.offers_items);
   &__offers {
     display: flex;
     gap: 20px;
-    padding-bottom: 20px;
     overflow-x: auto;
-    @include scrollbar-x;
+    @include no-scrollbar;
     align-content: stretch;
 
     @include tablet {
