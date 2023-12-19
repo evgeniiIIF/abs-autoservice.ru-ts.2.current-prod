@@ -9,7 +9,7 @@ defineProps<AppNavigationProps>();
   <nav class="nav">
     <ul class="nav__list">
       <li v-for="item in items" :key="item.name" class="nav__item">
-        <NuxtLink class="nav__link" active-class="nav__link--active" to="">{{ item.name }}</NuxtLink>
+        <NuxtLink class="nav__link" active-class="nav__link--active" :to="item.link">{{ item.name }}</NuxtLink>
       </li>
     </ul>
   </nav>

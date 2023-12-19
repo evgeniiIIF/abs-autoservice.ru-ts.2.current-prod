@@ -17,7 +17,6 @@ export const callBackFormStore = defineStore('callBackFormStore', () => {
       const response = await callBackFormHttp.fetchCallBackForm();
 
       const data = response.data.value?.data;
-      console.log(data);
 
       if (data) setCallBackForm(data);
     } catch (error) {

@@ -62,6 +62,9 @@ const descriptionHasFixedHeight = ref(false);
 <style lang="scss">
 .about-company {
   padding: 40px 0 30px 0;
+  @include tablet {
+    padding: 60px 0 80px 0;
+  }
 
   &__content {
     display: grid;

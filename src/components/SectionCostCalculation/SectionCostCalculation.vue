@@ -105,7 +105,6 @@ const currentQuestItem = computed(() => {
                   :title="currentQuestItem.title"
                   :inputProps="currentQuestItem.inputProps"
                   :titleTop="currentQuestItem.titleTop"
-                  :titleBottom="currentQuestItem.titleBottom"
                   :text="currentQuestItem.text"
                 ></component>
               </Transition>
@@ -147,7 +146,11 @@ const currentQuestItem = computed(() => {
 .cost-calculation {
   &__body {
     position: relative;
-    padding: 60px 0 80px;
+    padding: 30px 0 40px;
+
+    @include tablet {
+      padding: 60px 0 80px;
+    }
   }
   &__top {
     max-width: 688px;

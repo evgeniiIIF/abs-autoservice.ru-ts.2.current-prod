@@ -9,8 +9,8 @@ const { isMobile } = useMediaSizes();
 
 <template>
   <div class="offer-card">
-    <div class="offer-card__image">
-      <NuxtPicture :src="image" loading="lazy" format="webp" />
+    <div class="offer-card__image ibg">
+      <NuxtPicture :src="image ?? 'undefined'" loading="lazy" format="webp" />
     </div>
     <div class="offer-card__info">
       <h3 class="offer-card__title">{{ title }}</h3>
@@ -24,83 +24,64 @@ const { isMobile } = useMediaSizes();
 
 <style lang="scss">
 .offer-card {
-  display: grid;
-  grid-template-rows: 160px auto 40px;
-  grid-row-gap: 10px;
-  width: 100%;
+  display: flex;
+  flex-direction: column;
   height: 100%;
-  min-width: 205px;
   padding: 12px;
   border-radius: 20px;
-  background: rgba(42, 42, 42, 0.5);
+  border: 1px solid #2a2a2a;
+  background: var(--Linear, linear-gradient(180deg, rgba(42, 42, 42, 0) 0%, rgba(42, 42, 42, 0.4) 100%));
+  transition: $transition-1;
 
+  @include mb(10px);
   @include tablet {
     padding: 16px;
-    grid-row-gap: 12px;
-    border: 1px solid var(--black-black-90);
-    background: var(--linear, linear-gradient(180deg, rgba(42, 42, 42, 0) 0%, rgba(42, 42, 42, 0.4) 100%));
-  }
-
-  @include desktop {
     &:hover {
       background: rgba(42, 42, 42, 0.5);
+      transition: $transition-1;
 
       .offer-card__image {
         img {
-          transform: scale(0.97);
+          transform: scale(90%);
+          transition: $transition-1;
         }
       }
     }
   }
 
   &__image {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
+    padding-top: 88.3977901%;
     @include tablet {
-      width: 100%;
-      margin-bottom: 12px;
+      padding-top: 45.0704225%;
     }
-
-    picture {
-      display: flex;
-      width: 100%;
-      height: 100%;
-    }
-
     img {
-      width: 100%;
-      transition: all 0.3s ease;
       object-fit: contain;
-
       @include tablet {
-        aspect-ratio: 355 / 160;
-        border-radius: 20px;
+        object-fit: cover;
+        transition: $transition-1;
       }
     }
   }
 
-  &__content {
-    @include tablet {
-      margin-bottom: 16px;
-    }
+  &__info {
+    flex: 1 1 auto;
   }
 
   &__title {
+    min-width: 181px;
+    text-overflow: ellipsis;
+    color: var(--Black-Black-00, #fff);
     @include SubtitleSBold;
-    color: var(--white, #fff);
-
-    @include tablet {
-      margin-bottom: 8px;
-      @include SubtitleMBold;
-    }
   }
 
   &__description {
+    color: var(--Black-Black-50, #898989);
     @include BodyMRegular;
-    color: var(--black-black-50, #898989);
-    min-height: 80px;
   }
+
+  &__link {
+  }
+}
+.ibg {
 }
 </style>

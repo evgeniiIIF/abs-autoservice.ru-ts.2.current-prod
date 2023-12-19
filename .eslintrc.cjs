@@ -42,5 +42,6 @@ module.exports = {
     'no-useless-return': 'off',
     'vue/v-on-event-hyphenation': 'off',
     'vue/attribute-hyphenation': 'off',
+    'vue/no-multiple-template-root': 'off',
   },
 };

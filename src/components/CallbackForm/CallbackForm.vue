@@ -3,15 +3,14 @@
 
 import { useCallBackFormStore } from '~/store/callBackForm';
 
-import AppSocial from '@/components/AppSocial/AppSocial.vue';
-import vk from '@/assets/icons/vk.svg';
 import { useMediaSizes } from '@/composables/useMediaSizes';
 import { validateNameInput } from '@/utils/validateNameInput/validateNameInput';
 import { validatePhoneInput } from '@/utils/validatePhoneInput/validatePhoneInput';
 
-const { callBackFormState } = useCallBackFormStore();
+const { callBackFormState, callBackFormEffects } = useCallBackFormStore();
+callBackFormEffects.fetchCallBackForm();
 
-const { isLessThanDesktop } = useMediaSizes();
+const { isMoreThanMobile } = useMediaSizes();
 
 const name = ref('');
 const phone = ref('');
@@ -56,7 +55,9 @@ watch(
   <section class="callback-form">
     <div class="callback-form__container">
       <div class="callback-form__content">
-        <h2 class="callback-form__title">{{ callBackFormState.title }}</h2>
+        <h2 class="callback-form__title">
+          {{ callBackFormState.title }}
+        </h2>
         <p class="callback-form__description">{{ callBackFormState.text }}</p>
         <form class="callback-form__form" @submit.prevent="onSubmit">
           <div class="callback-form__inputs">
@@ -86,12 +87,15 @@ watch(
         </form>
         <p class="callback-form__policy">Нажимая кнопку, вы соглашаетесь с нашей Политикой конфиденциальности</p>
         <ul class="callback-form__socials">
-          <li v-for="social in 2" :key="social" class="callback-form__social">
-            <AppSocial link="#" :img="vk" background="green" />
+          <li class="callback-form__social">
+            <UIButton><IcTelegram :font-controlled="false" :filled="true" /></UIButton>
+          </li>
+          <li class="callback-form__social">
+            <UIButton><IcWhatsapp :font-controlled="false" :filled="true" /></UIButton>
           </li>
         </ul>
       </div>
-      <div v-if="!isLessThanDesktop" class="callback-form__image">
+      <div v-if="isMoreThanMobile" class="callback-form__image">
         <NuxtPicture src="/images/callback-form.png" format="webp,png,jpg" loading="lazy" />
       </div>
     </div>
@@ -103,6 +107,9 @@ watch(
   margin: 0 10px;
   padding: 20px 0;
 
+  @include tablet {
+    padding: 20px 0 80px 0;
+  }
   @include desktop {
     margin: 0 20px;
   }
@@ -115,6 +122,9 @@ watch(
     border-radius: 20px;
     border-top: 1px solid var(--black-black-80, #414141);
     background: var(--black-black-90, #2a2a2a);
+    @include tablet {
+      display: flex;
+    }
 
     @include desktop {
       padding: 40px;
@@ -122,9 +132,6 @@ watch(
   }
 
   &__content {
-    @include desktop {
-      max-width: 632px;
-    }
   }
 
   &__title {
@@ -139,6 +146,7 @@ watch(
   }
 
   &__description {
+    max-width: 632px;
     margin-bottom: 20px;
     @include BodyMRegular;
     color: var(--black-black-50, #898989);
@@ -208,17 +216,29 @@ watch(
     gap: 20px;
   }
 
+  &__social {
+    .button {
+      padding: 12px;
+    }
+  }
+
   &__image {
-    position: absolute;
-    bottom: -4px;
-    right: 0;
-
+    position: relative;
+    flex: 0 0 380px;
+    margin-bottom: -30px;
+    margin-right: -30px;
+    @include desktop {
+      margin-bottom: -40px;
+      margin-right: -40px;
+    }
+    @include media($xl) {
+      flex: 0 0 488px;
+    }
     img {
-      width: 488px;
-
-      @include to(1200px) {
-        width: 400px;
-      }
+      position: absolute;
+      bottom: 0;
+      right: 0;
+      width: 100%;
     }
   }
 }

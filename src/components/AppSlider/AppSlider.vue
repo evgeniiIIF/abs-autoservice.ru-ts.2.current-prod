@@ -56,7 +56,7 @@ const goBack = () => {
         :class="['app-slider__slide', index === currentSlideIndex ? 'app-slider__slide--active' : '']"
       >
         <div class="app-slider__image ibg">
-          <NuxtPicture :src="image?.path" fit="contain" loading="lazy" format="webp" />
+          <NuxtPicture :src="image?.path ?? 'undefined'" fit="contain" loading="lazy" format="webp" />
         </div>
       </div>
     </div>
@@ -68,7 +68,7 @@ const goBack = () => {
     <div class="app-slider__row">
       <div v-for="(image, index) in galleryItems" :key="index" :class="['app-slider__slide']">
         <div class="app-slider__image ibg">
-          <NuxtPicture :src="image?.path" fit="contain" loading="lazy" />
+          <NuxtPicture :src="image?.path ?? 'undefined'" fit="contain" loading="lazy" />
         </div>
       </div>
     </div>

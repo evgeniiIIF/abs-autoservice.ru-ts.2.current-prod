@@ -41,6 +41,10 @@ const onInput = (value: string) => console.log(value);
     // max-width: 300px;
     @include mb(20px);
     margin-bottom: 8px;
+    @include media($xl) {
+      display: flex;
+      @include mr(20px);
+    }
   }
   &__input {
     textarea {

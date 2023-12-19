@@ -1,14 +1,16 @@
 <script lang="ts" setup>
-import { useHomeStore } from '~/store/home';
+interface CompanyPictureProps {
+  image: string;
+  alt: string;
+}
 
-const { homeState } = useHomeStore();
-const aboutImg = computed(() => homeState.value.about_img);
+defineProps<CompanyPictureProps>();
 </script>
 
 <template>
   <div class="company-picture">
     <div class="container">
-      <NuxtPicture :src="aboutImg" loading="lazy" alt="автосервис ставрополь" />
+      <NuxtPicture :src="image" loading="lazy" :alt="alt" />
     </div>
   </div>
 </template>

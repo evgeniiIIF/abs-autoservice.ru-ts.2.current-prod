@@ -9,16 +9,18 @@ export const useMediaSizes = () => {
   const isXl = computed(() => breakpoint.value === 'xl');
   const isXxl = computed(() => breakpoint.value === 'xxl');
 
-  const isLessThanDesktop = computed(() => isLessThan('desktop'));
+  const isMoreThanMobile = computed(() => !isLessThan('tablet'));
+  const isMoreThanTablet = computed(() => !isLessThan('desktop'));
 
   return {
     isDesktop,
     isMobile,
     isTablet,
-    isLessThanDesktop,
     // isXs,
     // isSm,
     isXl,
     isXxl,
+    isMoreThanMobile,
+    isMoreThanTablet,
   };
 };
