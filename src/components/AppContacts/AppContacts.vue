@@ -47,8 +47,15 @@ const { isMobile } = useMediaSizes();
   &__callback {
     min-width: 220px;
     margin-bottom: 30px;
+    @include tablet {
+      display: flex;
+      justify-content: center;
+    }
     .button {
       width: 100%;
+      @include tablet {
+        width: auto;
+      }
     }
   }
 
