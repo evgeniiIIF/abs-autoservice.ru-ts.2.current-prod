@@ -1,6 +1,8 @@
 <script setup lang="ts">
+import { appRoutes } from '~/appRoutes';
+
 const { isMoreThanMobile, isMoreThanTablet } = useMediaSizes();
-const breadcrumbItems = [{ name: 'Об автосервисе', link: '/about' }];
+const breadcrumbItems = [{ name: 'Об автосервисе', link: appRoutes.about().path }];
 </script>
 
 <template>

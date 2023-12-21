@@ -18,10 +18,10 @@ const toggleMobileMenu = () => {
 const navItems = [
   { name: 'Услуги', link: '' },
   { name: 'Акции', link: '' },
-  { name: 'Об автосервисе', link: '' },
+  { name: 'Об автосервисе', link: '/about' },
   { name: 'Гарантии', link: '' },
   { name: 'Преимущества', link: '' },
-  { name: 'Контакты', link: '' },
+  { name: 'Контакты', link: '/contacts' },
 ];
 onBeforeMount(() => {
   setHeaderWidth('.js-header-mobile');

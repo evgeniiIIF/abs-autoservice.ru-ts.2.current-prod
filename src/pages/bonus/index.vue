@@ -1,8 +1,10 @@
 <script setup lang="ts">
+import { appRoutes } from '~/appRoutes';
+
 const breadcrumbItems = [
   {
     name: 'Бонусная программа',
-    link: '/bonus',
+    link: appRoutes.bonus().path,
   },
 ];
 </script>
