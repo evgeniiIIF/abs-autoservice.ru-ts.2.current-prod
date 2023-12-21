@@ -1,4 +1,5 @@
 <script lang="ts" setup>
+import { appRoutes } from '~/appRoutes';
 import { setHeaderWidth } from './AppHeader.utils';
 
 const navItems = [
@@ -7,10 +8,10 @@ const navItems = [
   { name: 'Об автосервисе', link: '/about' },
   { name: 'Гарантии', link: '' },
   { name: 'Преимущества', link: '' },
-  { name: 'Контакты', link: '' },
+  { name: 'Контакты', link: appRoutes.contacts().path },
 ];
 const topNavItems = [
-  { name: 'Бонусная программа', link: '/bonus' },
+  { name: 'Бонусная программа', link: appRoutes.bonus().path },
   { name: 'Отзовы', link: '' },
   { name: 'Вакансии', link: '' },
 ];
@@ -253,6 +254,12 @@ onMounted(() => {
           border-bottom: 2px solid var(--green-primary, #00a19c);
           background: radial-gradient(59.75% 50.89% at 50% 100%, rgba(0, 161, 156, 0.22) 0%, rgba(0, 161, 156, 0) 100%);
         }
+      }
+
+      .nav__link--active {
+        color: var(--Black-Black-00, #fff);
+        border-bottom: 2px solid var(--green-primary, #00a19c);
+        background: radial-gradient(59.75% 50.89% at 50% 100%, rgba(0, 161, 156, 0.22) 0%, rgba(0, 161, 156, 0) 100%);
       }
     }
   }

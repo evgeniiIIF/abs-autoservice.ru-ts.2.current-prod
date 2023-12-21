@@ -1,14 +1,28 @@
-<script setup lang="ts"></script>
+<script setup lang="ts">
+interface AppSocialProps {
+  linkVk?: string;
+  linkTg?: string;
+  linkWh?: string;
+}
+
+defineProps<AppSocialProps>();
+</script>
 <template>
   <ul class="social">
     <li class="social__item">
-      <IcVk :font-controlled="false" :filled="true" />
+      <a class="social__link" :href="linkVk" target="_blank" rel="noopener">
+        <IcVk :font-controlled="false" :filled="true" />
+      </a>
     </li>
     <li class="social__item">
-      <IcTelegram :font-controlled="false" :filled="true" />
+      <a class="social__link" :href="linkTg" target="_blank" rel="noopener">
+        <IcTelegram :font-controlled="false" :filled="true" />
+      </a>
     </li>
     <li class="social__item">
-      <IcWhatsapp :font-controlled="false" :filled="true" />
+      <a class="social__link" :href="linkWh" target="_blank" rel="noopener">
+        <IcWhatsapp :font-controlled="false" :filled="true" />
+      </a>
     </li>
   </ul>
 </template>
@@ -19,7 +33,7 @@
   align-items: flex-start;
   gap: 10px;
 
-  &__item {
+  &__link {
     display: flex;
     padding: 12px;
     align-items: flex-start;
