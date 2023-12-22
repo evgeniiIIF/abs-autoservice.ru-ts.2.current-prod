@@ -6,3 +6,7 @@ export interface CallBackForm {
 export interface CallBackFormResponse {
   data: CallBackForm;
 }
+
+export interface CallbackFormWithModal extends CallBackForm {
+  titleModal?: string;
+}

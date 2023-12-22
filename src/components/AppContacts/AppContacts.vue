@@ -2,6 +2,17 @@
 import type { AppContacts } from '@/components/AppContacts/AppContacts.types';
 import { useMediaSizes } from '@/composables/useMediaSizes';
 
+import { useCallBackFormStore } from '~/store/callBackForm';
+
+const { callBackFormState, callBackFormActions } = useCallBackFormStore();
+
+const openModal = (title: string) => {
+  callBackFormActions.setTitleModal(title);
+  useOpenModal();
+};
+
+const [isOpenModal, useOpenModal, closeModal] = useBooleanState();
+
 defineProps<AppContacts>();
 
 const { isMobile } = useMediaSizes();
@@ -11,7 +22,10 @@ const { isMobile } = useMediaSizes();
   <div class="contacts" :class="{ 'contacts--in-mobile-menu': inMobileMenu }">
     <a class="contacts__phone" href="tel:88652500520">8 (8652) 500-520</a>
     <div class="contacts__callback">
-      <UIButton :has-full-width="isMobile">Заказать звонок</UIButton>
+      <UIButton :has-full-width="isMobile" @click="openModal('Заказать звонок')">Заказать звонок</UIButton>
+      <UIModal position="center" :is-open="isOpenModal" @onClose="closeModal"
+        ><CallbackForm :title-modal="callBackFormState.titleModal" @onClose="closeModal"
+      /></UIModal>
     </div>
     <a class="contacts__email" href="mailto:info@abs-autoservice.ru">info@abs-autoservice.ru</a>
     <ul class="contacts__socials">

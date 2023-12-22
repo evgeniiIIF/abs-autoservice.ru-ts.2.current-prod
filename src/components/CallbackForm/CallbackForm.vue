@@ -7,6 +7,17 @@ import { useMediaSizes } from '@/composables/useMediaSizes';
 import { validateNameInput } from '@/utils/validateNameInput/validateNameInput';
 import { validatePhoneInput } from '@/utils/validatePhoneInput/validatePhoneInput';
 
+interface CallBackFormEmits {
+  (event: 'onClose'): void;
+}
+interface CallBackFormProps {
+  titleModal?: string;
+}
+
+defineProps<CallBackFormProps>();
+
+const emits = defineEmits<CallBackFormEmits>();
+
 const { callBackFormState, callBackFormEffects } = useCallBackFormStore();
 callBackFormEffects.fetchCallBackForm();
 
@@ -52,13 +63,19 @@ watch(
 </script>
 
 <template>
-  <section class="callback-form">
-    <div class="callback-form__container">
+  <div class="callback-form">
+    <div class="callback-form__body">
+      <div class="callback-form__close">
+        <UIButton @click="emits('onClose')"><IcClose :font-controlled="false" :filled="true" /></UIButton>
+      </div>
       <div class="callback-form__content">
-        <h2 class="callback-form__title">
+        <h2 v-if="!titleModal" class="callback-form__title">
           {{ callBackFormState.title }}
         </h2>
-        <p class="callback-form__description">{{ callBackFormState.text }}</p>
+        <h2 v-else class="callback-form__title callback-form__title--modal">
+          {{ titleModal }}
+        </h2>
+        <p v-if="!titleModal" class="callback-form__description">{{ callBackFormState.text }}</p>
         <form class="callback-form__form" @submit.prevent="onSubmit">
           <div class="callback-form__inputs">
             <div class="callback-form__input">
@@ -99,25 +116,54 @@ watch(
         <NuxtPicture src="/images/callback-form.png" format="webp,png,jpg" loading="lazy" />
       </div>
     </div>
-  </section>
+  </div>
 </template>
 
 <style lang="scss">
+.ui-modal {
+  .callback-form {
+    &__body {
+      padding-top: 81px;
+      @include tablet {
+        padding-top: 30px;
+      }
+      @include desktop {
+        min-width: 1000px;
+      }
+    }
+    &__close {
+      display: block;
+      position: absolute;
+      right: 0;
+      top: -1px;
+      z-index: 1;
+      .button {
+        background: darken($color: #2a2a2a, $amount: 5%);
+        border: none;
+        border-radius: 0 20px;
+        padding: 18px;
+        svg {
+          @include svg-color(#fff);
+        }
+      }
+    }
+    &__image {
+      flex: 0 0 399px;
+    }
+    &__input {
+      @include desktop {
+        width: 100%;
+        min-width: 185px;
+      }
+    }
+  }
+}
+
 .callback-form {
-  margin: 0 10px;
-  padding: 20px 0;
+  max-width: 1200px;
 
-  @include tablet {
-    padding: 20px 0 80px 0;
-  }
-  @include desktop {
-    margin: 0 20px;
-  }
-
-  &__container {
+  &__body {
     position: relative;
-    max-width: 1200px;
-    margin: 0 auto;
     padding: 30px 20px;
     border-radius: 20px;
     border-top: 1px solid var(--black-black-80, #414141);
@@ -131,7 +177,13 @@ watch(
     }
   }
 
+  &__close {
+    display: none;
+  }
+
   &__content {
+    max-width: 638px;
+    margin-right: auto;
   }
 
   &__title {
@@ -139,10 +191,14 @@ watch(
     @include SubtitleLBold;
     color: var(--white, #fff);
 
-    @include desktop {
+    @include tablet {
       margin-bottom: 8px;
       @include TitleSBold;
     }
+  }
+
+  &__title {
+    margin-bottom: 40px;
   }
 
   &__description {
@@ -151,7 +207,7 @@ watch(
     @include BodyMRegular;
     color: var(--black-black-50, #898989);
 
-    @include desktop {
+    @include tablet {
       margin-bottom: 24px;
       @include SubtitleSRegular;
     }
@@ -174,8 +230,7 @@ watch(
     margin-bottom: 40px;
 
     @include desktop {
-      width: 100%;
-      max-width: 460px;
+      flex: 1 1 auto;
       flex-direction: inherit;
       margin-bottom: 0;
     }
@@ -194,8 +249,7 @@ watch(
     }
 
     @include desktop {
-      width: 100%;
-      max-width: 158px;
+      flex: 0 0 158px;
       display: flex;
       align-items: flex-end;
     }

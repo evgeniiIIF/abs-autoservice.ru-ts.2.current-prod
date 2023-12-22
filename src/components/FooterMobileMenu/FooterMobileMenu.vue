@@ -4,7 +4,7 @@ import search from '@/assets/icons/search.svg';
 import navigation from '@/assets/icons/navigation.svg';
 import star from '@/assets/icons/star.svg';
 import { useClickOutside } from '@/composables/useClickOutside';
-import { setHeaderWidth } from '../AppHeader/AppHeader.utils';
+import { setHeaderWidth } from '@/utils/useWrapper/useWrapper';
 
 const items = [
   { id: 1, icon: chat },

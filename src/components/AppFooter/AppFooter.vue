@@ -2,14 +2,6 @@
 import { useMediaSizes } from '@/composables/useMediaSizes';
 
 const { isDesktop } = useMediaSizes();
-
-const navItems = [
-  { name: 'Акции', link: '' },
-  { name: 'Услуги', link: '' },
-  { name: 'Бонусная программа', link: '' },
-  { name: 'О автосервисе', link: '' },
-  { name: 'Контакты', link: '' },
-];
 </script>
 
 <template>
