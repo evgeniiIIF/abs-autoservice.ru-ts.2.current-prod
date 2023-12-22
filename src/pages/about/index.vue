@@ -1,8 +1,6 @@
 <script setup lang="ts">
-import { appRoutes } from '~/appRoutes';
-
-const { isMoreThanMobile, isMoreThanTablet } = useMediaSizes();
-const breadcrumbItems = [{ name: 'Об автосервисе', link: appRoutes.about().path }];
+const { isMobile, isTablet } = useMediaSizes();
+const breadcrumbItems = [{ name: 'Об автосервисе', link: '/about' }];
 </script>
 
 <template>
@@ -35,7 +33,7 @@ const breadcrumbItems = [{ name: 'Об автосервисе', link: appRoutes.
               поставщиков автомобильных запчастей и смазочных материалов в СНГ, занимается производством собственных
               запчастей под брендом ABSEL, а также создает современные технологичные решения для автобизнеса.
             </p>
-            <p v-if="isMoreThanMobile" class="info-about__text info-about__text--desktop">
+            <p v-if="!isMobile" class="info-about__text info-about__text--desktop">
               В ABS-AUTO Service мы собрали команду настоящих профессионалов, которых объединяет искренняя любовь к
               автомобилям. Мы предлагаем комплексные услуги по ремонту и полноценному обслуживанию вашего авто с
               применением только высококачественных средств и оборудования.
@@ -51,7 +49,7 @@ const breadcrumbItems = [{ name: 'Об автосервисе', link: appRoutes.
       <div class="guarantees-about__ellipse"></div>
       <div class="container">
         <div class="guarantees-about__body">
-          <div v-if="!isMoreThanTablet" class="guarantees-about__image guarantees-about__image--mobile ibg">
+          <div v-if="!isTablet" class="guarantees-about__image guarantees-about__image--mobile ibg">
             <NuxtPicture src="images/guarantees-mobile.jpg" format="webp" loading="lazy" />
           </div>
           <div v-else class="guarantees-about__image guarantees-about__image--desktop ibg">

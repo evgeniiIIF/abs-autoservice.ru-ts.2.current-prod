@@ -4,8 +4,8 @@ import { setHeaderWidth } from './AppHeader.utils';
 
 const navItems = [
   { name: 'Услуги', link: '' },
-  { name: 'Акции', link: '' },
-  { name: 'Об автосервисе', link: '/about' },
+  { name: 'Акции', link: appRoutes.offers().path },
+  { name: 'Об автосервисе', link: appRoutes.about().path },
   { name: 'Гарантии', link: '' },
   { name: 'Преимущества', link: '' },
   { name: 'Контакты', link: appRoutes.contacts().path },

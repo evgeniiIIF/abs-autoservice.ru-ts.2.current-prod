@@ -1,6 +1,8 @@
 <script setup lang="ts">
+import { NuxtLink } from '#components';
+
 interface UIButtonProps {
-  tag?: 'a' | 'button';
+  tag?: 'a' | 'button' | 'NuxtLink';
   type?: 'button' | 'submit';
   hasFullWidth?: boolean;
   withoutFill?: boolean;
@@ -20,7 +22,7 @@ withDefaults(defineProps<UIButtonProps>(), {
 
 <template>
   <component
-    :is="tag"
+    :is="tag === 'NuxtLink' ? NuxtLink : tag"
     :class="{
       button: true,
       'button-wrapper': isWrapper,
@@ -44,6 +46,7 @@ withDefaults(defineProps<UIButtonProps>(), {
   border-radius: 10px;
   border: 2px solid transparent;
   outline: none;
+  width: fit-content;
 
   background: var(--green-primary, #00a19c);
   color: var(--black-black-00, #fff);

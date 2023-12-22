@@ -1,3 +1,5 @@
+import type { OffersListItem } from '~/api/http/offersHttp';
+
 export interface HomeSeo {
   meta_title: string;
   meta_description: string;
@@ -21,13 +23,6 @@ export interface HomeWelcome {
 
 export interface HomeOffers {
   title: string;
-}
-
-export interface HomeOffersItem {
-  id: number;
-  title: string;
-  descriptions: number;
-  image: string;
 }
 
 export interface HomePopularServices {
@@ -75,7 +70,7 @@ export interface HomeData {
   welcome: HomeWelcome[];
   welcome_img: string;
   offers: HomeOffers;
-  offers_items: HomeOffersItem[];
+  offers_items: OffersListItem[];
   popular_services: HomePopularServices;
   popular_services_items: HomePopularServicesItem[];
   about: HomeAbout;

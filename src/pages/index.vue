@@ -7,14 +7,12 @@ import { useBonusCardStore } from '~/store/bonusCard';
 const { homeEffects, homeState } = useHomeStore();
 const { calculatorBlockEffects } = useCalculatorBlockStore();
 const { bonusCardEffects } = useBonusCardStore();
-// const { callBackFormEffects } = useCallBackFormStore();
 
 await useAsyncData('home', async () => {
   await Promise.all([
     homeEffects.fetchHome(),
     calculatorBlockEffects.fetchCalculatorBlock(),
     bonusCardEffects.fetchBonusCard(),
-    // callBackFormEffects.fetchCallBackForm(),
   ]);
 });
 
