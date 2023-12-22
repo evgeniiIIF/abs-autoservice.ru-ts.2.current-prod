@@ -6,4 +6,5 @@ export const appRoutes = {
   about: () => ({ path: '/about' }),
   contacts: () => ({ path: '/contacts' }),
   bonus: () => ({ path: '/bonus' }),
+  reviews: () => ({ path: '/reviews' }),
 };

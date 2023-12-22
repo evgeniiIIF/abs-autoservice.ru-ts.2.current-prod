@@ -1,10 +1,24 @@
 <script setup lang="ts">
 import { Vue3Marquee } from 'vue3-marquee';
-
 import { useHomeStore } from '~/store/home';
+import { useCallBackFormStore } from '~/store/callBackForm';
+import { goToAnchor } from '@/utils/goToAnchor/goToAnchor';
 
 const { homeState } = useHomeStore();
 const welcomeState = computed(() => homeState.value.welcome[0]);
+
+const { callBackFormState, callBackFormActions } = useCallBackFormStore();
+
+const openModal = (title: string) => {
+  callBackFormActions.setTitleModal(title);
+  useOpenModal();
+};
+
+const [isOpenModal, useOpenModal, closeModal] = useBooleanState();
+
+const scrollToAnchor = () => {
+  goToAnchor('section-cost-calculation', 88);
+};
 
 const { isMobile } = useMediaSizes();
 const [isHovered, hoverElement, leaveElement] = useBooleanState();
@@ -40,11 +54,21 @@ const [isHovered, hoverElement, leaveElement] = useBooleanState();
 
           <div class="banner__buttons">
             <!-- eslint-disable-next-line vuejs-accessibility/mouse-events-have-key-events -->
-            <div class="banner__button banner__button--bg" @mouseover="hoverElement" @mouseleave="leaveElement">
+            <div
+              class="banner__button banner__button--bg"
+              @mouseover="hoverElement"
+              @mouseleave="leaveElement"
+              @click="scrollToAnchor"
+            >
               <UIButton>{{ welcomeState.btn[0].title }}</UIButton>
             </div>
             <div class="banner__button banner__button--bd">
-              <UIButton :withoutFill="true">{{ welcomeState.btn[1].title }}</UIButton>
+              <UIButton :withoutFill="true" @click="openModal(welcomeState.btn[1].title)">{{
+                welcomeState.btn[1].title
+              }}</UIButton>
+              <UIModal position="center" :is-open="isOpenModal" @onClose="closeModal"
+                ><CallbackForm :title-modal="callBackFormState.titleModal" @onClose="closeModal"
+              /></UIModal>
             </div>
           </div>
         </div>

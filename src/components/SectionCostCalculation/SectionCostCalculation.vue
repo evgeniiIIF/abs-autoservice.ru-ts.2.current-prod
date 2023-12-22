@@ -1,75 +1,9 @@
 <script setup lang="ts">
 import { useCalculatorBlockStore } from '~/store/calculatorBlock';
 
-import SectionCostCalculationQuestion1 from './SectionCostCalculationQuestion1.vue';
-import SectionCostCalculationQuestion2 from './SectionCostCalculationQuestion2.vue';
-import SectionCostCalculationQuestion3 from './SectionCostCalculationQuestion3.vue';
-import SectionCostCalculationQuestion4 from './SectionCostCalculationQuestion4.vue';
-// import { QUEST_ITEMS } from './SectionCostCalculation.constants';
-const { calculatorBlockState } = useCalculatorBlockStore();
-
-const QUEST_ITEMS = [
-  {
-    component: SectionCostCalculationQuestion1,
-    title: calculatorBlockState.value.title_step_1,
-    inputProps: {
-      value: '',
-      type: 'text',
-      name: 'auto',
-      label: calculatorBlockState.value.title_input_step_1,
-      placeholder: calculatorBlockState.value.title_input_placeholder_step_1,
-      maxlength: 128,
-    },
-  },
-  {
-    component: SectionCostCalculationQuestion2,
-    title: calculatorBlockState.value.title_step_2,
-    inputProps: {
-      value: '',
-      type: 'textarea',
-      name: 'problem',
-      label: calculatorBlockState.value.title_input_step_2,
-      placeholder: calculatorBlockState.value.title_input_placeholder_step_2,
-      maxlength: 128,
-    },
-  },
-  {
-    component: SectionCostCalculationQuestion3,
-    title: calculatorBlockState.value.title_step_3,
-    inputProps: {
-      inputName: {
-        value: '',
-        type: 'text',
-        name: 'name',
-        label: 'Имя',
-        placeholder: 'Введите имя',
-        maxlength: 32,
-      },
-      inputTel: {
-        value: '',
-        type: 'tel',
-        name: 'phone',
-        label: 'Телефон',
-        pattern: /[^0-9+]/g,
-      },
-    },
-  },
-  {
-    component: SectionCostCalculationQuestion4,
-    titleTop: calculatorBlockState.value.title_step_4,
-    text: calculatorBlockState.value.title_input_step_4,
-  },
-];
-
 const { isMobile } = useMediaSizes();
 
-const currentStepIndex = ref(0);
-const goNextQuestion = () => (currentStepIndex.value += 1);
-const goBackQuestion = () => (currentStepIndex.value -= 1);
-
-const currentQuestItem = computed(() => {
-  return QUEST_ITEMS[currentStepIndex.value];
-});
+const { calculatorBlockState } = useCalculatorBlockStore();
 </script>
 
 <template>
@@ -82,61 +16,9 @@ const currentQuestItem = computed(() => {
             {{ calculatorBlockState.subtitle_form }}
           </p>
         </div>
-        <form class="cost-calculation__quest quest">
-          <div class="quest__blur"></div>
-          <div class="quest__content">
-            <div v-if="currentStepIndex !== QUEST_ITEMS.length - 1" class="quest__top">
-              <div class="quest__text">ШАГ {{ currentStepIndex + 1 }}</div>
-              <div class="quest__steps steps-quest">
-                <div
-                  v-for="(item, index) in QUEST_ITEMS.length"
-                  :key="index"
-                  :class="{ 'steps-quest__item': true, 'steps-quest__item--active': index <= currentStepIndex }"
-                >
-                  <span v-if="index !== 0" class="steps-quest__line"></span>
-                  <span class="steps-quest__step">{{ index + 1 }}</span>
-                </div>
-              </div>
-            </div>
-            <div class="quest__current">
-              <Transition name="fade-in" mode="out-in">
-                <component
-                  :is="currentQuestItem.component"
-                  :title="currentQuestItem.title"
-                  :inputProps="currentQuestItem.inputProps"
-                  :titleTop="currentQuestItem.titleTop"
-                  :text="currentQuestItem.text"
-                ></component>
-              </Transition>
-            </div>
-            <div class="quest__buttons">
-              <div
-                v-if="currentStepIndex > 0 && !(currentStepIndex > QUEST_ITEMS.length - 2)"
-                class="quest__button--back"
-              >
-                <UIButton @click="goBackQuestion">
-                  <span class="button__arrow">
-                    <IcArrowLeft />
-                  </span>
-                  <span class="button__text">Назад</span>
-                </UIButton>
-              </div>
-              <div v-if="currentStepIndex !== QUEST_ITEMS.length - 1" class="quest__button--next">
-                <UIButton @click="goNextQuestion">
-                  <span class="button__text">{{
-                    currentStepIndex < QUEST_ITEMS.length - 2 ? 'Далее' : ' Завершить '
-                  }}</span>
-                  <span v-if="currentStepIndex < QUEST_ITEMS.length - 2" class="button__arrow">
-                    <IcArrowRight />
-                  </span>
-                </UIButton>
-              </div>
-            </div>
-          </div>
-          <div class="quest__image ibg">
-            <NuxtPicture src="images/quest.png" format="webp" loading="lazy" />
-          </div>
-        </form>
+        <div class="cost-calculation__quest">
+          <AppQuest />
+        </div>
       </div>
     </div>
   </div>

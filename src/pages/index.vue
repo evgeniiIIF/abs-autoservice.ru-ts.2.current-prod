@@ -27,7 +27,7 @@ useSeoMeta({
 <template>
   <SectionBanner />
   <SpecialOffers />
-  <SectionCostCalculation />
+  <SectionCostCalculation id="section-cost-calculation" />
   <CompanyPicture image="/images/company-1.png" alt="АБС автосервис ставрополь" />
   <PopularServices />
   <SectionCallback />

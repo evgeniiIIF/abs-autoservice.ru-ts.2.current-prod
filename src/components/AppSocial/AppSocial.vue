@@ -1,26 +1,23 @@
 <script setup lang="ts">
-interface AppSocialProps {
-  linkVk?: string;
-  linkTg?: string;
-  linkWh?: string;
-}
+import { useContactsStore } from '~/store/contacts';
 
-defineProps<AppSocialProps>();
+const { contactsEffects, contactsState } = useContactsStore();
+contactsEffects.fetchContacts();
 </script>
 <template>
   <ul class="social">
     <li class="social__item">
-      <a class="social__link" :href="linkVk" target="_blank" rel="noopener">
+      <a class="social__link" :href="contactsState.social_network?.[2].url" target="_blank" rel="noopener">
         <IcVk :font-controlled="false" :filled="true" />
       </a>
     </li>
     <li class="social__item">
-      <a class="social__link" :href="linkTg" target="_blank" rel="noopener">
+      <a class="social__link" :href="contactsState.social_network?.[0].url" target="_blank" rel="noopener">
         <IcTelegram :font-controlled="false" :filled="true" />
       </a>
     </li>
     <li class="social__item">
-      <a class="social__link" :href="linkWh" target="_blank" rel="noopener">
+      <a class="social__link" :href="contactsState.social_network?.[1].url" target="_blank" rel="noopener">
         <IcWhatsapp :font-controlled="false" :filled="true" />
       </a>
     </li>

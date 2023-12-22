@@ -5,7 +5,7 @@ import { useContactsStore } from '~/store/contacts';
 const { contactsEffects, contactsState } = useContactsStore();
 contactsEffects.fetchContacts();
 
-const { isMoreThanTablet } = useMediaSizes();
+const { isDesktop } = useMediaSizes();
 
 const breadcrumbItems = [{ name: 'Контакты', link: appRoutes.contacts().path }];
 
@@ -65,11 +65,7 @@ const workTimeItems = computed(() => contactsState.value.time_work?.split(',').m
                   </li>
                 </ul>
                 <div class="bottom-info-contacts-page__social">
-                  <AppSocial
-                    :link-tg="contactsState.social_network?.[0].url"
-                    :link-wh="contactsState.social_network?.[1].url"
-                    :link-vk="contactsState.social_network?.[2].url"
-                  />
+                  <AppSocial />
                 </div>
               </div>
             </div>
@@ -88,8 +84,8 @@ const workTimeItems = computed(() => contactsState.value.time_work?.split(',').m
         </div>
       </div>
     </section>
-    <div v-if="isMoreThanTablet" class="contacts-page__call-back">
-      <CallbackForm />
+    <div v-if="isDesktop" class="contacts-page__call-back">
+      <SectionCallback />
     </div>
   </div>
 </template>

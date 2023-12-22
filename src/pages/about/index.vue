@@ -1,5 +1,5 @@
 <script setup lang="ts">
-const { isMobile, isTablet } = useMediaSizes();
+const { isMobile, isDesktop } = useMediaSizes();
 const breadcrumbItems = [{ name: 'Об автосервисе', link: '/about' }];
 </script>
 
@@ -49,7 +49,7 @@ const breadcrumbItems = [{ name: 'Об автосервисе', link: '/about' }
       <div class="guarantees-about__ellipse"></div>
       <div class="container">
         <div class="guarantees-about__body">
-          <div v-if="!isTablet" class="guarantees-about__image guarantees-about__image--mobile ibg">
+          <div v-if="!isDesktop" class="guarantees-about__image guarantees-about__image--mobile ibg">
             <NuxtPicture src="images/guarantees-mobile.jpg" format="webp" loading="lazy" />
           </div>
           <div v-else class="guarantees-about__image guarantees-about__image--desktop ibg">
