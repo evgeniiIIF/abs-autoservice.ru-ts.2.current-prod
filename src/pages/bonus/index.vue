@@ -24,7 +24,7 @@ const breadcrumbItems = [
       <CompanyPicture image="/images/company-1.png" alt="АБС автосервис ставрополь" />
     </div>
     <div class="bonus__call-back">
-      <CallbackForm />
+      <SectionCallback />
     </div>
   </div>
 </template>

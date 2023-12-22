@@ -1,4 +1,15 @@
 <script setup lang="ts">
+import { appRoutes } from '~/appRoutes';
+import { useContactsStore } from '~/store/contacts';
+
+const { contactsEffects, contactsState } = useContactsStore();
+contactsEffects.fetchContacts();
+
+const workTimeItems = computed(() => contactsState.value.time_work?.split(',').map((item) => item.split(' ')));
+const addressItems = computed(() => contactsState.value.address?.split(','));
+
+const [isOpenModal, openModal, closeModal] = useBooleanState();
+
 const SERVICES = [
   { title: 'Техническое обслуживание' },
   { title: 'Диагностика автомобиля' },
@@ -7,12 +18,15 @@ const SERVICES = [
   { title: 'Дополнительные услуги' },
 ];
 const AUTOSERVICE_1 = [
-  { title: 'Об автосервисе' },
-  { title: 'Отзывы' },
-  { title: 'Вакансии' },
-  { title: 'Бонусная программа' },
+  { title: 'Об автосервисе', link: appRoutes.about().path },
+  { title: 'Отзывы', link: appRoutes.reviews().path },
+  { title: 'Бонусная программа', link: appRoutes.bonus().path },
 ];
-const AUTOSERVICE_2 = [{ title: 'Расчёт стоимости' }, { title: 'Гарантия' }, { title: 'Акции' }, { title: 'Контакты' }];
+const AUTOSERVICE_2 = [
+  { title: 'Расчёт стоимости', link: 'open-modal' },
+  { title: 'Акции', link: appRoutes.offers().path },
+  { title: 'Контакты', link: appRoutes.contacts().path },
+];
 </script>
 <template>
   <div class="footer-desktop">
@@ -32,13 +46,21 @@ const AUTOSERVICE_2 = [{ title: 'Расчёт стоимости' }, { title: '�
               <h5 class="top-footer-desktop__title">Автосервис</h5>
               <div class="top-footer-desktop__nav--0202">
                 <ul class="top-footer-desktop__list">
-                  <li class="top-footer-desktop__list-item" v-for="item in AUTOSERVICE_1" :key="item.title">
-                    <NuxtLink class="top-footer-desktop__nav-link">{{ item.title }}</NuxtLink>
+                  <li v-for="item in AUTOSERVICE_1" :key="item.title" class="top-footer-desktop__list-item">
+                    <NuxtLink class="top-footer-desktop__nav-link" :to="item.link">{{ item.title }}</NuxtLink>
                   </li>
                 </ul>
                 <ul class="top-footer-desktop__list">
-                  <li class="top-footer-desktop__list-item" v-for="item in AUTOSERVICE_2" :key="item.title">
-                    <NuxtLink class="top-footer-desktop__nav-link">{{ item.title }}</NuxtLink>
+                  <li v-for="item in AUTOSERVICE_2" :key="item.title" class="top-footer-desktop__list-item">
+                    <template v-if="item.link === 'open-modal'">
+                      <UIButton class="top-footer-desktop__nav-link" :is-wrapper="true" @click="openModal">
+                        {{ item.title }}
+                      </UIButton>
+                      <UIModal position="center" :is-open="isOpenModal" @onClose="closeModal">
+                        <AppQuest />
+                      </UIModal>
+                    </template>
+                    <NuxtLink v-else class="top-footer-desktop__nav-link" :to="item.link">{{ item.title }}</NuxtLink>
                   </li>
                 </ul>
               </div>
@@ -54,16 +76,22 @@ const AUTOSERVICE_2 = [{ title: 'Расчёт стоимости' }, { title: '�
               <h5 class="top-footer-desktop__title">Контакты</h5>
               <ul class="top-footer-desktop__list">
                 <li class="top-footer-desktop__list-item">
-                  <a class="contacts-top-footer-desktop__phone">8 (8652) 500-520</a>
+                  <a
+                    :href="`tel:${contactsState.phone?.match(/\d+/g)?.join('')}`"
+                    class="contacts-top-footer-desktop__phone"
+                    >{{ contactsState.phone }}</a
+                  >
                 </li>
                 <li class="top-footer-desktop__list-item">
                   <address class="contacts-top-footer-desktop__address">
-                    <div class="contacts-top-footer-desktop__city">г. Ставрополь</div>
-                    <div class="contacts-top-footer-desktop__street">ул. Доваторцев 47Б</div>
+                    <div class="contacts-top-footer-desktop__city">{{ addressItems?.[0] }}</div>
+                    <div class="contacts-top-footer-desktop__street">{{ addressItems?.[1] }}</div>
                   </address>
                 </li>
                 <li class="top-footer-desktop__list-item">
-                  <a class="contacts-top-footer-desktop__email">info@abs-autoservice.ru</a>
+                  <a :href="`mailto:${contactsState.mail}`" class="contacts-top-footer-desktop__email">{{
+                    contactsState.mail
+                  }}</a>
                 </li>
                 <li class="top-footer-desktop__list-item">
                   <div class="contacts-top-footer-desktop__working-hours working-hours">
@@ -75,12 +103,12 @@ const AUTOSERVICE_2 = [{ title: 'Расчёт стоимости' }, { title: '�
                     </div>
                     <div class="working-hours__row">
                       <div class="working-hours__item">
-                        <div class="working-hours__title">пн-сб</div>
-                        <div class="working-hours__time">9:00-19:00</div>
+                        <div class="working-hours__title">{{ workTimeItems?.[0][0] }}</div>
+                        <div class="working-hours__time">{{ workTimeItems?.[0][1] }}</div>
                       </div>
                       <div class="working-hours__item">
-                        <div class="working-hours__title">вс</div>
-                        <div class="working-hours__time">10:00-16:00</div>
+                        <div class="working-hours__title">{{ workTimeItems?.[1][1] }}</div>
+                        <div class="working-hours__time">{{ workTimeItems?.[1][2] }}</div>
                       </div>
                     </div>
                   </div>
@@ -178,8 +206,12 @@ const AUTOSERVICE_2 = [{ title: 'Расчёт стоимости' }, { title: '�
   }
 
   &__nav-link {
+    cursor: pointer;
     color: var(--Black-Black-00, #fff);
     @include BodyLRegular;
+    &:hover {
+      color: darken($color: #fff, $amount: 15%);
+    }
   }
 
   &__nav--0202 {

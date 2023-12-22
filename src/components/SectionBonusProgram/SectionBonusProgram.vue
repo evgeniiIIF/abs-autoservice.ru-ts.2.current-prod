@@ -1,4 +1,15 @@
 <script setup lang="ts">
+import { useCallBackFormStore } from '~/store/callBackForm';
+
+const { callBackFormState, callBackFormActions } = useCallBackFormStore();
+
+const openModal = (title: string) => {
+  callBackFormActions.setTitleModal(title);
+  useOpenModal();
+};
+
+const [isOpenModal, useOpenModal, closeModal] = useBooleanState();
+
 const { isMobile } = useMediaSizes();
 
 const bonusProgramItems = [
@@ -28,7 +39,11 @@ const bonusProgramItems = [
           </div>
         </div>
         <div class="bonus-program__button">
-          <UIButton>Получить карту</UIButton>
+          <UIButton @click="openModal('Получить карту')">Получить карту</UIButton>
+
+          <UIModal position="center" :is-open="isOpenModal" @onClose="closeModal">
+            <CallbackForm :title-modal="callBackFormState.titleModal" @onClose="closeModal" />
+          </UIModal>
         </div>
       </div>
     </div>

@@ -23,7 +23,6 @@ const navItems = [
 const topNavItems = [
   { name: 'Бонусная программа', link: appRoutes.bonus().path },
   { name: 'Отзовы', link: '' },
-  { name: 'Вакансии', link: '' },
 ];
 const headerDesktopNode = ref(null);
 const headerTopNode = ref(null);
@@ -66,17 +65,9 @@ onMounted(() => {
       <div class="header-desktop-top__nav">
         <AppNavigation :items="topNavItems" />
       </div>
-      <ul class="header-desktop-top__social">
-        <li class="header-desktop-top__social-item">
-          <IcTelegram :font-controlled="false" :filled="true" />
-        </li>
-        <li class="header-desktop-top__social-item">
-          <IcWhatsapp :font-controlled="false" :filled="true" />
-        </li>
-        <li class="header-desktop-top__social-item">
-          <IcVk :font-controlled="false" :filled="true" />
-        </li>
-      </ul>
+      <div class="header-desktop-top__social">
+        <AppSocial />
+      </div>
     </div>
 
     <div class="header-desktop__body">
@@ -174,19 +165,11 @@ onMounted(() => {
     }
   }
   &__social {
-    display: flex;
-    align-items: center;
-    @include mr(4px);
-  }
-  &__social-item {
-    padding: 6px;
-    cursor: pointer;
-    &:hover {
-      background: darken($color: #2a2a2a, $amount: 2%);
-    }
-    svg {
-      width: 24px;
-      height: 24px;
+    .social {
+      gap: 4px;
+      svg {
+        margin: -4px;
+      }
     }
   }
 }
@@ -293,18 +276,6 @@ onMounted(() => {
       height: 48px;
     }
   }
-
-  // &__search {
-  //   .button {
-  //     padding: 12px;
-  //     border-radius: 10px;
-  //     background: var(--black-black-90, #2a2a2a);
-  //     svg {
-  //       width: 24px;
-  //       height: 24px;
-  //     }
-  //   }
-  // }
 }
 
 .feedback {
