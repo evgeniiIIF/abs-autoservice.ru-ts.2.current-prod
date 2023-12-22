@@ -3,14 +3,20 @@ import { defineStore } from 'pinia';
 
 import { callBackFormHttp } from '~/api/http';
 
-import type { CallBackForm } from '~/api/http/callBackForm/callBackFormHttp.types';
+import type { CallbackFormWithModal } from '~/api/http/callBackForm/callBackFormHttp.types';
 
-const DEFAULT_STATE: CallBackForm = {} as CallBackForm;
+const DEFAULT_STATE: Partial<CallbackFormWithModal> = {};
 
 export const callBackFormStore = defineStore('callBackFormStore', () => {
   const state = ref(DEFAULT_STATE);
 
-  const setCallBackForm = (data: CallBackForm) => (state.value = data);
+  const setCallBackForm = (data: CallbackFormWithModal) => {
+    state.value.title = data.title;
+    state.value.text = data.text;
+  };
+  const setTitleModal = (titleModal: string) => {
+    state.value.titleModal = titleModal;
+  };
 
   const fetchCallBackForm = async () => {
     try {
@@ -26,7 +32,9 @@ export const callBackFormStore = defineStore('callBackFormStore', () => {
 
   return {
     state,
-    actions: {},
+    actions: {
+      setTitleModal,
+    },
     effects: {
       fetchCallBackForm,
     },

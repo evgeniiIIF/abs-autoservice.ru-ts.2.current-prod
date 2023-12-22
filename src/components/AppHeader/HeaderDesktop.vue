@@ -1,6 +1,16 @@
 <script lang="ts" setup>
 import { appRoutes } from '~/appRoutes';
-import { setHeaderWidth } from './AppHeader.utils';
+import { setHeaderWidth } from '@/utils/useWrapper/useWrapper';
+import { useCallBackFormStore } from '~/store/callBackForm';
+
+const { callBackFormState, callBackFormActions } = useCallBackFormStore();
+
+const openModal = (title: string) => {
+  callBackFormActions.setTitleModal(title);
+  useOpenModal();
+};
+
+const [isOpenModal, useOpenModal, closeModal] = useBooleanState();
 
 const navItems = [
   { name: 'Услуги', link: '' },
@@ -88,7 +98,12 @@ onMounted(() => {
             <UIButton :isWrapper="true">обратный звонок</UIButton>
           </div>
         </div>
-        <div class="contacts-header-desktop__button"><UIButton>Записаться на сервис</UIButton></div>
+        <div class="contacts-header-desktop__button">
+          <UIButton @click="openModal('Записаться на сервис')">Записаться на сервис</UIButton>
+        </div>
+        <UIModal position="center" :is-open="isOpenModal" @onClose="closeModal"
+          ><CallbackForm :title-modal="callBackFormState.titleModal" @onClose="closeModal"
+        /></UIModal>
       </div>
     </div>
   </header>

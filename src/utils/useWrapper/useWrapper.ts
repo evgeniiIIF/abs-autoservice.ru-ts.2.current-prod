@@ -16,10 +16,10 @@ export const bodyLock = () => {
   if (!wrapperNode) return;
   wrapperNode.style.overflow = 'hidden';
   wrapperNode.style.paddingRight = `${getScrollWidth()}px`;
-  const headerNode = document.querySelector('header');
-  if (headerNode) {
-    headerNode.style.paddingRight = `${getScrollWidth()}px`;
-  }
+  // const headerNode = document.querySelector('header');
+  // if (headerNode) {
+  //   headerNode.style.paddingRight = `${getScrollWidth()}px`;
+  // }
 };
 
 export const bodyUnlock = () => {
@@ -27,10 +27,10 @@ export const bodyUnlock = () => {
   if (!wrapperNode) return;
   wrapperNode.style.overflow = '';
   wrapperNode.style.paddingRight = '';
-  const headerNode = document.querySelector('header');
-  if (headerNode) {
-    headerNode.style.paddingRight = '';
-  }
+  // const headerNode = document.querySelector('header');
+  // if (headerNode) {
+  //   headerNode.style.paddingRight = '';
+  // }
 };
 
 export const setHeaderWidth = (selectorHeader: string) => {

@@ -12,11 +12,11 @@ const { isMobile } = useMediaSizes();
   <div class="review-card">
     <div class="review-card__aside">
       <div class="review-card__review-avatar">
-        <NuxtPicture :src="item.avatar ?? 'undefined'" loading="lazy" alt="Аватар клиента" />
+        <NuxtPicture :src="item?.avatar ?? 'undefined'" loading="lazy" alt="Аватар клиента" />
       </div>
       <div v-if="isMobile" class="review-card__review-app">
         <div class="review-card__review-rating">
-          <AppRating :rating="Number(item.rating)" />
+          <AppRating :rating="Number(item?.rating)" />
         </div>
         <div class="review-card__review-app-image">
           <NuxtPicture :src="item.review_service[0]?.icon ?? 'undefined'" loading="lazy" alt="Приложение" />
@@ -25,12 +25,12 @@ const { isMobile } = useMediaSizes();
     </div>
     <div class="review-card__content">
       <div class="review-card__content-top">
-        <h3 class="review-card__review-name">{{ item.name }}</h3>
+        <h3 class="review-card__review-name">{{ item?.name }}</h3>
         <div v-if="!isMobile" class="review-card__review-rating">
-          <IcStarRating v-for="star in Number(item.rating)" :key="star" :font-controlled="false" :filled="true" />
+          <IcStarRating v-for="star in Number(item?.rating)" :key="star" :font-controlled="false" :filled="true" />
         </div>
       </div>
-      <div class="review-card__review-text" v-html="item.content"></div>
+      <div class="review-card__review-text" v-html="item?.content"></div>
       <div class="review-card__content-bottom">
         <div class="review-card__review-button">
           <NuxtLink :to="item.review_service[0]?.link" target="_blank">

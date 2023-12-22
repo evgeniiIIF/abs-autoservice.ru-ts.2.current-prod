@@ -1,9 +1,9 @@
 <script setup lang="ts">
+import { bodyLock, bodyUnlock } from '@/utils/useWrapper/useWrapper';
 import type { UIModalEmits, UIModalProps } from './UIModal.types';
-import { bodyLock, bodyUnlock } from './UIModal.utils';
 
 const props = withDefaults(defineProps<UIModalProps>(), {
-  closeButton: true,
+  closeButton: false,
 });
 defineEmits<UIModalEmits>();
 
@@ -58,21 +58,18 @@ $during: 0.3s;
   width: 100%;
   height: 100%;
   z-index: 10000;
-  padding: 0 16px;
+  overflow-y: auto;
 
   display: flex;
-
-  @include tablet {
-    padding: 0;
-  }
-
-  @include mobile {
-    padding: 0;
-  }
+  padding: 100px 0;
 
   &.fade-in {
     justify-content: center;
-    align-items: center;
+    align-items: flex-start;
+
+    @include desktop {
+      align-items: center;
+    }
   }
 
   &.fade-left {
@@ -84,39 +81,21 @@ $during: 0.3s;
   }
 
   &__mask {
-    position: absolute;
+    position: fixed;
     left: 0;
     top: 0;
     width: 100%;
     height: 100%;
-    background: rgba(54, 54, 54, 0.7);
+    background: rgba(0, 0, 0, 0.7);
     cursor: pointer;
   }
 
   &__container {
     position: relative;
-    max-width: 1000px;
-    width: 100%;
-    height: 100%;
+    max-width: inherit;
+    padding: 0 10px;
 
     .fade-in & {
-      height: auto;
-
-      @include tablet {
-        height: 100%;
-      }
-
-      @include mobile {
-        height: 100%;
-      }
-    }
-
-    @include tablet {
-      max-width: inherit;
-    }
-
-    @include mobile {
-      max-width: inherit;
     }
   }
 
@@ -147,14 +126,7 @@ $during: 0.3s;
     .ui-modal {
       &__container {
         width: auto;
-
-        @include tablet {
-          height: auto;
-        }
-
-        @include mobile {
-          height: auto;
-        }
+        height: auto;
       }
     }
   }

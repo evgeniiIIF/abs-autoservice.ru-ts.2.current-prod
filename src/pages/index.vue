@@ -30,7 +30,7 @@ useSeoMeta({
   <SectionCostCalculation />
   <CompanyPicture image="/images/company-1.png" alt="АБС автосервис ставрополь" />
   <PopularServices />
-  <CallbackForm />
+  <SectionCallback />
   <SectionGetCard />
   <CompanyPicture :image="homeState.about_img" alt="АБС автосервис ставрополь" />
   <AboutCompany />
