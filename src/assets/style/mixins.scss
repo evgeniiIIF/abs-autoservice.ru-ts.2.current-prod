@@ -62,6 +62,7 @@ $xxl: 1536px;
 // ==============================================================
 // <breakpoints Desktop First>
 $screen-mobile-to: 768px;
+$screen-tablet-from: 769px;
 $screen-tablet-to: 1024px;
 $screen-desktop-to: 1280px;
 
@@ -72,14 +73,14 @@ $screen-desktop-to: 1280px;
 }
 
 @mixin d-tablet {
-  @media screen and (max-width: #{$screen-tablet-to}) {
+  @media screen and (min-width: #{$screen-tablet-from}) and (max-width: #{$screen-tablet-to}) {
     @content;
   }
 }
 
-@mixin d-desktop {
-  @media screen and (max-width: #{$screen-desktop-to}) {
-    @content;
+@mixin d-desktop { 
+  @media screen and (min-width: #{$screen-desktop-to}) { 
+      @content; 
   }
 }
 
@@ -191,4 +192,10 @@ $screen-desktop-to: 1280px;
       margin-bottom: 0;
     }
   }
+}
+
+@mixin flex-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }

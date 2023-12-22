@@ -29,6 +29,7 @@ watch(
     main {
       margin-top: 0;
     }
+
     .header-mobile {
       display: none;
     }

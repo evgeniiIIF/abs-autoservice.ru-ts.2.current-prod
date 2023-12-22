@@ -1,87 +1,85 @@
 <script setup lang="ts">
-import { useMediaSizes } from '@/composables/useMediaSizes';
 import type { OfferCard } from '@/components/OfferCard/OfferCard.types';
 
 defineProps<OfferCard>();
-
-const { isMobile } = useMediaSizes();
 </script>
 
 <template>
   <div class="offer-card">
-    <div class="offer-card__image ibg">
-      <NuxtPicture :src="image ?? 'undefined'" loading="lazy" format="webp" />
+    <div class="offer-card__picture-wrapper">
+      <NuxtPicture class="offer-card__picture" :src="image ?? 'undefined'" loading="lazy" format="webp" />
     </div>
     <div class="offer-card__info">
-      <h3 class="offer-card__title">{{ title }}</h3>
-      <p v-if="!isMobile" class="offer-card__description">{{ descriptions }}</p>
+      <div class="offer-card__title">
+        {{ title }}
+      </div>
+      <p v-if="descriptions" class="offer-card__description">{{ descriptions }}</p>
     </div>
-    <NuxtLink class="offer-card__link">
-      <UIButton :has-full-width="isMobile" :without-fill="!isMobile">Записаться</UIButton>
-    </NuxtLink>
+    <UIButton
+      class="offer-card__button"
+      :tag="link ? 'NuxtLink' : 'button'"
+      :to="link"
+      :without-fill="button?.fill === 'outline'"
+      :has-full-width="button?.size === 'big'"
+    >
+      {{ button?.text }}
+    </UIButton>
   </div>
 </template>
 
 <style lang="scss">
 .offer-card {
-  display: flex;
-  flex-direction: column;
-  height: 100%;
-  padding: 12px;
+  padding: 16px;
+  min-width: 205px;
   border-radius: 20px;
   border: 1px solid #2a2a2a;
   background: var(--Linear, linear-gradient(180deg, rgba(42, 42, 42, 0) 0%, rgba(42, 42, 42, 0.4) 100%));
-  transition: $transition-1;
+  display: flex;
+  flex-direction: column;
 
-  @include mb(10px);
-  @include tablet {
-    padding: 16px;
-    &:hover {
-      background: rgba(42, 42, 42, 0.5);
-      transition: $transition-1;
+  @include hover {
+    background: rgba(42, 42, 42, 0.5);
+    transition: $transition-1;
 
-      .offer-card__image {
-        img {
-          transform: scale(90%);
-          transition: $transition-1;
-        }
-      }
-    }
-  }
-
-  &__image {
-    padding-top: 88.3977901%;
-    @include tablet {
-      padding-top: 45.0704225%;
-    }
-    img {
-      object-fit: contain;
-      @include tablet {
-        object-fit: cover;
+    .offer-card__picture {
+      img {
+        transform: scale(90%);
         transition: $transition-1;
       }
     }
   }
 
-  &__info {
-    flex: 1 1 auto;
+  &__picture {
+    @include flex-center;
+    height: 160px;
+
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+    }
   }
 
   &__title {
-    min-width: 181px;
-    text-overflow: ellipsis;
-    color: var(--Black-Black-00, #fff);
     @include SubtitleSBold;
+    @include cut-for-n-rows;
+    color: var(--white);
+    margin-top: 12px;
+    margin-bottom: 8px;
+
+    @include desktop {
+      @include SubtitleMBold;
+    }
   }
 
   &__description {
-    color: var(--Black-Black-50, #898989);
     @include BodyMRegular;
+    margin-bottom: 16px;
+    color: var(--black-black-50);
   }
 
-  &__link {
+  &__button {
+    margin-top: auto;
   }
-}
-.ibg {
 }
 </style>

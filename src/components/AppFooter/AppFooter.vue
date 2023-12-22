@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { useMediaSizes } from '@/composables/useMediaSizes';
 
-const { isMobile, isTablet, isDesktop } = useMediaSizes();
+const { isDesktop } = useMediaSizes();
 
 const navItems = [
   { name: 'Акции', link: '' },
@@ -13,7 +13,7 @@ const navItems = [
 </script>
 
 <template>
-  <AppFooterMobile v-if="isMobile || isTablet || isDesktop" />
+  <AppFooterMobile v-if="!isDesktop" />
   <AppFooterDesktop v-else />
 </template>
 

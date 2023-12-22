@@ -10,7 +10,7 @@ import { validatePhoneInput } from '@/utils/validatePhoneInput/validatePhoneInpu
 const { callBackFormState, callBackFormEffects } = useCallBackFormStore();
 callBackFormEffects.fetchCallBackForm();
 
-const { isMoreThanMobile } = useMediaSizes();
+const { isMobile } = useMediaSizes();
 
 const name = ref('');
 const phone = ref('');
@@ -95,7 +95,7 @@ watch(
           </li>
         </ul>
       </div>
-      <div v-if="isMoreThanMobile" class="callback-form__image">
+      <div v-if="!isMobile" class="callback-form__image">
         <NuxtPicture src="/images/callback-form.png" format="webp,png,jpg" loading="lazy" />
       </div>
     </div>

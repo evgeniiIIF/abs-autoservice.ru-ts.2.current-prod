@@ -1,7 +1,7 @@
 <script lang="ts" setup>
 import { useMediaSizes } from '@/composables/useMediaSizes';
 
-const { isTablet, isMobile, isDesktop } = useMediaSizes();
+const { isTablet, isMobile } = useMediaSizes();
 </script>
 
 <template>
@@ -12,7 +12,7 @@ const { isTablet, isMobile, isDesktop } = useMediaSizes();
       <SectionBrandIconsRow v-if="!isMobile && !isTablet" />
     </main>
     <AppFooter />
-    <FooterMobileMenu v-if="isTablet || isMobile || isDesktop" />
+    <FooterMobileMenu />
   </div>
 </template>
 

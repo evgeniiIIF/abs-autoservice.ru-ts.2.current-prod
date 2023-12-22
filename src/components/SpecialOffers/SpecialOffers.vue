@@ -2,60 +2,28 @@
 import { useHomeStore } from '~/store/home';
 
 const { homeState } = useHomeStore();
-
-const offersTitle = computed(() => homeState.value.offers.title);
-const offersItems = computed(() => homeState.value.offers_items);
-
-// const offers = [
-//   {
-//     title: 'Бесплатная замена масла',
-//     description: 'При покупке масла в нашем автотехцентре замену мы сделаем для Вас бесплатно!',
-//     img: '/images/special-offers-items/1.png',
-//     link: '#',
-//   },
-//   {
-//     title: 'Бесплатная диагностика подвески',
-//     description:
-//       'Предоставим все необходимые рекомендации по устранению неисправностей и поможем их устранить, если это необходимо.',
-//     img: '/images/special-offers-items/2.png',
-//     link: '#',
-//   },
-//   {
-//     title: 'Выгодное ТО для любой иномарки',
-//     description: 'Проводим техническое обслуживание вашего автомобиля согласно всем рекомендациям автопроизводителя',
-//     img: '/images/special-offers-items/3.png',
-//     link: '#',
-//   },
-//   {
-//     title: 'Качественные автозапчасти и технические жидкости ABSEL всегда в наличии',
-//     description:
-//       'Фильтры, тормозные диски и колодки, детали подвески и рулевого управления, амортизаторы и пневмобаллоны, пружины, аккумуляторы, свечи, антифризы и омывающие жидкости.',
-//     img: '/images/special-offers-items/4.png',
-//     link: '#',
-//   },
-//   {
-//     title: 'Шины YOKOHAMA по специальным ценам',
-//     description:
-//       'Приобретайте шины YOKOHAMA и получайте Расширенную Гарантию “САМУРАЙ”. При повреждении шины мы бесплатно заменим или отремонтируем ее.',
-//     img: '/images/special-offers-items/5.png',
-//     link: '#',
-//   },
-//   {
-//     title: 'Экспресс-доставка оригинальных запчастей из Европы',
-//     description: 'Новая услуга для владельцев автомобилей Mercedes-Benz, BMW, VAG и Land Rover.',
-//     img: '/images/special-offers-items/6.png',
-//     link: '#',
-//   },
-// ];
+const { isDesktop } = useMediaSizes();
 </script>
 
 <template>
   <section class="special-offers">
     <div class="container">
-      <h2 class="special-offers__title">{{ offersTitle }}</h2>
+      <h2 class="special-offers__title">Акции и спецпредложения</h2>
       <ul class="special-offers__offers">
-        <li v-for="item in offersItems" :key="item.title" class="special-offers__offer">
-          <OfferCard :id="item.id" :title="item.title" :descriptions="item.descriptions" :image="item.image" />
+        <li v-for="offer in homeState.offers_items" :key="offer.id" class="special-offers__item">
+          <OfferCard
+            :id="offer.id"
+            class="special-offers__offer-card"
+            :title="offer.title"
+            :descriptions="isDesktop ? offer.description : undefined"
+            :image="offer.image"
+            :link="offer.btn?.btn_link"
+            :button="{
+              text: offer.btn.btn_title,
+              size: isDesktop ? 'small' : 'big',
+              fill: isDesktop ? 'outline' : 'solid',
+            }"
+          />
         </li>
       </ul>
     </div>
@@ -66,6 +34,7 @@ const offersItems = computed(() => homeState.value.offers_items);
 .special-offers {
   position: relative;
   padding-bottom: 30px;
+
   @include tablet {
     padding: 60px 0 80px 0;
   }
@@ -93,30 +62,16 @@ const offersItems = computed(() => homeState.value.offers_items);
   &__offers {
     display: flex;
     gap: 20px;
-    overflow-x: auto;
-    @include no-scrollbar;
-    align-content: stretch;
+    overflow-x: scroll;
 
-    @include tablet {
-      overflow-x: inherit;
-      flex-wrap: wrap;
-      justify-content: space-between;
-    }
-
-    @include from(1210px) {
-      justify-content: space-between;
-      column-gap: 0;
+    @include d-desktop {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
     }
   }
 
-  &__offer {
-    @include tablet {
-      flex-basis: calc(50% - 10px);
-    }
-
-    @include desktop {
-      flex-basis: calc(33% - 13.3px);
-    }
+  &__offer-card {
+    height: 100%;
   }
 }
 </style>

@@ -20,8 +20,10 @@ defineProps<UIBreadcrumbProps>();
           </NuxtLink>
           <div class="item-breadcrumb__arrow"><IcArrowRight :font-controlled="false" :filled="true" /></div>
         </li>
-        <li class="breadcrumb__item" v-for="(item, index) in items" :key="item.name">
-          <NuxtLink v-if="index !== items.length - 1" class="item-breadcrumb__name" to="">{{ item.name }}</NuxtLink>
+        <li v-for="(item, index) in items" :key="item.name" class="breadcrumb__item">
+          <NuxtLink v-if="index !== items.length - 1" class="item-breadcrumb__name" :to="item.link">{{
+            item.name
+          }}</NuxtLink>
           <div v-else class="item-breadcrumb__name">{{ item.name }}</div>
           <div v-if="index !== items.length - 1" class="item-breadcrumb__arrow">
             <IcArrowRight :font-controlled="false" :filled="true" />
