@@ -8,6 +8,7 @@ export interface SectionServicesItemProps {
     image: string;
     title: string;
     text?: string;
+    link?: string;
     subcategories?: SectionServicesItemSubcategory[];
   };
 }

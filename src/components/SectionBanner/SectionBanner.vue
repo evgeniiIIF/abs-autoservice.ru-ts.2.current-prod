@@ -1,27 +1,20 @@
 <script setup lang="ts">
 import { Vue3Marquee } from 'vue3-marquee';
 import { useHomeStore } from '~/store/home';
-import { useCallBackFormStore } from '~/store/callBackForm';
-import { goToAnchor } from '@/utils/goToAnchor/goToAnchor';
-
-const { homeState } = useHomeStore();
-const welcomeState = computed(() => homeState.value.welcome[0]);
-
-const { callBackFormState, callBackFormActions } = useCallBackFormStore();
-
-const openModal = (title: string) => {
-  callBackFormActions.setTitleModal(title);
-  useOpenModal();
-};
-
-const [isOpenModal, useOpenModal, closeModal] = useBooleanState();
-
-const scrollToAnchor = () => {
-  goToAnchor('section-cost-calculation', 88);
-};
 
 const { isMobile } = useMediaSizes();
+
+const { homeState } = useHomeStore();
+const { scrollTo } = useScrollTo();
+
+const [isOpenModal, openModal, closeModal] = useBooleanState();
 const [isHovered, hoverElement, leaveElement] = useBooleanState();
+
+const welcomeState = computed(() => homeState.value.welcome?.[0]);
+
+const scrollToAnchor = () => {
+  scrollTo('#section-cost-calculation');
+};
 </script>
 
 <template>
@@ -58,17 +51,13 @@ const [isHovered, hoverElement, leaveElement] = useBooleanState();
               class="banner__button banner__button--bg"
               @mouseover="hoverElement"
               @mouseleave="leaveElement"
-              @click="scrollToAnchor"
+              
             >
-              <UIButton>{{ welcomeState.btn[0].title }}</UIButton>
+              <UIButton @click="scrollToAnchor">{{ welcomeState.btn[0].title }}</UIButton>
             </div>
             <div class="banner__button banner__button--bd">
-              <UIButton :withoutFill="true" @click="openModal(welcomeState.btn[1].title)">{{
-                welcomeState.btn[1].title
-              }}</UIButton>
-              <UIModal position="center" :is-open="isOpenModal" @onClose="closeModal"
-                ><CallbackForm :title-modal="callBackFormState.titleModal" @onClose="closeModal"
-              /></UIModal>
+              <UIButton :withoutFill="true" @click="openModal">{{ welcomeState.btn[1].title }}</UIButton>
+              <CallbackFormModal :is-open="isOpenModal" @on-close="closeModal" />
             </div>
           </div>
         </div>
@@ -81,9 +70,11 @@ const [isHovered, hoverElement, leaveElement] = useBooleanState();
 .banner {
   background: var(--black-primary-black, #111212);
   padding: 15px 0 60px;
-  @include tablet {
+
+  @include desktop {
     padding: 24px 0 40px;
   }
+
   &__body {
     position: relative;
   }
@@ -95,7 +86,7 @@ const [isHovered, hoverElement, leaveElement] = useBooleanState();
     border-radius: 20px;
     overflow: hidden;
 
-    @include tablet {
+    @include desktop {
       position: absolute;
       left: 0;
       top: 0;
@@ -110,7 +101,8 @@ const [isHovered, hoverElement, leaveElement] = useBooleanState();
   &__content {
     position: relative;
     z-index: 2;
-    @include tablet {
+
+    @include desktop {
       padding: 80px 0px 144px 80px;
     }
   }
@@ -118,8 +110,9 @@ const [isHovered, hoverElement, leaveElement] = useBooleanState();
   &__title {
     max-width: 290px;
     margin-bottom: 10px;
-    @include TitleXSBold;
     color: var(--1, #fff);
+
+    @include TitleXSBold;
 
     @include media(385px) {
       max-width: 500px;
@@ -130,34 +123,36 @@ const [isHovered, hoverElement, leaveElement] = useBooleanState();
       max-width: 689px;
     }
   }
+
   &__tickers {
     margin-bottom: 20px;
     // margin-left: -20px;
     // margin-right: -20px;
-    @include tablet {
+    @include desktop {
       margin-bottom: 48px;
     }
   }
+
   &__buttons {
     color: var(--black-black-00, #fff);
-    @include mb(20px);
     @include buttonText;
-    @include tablet {
-      @include mb(0px);
-      @include mr(20px);
-      display: flex;
-    }
+
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
   }
-  &__button {
+
+  /* &__button {
     .button {
       width: 100%;
     }
-  }
+  } */
 
   .vue3-marquee > .marquee {
     min-width: auto !important;
   }
 }
+
 .tickers {
   overflow: hidden;
   position: relative;

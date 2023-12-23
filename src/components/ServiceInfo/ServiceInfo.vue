@@ -1,91 +1,60 @@
 <script lang="ts" setup>
-import vk from '@/assets/icons/vk.svg';
 import { useMediaSizes } from '@/composables/useMediaSizes';
-import { data } from './ServiceInfo.constant';
+import { useServicesStore } from '~/store/services';
+import { useContactsStore } from '~/store/contacts';
 
 const { isDesktop } = useMediaSizes();
 
-const {
-  title,
-  firstParagraph,
-  lastParagraph,
-  list,
-  price,
-  priceFootnote,
-  priceButtonText,
-  questionTitle,
-  questionFootnote,
-} = data;
+const { servicesState } = useServicesStore();
+const { contactsState } = useContactsStore();
 
-const descriptionIsOpen = ref(false);
+const [isOpenModal, openModal, closeModal] = useBooleanState();
 </script>
 
 <template>
   <section class="service-info">
     <div class="container">
-      <h1 v-if="!isDesktop" class="service-info__title">{{ title }}</h1>
+      <h1 v-if="!isDesktop" class="service-info__title">{{ servicesState.service?.title }}</h1>
       <div class="service-info__wrapper">
         <div class="service-info__content">
           <div class="service-info__info">
-            <h1 v-if="isDesktop" class="service-info__title">{{ title }}</h1>
-            <div class="service-info__description">
-              <p class="service-info__description-text">{{ firstParagraph }}</p>
-              <ul class="service-info__description-list">
-                <template v-for="(item, i) in list" :key="item">
-                  <li
-                    v-if="descriptionIsOpen || isDesktop ? true : i === 0"
-                    class="service-info__description-list-item"
-                  >
-                    <span class="service-info__description-list-item-index">{{ i + 1 }}.</span>
-                    <span class="service-info__description-list-item-text">{{ item }}</span>
-                  </li>
-                </template>
-              </ul>
-              <p v-if="descriptionIsOpen || isDesktop" class="service-info__description-text">{{ lastParagraph }}</p>
-              <button
-                v-if="!isDesktop"
-                class="service-info__description-button"
-                :class="{ 'service-info__description-button--close': descriptionIsOpen }"
-                type="button"
-                @click="descriptionIsOpen = !descriptionIsOpen"
-              >
-                <span>{{ descriptionIsOpen ? 'Свернуть' : 'Читать далее' }}</span>
-                <IcArrowDown :font-controlled="false" :filled="true" />
-              </button>
-            </div>
+            <NuxtPicture class="service-info__picture" :src="servicesState.service?.image ?? 'undefined'" />
+            <h1 v-if="isDesktop" class="service-info__title">{{ servicesState.service?.title }}</h1>
+            <div class="service-info__description" v-html="servicesState.service?.full_text"></div>
           </div>
           <div class="service-info__callback">
             <h2 class="service-info__callback-title">Для записи в автосервис ABS-AUTO</h2>
             <p class="service-info__callback-subtitle">звоните нам по телефону</p>
             <div class="service-info__callback-separator"></div>
             <div class="service-info__callback-row">
-              <h3 class="service-info__callback-phone">+7 8652 500 520</h3>
-              <UIButton :has-full-width="!isDesktop">Позвонить</UIButton>
+              <h3 class="service-info__callback-phone">{{ contactsState.phone }}</h3>
+              <UIButton
+                tag="a"
+                :href="`tel:${contactsState.phone?.match(/\d+/g)?.join('')}`"
+                target="__blank"
+                :has-full-width="!isDesktop"
+                >Позвонить</UIButton
+              >
             </div>
           </div>
         </div>
         <div class="service-info__aside">
           <div class="service-info__price">
             <div class="service-info__price-info">
-              <h2 class="service-info__price-count">{{ price }} ₽</h2>
+              <h2 class="service-info__price-count">{{ servicesState.service?.price }} ₽</h2>
               <p class="service-info__price-footnote">
-                {{ priceFootnote }}
+                Цена может быть изменена в зависимости от типа кузова вашего авто
               </p>
             </div>
-            <UIButton :has-full-width="!isDesktop">{{ priceButtonText }}</UIButton>
+            <UIButton :has-full-width="!isDesktop" @click.stop="openModal">Записаться на СТО</UIButton>
           </div>
           <div class="service-info__questions">
-            <h2 class="service-info__questions-title">{{ questionTitle }}</h2>
-            <p class="service-info__questions-footnote">{{ questionFootnote }}</p>
-            <ul class="service-info__questions-socials">
-              <li v-for="social in 2" :key="social" class="service-info__questions-social">
-                <AppSocial :img="vk" link="#" with-border />
-              </li>
-            </ul>
+            <HasQuestionsBanner />
           </div>
         </div>
       </div>
     </div>
+    <CallbackFormModal :is-open="isOpenModal" :title-modal="servicesState.service?.title" @on-close="closeModal" />
   </section>
 </template>
 
@@ -112,6 +81,19 @@ const descriptionIsOpen = ref(false);
     @include desktop {
       flex-direction: inherit;
       gap: 20px;
+    }
+  }
+
+  &__picture {
+    width: 100%;
+    height: 240px;
+    display: block;
+
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: 20px;
     }
   }
 

@@ -1,5 +1,10 @@
 <script lang="ts" setup>
 import { bodyLock, bodyUnlock, setHeaderWidth } from '@/utils/useWrapper/useWrapper';
+import { appRoutes } from '~/appRoutes';
+import { useContactsStore } from '~/store/contacts';
+
+const route = useRoute();
+const { contactsState } = useContactsStore();
 
 const [isOpenMobileMenu, useOpenMobileMenu, useCloseMobileMenu] = useBooleanState(false);
 
@@ -16,16 +21,22 @@ const toggleMobileMenu = () => {
 };
 
 const navItems = [
-  { name: 'Услуги', link: '' },
-  { name: 'Акции', link: '' },
-  { name: 'Об автосервисе', link: '/about' },
-  { name: 'Гарантии', link: '' },
-  { name: 'Преимущества', link: '' },
-  { name: 'Контакты', link: '/contacts' },
+  { name: 'Услуги', link: appRoutes.services().path },
+  { name: 'Акции', link: appRoutes.offers().path },
+  { name: 'Об автосервисе', link: appRoutes.contacts().path },
+  // { name: 'Гарантии', link: '' },
+  // { name: 'Преимущества', link: '' },
+  { name: 'Контакты', link: appRoutes.contacts().path },
 ];
+
 onBeforeMount(() => {
   setHeaderWidth('.js-header-mobile');
 });
+
+watch(
+  () => route.fullPath,
+  () => toggleMobileMenu(),
+);
 </script>
 <template>
   <header :class="{ 'header-mobile': true, 'js-header-mobile': true, 'header-mobile-menu--open': isOpenMobileMenu }">
@@ -37,7 +48,13 @@ onBeforeMount(() => {
           </div>
           <div class="mobile-header__buttons">
             <div class="mobile-header__button mobile-header__button--phone">
-              <UIButton><IcPhone /></UIButton>
+              <UIButton
+                tag="a"
+                :href="`tel:${contactsState.phone?.match(/\d+/g)?.join('')}`"
+                target="_blank"
+                rel="noopener noreferrer"
+                ><IcPhone
+              /></UIButton>
             </div>
             <div class="mobile-header__button mobile-header__button--burger">
               <UIButton @click="toggleMobileMenu">
@@ -59,7 +76,13 @@ onBeforeMount(() => {
             </div>
             <div class="mobile-header__buttons">
               <div class="mobile-header__button mobile-header__button--phone">
-                <UIButton><IcPhone /></UIButton>
+                <UIButton
+                  tag="a"
+                  :href="`tel:${contactsState.phone?.match(/\d+/g)?.join('')}`"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  ><IcPhone
+                /></UIButton>
               </div>
               <div class="mobile-header__button mobile-header__button--burger">
                 <UIButton @click="toggleMobileMenu">

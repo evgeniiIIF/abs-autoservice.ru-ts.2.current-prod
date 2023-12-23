@@ -60,7 +60,7 @@ const bonusProgramItems = [
     color: var(--1, #fff);
     @include SubtitleLBold;
 
-    @include tablet {
+    @include desktop {
       @include TitleSBold;
     }
   }
@@ -92,7 +92,7 @@ const bonusProgramItems = [
     gap: 10px;
     margin-bottom: 20px;
 
-    @include tablet {
+    @include desktop {
       max-width: 640px;
       margin: -10px;
       flex-direction: row;
@@ -103,7 +103,7 @@ const bonusProgramItems = [
   }
 
   &__item {
-    @include tablet {
+    @include desktop {
       margin: 10px;
       flex: 0 0 calc(50% - 20px);
     }
@@ -112,7 +112,8 @@ const bonusProgramItems = [
   &__button {
     .button {
       width: 100%;
-      @include tablet {
+
+      @include desktop {
         width: auto;
       }
     }
@@ -131,6 +132,7 @@ const bonusProgramItems = [
   border: 1px solid #2a2a2a;
   border-bottom: none;
   background: var(--Linear, linear-gradient(180deg, rgba(42, 42, 42, 0) 0%, rgba(42, 42, 42, 0.4) 100%));
+
   &__title {
     color: var(--Black-Black-00, #fff);
     @include SubtitleMRegular;

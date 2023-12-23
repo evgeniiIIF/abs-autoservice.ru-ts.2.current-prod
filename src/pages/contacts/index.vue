@@ -2,8 +2,7 @@
 import { appRoutes } from '~/appRoutes';
 import { useContactsStore } from '~/store/contacts';
 
-const { contactsEffects, contactsState } = useContactsStore();
-contactsEffects.fetchContacts();
+const { contactsState } = useContactsStore();
 
 const { isDesktop } = useMediaSizes();
 

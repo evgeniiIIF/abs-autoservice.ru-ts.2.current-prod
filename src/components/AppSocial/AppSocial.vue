@@ -1,8 +1,7 @@
 <script setup lang="ts">
 import { useContactsStore } from '~/store/contacts';
 
-const { contactsEffects, contactsState } = useContactsStore();
-contactsEffects.fetchContacts();
+const { contactsState } = useContactsStore();
 </script>
 <template>
   <ul class="social">

@@ -57,7 +57,7 @@ const { isMobile } = useMediaSizes();
   background: var(--linear, linear-gradient(180deg, rgba(42, 42, 42, 0) 0%, rgba(42, 42, 42, 0.4) 100%));
   border-radius: 20px;
 
-  @include tablet {
+  @include desktop {
     width: 100%;
     display: flex;
     gap: 20px;

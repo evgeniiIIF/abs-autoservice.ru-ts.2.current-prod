@@ -1,20 +1,7 @@
 <script setup lang="ts">
-import { useAsyncData } from '#imports';
 import { useHomeStore } from '~/store/home';
-import { useCalculatorBlockStore } from '~/store/calculatorBlock';
-import { useBonusCardStore } from '~/store/bonusCard';
 
-const { homeEffects, homeState } = useHomeStore();
-const { calculatorBlockEffects } = useCalculatorBlockStore();
-const { bonusCardEffects } = useBonusCardStore();
-
-await useAsyncData('home', async () => {
-  await Promise.all([
-    homeEffects.fetchHome(),
-    calculatorBlockEffects.fetchCalculatorBlock(),
-    bonusCardEffects.fetchBonusCard(),
-  ]);
-});
+const { homeState } = useHomeStore();
 
 useSeoMeta({
   title: () => homeState.value.seo.meta_title,

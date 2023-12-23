@@ -1,15 +1,23 @@
 <script lang="ts" setup>
 import { useMediaSizes } from '@/composables/useMediaSizes';
 
-const { isTablet, isMobile, isDesktop } = useMediaSizes();
+const route = useRoute();
+const { isDesktop } = useMediaSizes();
+
+const { scrollTo } = useScrollTo();
+
+watch(
+  () => route.fullPath,
+  () => scrollTo(),
+);
 </script>
 
 <template>
-  <div class="wrapper">
+  <div ref="nodeRef" class="wrapper">
     <AppHeader />
     <main class="main">
       <slot />
-      <SectionBrandIconsRow v-if="!isMobile && !isTablet" />
+      <SectionBrandIconsRow v-if="isDesktop" />
     </main>
     <AppFooter />
     <FooterMobileMenu v-if="!isDesktop" />
@@ -17,11 +25,6 @@ const { isTablet, isMobile, isDesktop } = useMediaSizes();
 </template>
 
 <style lang="scss">
-.main {
-  // margin-top: 67.75px;
-
-  @include desktop {
-    // margin-top: 89px;
-  }
+.wrapper {
 }
 </style>

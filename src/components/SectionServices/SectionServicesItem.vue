@@ -5,18 +5,20 @@ defineProps<SectionServicesItemProps>();
 </script>
 <template>
   <div class="section-service-item">
-    <div class="section-service-item__image ibg">
+    <div class="section-service-item__image">
       <NuxtPicture :src="item.image ?? 'undefined'" format="webp" loading="lazy" />
     </div>
     <div class="section-service-item__content">
-      <h2 class="section-service-item__title">{{ item.title }}</h2>
+      <NuxtLink class="section-service-item__title" :to="item.link">{{ item.title }}</NuxtLink>
       <div class="section-service-item__subcategories service-subcategories-list">
         <div
           v-for="subcategoryItem in item.subcategories"
           :key="subcategoryItem.title"
           class="service-subcategories-list__item"
         >
-          <h3 class="service-subcategories-list__item-title">{{ subcategoryItem.title }}</h3>
+          <NuxtLink class="service-subcategories-list__item-title" :to="subcategoryItem.link">{{
+            subcategoryItem.title
+          }}</NuxtLink>
         </div>
       </div>
     </div>
@@ -26,29 +28,35 @@ defineProps<SectionServicesItemProps>();
 <style lang="scss">
 .section-service-item {
   display: flex;
+  gap: 20px;
   padding: 10px;
 
   border-radius: 40px;
   border: 1px solid var(--black-black-80, #414141);
   background: var(--black-primary-black, #111212);
 
-  @include tablet {
+  @include desktop {
     height: auto;
     padding: 20px;
   }
-  @include desktop {
-  }
 
   &__image {
-    flex: 0 0 20.1169591%;
-    margin-right: 20px;
     border-radius: 20px;
-    overflow: hidden;
+    height: 192px;
+    width: 172px;
+    min-width: 172px;
     background:
       linear-gradient(0deg, rgba(0, 161, 156, 0.5) 0%, rgba(0, 161, 156, 0.5) 100%),
       lightgray 50% / cover no-repeat;
     background-blend-mode: soft-light, normal;
+
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
   }
+
   &__title {
     flex: 1 1 auto;
     margin-bottom: 22px;
@@ -68,6 +76,7 @@ defineProps<SectionServicesItemProps>();
   &__subcategories {
   }
 }
+
 .service-subcategories-list {
   display: flex;
   align-items: flex-start;

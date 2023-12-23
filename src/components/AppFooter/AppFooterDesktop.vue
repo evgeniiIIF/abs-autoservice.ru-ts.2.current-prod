@@ -1,22 +1,16 @@
 <script setup lang="ts">
 import { appRoutes } from '~/appRoutes';
 import { useContactsStore } from '~/store/contacts';
+import { useServicesStore } from '~/store/services';
 
-const { contactsEffects, contactsState } = useContactsStore();
-contactsEffects.fetchContacts();
+const { contactsState } = useContactsStore();
+const { servicesState } = useServicesStore();
 
 const workTimeItems = computed(() => contactsState.value.time_work?.split(',').map((item) => item.split(' ')));
 const addressItems = computed(() => contactsState.value.address?.split(','));
 
 const [isOpenModal, openModal, closeModal] = useBooleanState();
 
-const SERVICES = [
-  { title: 'Техническое обслуживание' },
-  { title: 'Диагностика автомобиля' },
-  { title: 'Слесарный ремонт' },
-  { title: 'Кузовной ремонт' },
-  { title: 'Дополнительные услуги' },
-];
 const AUTOSERVICE_1 = [
   { title: 'Об автосервисе', link: appRoutes.about().path },
   { title: 'Отзывы', link: appRoutes.reviews().path },
@@ -29,7 +23,7 @@ const AUTOSERVICE_2 = [
 ];
 </script>
 <template>
-  <div class="footer-desktop">
+  <footer class="footer-desktop">
     <div class="container">
       <div class="footer-desktop__body">
         <div class="footer-desktop__top top-footer-desktop">
@@ -37,8 +31,10 @@ const AUTOSERVICE_2 = [
             <div class="top-footer-desktop__col">
               <h5 class="top-footer-desktop__title">Услуги</h5>
               <ul class="top-footer-desktop__list">
-                <li v-for="item in SERVICES" :key="item.title" class="top-footer-desktop__list-item">
-                  <NuxtLink class="top-footer-desktop__nav-link">{{ item.title }}</NuxtLink>
+                <li v-for="item in servicesState.mainServices" :key="item.title" class="top-footer-desktop__list-item">
+                  <NuxtLink class="top-footer-desktop__nav-link" :to="appRoutes.services(item.id)">{{
+                    item.title
+                  }}</NuxtLink>
                 </li>
               </ul>
             </div>
@@ -136,7 +132,7 @@ const AUTOSERVICE_2 = [
         </div>
       </div>
     </div>
-  </div>
+  </footer>
 </template>
 
 <style lang="scss">

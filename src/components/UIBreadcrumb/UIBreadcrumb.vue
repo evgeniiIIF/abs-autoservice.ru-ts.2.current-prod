@@ -39,10 +39,16 @@ defineProps<UIBreadcrumbProps>();
   &__list {
     display: flex;
     align-items: center;
+    overflow-y: scroll;
     padding: 20px 0;
+
+    @include no-scrollbar;
   }
 
   &__item {
+    display: flex;
+    align-items: center;
+    white-space: nowrap;
   }
 }
 .item-breadcrumb {
@@ -51,10 +57,13 @@ defineProps<UIBreadcrumbProps>();
 
   &__name {
     color: var(--Black-Black-80, #414141);
+    white-space: nowrap;
     @include BodySRegular;
   }
 
   &__arrow {
+    display: flex;
+    align-items: center;
     margin: 0 4px;
     svg {
       @include svg-color(#414141);

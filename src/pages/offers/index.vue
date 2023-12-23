@@ -47,11 +47,11 @@ await offerEffects.fetchOffersList();
     grid-template-columns: repeat(3, 1fr);
     gap: 20px;
 
-    @include d-tablet {
+    @include tablet {
       grid-template-columns: repeat(2, 1fr);
     }
 
-    @include d-mobile {
+    @include mobile {
       display: initial;
     }
   }

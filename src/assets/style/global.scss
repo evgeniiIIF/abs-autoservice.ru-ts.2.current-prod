@@ -2,14 +2,10 @@
 @import './variables.scss';
 @import './mixins.scss';
 
-html {
-  width: 100%;
-  height: 100%;
-}
-
 body {
   height: inherit;
   background: var(--black-primary-black, #111212);
+  height: 100%;
 }
 
 div#__nuxt {

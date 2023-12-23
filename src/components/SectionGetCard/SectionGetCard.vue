@@ -1,8 +1,11 @@
 <script lang="ts" setup>
 import { useBonusCardStore } from '~/store/bonusCard';
 
-const { bonusCardState } = useBonusCardStore();
 const { isMobile } = useMediaSizes();
+
+const { bonusCardState } = useBonusCardStore();
+
+const [isModalOpen, openModal, closeModal] = useBooleanState();
 </script>
 
 <template>
@@ -17,9 +20,9 @@ const { isMobile } = useMediaSizes();
             <NuxtPicture src="images/get-card.png" format="webp" loading="lazy" />
           </div>
           <div class="get-card__button">
-            <NuxtLink :to="bonusCardState.btn_link">
-              <UIButton>{{ isMobile ? 'Получить карту бесплатно' : bonusCardState.btn_title }}</UIButton>
-            </NuxtLink>
+            <UIButton @click.stop="openModal">{{
+              isMobile ? 'Получить карту бесплатно' : bonusCardState.btn_title
+            }}</UIButton>
           </div>
         </div>
         <div v-if="!isMobile" class="get-card__image">
@@ -27,6 +30,7 @@ const { isMobile } = useMediaSizes();
         </div>
       </div>
     </div>
+    <CallbackFormModal :is-open="isModalOpen" :title-modal="bonusCardState.btn_title" @on-close="closeModal" />
   </section>
 </template>
 

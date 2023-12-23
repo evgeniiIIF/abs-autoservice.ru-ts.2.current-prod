@@ -1,6 +1,8 @@
 <script setup lang="ts">
 const { isMobile, isDesktop } = useMediaSizes();
 const breadcrumbItems = [{ name: 'Об автосервисе', link: '/about' }];
+
+const [isModalOpen, openModal, closeModal] = useBooleanState();
 </script>
 
 <template>
@@ -61,10 +63,13 @@ const breadcrumbItems = [{ name: 'Об автосервисе', link: '/about' }
               Каждый автотехцентр под брендом ABS-autoservice предоставляет 1 год гарантии на все устанавливаемые
               автозапчасти и работы.
             </p>
-            <div class="guarantees-about__button"><UIButton>Записаться на сервис</UIButton></div>
+            <div class="guarantees-about__button">
+              <UIButton @click.stop="openModal">Записаться на сервис</UIButton>
+            </div>
           </div>
         </div>
       </div>
+      <CallbackFormModal :is-open="isModalOpen" @on-close="closeModal" />
     </section>
   </div>
 </template>

@@ -11,18 +11,19 @@ const openModal = (title: string) => {
 };
 
 const [isOpenModal, useOpenModal, closeModal] = useBooleanState();
+const [isSearchOpen, openSearch, closeSearch] = useBooleanState();
 
 const navItems = [
-  { name: 'Услуги', link: '' },
+  { name: 'Услуги', link: appRoutes.services().path },
   { name: 'Акции', link: appRoutes.offers().path },
   { name: 'Об автосервисе', link: appRoutes.about().path },
-  { name: 'Гарантии', link: '' },
-  { name: 'Преимущества', link: '' },
+  // { name: 'Гарантии', link: '' },
+  // { name: 'Преимущества', link: '' },
   { name: 'Контакты', link: appRoutes.contacts().path },
 ];
 const topNavItems = [
   { name: 'Бонусная программа', link: appRoutes.bonus().path },
-  { name: 'Отзовы', link: '' },
+  { name: 'Отзовы', link: appRoutes.reviews().path },
 ];
 const headerDesktopNode = ref(null);
 const headerTopNode = ref(null);
@@ -76,7 +77,10 @@ onMounted(() => {
       </NuxtLink>
       <div class="header-desktop__nav">
         <div class="header-desktop__nav-button">
-          <UIButton><IcSearch :font-controlled="false" :filled="true" /></UIButton>
+          <UIButton v-if="!isSearchOpen" @click.stop="openSearch"
+            ><IcSearch :font-controlled="false" :filled="true"
+          /></UIButton>
+          <AppSearchService v-if="isSearchOpen" @on-close="closeSearch" />
         </div>
         <AppNavigation :items="navItems" />
       </div>
