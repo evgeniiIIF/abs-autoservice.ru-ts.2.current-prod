@@ -1,75 +1,23 @@
 <script setup lang="ts">
+import { useServicesStore } from '~/store/services';
+import { appRoutes } from '~/appRoutes';
+
 const { isMobile } = useMediaSizes();
 
-const items = [
-  {
-    image: 'images/section-services-items/Frame.jpg',
-    title: 'Кузовной ремонт',
-    text: '12 услуг',
-    subcategories: [
-      { title: 'Защита кузова', link: 'link' },
-      { title: 'Удаление царапин и вмятин', link: 'link' },
-      { title: 'Покраска автомобиля', link: 'link' },
-      { title: 'Бронирование фар', link: 'link' },
-      { title: 'Восстановление геометрии кузова', link: 'link' },
-      { title: 'Полировка кузова автомобиля', link: 'link' },
-    ],
-  },
-  {
-    image: 'images/section-services-items/Frame1.jpg',
-    title: 'Техническое обслуживание',
-    text: ' 45 услуг',
-    subcategories: [
-      { title: 'Замена фильтров', link: 'link' },
-      { title: 'Антибактериальная обработка кондиционера', link: 'link' },
-      { title: 'Замена помпы', link: 'link' },
-      { title: 'Замена технических жидкостей в автомобиле', link: 'link' },
-      { title: 'Развал схождение', link: 'link' },
-      { title: 'Замена свечей', link: 'link' },
-      { title: 'Замена приводного ремня', link: 'link' },
-    ],
-  },
-  {
-    image: 'images/section-services-items/Frame2.jpg',
-    title: 'Слесарный ремонт',
-    text: ' 69 услуг',
-    subcategories: [
-      { title: 'Ремонт тормозной системы', link: 'link' },
-      { title: 'Ремонт подвески', link: 'link' },
-      { title: 'Ремонт рулевого управления', link: 'link' },
-      { title: 'Ремонт двигателей', link: 'link' },
-      { title: 'Ремонт трансмиссии', link: 'link' },
-      { title: 'Ремонт топливной системы', link: 'link' },
-      { title: 'Ремонт выхлопной системы', link: 'link' },
-    ],
-  },
-  {
-    image: 'images/section-services-items/Frame3.jpg',
-    title: 'Диагностика автомобил',
-    text: '7 услуг',
-    subcategories: [
-      { title: 'Комплексная проверка состояния авто', link: 'link' },
-      { title: 'Диагностика подвески', link: 'link' },
-      { title: 'Диагностика двигателя', link: 'link' },
-      { title: 'Диагностика тормозной системы', link: 'link' },
-      { title: 'Диагностика электрооборудования', link: 'link' },
-      { title: 'Компьютерная диагностика', link: 'link' },
-    ],
-  },
-  {
-    image: 'images/section-services-items/Frame4.jpg',
-    title: 'Дополнительные услуги',
-    text: ' 4 услуги',
-    subcategories: [
-      { title: 'Химчистка', link: 'link' },
-      { title: 'Тонировка', link: 'link' },
-      { title: 'Автомойка', link: 'link' },
-      { title: 'Диагностика тормозной системы', link: 'link' },
-      { title: 'Установка доп. оборудования', link: 'link' },
-      { title: 'Шиномонтаж и балансировка колес', link: 'link' },
-    ],
-  },
-];
+const { servicesState } = useServicesStore();
+
+const converterItems = computed(() =>
+  servicesState.value.servicesTree.map((service) => ({
+    image: service.image,
+    title: service.title,
+    text: service.children?.length ? `${service.children?.length} услуг` : '',
+    link: appRoutes.services(service.id).path,
+    subcategories: service.children?.map((subService) => ({
+      title: subService.title,
+      link: appRoutes.services(subService.id).path,
+    })),
+  })),
+);
 </script>
 
 <template>
@@ -80,7 +28,7 @@ const items = [
           <h3 class="section-services__title">Услуги</h3>
         </div>
         <div class="section-services__list">
-          <div v-for="item in items" :key="item.title" class="section-services__item">
+          <div v-for="item in converterItems" :key="item.title" class="section-services__item">
             <SectionServicesItemMobile v-if="isMobile" :item="item" />
             <SectionServicesItem v-else :item="item" />
           </div>
@@ -95,6 +43,7 @@ const items = [
   &__body {
     padding: 30px 0;
     position: relative;
+
     @include desktop {
       display: flex;
       padding: 80px 0;
@@ -103,10 +52,12 @@ const items = [
   }
   &__title-wrapper {
     margin-bottom: 20px;
+
     @include desktop {
       margin-bottom: 0px;
       margin-right: 104px;
     }
+
     @include media(1200px) {
       margin-right: 204px;
     }
@@ -124,33 +75,42 @@ const items = [
       top: 160px;
     }
   }
+
   &__list {
     counter-reset: card;
     position: relative;
-
     display: flex;
     flex-wrap: wrap;
     margin: -5px;
+
     @include tablet {
       margin: 0;
+      display: block;
+
       @include mb(20px);
     }
+
     @include desktop {
-      @include mb(0px);
       position: relative;
       margin-top: -70px;
+      display: block;
+
+      @include mb(0px);
     }
   }
+
   &__item {
     flex: 0 0 50%;
     padding: 5px;
     height: inherit;
 
     @include tablet {
+      position: sticky;
       padding: 0;
-      flex: 0 0 100%;
     }
+
     @include desktop {
+      display: block;
       position: sticky;
       top: 70px;
       margin-bottom: -26px;
@@ -160,6 +120,7 @@ const items = [
           transform: translateY(calc((#{$i} * 70px)));
         }
       }
+
       &:last-child {
         transform: translateY(325px);
       }

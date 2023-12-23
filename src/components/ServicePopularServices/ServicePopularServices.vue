@@ -2,15 +2,19 @@
 import { Navigation } from 'swiper/modules';
 
 import 'swiper/scss';
+import { appRoutes } from '~/appRoutes';
+import { useHomeStore } from '~/store/home';
 
-const services = [
-  { id: 1, title: 'Замена блока управления АБC', price: 1800, link: '#' },
-  { id: 2, title: 'Ремонт головки блоки цилиндров (ГБЦ)', price: 12000, link: '#' },
-  { id: 3, title: 'Замена блока управления АБC', price: 1800, link: '#' },
-  { id: 4, title: 'Ремонт головки блоки цилиндров (ГБЦ)', price: 12000, link: '#' },
-  { id: 5, title: 'Ремонт головки блоки цилиндров (ГБЦ)', price: 12000, link: '#' },
-  { id: 6, title: 'Ремонт головки блоки цилиндров (ГБЦ)', price: 12000, link: '#' },
-];
+const { homeState } = useHomeStore();
+
+const popularServices = computed(() =>
+  homeState.value.popular_services_items.map((service) => ({
+    id: service.id,
+    title: service.title,
+    link: appRoutes.services(service.id).path,
+    price: 0,
+  })),
+);
 </script>
 
 <template>
@@ -42,7 +46,7 @@ const services = [
           },
         }"
       >
-        <SwiperSlide v-for="service in services" :key="service.id" class="service-popular-services__slide">
+        <SwiperSlide v-for="service in popularServices" :key="service.id" class="service-popular-services__slide">
           <ServicePopularServiceCard :title="service.title" :price="service.price" :link="service.link" />
         </SwiperSlide>
       </Swiper>

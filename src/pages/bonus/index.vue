@@ -31,9 +31,6 @@ const breadcrumbItems = [
 
 <style lang="scss">
 .bonus {
-  &__breadcrumb {
-  }
-
   &__bonus-program {
     margin-bottom: 40px;
   }

@@ -1,14 +1,17 @@
 <script setup lang="ts">
 import { useMediaSizes } from '@/composables/useMediaSizes';
 import type { PopularServiceCard } from '@/components/PopularServiceCard/PopularServiceCard.types';
+import { appRoutes } from '~/appRoutes';
 
 defineProps<PopularServiceCard>();
 
 const { isMobile } = useMediaSizes();
+
+const [isModalOpen, openModal, closeModal] = useBooleanState();
 </script>
 
 <template>
-  <NuxtLink v-if="isMobile" class="popular-service-card">
+  <NuxtLink v-if="isMobile" class="popular-service-card" :to="appRoutes.services(service.id)">
     <div class="popular-service-card__image">
       <NuxtPicture :src="service.image_icon ?? 'undefined'" format="webp,png,jpg" loading="lazy" />
     </div>
@@ -23,10 +26,11 @@ const { isMobile } = useMediaSizes();
     <div class="popular-service-card__content">
       <h3 class="popular-service-card__title">{{ service.title }}</h3>
       <NuxtLink v-if="!isMobile" class="popular-service-card__link">
-        <UIButton>Записаться</UIButton>
+        <UIButton @click.stop="openModal">Записаться</UIButton>
       </NuxtLink>
     </div>
   </div>
+  <CallbackFormModal :is-open="isModalOpen" :title-modal="service.title" @on-close="closeModal" />
 </template>
 
 <style lang="scss">
@@ -43,7 +47,7 @@ const { isMobile } = useMediaSizes();
   border-radius: 20px;
   background-color: rgba(42, 42, 42, 0.5);
 
-  @include tablet {
+  @include desktop {
     padding: 12px;
     gap: 16px;
     flex-direction: inherit;
@@ -52,7 +56,7 @@ const { isMobile } = useMediaSizes();
     background: var(--linear, linear-gradient(180deg, rgba(42, 42, 42, 0) 0%, rgba(42, 42, 42, 0.4) 100%));
     transition: all 0.3s ease;
 
-    &:hover {
+    @include hover {
       background: var(--black-black-90, #2a2a2a);
 
       .popular-service-card {
@@ -73,7 +77,7 @@ const { isMobile } = useMediaSizes();
       object-fit: contain;
       transition: all 0.3s ease;
 
-      @include tablet {
+      @include desktop {
         width: 120px;
         height: 120px;
         max-width: inherit;
@@ -82,7 +86,7 @@ const { isMobile } = useMediaSizes();
   }
 
   &__content {
-    @include tablet {
+    @include desktop {
       display: flex;
       flex-direction: column;
       justify-content: space-between;
@@ -95,7 +99,7 @@ const { isMobile } = useMediaSizes();
     @include BodySBold;
     color: var(--white, #fff);
 
-    @include tablet {
+    @include desktop {
       text-align: inherit;
       @include SubtitleMBold;
     }

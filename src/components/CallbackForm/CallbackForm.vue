@@ -1,37 +1,32 @@
 <script setup lang="ts">
-// import type { CallBackForm } from '~/api/http/callBackForm/callBackFormHttp.types';
-
 import { useCallBackFormStore } from '~/store/callBackForm';
 
 import { useMediaSizes } from '@/composables/useMediaSizes';
 import { validateNameInput } from '@/utils/validateNameInput/validateNameInput';
 import { validatePhoneInput } from '@/utils/validatePhoneInput/validatePhoneInput';
+import { useContactsStore } from '~/store/contacts';
+import type { CallBackFormProps } from './CallbackForm.types';
 
-interface CallBackFormEmits {
-  (event: 'onClose'): void;
-}
-interface CallBackFormProps {
-  titleModal?: string;
-}
-
-defineProps<CallBackFormProps>();
-
-const emits = defineEmits<CallBackFormEmits>();
-
-const { callBackFormState, callBackFormEffects } = useCallBackFormStore();
-callBackFormEffects.fetchCallBackForm();
+const props = defineProps<CallBackFormProps>();
 
 const { isMobile } = useMediaSizes();
 
-const name = ref('');
-const phone = ref('');
+const { callBackFormState } = useCallBackFormStore();
+const { contactsState } = useContactsStore();
+
+const formData = ref({
+  name: '',
+  phone: '',
+  title: props.titleModal,
+});
+
 const hasError = ref(false);
 const errorNameInput = ref('');
 const errorPhoneInput = ref('');
 
 const onSubmit = () => {
-  errorNameInput.value = validateNameInput(name.value);
-  errorPhoneInput.value = validatePhoneInput(phone.value);
+  errorNameInput.value = validateNameInput(formData.value.name);
+  errorPhoneInput.value = validatePhoneInput(formData.value.phone);
 
   if (errorNameInput.value || errorPhoneInput.value) {
     hasError.value = true;
@@ -39,62 +34,49 @@ const onSubmit = () => {
   }
 
   hasError.value = false;
-  name.value = '';
-  phone.value = '';
+  formData.value.name = '';
+  formData.value.phone = '';
 };
 
 watch(
-  () => [name.value, hasError.value],
+  () => [formData.value, hasError.value],
   () => {
     if (hasError.value) {
-      errorNameInput.value = validateNameInput(name.value);
+      errorNameInput.value = validateNameInput(formData.value.name);
+      errorPhoneInput.value = validatePhoneInput(formData.value.phone);
     }
   },
-);
-
-watch(
-  () => [phone.value, hasError.value],
-  () => {
-    if (hasError.value) {
-      errorPhoneInput.value = validatePhoneInput(phone.value);
-    }
-  },
+  { deep: true },
 );
 </script>
 
 <template>
   <div class="callback-form">
     <div class="callback-form__body">
-      <div class="callback-form__close">
-        <UIButton @click="emits('onClose')"><IcClose :font-controlled="false" :filled="true" /></UIButton>
-      </div>
       <div class="callback-form__content">
-        <h2 v-if="!titleModal" class="callback-form__title">
-          {{ callBackFormState.title }}
-        </h2>
-        <h2 v-else class="callback-form__title callback-form__title--modal">
-          {{ titleModal }}
-        </h2>
+        <p class="callback-form__title">
+          {{ titleModal ?? callBackFormState.title }}
+        </p>
         <p v-if="!titleModal" class="callback-form__description">{{ callBackFormState.text }}</p>
         <form class="callback-form__form" @submit.prevent="onSubmit">
           <div class="callback-form__inputs">
             <div class="callback-form__input">
               <UIInput
-                :value="name"
+                :value="formData.name"
                 type="text"
                 label="Имя"
                 placeholder="Введите имя"
                 :error-message="errorNameInput"
-                @on-input="name = $event"
+                @on-input="formData.name = $event"
               />
             </div>
             <div class="callback-form__input">
               <UIInput
-                :value="phone"
+                :value="formData.phone"
                 type="tel"
                 label="Телефон"
                 :error-message="errorPhoneInput"
-                @on-input="phone = $event"
+                @on-input="formData.phone = $event"
               />
             </div>
           </div>
@@ -103,14 +85,14 @@ watch(
           </div>
         </form>
         <p class="callback-form__policy">Нажимая кнопку, вы соглашаетесь с нашей Политикой конфиденциальности</p>
-        <ul class="callback-form__socials">
-          <li class="callback-form__social">
-            <UIButton><IcTelegram :font-controlled="false" :filled="true" /></UIButton>
-          </li>
-          <li class="callback-form__social">
-            <UIButton><IcWhatsapp :font-controlled="false" :filled="true" /></UIButton>
-          </li>
-        </ul>
+        <div class="callback-form__socials">
+          <UIButton tag="a" :href="contactsState.social_network?.[0].url">
+            <IcTelegram :font-controlled="false" :filled="true" />
+          </UIButton>
+          <UIButton tag="a" :href="contactsState.social_network?.[1].url">
+            <IcWhatsapp :font-controlled="false" :filled="true" />
+          </UIButton>
+        </div>
       </div>
       <div v-if="!isMobile" class="callback-form__image">
         <NuxtPicture src="/images/callback-form.png" format="webp,png,jpg" loading="lazy" />
@@ -120,57 +102,16 @@ watch(
 </template>
 
 <style lang="scss">
-.ui-modal {
-  .callback-form {
-    &__body {
-      padding-top: 81px;
-      @include tablet {
-        padding-top: 30px;
-      }
-      @include desktop {
-        min-width: 1000px;
-      }
-    }
-    &__close {
-      display: block;
-      position: absolute;
-      right: 0;
-      top: -1px;
-      z-index: 1;
-      .button {
-        background: darken($color: #2a2a2a, $amount: 5%);
-        border: none;
-        border-radius: 0 20px;
-        padding: 18px;
-        svg {
-          @include svg-color(#fff);
-        }
-      }
-    }
-    &__image {
-      flex: 0 0 399px;
-    }
-    &__input {
-      @include desktop {
-        width: 100%;
-        min-width: 185px;
-      }
-    }
-  }
-}
-
 .callback-form {
   max-width: 1200px;
+  width: 100%;
 
   &__body {
-    position: relative;
+    display: flex;
     padding: 30px 20px;
     border-radius: 20px;
     border-top: 1px solid var(--black-black-80, #414141);
     background: var(--black-black-90, #2a2a2a);
-    @include tablet {
-      display: flex;
-    }
 
     @include desktop {
       padding: 40px;
@@ -191,14 +132,10 @@ watch(
     @include SubtitleLBold;
     color: var(--white, #fff);
 
-    @include tablet {
-      margin-bottom: 8px;
+    @include desktop {
+      margin-bottom: 40px;
       @include TitleSBold;
     }
-  }
-
-  &__title {
-    margin-bottom: 40px;
   }
 
   &__description {
@@ -207,7 +144,7 @@ watch(
     @include BodyMRegular;
     color: var(--black-black-50, #898989);
 
-    @include tablet {
+    @include desktop {
       margin-bottom: 24px;
       @include SubtitleSRegular;
     }
@@ -215,7 +152,6 @@ watch(
 
   &__form {
     margin-bottom: 8px;
-
     @include desktop {
       display: flex;
       gap: 20px;
@@ -268,9 +204,7 @@ watch(
   &__socials {
     display: flex;
     gap: 20px;
-  }
 
-  &__social {
     .button {
       padding: 12px;
     }
@@ -281,13 +215,16 @@ watch(
     flex: 0 0 380px;
     margin-bottom: -30px;
     margin-right: -30px;
+
     @include desktop {
       margin-bottom: -40px;
       margin-right: -40px;
     }
+
     @include media($xl) {
       flex: 0 0 488px;
     }
+
     img {
       position: absolute;
       bottom: 0;

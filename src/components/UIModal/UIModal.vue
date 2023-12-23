@@ -35,7 +35,7 @@ watch(
       >
         <div class="ui-modal__mask" @click="$emit('onClose')"></div>
 
-        <div class="ui-modal__container">
+        <div :class="['ui-modal__container', containerClass]">
           <button v-if="closeButton" type="button" class="ui-modal__close" @click="$emit('onClose')">
             <IcClose :font-controlled="false" :filled="true" />
           </button>

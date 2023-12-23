@@ -4,13 +4,13 @@ import type { SectionServicesItemProps } from './SectionServices.types';
 defineProps<SectionServicesItemProps>();
 </script>
 <template>
-  <div class="section-service-item-mobile">
+  <NuxtLink class="section-service-item-mobile" :to="item.link">
     <div class="section-service-item-mobile__image ibg">
       <NuxtPicture :src="item.image ?? 'undefined'" format="webp" loading="lazy" />
     </div>
     <div class="section-service-item-mobile__title">{{ item.title }}</div>
     <div class="section-service-item-mobile__text">{{ item.text }}</div>
-  </div>
+  </NuxtLink>
 </template>
 
 <style lang="scss">

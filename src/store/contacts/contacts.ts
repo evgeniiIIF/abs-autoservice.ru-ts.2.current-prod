@@ -13,15 +13,10 @@ export const contactsStore = defineStore('contactsStore', () => {
   const setContacts = (data: ContactsPage) => (state.value = data);
 
   const fetchContacts = async () => {
-    try {
-      const response = await contactsPageHttp.fetchContactsPage();
+    const response = await contactsPageHttp.fetchContactsPage();
 
-      const data = response.data.value?.data;
-
-      if (data) setContacts(data);
-    } catch (error) {
-      console.log(error);
-    }
+    const data = response.data.value?.data;
+    if (data) setContacts(data);
   };
 
   return {

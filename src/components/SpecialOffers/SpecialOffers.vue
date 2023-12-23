@@ -64,7 +64,7 @@ const { isDesktop } = useMediaSizes();
     gap: 20px;
     overflow-x: scroll;
 
-    @include d-desktop {
+    @include desktop {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
     }

@@ -50,7 +50,8 @@ const reviewItems = computed(() => homeState.value.review_items);
 .clients-reviews {
   position: relative;
   padding: 30px 0;
-  @include tablet {
+
+  @include desktop {
     padding: 60px 0 85px 0;
   }
 
@@ -125,9 +126,13 @@ const reviewItems = computed(() => homeState.value.review_items);
   }
 
   &__slide {
+    width: 100%;
     max-width: 240px;
+    & > div {
+      width: 100%;
+    }
 
-    @include tablet {
+    @include desktop {
       max-width: 590px;
     }
   }

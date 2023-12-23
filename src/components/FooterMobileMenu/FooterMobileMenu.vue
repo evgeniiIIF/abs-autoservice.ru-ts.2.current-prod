@@ -1,24 +1,10 @@
 <script setup lang="ts">
-import chat from '@/assets/icons/chat.svg';
-import search from '@/assets/icons/search.svg';
-import navigation from '@/assets/icons/navigation.svg';
-import star from '@/assets/icons/star.svg';
-import { useClickOutside } from '@/composables/useClickOutside';
 import { setHeaderWidth } from '@/utils/useWrapper/useWrapper';
+import { appRoutes } from '~/appRoutes';
 
-const items = [
-  { id: 1, icon: chat },
-  { id: 2, icon: search },
-  { id: 3, icon: navigation },
-  { id: 4, icon: star },
-];
+const [isCAllbackOpenModal, openCAllbackModal, closeCallbackModal] = useBooleanState();
+const [isOpenSearchModal, openSearchModal, closeSearchModal] = useBooleanState();
 
-const activeItem = ref<number | null>(null);
-const menuRef = ref<HTMLDivElement | null>(null);
-
-useClickOutside(menuRef, () => {
-  activeItem.value = null;
-});
 onBeforeMount(() => {
   setHeaderWidth('.js-footer-mobile-menu');
 });
@@ -27,15 +13,25 @@ onBeforeMount(() => {
 <template>
   <div ref="menuRef" class="footer-mobile-menu js-footer-mobile-menu">
     <ul class="footer-mobile-menu__list">
-      <li
-        v-for="item in items"
-        :key="item.id"
-        class="footer-mobile-menu__item"
-        :class="{ 'footer-mobile-menu__item--active': activeItem === item.id }"
-      >
-        <component :is="item.icon" :font-controlled="false" :filled="true" />
+      <li class="footer-mobile-menu__item" @click="openCAllbackModal">
+        <IcChat :font-controlled="false" :filled="true" />
+      </li>
+      <li class="footer-mobile-menu__item" @click="openSearchModal">
+        <IcSearch :font-controlled="false" :filled="true" />
+      </li>
+      <li class="footer-mobile-menu__item">
+        <NuxtLink :to="appRoutes.contacts()">
+          <IcNavigation :font-controlled="false" :filled="true" />
+        </NuxtLink>
+      </li>
+      <li class="footer-mobile-menu__item">
+        <NuxtLink :to="appRoutes.reviews()">
+          <IcStar :font-controlled="false" :filled="true" />
+        </NuxtLink>
       </li>
     </ul>
+    <CallbackFormModal :is-open="isCAllbackOpenModal" @on-close="closeCallbackModal" />
+    <AppSearchServiceModal :is-open="isOpenSearchModal" @on-close="closeSearchModal"/>
   </div>
 </template>
 

@@ -2,6 +2,8 @@
 import type { OfferCard } from '@/components/OfferCard/OfferCard.types';
 
 defineProps<OfferCard>();
+
+const [isModalOpen, openModal, closeModal] = useBooleanState();
 </script>
 
 <template>
@@ -17,13 +19,14 @@ defineProps<OfferCard>();
     </div>
     <UIButton
       class="offer-card__button"
-      :tag="link ? 'NuxtLink' : 'button'"
-      :to="link"
+      :tag="'button'"
       :without-fill="button?.fill === 'outline'"
       :has-full-width="button?.size === 'big'"
+      @click.stop="openModal"
     >
       {{ button?.text }}
     </UIButton>
+    <CallbackFormModal :is-open="isModalOpen" :title-modal="title" @on-close="closeModal" />
   </div>
 </template>
 
