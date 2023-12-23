@@ -16,9 +16,9 @@ export default defineNuxtConfig({
   googleFonts: {
     overwriting: true,
     preload: true,
+    download: true,
     families: {
       Roboto: [100, 400, 500, 700],
-      download: true,
     },
     subsets: ['cyrillic', 'latin'],
   },

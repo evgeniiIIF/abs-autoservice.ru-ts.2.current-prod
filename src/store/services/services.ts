@@ -14,8 +14,6 @@ export const servicesStore = defineStore('servicesState', () => {
 
   const setAllServices = (services: ServicesState['allServices']) => {
     state.value.allServices = services;
-
-    console.log(services);
   };
 
   const setParentServices = (services: ServicesState['mainServices']) => {
