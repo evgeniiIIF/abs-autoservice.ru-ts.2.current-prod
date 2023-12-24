@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { bodyLock, bodyUnlock } from '@/utils/useWrapper/useWrapper';
+import { disableBodyScroll, enableBodyScroll } from '@/utils/dom';
 import type { UIModalEmits, UIModalProps } from './UIModal.types';
 
 const props = withDefaults(defineProps<UIModalProps>(), {
@@ -16,7 +16,7 @@ const UI_MODAL_POSITIONS = {
 watch(
   () => props.isOpen,
   (isOpen) => {
-    isOpen ? bodyLock() : bodyUnlock();
+    isOpen ? disableBodyScroll() : enableBodyScroll();
   },
 );
 </script>

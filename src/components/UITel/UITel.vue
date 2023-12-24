@@ -1,4 +1,3 @@
-import type { textSpanIntersectsWith } from 'typescript';
 <script setup lang="ts">
 const props = defineProps<{ phoneNumber: string }>();
 

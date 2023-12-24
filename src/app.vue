@@ -6,8 +6,6 @@ import { useContactsStore } from './store/contacts';
 import { useHomeStore } from './store/home';
 import { useServicesStore } from './store/services';
 
-const route = useRoute();
-
 const { servicesEffects } = useServicesStore();
 const { homeEffects } = useHomeStore();
 const { calculatorBlockEffects } = useCalculatorBlockStore();
@@ -27,42 +25,16 @@ await useAsyncData('global', async () => {
 });
 
 await servicesEffects.fetchServicesTree();
-
-onBeforeMount(() => {
-  if (route.path === '/services') {
-    document.body.classList.add('services-page');
-  }
-});
-
-watch(
-  () => route.path,
-  () => {
-    if (route.path === '/services') {
-      document.body.classList.add('services-page');
-    } else {
-      document.body.classList.remove('services-page');
-    }
-  },
-);
 </script>
 
 <template>
-  <NuxtLayout ref="nodeRef">
+  <NuxtLayout>
     <NuxtLoadingIndicator color="#00a19c" :height="3" />
     <NuxtPage />
   </NuxtLayout>
 </template>
 
 <style lang="scss">
-.services-page {
-  @include to(1280px) {
-    main {
-      margin-top: 0;
-    }
-
-    .header-mobile {
-      display: none;
-    }
-  }
+.main {
 }
 </style>

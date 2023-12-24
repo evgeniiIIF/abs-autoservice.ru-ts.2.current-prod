@@ -183,13 +183,14 @@ const goBackQuestion = () => {
     width: 1000px;
   }
 }
+
 .quest {
   background: var(--black-black-90, #2a2a2a);
   border-radius: 16px;
   overflow: hidden;
 
   @include media(650px) {
-    position: relative;
+    /* position: relative; */
   }
 
   @include media(880px) {

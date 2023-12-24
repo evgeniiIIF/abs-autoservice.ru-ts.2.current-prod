@@ -1,7 +1,7 @@
 <script lang="ts" setup>
 import { appRoutes } from '~/appRoutes';
-import { setHeaderWidth } from '@/utils/useWrapper/useWrapper';
 
+const { y } = useWindowScroll();
 const [isOpenModal, openModal, closeModal] = useBooleanState();
 const [isSearchOpen, openSearch, closeSearch] = useBooleanState();
 
@@ -17,40 +17,11 @@ const topNavItems = [
   { name: 'Бонусная программа', link: appRoutes.bonus().path },
   { name: 'Отзовы', link: appRoutes.reviews().path },
 ];
-const headerDesktopNode = ref(null);
-const headerTopNode = ref(null);
-const bodyNode = ref();
-const wrapper = ref();
-
-const currentScrollPosition = ref(0);
-const lastScrollPosition = ref(0);
-
-const getScrollPosition = () => wrapper.value.scrollTop;
-
-const addClassInBodyByScroll = () => {
-  currentScrollPosition.value = getScrollPosition();
-
-  lastScrollPosition.value < currentScrollPosition.value
-    ? bodyNode.value.classList.add('hide-header-top')
-    : bodyNode.value.classList.remove('hide-header-top');
-
-  lastScrollPosition.value = getScrollPosition();
-};
-
-onBeforeMount(() => {
-  setHeaderWidth('.js-header-desktop');
-});
-
-onMounted(() => {
-  wrapper.value = document.querySelector('.wrapper');
-  bodyNode.value = document.querySelector('body');
-  wrapper.value.addEventListener('scroll', addClassInBodyByScroll);
-});
 </script>
 
 <template>
-  <header ref="headerDesktopNode" class="header-desktop js-header-desktop">
-    <div ref="headerTopNode" class="header-desktop__top header-desktop-top">
+  <header class="header-desktop">
+    <div :class="['header-desktop__top', 'header-desktop-top', { 'header-desktop-top--invisible': y > 100 }]">
       <address class="header-desktop-top__address">
         <div class="header-desktop-top__address-icon"><IcNavigation :font-controlled="false" :filled="true" /></div>
         <p class="header-desktop-top__address-text">г. Ставрополь, ул. Доваторцев 47Б</p>
@@ -98,10 +69,12 @@ onMounted(() => {
 .main {
   margin-top: 67.75px;
 }
+
 @include desktop {
   .main {
     margin-top: 129.47px;
   }
+
   .hide-header-top {
     .main {
       margin-top: 89.48px;
@@ -112,6 +85,7 @@ onMounted(() => {
     }
   }
 }
+
 .header-desktop-top {
   display: flex;
   align-items: center;
@@ -119,6 +93,12 @@ onMounted(() => {
   padding: 0px 20px;
   border-radius: 0px 0px 10px 10px;
   background: var(--black-black-90, #2a2a2a);
+  transition: 0.3s;
+
+  &--invisible {
+    height: 0;
+  }
+
   @include media($xxl) {
     padding: 0px 40px;
   }
@@ -131,6 +111,7 @@ onMounted(() => {
       margin-right: 95px;
     }
   }
+
   &__address-icon {
     margin-right: 8px;
     svg {
@@ -139,6 +120,7 @@ onMounted(() => {
       @include svg-color(#00a19c);
     }
   }
+
   &__address-text {
     color: var(--black-black-40, #999);
     @include BodySRegular;
@@ -146,18 +128,22 @@ onMounted(() => {
 
   &__nav {
     flex: 1 1 auto;
+
     .nav__list {
       display: flex;
       @include mr(32px);
     }
+
     .nav__link {
       color: var(--black-black-40, #999);
       @include BodySRegular;
     }
+
     .nav__link--active {
       color: var(--Black-Black-00, #fff);
     }
   }
+
   &__social {
     .social {
       gap: 4px;

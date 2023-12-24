@@ -25,5 +25,6 @@ watch(
 </template>
 
 <style lang="scss">
-.wrapper {}
+.wrapper {
+}
 </style>

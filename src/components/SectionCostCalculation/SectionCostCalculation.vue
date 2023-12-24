@@ -28,6 +28,7 @@ const { calculatorBlockState } = useCalculatorBlockStore();
 .cost-calculation {
   &__body {
     position: relative;
+    overflow: hidden;
     padding: 30px 0 40px;
 
     @include tablet {
