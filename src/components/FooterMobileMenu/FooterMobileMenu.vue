@@ -1,13 +1,8 @@
 <script setup lang="ts">
-import { setHeaderWidth } from '@/utils/useWrapper/useWrapper';
 import { appRoutes } from '~/appRoutes';
 
 const [isCAllbackOpenModal, openCAllbackModal, closeCallbackModal] = useBooleanState();
 const [isOpenSearchModal, openSearchModal, closeSearchModal] = useBooleanState();
-
-onBeforeMount(() => {
-  setHeaderWidth('.js-footer-mobile-menu');
-});
 </script>
 
 <template>
@@ -31,7 +26,7 @@ onBeforeMount(() => {
       </li>
     </ul>
     <CallbackFormModal :is-open="isCAllbackOpenModal" @on-close="closeCallbackModal" />
-    <AppSearchServiceModal :is-open="isOpenSearchModal" @on-close="closeSearchModal"/>
+    <AppSearchServiceModal :is-open="isOpenSearchModal" @on-close="closeSearchModal" />
   </div>
 </template>
 

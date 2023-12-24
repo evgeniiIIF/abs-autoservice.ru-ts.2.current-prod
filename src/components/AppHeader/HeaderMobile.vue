@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import { bodyLock, bodyUnlock, setHeaderWidth } from '@/utils/useWrapper/useWrapper';
+import { enableBodyScroll, disableBodyScroll } from '@/utils/dom';
 import { appRoutes } from '~/appRoutes';
 import { useContactsStore } from '~/store/contacts';
 import { useServicesStore } from '~/store/services';
@@ -10,7 +10,7 @@ const router = useRouter();
 const { contactsState } = useContactsStore();
 const { servicesState } = useServicesStore();
 
-const [isOpenMobileMenu, useOpenMobileMenu, useCloseMobileMenu] = useBooleanState(false);
+const [isOpenMobileMenu, , closeMobileMenu, toggleMobileMenu] = useBooleanState(false);
 const [isOpenServicesMenu, openServicesMenu, closeServicesMenu] = useBooleanState(false);
 
 const activeServiceId = ref<number | null>(null);
@@ -23,19 +23,6 @@ const servicesList = computed(() => {
   return servicesState.value.servicesTree.find((item) => item.id === activeServiceId.value)?.children;
 });
 
-const openMobileMenu = () => {
-  bodyLock();
-  useOpenMobileMenu();
-};
-const closeMobileMenu = () => {
-  bodyUnlock();
-  useCloseMobileMenu();
-};
-
-const toggleMobileMenu = () => {
-  isOpenMobileMenu.value ? closeMobileMenu() : openMobileMenu();
-};
-
 const navItems = [
   { name: 'Услуги', onClick: openServicesMenu },
   { name: 'Акции', link: appRoutes.offers().path },
@@ -45,8 +32,8 @@ const navItems = [
   { name: 'Контакты', link: appRoutes.contacts().path },
 ];
 
-onBeforeMount(() => {
-  setHeaderWidth('.js-header-mobile');
+watch(isOpenMobileMenu, () => {
+  isOpenMobileMenu.value ? disableBodyScroll() : enableBodyScroll();
 });
 
 watch(

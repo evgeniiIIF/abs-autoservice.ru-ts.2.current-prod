@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { useHomeStore } from '~/store/home';
 
+const { isMobile } = useMediaSizes();
 const { homeState } = useHomeStore();
 </script>
 
@@ -15,6 +16,7 @@ const { homeState } = useHomeStore();
           :key="review.id"
           class="reviews-page__list-item"
           :item="review"
+          :size="isMobile ? 'small' : 'standard'"
         />
       </div>
       <CallbackForm class="reviews-page__form" />
