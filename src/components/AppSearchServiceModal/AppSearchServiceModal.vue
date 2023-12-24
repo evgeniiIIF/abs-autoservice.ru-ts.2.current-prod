@@ -7,7 +7,7 @@ defineEmits<AppSearchServiceModalEmits>();
 
 <template>
   <UIModal :is-open="isOpen" position="center" container-class="app-search-modal-props" @on-close="$emit('onClose')">
-    <AppSearchService size="content" />
+    <AppSearchService size="content" @on-close="$emit('onClose')" />
   </UIModal>
 </template>
 

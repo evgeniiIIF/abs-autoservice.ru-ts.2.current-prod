@@ -2,11 +2,26 @@
 import { bodyLock, bodyUnlock, setHeaderWidth } from '@/utils/useWrapper/useWrapper';
 import { appRoutes } from '~/appRoutes';
 import { useContactsStore } from '~/store/contacts';
+import { useServicesStore } from '~/store/services';
 
 const route = useRoute();
+const router = useRouter();
+
 const { contactsState } = useContactsStore();
+const { servicesState } = useServicesStore();
 
 const [isOpenMobileMenu, useOpenMobileMenu, useCloseMobileMenu] = useBooleanState(false);
+const [isOpenServicesMenu, openServicesMenu, closeServicesMenu] = useBooleanState(false);
+
+const activeServiceId = ref<number | null>(null);
+
+const servicesList = computed(() => {
+  if (!activeServiceId.value) {
+    return servicesState.value.servicesTree;
+  }
+
+  return servicesState.value.servicesTree.find((item) => item.id === activeServiceId.value)?.children;
+});
 
 const openMobileMenu = () => {
   bodyLock();
@@ -16,12 +31,13 @@ const closeMobileMenu = () => {
   bodyUnlock();
   useCloseMobileMenu();
 };
+
 const toggleMobileMenu = () => {
   isOpenMobileMenu.value ? closeMobileMenu() : openMobileMenu();
 };
 
 const navItems = [
-  { name: 'Услуги', link: appRoutes.services().path },
+  { name: 'Услуги', onClick: openServicesMenu },
   { name: 'Акции', link: appRoutes.offers().path },
   { name: 'Об автосервисе', link: appRoutes.contacts().path },
   // { name: 'Гарантии', link: '' },
@@ -34,18 +50,20 @@ onBeforeMount(() => {
 });
 
 watch(
-  () => route.fullPath,
-  () => toggleMobileMenu(),
+  () => route.path,
+  () => closeMobileMenu(),
 );
+
+watch(activeServiceId, () => console.log(activeServiceId.value));
 </script>
 <template>
   <header :class="{ 'header-mobile': true, 'js-header-mobile': true, 'header-mobile-menu--open': isOpenMobileMenu }">
     <div class="mobile-header">
       <div class="container">
         <div class="mobile-header__body">
-          <div class="mobile-header__logo">
+          <NuxtLink class="mobile-header__logo" :to="appRoutes.main()">
             <IcLogoMobile :font-controlled="false" :filled="true" />
-          </div>
+          </NuxtLink>
           <div class="mobile-header__buttons">
             <div class="mobile-header__button mobile-header__button--phone">
               <UIButton
@@ -71,9 +89,9 @@ watch(
       <div class="mobile-header">
         <div class="container">
           <div class="mobile-header__body">
-            <div class="mobile-header__logo">
+            <NuxtLink class="mobile-header__logo" :to="appRoutes.main()">
               <IcLogoMobile :font-controlled="false" :filled="true" />
-            </div>
+            </NuxtLink>
             <div class="mobile-header__buttons">
               <div class="mobile-header__button mobile-header__button--phone">
                 <UIButton
@@ -95,7 +113,29 @@ watch(
       </div>
       <div class="header-mobile-menu__body">
         <div class="header-mobile-menu__nav">
-          <AppNavigation :items="navItems" />
+          <AppNavigation v-if="!isOpenServicesMenu" :items="navItems" />
+          <div v-if="isOpenServicesMenu" class="header-mobile-menu__services">
+            <div v-if="!activeServiceId" class="header-mobile-menu__service-item" @click="closeServicesMenu">
+              <IcArrowLeft /><span>Услуги</span>
+            </div>
+            <div v-if="activeServiceId" class="header-mobile-menu__service-item" @click="activeServiceId = null">
+              <IcArrowLeft class="header-mobile-menu__service-item-left" /><span>
+                {{ servicesState.mainServices?.find((item) => item.id === activeServiceId)?.title }}
+              </span>
+            </div>
+            <!-- @ts-nocheck -->
+            <div
+              v-for="service in servicesList"
+              :key="service.id"
+              class="header-mobile-menu__service-item"
+              @click="
+                service.children?.length ? (activeServiceId = service.id) : router.push(appRoutes.services(service.id))
+              "
+            >
+              <span>{{ service.title }}</span>
+              <IcArrowRight v-if="service?.children?.length" class="header-mobile-menu__service-item-right" />
+            </div>
+          </div>
         </div>
         <div class="header-mobile-menu__contacts">
           <AppContacts />
@@ -160,6 +200,30 @@ watch(
         }
       }
     }
+  }
+
+  &__service-item {
+    max-width: 280px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: flex;
+    gap: 14px;
+    padding: 14px;
+    border-bottom: 1px solid var(--black-black-80);
+    color: var(--white);
+    @include BodyXLBold;
+  }
+
+  &__service-item-right {
+    margin-left: auto;
+    width: 24px;
+    height: 24px;
+  }
+
+  &__service-item-left {
+    width: 24px;
+    height: 24px;
   }
 
   & .mobile-header {

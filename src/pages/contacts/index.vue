@@ -2,9 +2,13 @@
 import { appRoutes } from '~/appRoutes';
 import { useContactsStore } from '~/store/contacts';
 
+const { isDesktop } = useMediaSizes();
 const { contactsState } = useContactsStore();
 
-const { isDesktop } = useMediaSizes();
+useSeoMeta({
+  title: 'Контактыя',
+  description: 'г. Ставрополь, ул. Доваторцев 47Б',
+});
 
 const breadcrumbItems = [{ name: 'Контакты', link: appRoutes.contacts().path }];
 

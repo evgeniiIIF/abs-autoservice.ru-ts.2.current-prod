@@ -3,6 +3,7 @@ import type { QuestionProps } from '@/components/SectionCostCalculation/SectionC
 
 defineProps<QuestionProps>();
 </script>
+
 <template>
   <div class="question-end">
     <div class="question-end__title-group">
@@ -11,11 +12,13 @@ defineProps<QuestionProps>();
     <div class="question-end__text">{{ text }}</div>
   </div>
 </template>
+
 <style lang="scss">
 .question-end {
   &__title-group {
     margin-bottom: 16px;
   }
+
   &__title {
     @include SubtitleLBold;
     color: var(--1, #fff);
@@ -24,10 +27,7 @@ defineProps<QuestionProps>();
       @include TitleSBold;
     }
   }
-  &__title--top {
-  }
-  &__title--bottom {
-  }
+
   &__text {
     font-family: Roboto;
     font-style: normal;
@@ -36,9 +36,7 @@ defineProps<QuestionProps>();
     font-size: 18px;
     color: #00a19c;
     max-width: 350px;
-    // @include tablet {
-    //   font-size: 24px;
-    // }
+
     @include desktop {
       font-size: 29px;
       max-width: 500px;

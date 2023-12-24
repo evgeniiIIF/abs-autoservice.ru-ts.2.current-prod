@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { useCalculatorBlockStore } from '~/store/calculatorBlock';
 
+import { callBackFormHttp } from '~/api/http';
 import AppQuestQuestion1 from './AppQuestQuestion1.vue';
 import AppQuestQuestion2 from './AppQuestQuestion2.vue';
 import AppQuestQuestion3 from './AppQuestQuestion3.vue';
@@ -12,47 +13,48 @@ const QUEST_ITEMS = [
   {
     component: AppQuestQuestion1,
     title: calculatorBlockState.value.title_step_1,
-    inputProps: {
-      value: '',
-      type: 'text',
-      name: 'auto',
-      label: calculatorBlockState.value.title_input_step_1,
-      placeholder: calculatorBlockState.value.title_input_placeholder_step_1,
-      maxlength: 128,
-    },
+    inputProps: [
+      {
+        type: 'text',
+        name: 'auto',
+        label: calculatorBlockState.value.title_input_step_1,
+        placeholder: calculatorBlockState.value.title_input_placeholder_step_1,
+        maxlength: 128,
+      },
+    ],
   },
   {
     component: AppQuestQuestion2,
     title: calculatorBlockState.value.title_step_2,
-    inputProps: {
-      value: '',
-      type: 'textarea',
-      name: 'problem',
-      label: calculatorBlockState.value.title_input_step_2,
-      placeholder: calculatorBlockState.value.title_input_placeholder_step_2,
-      maxlength: 128,
-    },
+    inputProps: [
+      {
+        type: 'textarea',
+        name: 'problem',
+        label: calculatorBlockState.value.title_input_step_2,
+        placeholder: calculatorBlockState.value.title_input_placeholder_step_2,
+        maxlength: 128,
+      },
+    ],
   },
   {
     component: AppQuestQuestion3,
     title: calculatorBlockState.value.title_step_3,
-    inputProps: {
-      inputName: {
-        value: '',
+    inputProps: [
+      {
         type: 'text',
         name: 'name',
         label: 'Имя',
         placeholder: 'Введите имя',
         maxlength: 32,
       },
-      inputTel: {
-        value: '',
+      {
         type: 'tel',
         name: 'phone',
         label: 'Телефон',
+        placeholder: '+7 (___) ___-__-__',
         pattern: /[^0-9+]/g,
       },
-    },
+    ],
   },
   {
     component: AppQuestQuestion4,
@@ -61,13 +63,62 @@ const QUEST_ITEMS = [
   },
 ];
 
+const formData = ref({
+  auto: '',
+  problem: '',
+  name: '',
+  phone: '',
+});
 const currentStepIndex = ref(0);
-const goNextQuestion = () => (currentStepIndex.value += 1);
-const goBackQuestion = () => (currentStepIndex.value -= 1);
 
 const currentQuestItem = computed(() => {
   return QUEST_ITEMS[currentStepIndex.value];
 });
+
+// const isButtonActive = computed(() => {
+//   currentQuestItem.value.inputProps?.reduce((prev, next) => {
+//     if (formData.value[next.name as keyof typeof formData.value]) {
+//       return true;
+//     }
+//     return false;
+//   }, false);
+// });
+
+// TODO пофиксить эни
+const handleFormDataChange = (value: any) => {
+  formData.value = { ...formData.value, ...value };
+};
+
+const handleFormDataSubmit = async () => {
+  const { auto, problem, ...data } = formData.value;
+
+  const response = await callBackFormHttp.postCallBackFormData({
+    ...data,
+    message: `${auto}: ${problem}`,
+    form: 'call-back',
+  });
+
+  if (response.data.value) {
+    currentStepIndex.value += 1;
+
+    setTimeout(() => {
+      currentStepIndex.value = 0;
+    }, 3000);
+  }
+};
+
+const goNextQuestion = () => {
+  if (currentStepIndex.value === 2) {
+    handleFormDataSubmit();
+    return;
+  }
+
+  currentStepIndex.value += 1;
+};
+
+const goBackQuestion = () => {
+  currentStepIndex.value -= 1;
+};
 </script>
 
 <template>
@@ -89,13 +140,16 @@ const currentQuestItem = computed(() => {
       </div>
       <div class="quest__current">
         <Transition name="fade-in" mode="out-in">
+          <!-- @ts-nocheck -->
           <component
             :is="currentQuestItem.component"
             :title="currentQuestItem.title"
             :inputProps="currentQuestItem.inputProps"
             :titleTop="currentQuestItem.titleTop"
             :text="currentQuestItem.text"
-          ></component>
+            :formData="formData"
+            @on-change="handleFormDataChange"
+          />
         </Transition>
       </div>
       <div class="quest__buttons">
@@ -133,9 +187,11 @@ const currentQuestItem = computed(() => {
   background: var(--black-black-90, #2a2a2a);
   border-radius: 16px;
   overflow: hidden;
+
   @include media(650px) {
     position: relative;
   }
+
   @include media(880px) {
     display: flex;
   }
@@ -145,6 +201,7 @@ const currentQuestItem = computed(() => {
     justify-content: space-between;
     align-items: center;
     margin-bottom: 20px;
+
     @include media(880px) {
       max-width: 232px;
       margin-bottom: 36px;
@@ -157,10 +214,12 @@ const currentQuestItem = computed(() => {
   &__content {
     padding: 20px 20px 0;
     margin-bottom: 40px;
+
     @include media(650px) {
       padding-bottom: 20px;
       margin-bottom: 0;
     }
+
     @include media(880px) {
       flex: 1 1 auto;
       padding: 30px 0px 30px 40px;

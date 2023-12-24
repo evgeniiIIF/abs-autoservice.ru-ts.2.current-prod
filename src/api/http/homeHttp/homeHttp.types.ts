@@ -1,11 +1,11 @@
 import type { OffersListItem } from '~/api/http/offersHttp';
 
 export interface HomeSeo {
-  meta_title: string;
-  meta_description: string;
-  meta_author: string;
-  meta_robots: any;
-  meta_canonical_url: any;
+  title: string;
+  description: string;
+  author: string;
+  robots: any;
+  canonical_url: any;
 }
 export interface HomeBtn {
   link: string;

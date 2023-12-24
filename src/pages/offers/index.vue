@@ -6,6 +6,11 @@ const { offerState, offerEffects } = useOfferStore();
 const { isMobile } = useMediaSizes();
 
 await offerEffects.fetchOffersList();
+
+useSeoMeta({
+  title: 'Акции и спецпредложения',
+  description: offerState.value.offers.map((item) => item.title).join(', '),
+});
 </script>
 
 <template>

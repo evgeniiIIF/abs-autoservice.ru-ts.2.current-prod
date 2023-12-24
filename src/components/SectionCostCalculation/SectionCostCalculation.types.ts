@@ -4,4 +4,7 @@ export interface QuestionProps {
   titleBottom?: string;
   titleTop?: string;
   text?: string;
+  formData: {
+    [x: string]: string;
+  };
 }

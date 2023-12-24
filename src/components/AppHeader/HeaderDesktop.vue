@@ -1,16 +1,8 @@
 <script lang="ts" setup>
 import { appRoutes } from '~/appRoutes';
 import { setHeaderWidth } from '@/utils/useWrapper/useWrapper';
-import { useCallBackFormStore } from '~/store/callBackForm';
 
-const { callBackFormState, callBackFormActions } = useCallBackFormStore();
-
-const openModal = (title: string) => {
-  callBackFormActions.setTitleModal(title);
-  useOpenModal();
-};
-
-const [isOpenModal, useOpenModal, closeModal] = useBooleanState();
+const [isOpenModal, openModal, closeModal] = useBooleanState();
 const [isSearchOpen, openSearch, closeSearch] = useBooleanState();
 
 const navItems = [
@@ -33,7 +25,6 @@ const wrapper = ref();
 const currentScrollPosition = ref(0);
 const lastScrollPosition = ref(0);
 
-// const getScrollPosition = () => document.body.scrollTop || document.documentElement.scrollTop;
 const getScrollPosition = () => wrapper.value.scrollTop;
 
 const addClassInBodyByScroll = () => {
@@ -56,6 +47,7 @@ onMounted(() => {
   wrapper.value.addEventListener('scroll', addClassInBodyByScroll);
 });
 </script>
+
 <template>
   <header ref="headerDesktopNode" class="header-desktop js-header-desktop">
     <div ref="headerTopNode" class="header-desktop__top header-desktop-top">
@@ -94,11 +86,9 @@ onMounted(() => {
           </div>
         </div>
         <div class="contacts-header-desktop__button">
-          <UIButton @click="openModal('Записаться на сервис')">Записаться на сервис</UIButton>
+          <UIButton @click="openModal">Записаться на сервис</UIButton>
         </div>
-        <UIModal position="center" :is-open="isOpenModal" @onClose="closeModal"
-          ><CallbackForm :title-modal="callBackFormState.titleModal" @onClose="closeModal"
-        /></UIModal>
+        <CallbackFormModal :is-open="isOpenModal" @on-close="closeModal" />
       </div>
     </div>
   </header>

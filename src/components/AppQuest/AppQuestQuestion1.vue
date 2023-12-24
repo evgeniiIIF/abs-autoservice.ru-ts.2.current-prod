@@ -2,21 +2,23 @@
 import type { QuestionProps } from '@/components/SectionCostCalculation/SectionCostCalculation.types';
 
 defineProps<QuestionProps>();
+const emits = defineEmits<{ (event: 'onChange', data: { [x: string]: string }): void }>();
 
-const carBrand = ref('');
-const onInput = (value: string) => console.log(value);
+const onInput = (value: string, name: string) => {
+  emits('onChange', { [name]: value });
+};
 </script>
 <template>
   <div class="question">
     <h6 class="question__title">{{ title }}</h6>
-    <div class="question__input">
+    <div v-for="input in inputProps" :key="input.name" class="question__input">
       <UIInput
-        :type="inputProps.type"
-        :label="inputProps.label"
-        :placeholder="inputProps.placeholder"
-        :value="carBrand"
-        :name="inputProps.name"
-        @onInput="onInput"
+        :type="input.type"
+        :label="input.label"
+        :placeholder="input.placeholder"
+        :value="formData[input.name]"
+        :name="input.name"
+        @onInput="onInput($event, input.name)"
       />
     </div>
   </div>

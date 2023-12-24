@@ -10,3 +10,10 @@ export interface CallBackFormResponse {
 export interface CallbackFormWithModal extends CallBackForm {
   titleModal?: string;
 }
+
+export interface CallBackFormData {
+  name: string;
+  phone: string;
+  message?: string;
+  form: 'call-back';
+}

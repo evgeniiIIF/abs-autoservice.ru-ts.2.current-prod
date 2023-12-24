@@ -4,6 +4,11 @@ import { useServicesStore } from '~/store/services';
 
 const { servicesState } = useServicesStore();
 
+useSeoMeta({
+  title: 'Услуги',
+  description: servicesState.value.mainServices.map((item) => item.title).join(', '),
+});
+
 const converterItems = computed(() =>
   servicesState.value.servicesTree.map((service) => ({
     image: service.image,

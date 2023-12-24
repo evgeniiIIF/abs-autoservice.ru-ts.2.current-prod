@@ -1,4 +1,19 @@
 <script setup lang="ts">
+import { appRoutes } from '~/appRoutes';
+
+useSeoMeta({
+  title: 'Автосервис ABS-AUTO',
+  description: `
+  Автосервис ABS-AUTO – сервисный центр в Ставрополе, который успешно работает вот уже более 15 лет и входит
+  в состав торгово-инвестиционной группы компаний ABS GROUP. Холдинг является одним из крупнейших
+  поставщиков автомобильных запчастей и смазочных материалов в СНГ, занимается производством собственных
+  запчастей под брендом ABSEL, а также создает современные технологичные решения для автобизнеса.
+  В ABS-AUTO Service мы собрали команду настоящих профессионалов, которых объединяет искренняя любовь к
+  автомобилям. Мы предлагаем комплексные услуги по ремонту и полноценному обслуживанию вашего авто с
+  применением только высококачественных средств и оборудования.
+  `,
+});
+
 const { isMobile, isDesktop } = useMediaSizes();
 const breadcrumbItems = [{ name: 'Об автосервисе', link: '/about' }];
 
@@ -21,7 +36,7 @@ const [isModalOpen, openModal, closeModal] = useBooleanState();
             </p>
             <div class="info-about__buttons">
               <div class="info-about__button info-about__button--bg">
-                <UIButton>Контакты</UIButton>
+                <UIButton tag="NuxtLink" :to="appRoutes.contacts()">Контакты</UIButton>
               </div>
               <div class="info-about__button info-about__button--bd">
                 <UIButton>Реквизиты</UIButton>

@@ -1,6 +1,11 @@
 <script setup lang="ts">
 import { appRoutes } from '~/appRoutes';
 
+useSeoMeta({
+  title: 'Бонусная программа',
+  description: `Бонусная программа`,
+});
+
 const breadcrumbItems = [
   {
     name: 'Бонусная программа',

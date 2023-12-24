@@ -5,6 +5,7 @@ import { useMediaSizes } from '@/composables/useMediaSizes';
 import { validateNameInput } from '@/utils/validateNameInput/validateNameInput';
 import { validatePhoneInput } from '@/utils/validatePhoneInput/validatePhoneInput';
 import { useContactsStore } from '~/store/contacts';
+import { callBackFormHttp } from '~/api/http';
 import type { CallBackFormProps } from './CallbackForm.types';
 
 const props = defineProps<CallBackFormProps>();
@@ -17,14 +18,15 @@ const { contactsState } = useContactsStore();
 const formData = ref({
   name: '',
   phone: '',
-  title: props.titleModal,
 });
+
+const isSuccess = ref(false);
 
 const hasError = ref(false);
 const errorNameInput = ref('');
 const errorPhoneInput = ref('');
 
-const onSubmit = () => {
+const onSubmit = async () => {
   errorNameInput.value = validateNameInput(formData.value.name);
   errorPhoneInput.value = validatePhoneInput(formData.value.phone);
 
@@ -33,9 +35,22 @@ const onSubmit = () => {
     return;
   }
 
-  hasError.value = false;
-  formData.value.name = '';
-  formData.value.phone = '';
+  const response = await callBackFormHttp.postCallBackFormData({
+    ...formData.value,
+    message: props.titleModal ?? callBackFormState.value.title,
+    form: 'call-back',
+  });
+
+  if (response.data.value) {
+    hasError.value = false;
+    formData.value.name = '';
+    formData.value.phone = '';
+    isSuccess.value = true;
+
+    setTimeout(() => {
+      isSuccess.value = false;
+    }, 3000);
+  }
 };
 
 watch(
@@ -53,7 +68,7 @@ watch(
 <template>
   <div class="callback-form">
     <div class="callback-form__body">
-      <div class="callback-form__content">
+      <div v-if="!isSuccess" class="callback-form__content">
         <p class="callback-form__title">
           {{ titleModal ?? callBackFormState.title }}
         </p>
@@ -86,15 +101,21 @@ watch(
         </form>
         <p class="callback-form__policy">Нажимая кнопку, вы соглашаетесь с нашей Политикой конфиденциальности</p>
         <div class="callback-form__socials">
-          <UIButton tag="a" :href="contactsState.social_network?.[0].url">
+          <UIButton tag="a" :href="contactsState.social_network?.[0].url" target="_black">
             <IcTelegram :font-controlled="false" :filled="true" />
           </UIButton>
-          <UIButton tag="a" :href="contactsState.social_network?.[1].url">
+          <UIButton tag="a" :href="contactsState.social_network?.[1].url" target="_black">
             <IcWhatsapp :font-controlled="false" :filled="true" />
           </UIButton>
         </div>
       </div>
-      <div v-if="!isMobile" class="callback-form__image">
+      <AppQuestQuestion4
+        v-if="isSuccess"
+        :form-data="{}"
+        :title-top="'Спасибо! Ваша заявка отправлена успешно.'"
+        :text="'Специалист свяжется с Вами в ближайшее время.'"
+      />
+      <div v-if="!(isMobile || isSuccess)" class="callback-form__image">
         <NuxtPicture src="/images/callback-form.png" format="webp,png,jpg" loading="lazy" />
       </div>
     </div>

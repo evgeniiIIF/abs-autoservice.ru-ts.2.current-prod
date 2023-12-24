@@ -7,13 +7,13 @@ import type {
   HomeSeo,
   HomeWelcome,
   HomeOffers,
-  HomeOffersItem,
   HomePopularServices,
   HomePopularServicesItem,
   HomeAbout,
   HomeReviews,
   HomeReviewItem,
 } from '@/api/http/homeHttp/homeHttp.types';
+import type { OffersListItem } from '~/api/http/offersHttp';
 
 const DEFAULT_STATE: HomeData = {
   seo: {} as HomeSeo,
@@ -36,7 +36,7 @@ export const homeStore = defineStore('homeStore', () => {
   const setWelcome = (data: HomeWelcome[]) => (state.value.welcome = data);
   const setWelcomeImg = (data: string) => (state.value.welcome_img = data);
   const setOffers = (data: HomeOffers) => (state.value.offers = data);
-  const setOffersItems = (data: HomeOffersItem[]) => (state.value.offers_items = data);
+  const setOffersItems = (data: OffersListItem[]) => (state.value.offers_items = data);
   const setPopularServices = (data: HomePopularServices) => (state.value.popular_services = data);
   const setPopularServicesItems = (data: HomePopularServicesItem[]) => (state.value.popular_services_items = data);
   const setAbout = (data: HomeAbout) => (state.value.about = data);

@@ -16,6 +16,10 @@
     color: var(--white);
 
     @include TitleXSBold;
+
+    @include mobile {
+      @include SubtitleLBold;
+    }
   }
 
   &__subtitle {
@@ -23,6 +27,10 @@
     color: var(--black-black-50);
 
     @include SubtitleSRegular;
+
+    @include mobile {
+      @include SubtitleXSRegular;
+    }
   }
 
   &__socials {

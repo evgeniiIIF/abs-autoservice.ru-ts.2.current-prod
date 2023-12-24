@@ -3,6 +3,7 @@ import type { SectionServicesItemProps } from './SectionServices.types';
 
 defineProps<SectionServicesItemProps>();
 </script>
+
 <template>
   <div class="section-service-item">
     <div class="section-service-item__image">
@@ -16,9 +17,9 @@ defineProps<SectionServicesItemProps>();
           :key="subcategoryItem.title"
           class="service-subcategories-list__item"
         >
-          <NuxtLink class="service-subcategories-list__item-title" :to="subcategoryItem.link">{{
-            subcategoryItem.title
-          }}</NuxtLink>
+          <NuxtLink class="service-subcategories-list__item-title" :to="subcategoryItem.link">
+            {{ subcategoryItem.title }}
+          </NuxtLink>
         </div>
       </div>
     </div>
@@ -60,9 +61,11 @@ defineProps<SectionServicesItemProps>();
   &__title {
     flex: 1 1 auto;
     margin-bottom: 22px;
-    @include TitleXSRegular;
     color: var(--black-black-00, #fff);
+
+    @include TitleXSRegular;
   }
+
   &__text {
     color: var(--black-black-50, #898989);
     text-align: center;
@@ -72,8 +75,6 @@ defineProps<SectionServicesItemProps>();
       font-size: 21px;
       line-height: 29px;
     }
-  }
-  &__subcategories {
   }
 }
 

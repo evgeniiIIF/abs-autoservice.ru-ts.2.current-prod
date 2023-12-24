@@ -1,22 +1,11 @@
 <script setup lang="ts">
 import { useHomeStore } from '~/store/home';
 
+const { isMobile } = useMediaSizes();
 const { homeState } = useHomeStore();
 
 const popularServicesTitle = computed(() => homeState.value.popular_services.title);
 const popularServicesItems = computed(() => homeState.value.popular_services_items);
-
-// const services = [
-//   { title: 'Техническое обслуживание', link: '#', img: '/images/popular-services-items/1.png' },
-//   { title: 'Диагностика автомобиля', link: '#', img: '/images/popular-services-items/2.png' },
-//   { title: '3D развал-схождение', link: '#', img: '/images/popular-services-items/3.png' },
-//   { title: 'Ремонт двигателей', link: '#', img: '/images/popular-services-items/4.png' },
-//   { title: 'Ремонт Акпп', link: '#', img: '/images/popular-services-items/5.png' },
-//   { title: 'Ремонт электрики', link: '#', img: '/images/popular-services-items/6.png' },
-//   { title: 'Ремонт подвески', link: '#', img: '/images/popular-services-items/7.png' },
-//   { title: 'Ремонт тормозной системы', link: '#', img: '/images/popular-services-items/8.png' },
-//   { title: 'Шиномонтаж', link: '#', img: '/images/popular-services-items/9.png' },
-// ];
 </script>
 
 <template>
@@ -26,7 +15,7 @@ const popularServicesItems = computed(() => homeState.value.popular_services_ite
       <h2 class="popular-services__title">{{ popularServicesTitle }}</h2>
       <ul class="popular-services__services">
         <li v-for="service in popularServicesItems" :key="service.title" class="popular-services__service">
-          <PopularServiceCard :service="service" />
+          <PopularServiceCard :service="service" :size="isMobile ? 'small' : 'standard'" />
         </li>
       </ul>
     </div>
@@ -75,12 +64,12 @@ const popularServicesItems = computed(() => homeState.value.popular_services_ite
   }
 
   &__services {
-    display: flex;
-    flex-wrap: wrap;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
     gap: 10px;
-    justify-content: space-between;
 
     @include desktop {
+      grid-template-columns: repeat(3, 1fr);
       gap: 20px;
     }
   }

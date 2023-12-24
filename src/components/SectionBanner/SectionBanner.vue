@@ -25,11 +25,11 @@ const scrollToAnchor = () => {
           <NuxtPicture format="webp" :src="homeState.welcome_img ?? 'undefined'" />
         </div>
         <div class="banner__content">
-          <h1 class="banner__title">{{ welcomeState.title }}</h1>
+          <h1 class="banner__title">{{ welcomeState?.title }}</h1>
           <div class="banner__tickers tickers">
             <ClientOnly v-if="isMobile">
               <Vue3Marquee :duration="8">
-                <div v-for="tickerItem in welcomeState.advantage_tags" :key="tickerItem" class="tickers__column">
+                <div v-for="tickerItem in welcomeState?.advantage_tags" :key="tickerItem" class="tickers__column">
                   <div class="tickers__item">
                     {{ tickerItem }}
                   </div>
@@ -37,7 +37,7 @@ const scrollToAnchor = () => {
               </Vue3Marquee>
             </ClientOnly>
             <template v-else>
-              <div v-for="tickerItem in welcomeState.advantage_tags" :key="tickerItem" class="tickers__column">
+              <div v-for="tickerItem in welcomeState?.advantage_tags" :key="tickerItem" class="tickers__column">
                 <div class="tickers__item">
                   {{ tickerItem }}
                 </div>
@@ -47,16 +47,11 @@ const scrollToAnchor = () => {
 
           <div class="banner__buttons">
             <!-- eslint-disable-next-line vuejs-accessibility/mouse-events-have-key-events -->
-            <div
-              class="banner__button banner__button--bg"
-              @mouseover="hoverElement"
-              @mouseleave="leaveElement"
-              
-            >
-              <UIButton @click="scrollToAnchor">{{ welcomeState.btn[0].title }}</UIButton>
+            <div class="banner__button banner__button--bg" @mouseover="hoverElement" @mouseleave="leaveElement">
+              <UIButton @click="scrollToAnchor">{{ welcomeState?.btn?.[0].title }}</UIButton>
             </div>
             <div class="banner__button banner__button--bd">
-              <UIButton :withoutFill="true" @click="openModal">{{ welcomeState.btn[1].title }}</UIButton>
+              <UIButton :withoutFill="true" @click="openModal">{{ welcomeState?.btn?.[1].title }}</UIButton>
               <CallbackFormModal :is-open="isOpenModal" @on-close="closeModal" />
             </div>
           </div>

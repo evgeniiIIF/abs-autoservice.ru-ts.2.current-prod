@@ -1,20 +1,18 @@
 <script setup lang="ts">
-import { useMediaSizes } from '@/composables/useMediaSizes';
+import type { ReviewCardProps } from './ReviewCard.types';
 
-import type { HomeReviewItem } from '~/api/http/homeHttp/homeHttp.types';
-
-defineProps<{ item: HomeReviewItem }>();
-
-const { isMobile } = useMediaSizes();
+withDefaults(defineProps<ReviewCardProps>(), {
+  size: 'standard',
+});
 </script>
 
 <template>
-  <div class="review-card">
+  <div :class="['review-card', { 'review-card--size-standard': size === 'standard' }]">
     <div class="review-card__aside">
       <div class="review-card__review-avatar">
         <NuxtPicture :src="item?.avatar ?? 'undefined'" loading="lazy" alt="Аватар клиента" />
       </div>
-      <div v-if="isMobile" class="review-card__review-app">
+      <div v-if="size === 'small'" class="review-card__review-app">
         <div class="review-card__review-rating">
           <AppRating :rating="Number(item?.rating)" />
         </div>
@@ -26,7 +24,7 @@ const { isMobile } = useMediaSizes();
     <div class="review-card__content">
       <div class="review-card__content-top">
         <h3 class="review-card__review-name">{{ item?.name }}</h3>
-        <div v-if="!isMobile" class="review-card__review-rating">
+        <div v-if="size === 'standard'" class="review-card__review-rating">
           <IcStarRating v-for="star in Number(item?.rating)" :key="star" :font-controlled="false" :filled="true" />
         </div>
       </div>
@@ -34,14 +32,14 @@ const { isMobile } = useMediaSizes();
       <div class="review-card__content-bottom">
         <div class="review-card__review-button">
           <NuxtLink :to="item.review_service[0]?.link" target="_blank">
-            <UIButton with-arrow :has-full-width="isMobile">
+            <UIButton with-arrow :has-full-width="size === 'small'">
               <span>Читать весь отзыв</span>
-              <IcArrowRight v-if="isMobile" :font-controlled="false" :filled="true" />
+              <IcArrowRight v-if="size === 'small'" :font-controlled="false" :filled="true" />
               <IcArrowUpRight v-else :font-controlled="false" :filled="true" />
             </UIButton>
           </NuxtLink>
         </div>
-        <div v-if="!isMobile" class="review-card__review-app-image">
+        <div v-if="size === 'standard'" class="review-card__review-app-image">
           <NuxtPicture :src="item.review_service[0]?.icon ?? 'undefined'" alt="Приложение" />
         </div>
       </div>
@@ -57,7 +55,7 @@ const { isMobile } = useMediaSizes();
   background: var(--linear, linear-gradient(180deg, rgba(42, 42, 42, 0) 0%, rgba(42, 42, 42, 0.4) 100%));
   border-radius: 20px;
 
-  @include desktop {
+  &--size-standard {
     width: 100%;
     display: flex;
     gap: 20px;
@@ -93,11 +91,6 @@ const { isMobile } = useMediaSizes();
         padding: 8px 16px;
         background-color: var(--black-black-04, #f6f6f6);
         border-radius: 10px;
-        @include tablet {
-          display: flex;
-          align-items: center;
-          max-width: 100%;
-        }
 
         picture {
           display: flex;
@@ -106,32 +99,18 @@ const { isMobile } = useMediaSizes();
         img {
           width: 50px;
           height: 16px;
-          @include tablet {
-            width: auto;
-            height: auto;
-          }
         }
       }
     }
 
     &-rating {
       margin-top: 7px;
-
-      @include tablet {
-        margin-top: 0;
-      }
     }
 
     &-name {
       margin-bottom: 8px;
       @include SubtitleXSMedium;
       color: var(--white, #fff);
-
-      @include tablet {
-        margin-bottom: 0;
-
-        @include SubtitleMMedium;
-      }
     }
 
     &-text {
@@ -142,12 +121,6 @@ const { isMobile } = useMediaSizes();
 
       @include BodySRegular;
       color: var(--black-black-50, #898989);
-
-      @include tablet {
-        height: 136px;
-        margin-bottom: 20px;
-        @include BodyMRegular;
-      }
     }
 
     &-button {

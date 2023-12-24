@@ -1,108 +1,103 @@
 <script setup lang="ts">
-import { useMediaSizes } from '@/composables/useMediaSizes';
 import type { PopularServiceCard } from '@/components/PopularServiceCard/PopularServiceCard.types';
 import { appRoutes } from '~/appRoutes';
 
 defineProps<PopularServiceCard>();
 
-const { isMobile } = useMediaSizes();
+// const { isMobile } = useMediaSizes();
 
 const [isModalOpen, openModal, closeModal] = useBooleanState();
 </script>
 
 <template>
-  <NuxtLink v-if="isMobile" class="popular-service-card" :to="appRoutes.services(service.id)">
-    <div class="popular-service-card__image">
-      <NuxtPicture :src="service.image_icon ?? 'undefined'" format="webp,png,jpg" loading="lazy" />
-    </div>
+  <NuxtLink
+    :class="[
+      'popular-service-card',
+      {
+        'popular-service-card--size-standard': size === 'standard',
+        'popular-service-card--size-small': size === 'small',
+      },
+    ]"
+    :to="appRoutes.services(service.id)"
+  >
+    <NuxtPicture
+      class="popular-service-card__picture"
+      :src="service.image_icon ?? 'undefined'"
+      format="webp,png,jpg"
+      loading="lazy"
+    />
     <div class="popular-service-card__content">
-      <h3 class="popular-service-card__title">{{ service.title }}</h3>
+      <p class="popular-service-card__title">{{ service.title }}</p>
+      <UIButton v-if="size === 'standard'" class="popular-service-card__button" @click.stop="openModal">
+        Записаться
+      </UIButton>
     </div>
   </NuxtLink>
-  <div v-else class="popular-service-card">
-    <div class="popular-service-card__image">
-      <NuxtPicture :src="service.image_icon ?? 'undefined'" format="webp,png,jpg" loading="lazy" />
-    </div>
-    <div class="popular-service-card__content">
-      <h3 class="popular-service-card__title">{{ service.title }}</h3>
-      <NuxtLink v-if="!isMobile" class="popular-service-card__link">
-        <UIButton @click.stop="openModal">Записаться</UIButton>
-      </NuxtLink>
-    </div>
-  </div>
   <CallbackFormModal :is-open="isModalOpen" :title-modal="service.title" @on-close="closeModal" />
 </template>
 
 <style lang="scss">
 .popular-service-card {
   display: flex;
-  flex-direction: column;
   align-items: center;
-  width: 100%;
-  min-width: 135px;
-  min-height: 130px;
-  height: 100%;
-  padding: 10px 8px;
-  gap: 10px;
+  gap: 16px;
+  border: 1px solid var(--black-black-90, #2a2a2a);
+  transition: all 0.3s ease;
   border-radius: 20px;
-  background-color: rgba(42, 42, 42, 0.5);
 
-  @include desktop {
-    padding: 12px;
-    gap: 16px;
-    flex-direction: inherit;
-    align-items: inherit;
-    border: 1px solid var(--black-black-90, #2a2a2a);
+  &--size-standard {
     background: var(--linear, linear-gradient(180deg, rgba(42, 42, 42, 0) 0%, rgba(42, 42, 42, 0.4) 100%));
-    transition: all 0.3s ease;
+    padding: 12px;
 
     @include hover {
       background: var(--black-black-90, #2a2a2a);
 
-      .popular-service-card {
-        &__image {
-          img {
-            transform: scale(0.9);
-          }
+      .popular-service-card__picture {
+        img {
+          transform: scale(0.9);
         }
       }
     }
   }
 
-  &__image {
-    img {
-      width: 100%;
-      max-width: 115px;
-      height: 60px;
-      object-fit: contain;
-      transition: all 0.3s ease;
+  &--size-small {
+    display: block;
+    padding: 12px;
+    height: 100%;
+    background: var(--black-black-90);
 
-      @include desktop {
-        width: 120px;
-        height: 120px;
-        max-width: inherit;
-      }
+    .popular-service-card__picture {
+      margin: 0 auto;
+      width: 115px;
+      height: 80px;
+    }
+
+    .popular-service-card__title {
+      text-align: center;
+      @include BodySBold;
     }
   }
 
-  &__content {
-    @include desktop {
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-      padding: 6px 0;
+  &__picture {
+    display: block;
+    width: 120px;
+    height: 120px;
+
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      transition: all 0.3s ease;
     }
   }
 
   &__title {
-    text-align: center;
-    @include BodySBold;
-    color: var(--white, #fff);
+    color: var(--white);
+    @include SubtitleMBold;
+  }
 
-    @include desktop {
-      text-align: inherit;
-      @include SubtitleMBold;
-    }
+  &__button {
+    margin-top: 30px;
   }
 }
 </style>

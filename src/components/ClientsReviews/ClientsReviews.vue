@@ -6,7 +6,10 @@ import 'swiper/scss/pagination';
 
 import { useHomeStore } from '~/store/home';
 
+const { isDesktop } = useMediaSizes();
+
 const { homeState } = useHomeStore();
+
 const reviewsTitle = computed(() => homeState.value.reviews.title);
 const reviewItems = computed(() => homeState.value.review_items);
 </script>
@@ -38,7 +41,7 @@ const reviewItems = computed(() => homeState.value.review_items);
         }"
       >
         <SwiperSlide v-for="item in reviewItems" :key="item.name" class="clients-reviews__slide">
-          <ReviewCard :item="item" />
+          <ReviewCard :item="item" :size="isDesktop ? 'standard' : 'small'" />
         </SwiperSlide>
       </Swiper>
       <div class="clients-reviews__slider-pagination"></div>

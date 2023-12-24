@@ -69,30 +69,23 @@ export default defineNuxtConfig({
   },
   runtimeConfig: {
     public: {
-      apiBaseUrl: 'NUXT_PUBLIC_API_BASE_URL',
+      apiBaseUrl: process.env.NUXT_PUBLIC_API_BASE_URL,
     },
   },
   viewport: {
     breakpoints: {
-      // xs: 320,
-      // sm: 640,
       mobile: 768,
       tabletSmall: 769,
       tablet: 1024,
       desktop: 1280,
-      // xl: 1281,
-      // xxl: 1536,
     },
     cookieName: 'viewport',
     defaultBreakpoints: {
       mobile: 'mobile',
-      // xs: 'xs',
-      // sm: 'sm',
+      tabletSmall: 'tabletSmall',
       tablet: 'tablet',
       desktop: 'desktop',
-      // xl: 'xl',
-      // xxl: 'xxl',
     },
-    fallbackBreakpoint: 'xl',
+    fallbackBreakpoint: 'desktop',
   },
 });

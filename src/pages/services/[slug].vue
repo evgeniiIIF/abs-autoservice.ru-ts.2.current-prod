@@ -11,6 +11,18 @@ const { servicesEffects, servicesState } = useServicesStore();
 
 await servicesEffects.fetchService(route.params.slug as unknown as number);
 
+useSeoMeta({
+  title: servicesState.value.service?.seo.title,
+  description: servicesState.value.service?.seo.description,
+  ogTitle: servicesState.value.service?.seo['og:title'],
+  ogDescription: servicesState.value.service?.seo['og:description'],
+  ogType: servicesState.value.service?.seo['og:type'] as any,
+  twitterTitle: servicesState.value.service?.seo['twitter:title'],
+  twitterDescription: servicesState.value.service?.seo['twitter:description'],
+  twitterCard: servicesState.value.service?.seo['twitter:card'] as any,
+  robots: servicesState.value.service?.seo.robots,
+});
+
 const findServiceById = (
   id: number,
   categoryList: ServiceItem[],
