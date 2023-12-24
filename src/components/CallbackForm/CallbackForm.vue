@@ -125,7 +125,6 @@ watch(
 <style lang="scss">
 .callback-form {
   max-width: 1200px;
-  width: 100%;
 
   &__body {
     display: flex;

@@ -120,19 +120,34 @@ const [isOpenModal, openModal, closeModal] = useBooleanState();
       @include BodyXLRegular;
     }
 
-    &-list {
+    ul,
+    ol {
       display: flex;
       flex-direction: column;
       gap: 10px;
       margin: 20px 0;
 
-      &-item {
+      li {
         display: flex;
         gap: 20px;
+        @include BodyMRegular;
+        padding-left: 20px;
+        position: relative;
 
-        &-index {
-          @include BodyXLBold;
-          color: var(--green-primary, #00a19c);
+        @include desktop {
+          @include BodyXLRegular;
+        }
+
+        &::before {
+          content: '';
+          width: 6px;
+          height: 6px;
+          border-radius: 50%;
+          left: 0;
+          position: absolute;
+          top: 50%;
+          background: var(--green-primary);
+          transform: translateY(-50%);
         }
       }
     }

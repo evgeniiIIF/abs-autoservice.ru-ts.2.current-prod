@@ -12,7 +12,7 @@ const popularServices = computed(() =>
     id: service.id,
     title: service.title,
     link: appRoutes.services(service.id).path,
-    price: 0,
+    price: service?.price,
   })),
 );
 </script>

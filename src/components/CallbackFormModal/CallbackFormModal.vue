@@ -15,5 +15,9 @@ defineEmits<CallbackFormModalEmits>();
 .callback-form-modal {
   max-width: 1200px;
   width: 100%;
+
+  .callback-form {
+    width: 100%;
+  }
 }
 </style>

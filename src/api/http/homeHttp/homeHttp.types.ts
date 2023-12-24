@@ -33,6 +33,7 @@ export interface HomePopularServicesItem {
   id: number;
   title: string;
   image_icon: string;
+  price: number;
 }
 
 export interface HomeAbout {
