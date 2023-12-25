@@ -63,6 +63,7 @@ const { isDesktop } = useMediaSizes();
     display: flex;
     gap: 20px;
     overflow-x: scroll;
+    @include no-scrollbar;
 
     @include desktop {
       display: grid;
