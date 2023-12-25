@@ -1,23 +1,30 @@
 <script setup lang="ts">
-import { appRoutes } from '~/appRoutes';
+import { useAboutStore } from '~/store/about';
+
+const { aboutState, aboutEffects } = useAboutStore();
+
+await aboutEffects.fetchAboutPageInfo();
 
 useSeoMeta({
-  title: 'Автосервис ABS-AUTO',
-  description: `
-  Автосервис ABS-AUTO – сервисный центр в Ставрополе, который успешно работает вот уже более 15 лет и входит
-  в состав торгово-инвестиционной группы компаний ABS GROUP. Холдинг является одним из крупнейших
-  поставщиков автомобильных запчастей и смазочных материалов в СНГ, занимается производством собственных
-  запчастей под брендом ABSEL, а также создает современные технологичные решения для автобизнеса.
-  В ABS-AUTO Service мы собрали команду настоящих профессионалов, которых объединяет искренняя любовь к
-  автомобилям. Мы предлагаем комплексные услуги по ремонту и полноценному обслуживанию вашего авто с
-  применением только высококачественных средств и оборудования.
-  `,
+  title: aboutState.value?.seo?.title,
+  description: aboutState.value?.seo?.description,
+  ogTitle: aboutState.value?.seo?.['og:title'],
+  ogDescription: aboutState.value?.seo?.['og:description'],
+  ogType: aboutState.value?.seo?.['og:type'] as any,
+  twitterTitle: aboutState.value?.seo?.['twitter:title'],
+  twitterDescription: aboutState.value?.seo?.['twitter:description'],
+  twitterCard: aboutState.value?.seo?.['twitter:card'] as any,
+  robots: aboutState.value.seo?.robots,
 });
 
-const { isMobile, isDesktop } = useMediaSizes();
+const { isMobile } = useMediaSizes();
 const breadcrumbItems = [{ name: 'Об автосервисе', link: '/about' }];
 
 const [isModalOpen, openModal, closeModal] = useBooleanState();
+
+const bannerBackgroundStyle = computed(() => ({
+  background: `url(${aboutState.value.guarantee_img}) center center`,
+}));
 </script>
 
 <template>
@@ -25,96 +32,70 @@ const [isModalOpen, openModal, closeModal] = useBooleanState();
     <div class="about__breadcrumb">
       <UIBreadcrumb :items="breadcrumbItems" />
     </div>
-    <section class="about__info info-about">
-      <div class="container">
-        <div class="info-about__body">
-          <div class="info-about__ellipse"></div>
-          <div class="info-about__top">
-            <h1 class="info-about__title">Автосервис ABS-AUTO</h1>
-            <p class="info-about__subtitle">
-              – техническое обслуживание, ремонт и продажа запасных частей для автомобилей иностранного производства
-            </p>
-            <div class="info-about__buttons">
-              <div class="info-about__button info-about__button--bg">
-                <UIButton tag="NuxtLink" :to="appRoutes.contacts()">Контакты</UIButton>
-              </div>
-              <div class="info-about__button info-about__button--bd">
-                <UIButton>Реквизиты</UIButton>
-              </div>
-            </div>
-          </div>
-          <div class="info-about__bottom">
-            <p class="info-about__text">
-              Автосервис ABS-AUTO – сервисный центр в Ставрополе, который успешно работает вот уже более 15 лет и входит
-              в состав торгово-инвестиционной группы компаний ABS GROUP. Холдинг является одним из крупнейших
-              поставщиков автомобильных запчастей и смазочных материалов в СНГ, занимается производством собственных
-              запчастей под брендом ABSEL, а также создает современные технологичные решения для автобизнеса.
-            </p>
-            <p v-if="!isMobile" class="info-about__text info-about__text--desktop">
-              В ABS-AUTO Service мы собрали команду настоящих профессионалов, которых объединяет искренняя любовь к
-              автомобилям. Мы предлагаем комплексные услуги по ремонту и полноценному обслуживанию вашего авто с
-              применением только высококачественных средств и оборудования.
-            </p>
-            <div class="info-about__image ibg">
-              <NuxtPicture src="images/about.jpg" format="webp" />
-            </div>
+    <div class="about__container">
+      <div class="about__info-content">
+        <div class="about__info-ellipse" />
+        <div class="about__info-row">
+          <h1 class="about__title">{{ aboutState.text?.title }}</h1>
+          <p class="about__subtitle">{{ aboutState.text?.subtitle }}</p>
+          <div class="about__info-link-buttons">
+            <UINewButton
+              v-for="(linkButton, index) in aboutState.text?.link_btn"
+              :key="linkButton.title"
+              tag="NuxtLink"
+              :fill="index % 2 === 0 ? 'solid' : 'outlined'"
+              :to="linkButton.url"
+            >
+              {{ linkButton.title }}
+            </UINewButton>
           </div>
         </div>
-      </div>
-    </section>
-    <section class="about__guarantees guarantees-about">
-      <div class="guarantees-about__ellipse"></div>
-      <div class="container">
-        <div class="guarantees-about__body">
-          <div v-if="!isDesktop" class="guarantees-about__image guarantees-about__image--mobile ibg">
-            <NuxtPicture src="images/guarantees-mobile.jpg" format="webp" loading="lazy" />
-          </div>
-          <div v-else class="guarantees-about__image guarantees-about__image--desktop ibg">
-            <NuxtPicture src="images/guarantees-desktop.jpg" format="webp" loading="lazy" />
-          </div>
-          <div class="guarantees-about__content">
-            <h3 class="guarantees-about__title">Гарантия качества</h3>
-            <p class="guarantees-about__subtitle">
-              Каждый автотехцентр под брендом ABS-autoservice предоставляет 1 год гарантии на все устанавливаемые
-              автозапчасти и работы.
-            </p>
-            <div class="guarantees-about__button">
-              <UIButton @click.stop="openModal">Записаться на сервис</UIButton>
-            </div>
-          </div>
+        <div class="about__info-row">
+          <div class="about__description" v-html="aboutState.text?.content" />
+          <NuxtPicture class="about__description-image" :src="aboutState.text_img" />
         </div>
       </div>
-      <CallbackFormModal :is-open="isModalOpen" @on-close="closeModal" />
-    </section>
+      <div class="about__banner" :style="!isMobile ? bannerBackgroundStyle : undefined">
+        <div class="about__banner-ellipse" />
+        <div v-if="isMobile" class="about__banner-image-block">
+          <NuxtPicture class="about__banner-image" :src="aboutState.guarantee_img" />
+        </div>
+        <div class="about__banner-content">
+          <h2 class="about__banner-title">
+            {{ aboutState.guarantee?.title }}
+          </h2>
+          <div class="about__banner-subtitle" v-html="aboutState.guarantee?.content" />
+          <UINewButton class="about__banner-button" :is-full-width="isMobile" @click.stop="openModal">
+            {{ aboutState.guarantee?.title_btn }}
+          </UINewButton>
+        </div>
+      </div>
+    </div>
+    <CallbackFormModal :is-open="isModalOpen" @on-close="closeModal" />
   </div>
 </template>
 
 <style lang="scss">
 .about {
-  &__info {
-    margin-bottom: 60px;
+  margin-bottom: 80px;
+
+  &__container {
+    @include container;
+  }
+
+  &__info-content {
+    position: relative;
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 40px;
 
     @include desktop {
-      margin-bottom: 172px;
+      flex-wrap: nowrap;
     }
   }
-  &__guarantees {
-    margin-bottom: 60px;
 
-    @include desktop {
-      margin-bottom: 80px;
-    }
-  }
-}
-
-.info-about {
-  &__body {
-    @include desktop {
-      position: relative;
-      display: flex;
-    }
-  }
-  &__ellipse {
+  &__info-ellipse {
     position: absolute;
     left: 0;
     top: 50%;
@@ -126,81 +107,141 @@ const [isModalOpen, openModal, closeModal] = useBooleanState();
     opacity: 0.3;
     filter: blur(70px);
   }
-  &__top {
-    max-width: 387px;
-    margin-bottom: 40px;
 
-    @include desktop {
-      max-width: 100%;
-      margin-right: 10.1666667%;
-      flex: 0 0 387px;
+  &__info-row {
+    &:first-child {
+      @include desktop {
+        max-width: 400px;
+      }
+    }
+
+    &:last-child {
+      @include desktop {
+        max-width: 700px;
+      }
     }
   }
 
   &__title {
-    margin-bottom: 10px;
-    color: var(--1, #fff);
+    color: var(--white);
 
     @include TitleXSBold;
-    @include tablet {
-      margin-bottom: 8px;
+
+    @include desktop {
       @include TitleSBold;
     }
   }
 
   &__subtitle {
-    margin-bottom: 20px;
-    color: var(--Black-Black-50, #898989);
+    color: var(--black-black-50);
+    margin-top: 10px;
     @include SubtitleXSRegular;
-    @include tablet {
-      margin-bottom: 40px;
+
+    @include desktop {
+      margin-top: 20px;
     }
   }
 
-  &__buttons {
+  &__info-link-buttons {
     display: flex;
-    @include mr(20px);
-  }
+    gap: 20px;
+    margin-top: 20px;
 
-  &__button--bd {
-    .button {
-      color: var(--Green-Primary, #00a19c);
-      background: transparent;
-      border: 2px solid var(--Green-Primary, #00a19c);
+    @include desktop {
+      margin-top: 40px;
     }
   }
 
-  &__text {
-    margin-bottom: 20px;
-    color: var(--Black-Black-00, #fff);
+  &__description {
+    color: var(--white);
+
     @include BodyMRegular;
 
-    @include tablet {
+    p {
+      margin-bottom: 20px;
       @include BodyLRegular;
     }
   }
 
-  &__text--desktop {
-    @include desktop {
-      margin-bottom: 60px;
-    }
-  }
+  &__description-image {
+    margin-top: 60px;
+    display: block;
+    width: 100%;
+    height: 400px;
 
-  &__image {
-    margin: 0 -10px;
-    border-radius: 20px;
-    overflow: hidden;
-    padding-top: 57.3333333%;
-    @include tablet {
-      margin: 0;
+    @include mobile {
+      height: 200px;
+      margin-top: 20px;
+    }
+
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
       border-radius: 40px;
+
+      @include mobile {
+        border-radius: 20px;
+      }
     }
   }
-}
 
-.guarantees-about {
-  position: relative;
-  &__ellipse {
+  &__banner {
+    position: relative;
+    margin-top: 172px;
+    width: 100%;
+    padding: 40px 80px;
+    border-radius: 40px;
+
+    @include mobile {
+      padding: 0;
+      margin-top: 40px;
+    }
+  }
+
+  &__banner-image {
+    display: block;
+    width: 100%;
+    border-radius: 40px;
+
+    @include mobile {
+      height: 120px;
+    }
+
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: 20px;
+    }
+  }
+
+  &__banner-content {
+    max-width: 500px;
+
+    @include mobile {
+      margin-top: 20px;
+    }
+  }
+
+  &__banner-title {
+    color: var(--white);
+
+    @include TitleSBold;
+  }
+
+  &__banner-subtitle {
+    margin-top: 8px;
+    color: var(--black-black-50, #898989);
+
+    @include SubtitleSRegular;
+  }
+
+  &__banner-button {
+    margin-top: 40px;
+  }
+
+  &__banner-ellipse {
     position: absolute;
     left: -100px;
     bottom: 50px;
@@ -210,68 +251,12 @@ const [isModalOpen, openModal, closeModal] = useBooleanState();
     background: var(--Green-Primary, #00a19c);
     opacity: 0.34;
     filter: blur(70px);
+
     @include desktop {
       left: auto;
       bottom: auto;
       top: -50px;
       right: 110px;
-    }
-  }
-
-  &__body {
-    position: relative;
-    @include desktop {
-      border-radius: 40px;
-      overflow: hidden;
-      padding: 40px 0 112px 80px;
-    }
-  }
-
-  &__image--mobile {
-    margin-bottom: 20px;
-    border-radius: 20px;
-    overflow: hidden;
-    padding-top: 42.8571429%;
-  }
-
-  &__image--desktop {
-    position: absolute;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-  }
-
-  &__content {
-    position: relative;
-    z-index: 1;
-    max-width: 504px;
-  }
-
-  &__title {
-    margin-bottom: 8px;
-    color: var(--1, #fff);
-    @include SubtitleLBold;
-    @include tablet {
-      @include TitleSBold;
-    }
-  }
-
-  &__subtitle {
-    margin-bottom: 40px;
-    color: var(--Black-Black-50, #898989);
-    @include BodyMRegular;
-    @include tablet {
-      @include SubtitleSRegular;
-    }
-  }
-
-  &__button {
-    .button {
-      width: 100%;
-      @include tablet {
-        width: auto;
-      }
     }
   }
 }
