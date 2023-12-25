@@ -186,3 +186,10 @@ $screen-desktop-to: 1280px;
   align-items: center;
   justify-content: center;
 }
+
+@mixin container($max-width: 1240px) {
+  max-width: $max-width;
+  width: 100%;
+  margin: 0 auto;
+  padding: 0 20px;
+}
