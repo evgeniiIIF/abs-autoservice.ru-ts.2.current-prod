@@ -28,6 +28,7 @@ const { contactsState } = useContactsStore();
   display: flex;
   align-items: flex-start;
   gap: 10px;
+  list-style: none;
 
   &__link {
     display: flex;

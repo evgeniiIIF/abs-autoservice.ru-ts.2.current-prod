@@ -81,7 +81,12 @@ onMounted(() => {
   <div class="service-page">
     <UIBreadcrumb :items="breadcrumbItems" />
     <SectionService />
-    <CompanyPicture v-if="isDesktop" image="/images/company-2.png" alt="Зал автосервиса" />
+    <CompanyPicture
+      v-if="isDesktop"
+      class="service-page__company-picture"
+      image="/images/company-2.png"
+      alt="Зал автосервиса"
+    />
     <ServicePopularServices />
     <CallbackForm class="service-page__fallback-form container" />
   </div>
@@ -91,6 +96,10 @@ onMounted(() => {
 .service-page {
   &__fallback-form {
     margin-bottom: 80px;
+  }
+
+  &__company-picture {
+    margin-top: 80px;
   }
 }
 </style>

@@ -40,8 +40,6 @@ watch(
   () => route.path,
   () => closeMobileMenu(),
 );
-
-watch(activeServiceId, () => console.log(activeServiceId.value));
 </script>
 <template>
   <header :class="{ 'header-mobile': true, 'js-header-mobile': true, 'header-mobile-menu--open': isOpenMobileMenu }">

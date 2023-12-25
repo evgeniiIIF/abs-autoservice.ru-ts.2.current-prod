@@ -93,9 +93,6 @@ const AUTOSERVICE_2 = [
                   <div class="contacts-top-footer-desktop__working-hours working-hours">
                     <div class="working-hours__circles circles-working-hours">
                       <div v-for="circleItem in 6" :key="circleItem" class="circles-working-hours__item"></div>
-                      <div class="circles-working-hours__item circles-working-hours__item--incomplete">
-                        <div class="circles-working-hours__item--incomplete-inner"></div>
-                      </div>
                     </div>
                     <div class="working-hours__row">
                       <div class="working-hours__item">
@@ -196,6 +193,7 @@ const AUTOSERVICE_2 = [
     flex-direction: column;
     align-items: flex-start;
     gap: 20px;
+    list-style: none;
   }
 
   &__list-item {
@@ -247,18 +245,12 @@ const AUTOSERVICE_2 = [
     @include BodyXLRegular;
     text-decoration: underline;
   }
-
-  &__working-hours {
-  }
 }
 .working-hours {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
   gap: 10px;
-
-  &__circles {
-  }
 
   &__row {
     display: flex;
@@ -292,14 +284,13 @@ const AUTOSERVICE_2 = [
     height: 12px;
     border-radius: 50%;
     background: var(--Green-Primary, #00a19c);
+    border: 1px solid var(--Green-Primary, #00a19c);
+
+    &:last-child {
+      background: linear-gradient(to top, var(--green-primary) 50%, #2a2a2a 50%);
+    }
   }
 
-  &__item--incomplete {
-    display: flex;
-    align-items: flex-end;
-    background: transparent;
-    border: 1px solid var(--Green-Primary, #00a19c);
-  }
   &__item--incomplete-inner {
     width: 100%;
     height: 50%;

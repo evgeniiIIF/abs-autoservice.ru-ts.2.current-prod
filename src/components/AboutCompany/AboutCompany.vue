@@ -9,16 +9,6 @@ const aboutContent = computed(() => homeState.value.about);
 const descriptionIsOpen = ref(false);
 const descriptionRef = ref<HTMLDivElement | null>(null);
 const descriptionHasFixedHeight = ref(false);
-
-// const { isDesktop } = useMediaSizes();
-
-// watch(
-//   () => [descriptionRef.value, isDesktop.value],
-//   () => {
-//     descriptionHasFixedHeight.value = descriptionRef.value.clientHeight >= 88 && !isDesktop.value;
-//     console.log(descriptionRef.value.clientHeight);
-//   },
-// );
 </script>
 
 <template>
