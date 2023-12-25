@@ -2,6 +2,7 @@
 import { appRoutes } from '~/appRoutes';
 
 const { y } = useWindowScroll();
+
 const [isOpenModal, openModal, closeModal] = useBooleanState();
 const [isSearchOpen, openSearch, closeSearch] = useBooleanState();
 
@@ -35,7 +36,7 @@ const topNavItems = [
     </div>
 
     <div class="header-desktop__body">
-      <NuxtLink to="/" class="header-desktop__logo">
+      <NuxtLink :to="appRoutes.main()" class="header-desktop__logo">
         <IcLogoDesktop :font-controlled="false" :filled="true" />
       </NuxtLink>
       <div class="header-desktop__nav">
@@ -162,9 +163,6 @@ const topNavItems = [
   z-index: $z-header;
   transition: transform 0.3s ease 0s;
 
-  &__top {
-  }
-
   &__body {
     display: flex;
     align-items: center;
@@ -240,8 +238,6 @@ const topNavItems = [
         background: radial-gradient(59.75% 50.89% at 50% 100%, rgba(0, 161, 156, 0.22) 0%, rgba(0, 161, 156, 0) 100%);
       }
     }
-  }
-  &__contacts {
   }
 }
 .contacts-header-desktop {

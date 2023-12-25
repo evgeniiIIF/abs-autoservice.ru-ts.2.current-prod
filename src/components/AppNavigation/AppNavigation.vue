@@ -19,6 +19,10 @@ defineProps<AppNavigationProps>();
 
 <style lang="scss">
 .nav {
+  &__list {
+    list-style: none;
+  }
+
   &__link {
     cursor: pointer;
   }

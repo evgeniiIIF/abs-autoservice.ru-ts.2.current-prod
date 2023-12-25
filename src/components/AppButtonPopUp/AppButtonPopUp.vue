@@ -45,11 +45,11 @@
     width: 88px;
     height: 88px;
   }
-  &__item--top {
-  }
+
   &__item--bottom {
     background: var(--green-primary, #00a19c);
   }
+
   &__image {
     svg {
       @include svg-color(#fff);

@@ -14,7 +14,9 @@ const [isOpenModal, openModal, closeModal] = useBooleanState();
 <template>
   <section class="service-info">
     <div class="container">
-      <h1 v-if="!isDesktop" class="service-info__title">{{ servicesState.service?.title }}</h1>
+      <h1 v-if="!isDesktop" class="service-info__title service-info__title--mobile">
+        {{ servicesState.service?.title }}
+      </h1>
       <div class="service-info__wrapper">
         <div class="service-info__content">
           <div class="service-info__info">
@@ -61,15 +63,18 @@ const [isOpenModal, openModal, closeModal] = useBooleanState();
 <style lang="scss">
 .service-info {
   position: relative;
-  padding: 30px 0;
 
   &__title {
-    margin-bottom: 20px;
-    @include TitleXSBold;
+    margin-top: 20px;
+    @include SubtitleLBold;
     color: var(--white, #fff);
 
     @include desktop {
       @include TitleMBold;
+    }
+
+    &--mobile {
+      margin-bottom: 20px;
     }
   }
 
@@ -113,6 +118,7 @@ const [isOpenModal, openModal, closeModal] = useBooleanState();
   }
 
   &__description {
+    margin-top: 20px;
     @include BodyMRegular;
     color: var(--black-black-50, #898989);
 
@@ -128,26 +134,17 @@ const [isOpenModal, openModal, closeModal] = useBooleanState();
       margin: 20px 0;
 
       li {
-        display: flex;
-        gap: 20px;
         @include BodyMRegular;
+        margin-left: 20px;
         padding-left: 20px;
-        position: relative;
+        color: var(--green-primary);
+
+        p {
+          color: var(--black-black-50, #898989);
+        }
 
         @include desktop {
           @include BodyXLRegular;
-        }
-
-        &::before {
-          content: '';
-          width: 6px;
-          height: 6px;
-          border-radius: 50%;
-          left: 0;
-          position: absolute;
-          top: 50%;
-          background: var(--green-primary);
-          transform: translateY(-50%);
         }
       }
     }

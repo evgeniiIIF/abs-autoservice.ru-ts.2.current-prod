@@ -91,17 +91,16 @@ const [isModalOpen, openModal, closeModal] = useBooleanState();
 
 <style lang="scss">
 .about {
-  &__breadcrumb {
-  }
-
   &__info {
     margin-bottom: 60px;
+
     @include desktop {
       margin-bottom: 172px;
     }
   }
   &__guarantees {
     margin-bottom: 60px;
+
     @include desktop {
       margin-bottom: 80px;
     }
@@ -130,6 +129,7 @@ const [isModalOpen, openModal, closeModal] = useBooleanState();
   &__top {
     max-width: 387px;
     margin-bottom: 40px;
+
     @include desktop {
       max-width: 100%;
       margin-right: 10.1666667%;
@@ -140,6 +140,7 @@ const [isModalOpen, openModal, closeModal] = useBooleanState();
   &__title {
     margin-bottom: 10px;
     color: var(--1, #fff);
+
     @include TitleXSBold;
     @include tablet {
       margin-bottom: 8px;
@@ -161,21 +162,12 @@ const [isModalOpen, openModal, closeModal] = useBooleanState();
     @include mr(20px);
   }
 
-  &__button {
-  }
-
-  &__button--bg {
-  }
-
   &__button--bd {
     .button {
       color: var(--Green-Primary, #00a19c);
       background: transparent;
       border: 2px solid var(--Green-Primary, #00a19c);
     }
-  }
-
-  &__bottom {
   }
 
   &__text {
@@ -233,9 +225,6 @@ const [isModalOpen, openModal, closeModal] = useBooleanState();
       overflow: hidden;
       padding: 40px 0 112px 80px;
     }
-  }
-
-  &__image {
   }
 
   &__image--mobile {
