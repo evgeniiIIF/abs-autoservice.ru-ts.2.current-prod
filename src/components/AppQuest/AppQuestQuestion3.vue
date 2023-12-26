@@ -20,6 +20,7 @@ const onInput = (value: string, name: string) => {
           :placeholder="input.placeholder"
           :value="formData[input.name]"
           :name="input.name"
+          :errorMessage="formDataErrors[input.name]"
           @onInput="onInput($event, input.name)"
         />
       </div>

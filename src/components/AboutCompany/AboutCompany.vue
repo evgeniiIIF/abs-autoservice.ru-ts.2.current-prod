@@ -15,7 +15,7 @@ const descriptionHasFixedHeight = ref(false);
   <section class="about-company">
     <div class="container">
       <div class="about-company__content">
-        <h2 class="about-company__title">{{ aboutContent.title }}</h2>
+        <h1 class="about-company__title">{{ aboutContent.title }}</h1>
         <p class="about-company__subtitle">{{ aboutContent.subtitle }}</p>
         <ul class="about-company__review-services">
           <li v-for="reviewService in 2" :key="reviewService" class="about-company__review-service">

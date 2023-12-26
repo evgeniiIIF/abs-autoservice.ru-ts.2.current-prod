@@ -1,16 +1,10 @@
 <script setup lang="ts">
-import { useMediaSizes } from '@/composables/useMediaSizes';
 import { appRoutes } from '~/appRoutes';
+import { useContactsStore } from '~/store/contacts';
 
-const { isMobile } = useMediaSizes();
+const { contactsState } = useContactsStore();
 
-// const navItems = [
-//   { name: 'Акции', link: '' },
-//   { name: 'Услуги', link: '' },
-//   { name: 'Бонусная программа', link: '' },
-//   { name: 'О автосервисе', link: '' },
-//   { name: 'Контакты', link: '' },
-// ];
+const workTimeItems = computed(() => contactsState.value.time_work?.split(',').map((item) => item.split(' ')));
 </script>
 
 <template>
@@ -23,13 +17,14 @@ const { isMobile } = useMediaSizes();
             <span class="footer-mobile__circle footer-mobile__circle--sunday"></span>
           </div>
           <div class="footer-mobile__working-hours">
-            <div v-for="time in 2" :key="time" class="footer-mobile__working-hours-col">
-              <span class="footer-mobile__working-hours-days">пн-сб</span>
-              <span class="footer-mobile__working-hours-time">9:00-19:00</span>
+            <div class="footer-mobile__working-hours-col">
+              <span class="footer-mobile__working-hours-days">{{ workTimeItems?.[0][0] }}</span>
+              <span class="footer-mobile__working-hours-time">{{ workTimeItems?.[0][1] }}</span>
             </div>
-          </div>
-          <div v-if="!isMobile" class="footer-mobile__row-bottom">
-            <span class="footer-mobile__copyright">© Автосервис ABS-AUTO, 2023</span>
+            <div class="footer-mobile__working-hours-col">
+              <span class="footer-mobile__working-hours-days">{{ workTimeItems?.[1][1] }}</span>
+              <span class="footer-mobile__working-hours-time">{{ workTimeItems?.[1][2] }}</span>
+            </div>
           </div>
         </div>
         <div class="footer-mobile__c2">

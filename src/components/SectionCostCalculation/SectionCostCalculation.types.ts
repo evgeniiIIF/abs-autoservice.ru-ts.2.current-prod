@@ -7,4 +7,7 @@ export interface QuestionProps {
   formData: {
     [x: string]: string;
   };
+  formDataErrors: {
+    [x: string]: string;
+  };
 }

@@ -5,3 +5,5 @@ export * from './callBackForm';
 export * from './contacts';
 export * from './bonus';
 export * from './privacyHttp';
+export * from './menuHttp';
+export * from './reviewsHttp';

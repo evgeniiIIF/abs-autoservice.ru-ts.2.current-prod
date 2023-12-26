@@ -1,23 +1,18 @@
 <script lang="ts" setup>
 import { appRoutes } from '~/appRoutes';
+import { useContactsStore } from '~/store/contacts';
+import { useMenuStore } from '~/store/menu';
 
 const { y } = useWindowScroll();
+
+const { contactsState } = useContactsStore();
+const { menuState } = useMenuStore();
 
 const [isOpenModal, openModal, closeModal] = useBooleanState();
 const [isSearchOpen, openSearch, closeSearch] = useBooleanState();
 
-const navItems = [
-  { name: 'Услуги', link: appRoutes.services().path },
-  { name: 'Акции', link: appRoutes.offers().path },
-  { name: 'Об автосервисе', link: appRoutes.about().path },
-  // { name: 'Гарантии', link: '' },
-  // { name: 'Преимущества', link: '' },
-  { name: 'Контакты', link: appRoutes.contacts().path },
-];
-const topNavItems = [
-  { name: 'Бонусная программа', link: appRoutes.bonus().path },
-  { name: 'Отзовы', link: appRoutes.reviews().path },
-];
+const navItems = computed(() => menuState.value.top_menu.map((item) => ({ name: item.title, link: item.url })));
+const topNavItems = computed(() => menuState.value.header_menu.map((item) => ({ name: item.title, link: item.url })));
 </script>
 
 <template>
@@ -25,7 +20,7 @@ const topNavItems = [
     <div :class="['header-desktop__top', 'header-desktop-top', { 'header-desktop-top--invisible': y > 100 }]">
       <address class="header-desktop-top__address">
         <div class="header-desktop-top__address-icon"><IcNavigation :font-controlled="false" :filled="true" /></div>
-        <p class="header-desktop-top__address-text">г. Ставрополь, ул. Доваторцев 47Б</p>
+        <p class="header-desktop-top__address-text">{{ contactsState.address }}</p>
       </address>
       <div class="header-desktop-top__nav">
         <AppNavigation :items="topNavItems" />
@@ -51,7 +46,7 @@ const topNavItems = [
       <div class="header-desktop__contacts contacts-header-desktop">
         <div class="contacts-header-desktop__feedback feedback">
           <div class="feedback__tel">
-            <UITel phoneNumber="8 (8652) 500-520" />
+            <UITel :phoneNumber="contactsState.phone ?? ''" />
           </div>
           <button type="button" class="feedback__button">обратный звонок</button>
         </div>
@@ -238,9 +233,6 @@ const topNavItems = [
 
   &__feedback {
     margin-right: 20px;
-  }
-
-  &__button {
   }
 }
 

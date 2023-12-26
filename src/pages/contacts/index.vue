@@ -7,8 +7,8 @@ const { isDesktop } = useMediaSizes();
 const { contactsState } = useContactsStore();
 
 useSeoMeta({
-  title: 'Контактыя',
-  description: 'г. Ставрополь, ул. Доваторцев 47Б',
+  title: 'Контакты',
+  description: contactsState.value.address,
 });
 
 const breadcrumbItems = [{ name: 'Контакты', link: appRoutes.contacts().path }];

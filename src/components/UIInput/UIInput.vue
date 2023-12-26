@@ -48,7 +48,9 @@ const onChangeHandler = (event: Event): void => {
       @input="onInputHandler"
       @change="onChangeHandler"
     />
-    <span v-if="errorMessage" class="input__error">{{ errorMessage }}</span>
+    <span v-if="errorMessage" class="input__error" :style="{ top: type === 'textarea' ? '105px' : '70px' }">{{
+      errorMessage
+    }}</span>
   </label>
 </template>
 
@@ -78,7 +80,6 @@ const onChangeHandler = (event: Event): void => {
 
   &__error {
     position: absolute;
-    top: 70px;
     left: 0;
 
     @include BodyXSRegular;

@@ -1,6 +1,7 @@
 <script lang="ts" setup>
 import { appRoutes } from '~/appRoutes';
 import { useContactsStore } from '~/store/contacts';
+import { useMenuStore } from '~/store/menu';
 import { useServicesStore } from '~/store/services';
 
 interface HeaderMobileMenuEmits {
@@ -13,6 +14,7 @@ const router = useRouter();
 
 const { contactsState } = useContactsStore();
 const { servicesState } = useServicesStore();
+const { menuState } = useMenuStore();
 
 const [isOpenServicesMenu, openServicesMenu, closeServicesMenu] = useBooleanState(false);
 
@@ -26,15 +28,20 @@ const servicesList = computed(() => {
   return servicesState.value.servicesTree.find((item) => item.id === activeServiceId.value)?.children;
 });
 
-const navItems = [
-  { name: 'Услуги', onClick: openServicesMenu },
-  { name: 'Акции', link: appRoutes.offers().path },
-  { name: 'Об автосервисе', link: appRoutes.contacts().path },
-  // { name: 'Гарантии', link: '' },
-  // { name: 'Преимущества', link: '' },
-  { name: 'Контакты', link: appRoutes.contacts().path },
-];
+const navItems = computed(() =>
+  menuState.value.top_menu.map((item) => {
+    if (item.url === appRoutes.services().path) {
+      return {
+        name: item.title,
+        onClick: openServicesMenu,
+      };
+    }
+
+    return { name: item.title, link: item.url };
+  }),
+);
 </script>
+
 <template>
   <div class="header-mobile-menu">
     <div class="header-mobile-menu__mask" @click="emits('closeMobileMenu')"></div>

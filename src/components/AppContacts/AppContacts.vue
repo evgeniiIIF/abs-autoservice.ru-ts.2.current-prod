@@ -1,39 +1,26 @@
 <script lang="ts" setup>
 import type { AppContacts } from '@/components/AppContacts/AppContacts.types';
 import { useMediaSizes } from '@/composables/useMediaSizes';
-
-import { useCallBackFormStore } from '~/store/callBackForm';
-
-const { callBackFormState, callBackFormActions } = useCallBackFormStore();
-
-const openModal = (title: string) => {
-  callBackFormActions.setTitleModal(title);
-  useOpenModal();
-};
-
-const [isOpenModal, useOpenModal, closeModal] = useBooleanState();
+import { useContactsStore } from '~/store/contacts';
 
 defineProps<AppContacts>();
+const { contactsState } = useContactsStore();
+
+const [isOpenModal, openModal, closeModal] = useBooleanState();
 
 const { isMobile } = useMediaSizes();
 </script>
 
 <template>
   <div class="contacts" :class="{ 'contacts--in-mobile-menu': inMobileMenu }">
-    <a class="contacts__phone" href="tel:88652500520">8 (8652) 500-520</a>
+    <a class="contacts__phone" :href="`tel:${contactsState.phone?.match(/\d+/g)?.join('')}`">{{
+      contactsState.phone
+    }}</a>
     <div class="contacts__callback">
-      <UINewButton :is-full-width="isMobile" @click="openModal('Заказать звонок')">Заказать звонок</UINewButton>
-      <CallbackFormModal
-        position="center"
-        :is-open="isOpenModal"
-        :title-modal="callBackFormState.titleModal"
-        @onClose="closeModal"
-      />
-      <!-- <UIModal position="center" :is-open="isOpenModal" @onClose="closeModal" >
-        <CallbackForm :title-modal="callBackFormState.titleModal" @onClose="closeModal" />
-      </UIModal> -->
+      <UINewButton :is-full-width="isMobile" @click="openModal">Заказать звонок</UINewButton>
+      <CallbackFormModal :is-open="isOpenModal" @on-close="closeModal" />
     </div>
-    <a class="contacts__email" href="mailto:info@abs-autoservice.ru">info@abs-autoservice.ru</a>
+    <a class="contacts__email" :href="`mailto:${contactsState.mail}`">{{ contactsState.mail }}</a>
     <ul class="contacts__socials">
       <AppSocial />
     </ul>
@@ -67,6 +54,8 @@ const { isMobile } = useMediaSizes();
   &__callback {
     min-width: 220px;
     margin-bottom: 30px;
+    width: 100%;
+
     @include tablet {
       display: flex;
       justify-content: center;

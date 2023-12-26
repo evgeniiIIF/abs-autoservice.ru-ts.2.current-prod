@@ -5,19 +5,9 @@ const { contactsState } = useContactsStore();
 </script>
 <template>
   <ul class="social">
-    <li class="social__item">
-      <a class="social__link" :href="contactsState.social_network?.[2].url" target="_blank" rel="noopener">
-        <IcVk :font-controlled="false" :filled="true" />
-      </a>
-    </li>
-    <li class="social__item">
-      <a class="social__link" :href="contactsState.social_network?.[0].url" target="_blank" rel="noopener">
-        <IcTelegram :font-controlled="false" :filled="true" />
-      </a>
-    </li>
-    <li class="social__item">
-      <a class="social__link" :href="contactsState.social_network?.[1].url" target="_blank" rel="noopener">
-        <IcWhatsapp :font-controlled="false" :filled="true" />
+    <li v-for="social in contactsState.social_network" :key="social.url" class="social__item">
+      <a class="social__link" :href="social.url" target="_blank" rel="noopener">
+        <img :src="social.icon_social" :alt="social.title" />
       </a>
     </li>
   </ul>
@@ -40,6 +30,12 @@ const { contactsState } = useContactsStore();
 
     &:hover {
       background: var(--Black-Black-80, #414141);
+    }
+
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
     }
   }
 }
