@@ -28,9 +28,9 @@ const [isModalOpen, openModal, closeModal] = useBooleanState();
     />
     <div class="popular-service-card__content">
       <p class="popular-service-card__title">{{ service.title }}</p>
-      <UIButton v-if="size === 'standard'" class="popular-service-card__button" @click.stop.prevent="openModal">
+      <UINewButton v-if="size === 'standard'" class="popular-service-card__button" size="small" @click.stop="openModal">
         Записаться
-      </UIButton>
+      </UINewButton>
     </div>
   </NuxtLink>
   <CallbackFormModal :is-open="isModalOpen" :title-modal="service.title" @on-close="closeModal" />

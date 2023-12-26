@@ -48,10 +48,12 @@ const scrollToAnchor = () => {
           <div class="banner__buttons">
             <!-- eslint-disable-next-line vuejs-accessibility/mouse-events-have-key-events -->
             <div class="banner__button banner__button--bg" @mouseover="hoverElement" @mouseleave="leaveElement">
-              <UIButton @click="scrollToAnchor">{{ welcomeState?.btn?.[0].title }}</UIButton>
+              <UINewButton size="big" @click="scrollToAnchor">{{ welcomeState?.btn?.[0].title }}</UINewButton>
             </div>
             <div class="banner__button banner__button--bd">
-              <UIButton :withoutFill="true" @click="openModal">{{ welcomeState?.btn?.[1].title }}</UIButton>
+              <UINewButton size="big" fill="outline" :withoutFill="true" @click="openModal">
+                {{ welcomeState?.btn?.[1].title }}
+              </UINewButton>
               <CallbackFormModal :is-open="isOpenModal" @on-close="closeModal" />
             </div>
           </div>
@@ -121,8 +123,6 @@ const scrollToAnchor = () => {
 
   &__tickers {
     margin-bottom: 20px;
-    // margin-left: -20px;
-    // margin-right: -20px;
     @include desktop {
       margin-bottom: 48px;
     }
@@ -136,12 +136,6 @@ const scrollToAnchor = () => {
     flex-wrap: wrap;
     gap: 20px;
   }
-
-  /* &__button {
-    .button {
-      width: 100%;
-    }
-  } */
 
   .vue3-marquee > .marquee {
     min-width: auto !important;

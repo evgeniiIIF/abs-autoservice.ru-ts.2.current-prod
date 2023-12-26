@@ -20,9 +20,9 @@ const [isModalOpen, openModal, closeModal] = useBooleanState();
             <NuxtPicture src="images/get-card.png" format="webp" loading="lazy" />
           </div>
           <div class="get-card__button">
-            <UIButton @click.stop="openModal">{{
-              isMobile ? 'Получить карту бесплатно' : bonusState.bonusCard?.btn_title
-            }}</UIButton>
+            <UINewButton @click.stop="openModal" :is-full-width="isMobile ? true : false">{{
+              isMobile ? 'Получить карту бесплатно' : bonusCardState.btn_title
+            }}</UINewButton>
           </div>
         </div>
         <div v-if="!isMobile" class="get-card__image">
@@ -124,16 +124,6 @@ const [isModalOpen, openModal, closeModal] = useBooleanState();
     margin-bottom: 38px;
     @include SubtitleSRegular;
     color: var(--black-black-50, #898989);
-  }
-
-  &__button {
-    .button {
-      width: 100%;
-
-      @include tablet {
-        width: auto;
-      }
-    }
   }
 }
 </style>

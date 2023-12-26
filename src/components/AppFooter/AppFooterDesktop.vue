@@ -51,9 +51,9 @@ const AUTOSERVICE_2 = [
                 <ul class="top-footer-desktop__list">
                   <li v-for="item in AUTOSERVICE_2" :key="item.title" class="top-footer-desktop__list-item">
                     <template v-if="item.link === 'open-modal'">
-                      <UIButton class="top-footer-desktop__nav-link" :is-wrapper="true" @click="openModal">
+                      <button type="button" class="top-footer-desktop__nav-link" :is-wrapper="true" @click="openModal">
                         {{ item.title }}
-                      </UIButton>
+                      </button>
                       <UIModal position="center" :is-open="isOpenModal" @onClose="closeModal">
                         <AppQuest />
                       </UIModal>
@@ -200,6 +200,11 @@ const AUTOSERVICE_2 = [
   }
 
   &__list-item {
+    button {
+      background: none;
+      border: none;
+      outline: none;
+    }
   }
 
   &__nav-link {

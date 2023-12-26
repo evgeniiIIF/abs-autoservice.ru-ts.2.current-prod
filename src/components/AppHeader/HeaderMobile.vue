@@ -51,18 +51,21 @@ watch(
           </NuxtLink>
           <div class="mobile-header__buttons">
             <div class="mobile-header__button mobile-header__button--phone">
-              <UIButton
+              <UIIconButton
+                color="dark"
+                fill="outline"
                 tag="a"
                 :href="`tel:${contactsState.phone?.match(/\d+/g)?.join('')}`"
                 target="_blank"
                 rel="noopener noreferrer"
-                ><IcPhone
-              /></UIButton>
+              >
+                <IcPhone :font-controlled="false" :filled="true" />
+              </UIIconButton>
             </div>
             <div class="mobile-header__button mobile-header__button--burger">
-              <UIButton @click="toggleMobileMenu">
-                <IcBurger />
-              </UIButton>
+              <UIIconButton color="dark" @click="toggleMobileMenu">
+                <IcBurger :font-controlled="false" :filled="true" />
+              </UIIconButton>
             </div>
           </div>
         </div>
@@ -79,18 +82,21 @@ watch(
             </NuxtLink>
             <div class="mobile-header__buttons">
               <div class="mobile-header__button mobile-header__button--phone">
-                <UIButton
+                <UIIconButton
+                  color="dark"
+                  fill="outline"
                   tag="a"
                   :href="`tel:${contactsState.phone?.match(/\d+/g)?.join('')}`"
                   target="_blank"
                   rel="noopener noreferrer"
-                  ><IcPhone
-                /></UIButton>
+                >
+                  <IcPhone :font-controlled="false" :filled="true" />
+                </UIIconButton>
               </div>
               <div class="mobile-header__button mobile-header__button--burger">
-                <UIButton @click="toggleMobileMenu">
-                  <IcClose />
-                </UIButton>
+                <UIIconButton color="dark" @click="toggleMobileMenu">
+                  <IcClose :font-controlled="false" :filled="true" />
+                </UIIconButton>
               </div>
             </div>
           </div>
@@ -223,8 +229,8 @@ watch(
     backdrop-filter: blur(10px);
     transition: all 0.2s ease 0s;
     &__button--burger {
-      .button {
-        background: var(--black-black-90, #2a2a2a);
+      svg {
+        @include svg-color(#fff);
       }
     }
   }
@@ -276,26 +282,26 @@ watch(
     @include mr(10px);
   }
   &__button {
-    .button {
-      padding: 12px;
-      border: 1px solid var(--black-black-90, #2a2a2a);
-      background: transparent;
-    }
+    // .button {
+    //   padding: 12px;
+    //   border: 1px solid var(--black-black-90, #2a2a2a);
+    //   background: transparent;
+    // }
   }
   &__button--phone {
-    svg {
-      width: 24px;
-      height: 24px;
-    }
+    // svg {
+    //   width: 24px;
+    //   height: 24px;
+    // }
   }
   &__button--burger {
-    .button {
-      background: var(--black-black-90, #2a2a2a);
-      svg {
-        width: 24px;
-        height: 24px;
-      }
-    }
+    // .button {
+    //   background: var(--black-black-90, #2a2a2a);
+    //   svg {
+    //     width: 24px;
+    //     height: 24px;
+    //   }
+    // }
   }
 }
 </style>

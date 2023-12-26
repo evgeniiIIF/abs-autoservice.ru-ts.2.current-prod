@@ -22,10 +22,16 @@ const { isMobile } = useMediaSizes();
   <div class="contacts" :class="{ 'contacts--in-mobile-menu': inMobileMenu }">
     <a class="contacts__phone" href="tel:88652500520">8 (8652) 500-520</a>
     <div class="contacts__callback">
-      <UIButton :has-full-width="isMobile" @click="openModal('Заказать звонок')">Заказать звонок</UIButton>
-      <UIModal position="center" :is-open="isOpenModal" @onClose="closeModal"
-        ><CallbackForm :title-modal="callBackFormState.titleModal" @onClose="closeModal"
-      /></UIModal>
+      <UINewButton :is-full-width="isMobile" @click="openModal('Заказать звонок')">Заказать звонок</UINewButton>
+      <CallbackFormModal
+        position="center"
+        :is-open="isOpenModal"
+        :title-modal="callBackFormState.titleModal"
+        @onClose="closeModal"
+      />
+      <!-- <UIModal position="center" :is-open="isOpenModal" @onClose="closeModal" >
+        <CallbackForm :title-modal="callBackFormState.titleModal" @onClose="closeModal" />
+      </UIModal> -->
     </div>
     <a class="contacts__email" href="mailto:info@abs-autoservice.ru">info@abs-autoservice.ru</a>
     <ul class="contacts__socials">
@@ -65,11 +71,9 @@ const { isMobile } = useMediaSizes();
       display: flex;
       justify-content: center;
     }
-    .button {
-      width: 100%;
-      @include tablet {
-        width: auto;
-      }
+    @include desktop {
+      display: flex;
+      justify-content: center;
     }
   }
 

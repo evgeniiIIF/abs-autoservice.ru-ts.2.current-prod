@@ -36,7 +36,7 @@ withDefaults(defineProps<UIButtonProps>(), {
   </component>
 </template>
 
-<style lang="scss">
+<!-- <style lang="scss">
 .button {
   display: flex;
   padding: 10px 18px;
@@ -114,5 +114,5 @@ withDefaults(defineProps<UIButtonProps>(), {
   padding: 0;
   background: none !important;
   border: none !important;
-}
-</style>
+} -->
+<!-- </style> -->

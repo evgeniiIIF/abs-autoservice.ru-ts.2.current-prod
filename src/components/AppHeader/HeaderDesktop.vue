@@ -41,9 +41,9 @@ const topNavItems = [
       </NuxtLink>
       <div class="header-desktop__nav">
         <div class="header-desktop__nav-button">
-          <UIButton v-if="!isSearchOpen" @click.stop="openSearch"
-            ><IcSearch :font-controlled="false" :filled="true"
-          /></UIButton>
+          <UIIconButton v-if="!isSearchOpen" color="dark" @click.stop="openSearch">
+            <IcSearch :font-controlled="false" :filled="true" />
+          </UIIconButton>
           <AppSearchService v-if="isSearchOpen" @on-close="closeSearch" />
         </div>
         <AppNavigation :items="navItems" />
@@ -53,12 +53,10 @@ const topNavItems = [
           <div class="feedback__tel">
             <UITel phoneNumber="8 (8652) 500-520" />
           </div>
-          <div class="feedback__button">
-            <UIButton :isWrapper="true">обратный звонок</UIButton>
-          </div>
+          <button type="button" class="feedback__button">обратный звонок</button>
         </div>
         <div class="contacts-header-desktop__button">
-          <UIButton @click="openModal">Записаться на сервис</UIButton>
+          <UINewButton size="big" @click="openModal">Записаться на сервис</UINewButton>
         </div>
         <CallbackFormModal :is-open="isOpenModal" @on-close="closeModal" />
       </div>
@@ -196,11 +194,6 @@ const topNavItems = [
       width: 24px;
       height: 24px;
     }
-    .button {
-      padding: 12px;
-      border-radius: 10px;
-      background: var(--black-black-90, #2a2a2a);
-    }
   }
 
   &__nav {
@@ -248,9 +241,6 @@ const topNavItems = [
   }
 
   &__button {
-    .button {
-      height: 48px;
-    }
   }
 }
 
@@ -258,12 +248,15 @@ const topNavItems = [
   display: flex;
   flex-direction: column;
   align-items: flex-end;
-  justify-content: center;
+  justify-content: space-between;
 
   &__button {
-    .button {
-      color: var(--green-primary, #00a19c);
-    }
+    background: transparent;
+    outline: none;
+    border: none;
+    color: var(--Green-Primary, #00a19c);
+    @include buttonText;
+    cursor: pointer;
   }
 }
 </style>

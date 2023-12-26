@@ -96,17 +96,17 @@ watch(
             </div>
           </div>
           <div class="callback-form__button">
-            <UIButton tag="button" type="submit" has-full-width>Оставить заявку</UIButton>
+            <UINewButton tag="button" type="submit" :is-full-width="true" size="medium">Оставить заявку</UINewButton>
           </div>
         </form>
         <p class="callback-form__policy">Нажимая кнопку, вы соглашаетесь с нашей Политикой конфиденциальности</p>
         <div class="callback-form__socials">
-          <UIButton tag="a" :href="contactsState.social_network?.[0].url" target="_black">
+          <UIIconButton tag="a" :href="contactsState.social_network?.[0].url" target="_black">
             <IcTelegram :font-controlled="false" :filled="true" />
-          </UIButton>
-          <UIButton tag="a" :href="contactsState.social_network?.[1].url" target="_black">
+          </UIIconButton>
+          <UIIconButton tag="a" :href="contactsState.social_network?.[1].url" target="_black">
             <IcWhatsapp :font-controlled="false" :filled="true" />
-          </UIButton>
+          </UIIconButton>
         </div>
       </div>
       <AppQuestQuestion4
