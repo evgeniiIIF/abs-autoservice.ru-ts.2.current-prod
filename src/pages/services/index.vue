@@ -2,6 +2,7 @@
 import { appRoutes } from '~/appRoutes';
 import { useServicesStore } from '~/store/services';
 
+const { isMobile } = useMediaSizes();
 const { servicesState } = useServicesStore();
 
 useSeoMeta({
@@ -26,11 +27,19 @@ const converterItems = computed(() =>
 <template>
   <div class="services-page">
     <UIBreadcrumb :items="[{ name: 'Услуги', link: appRoutes.services().path }]" />
-    <div class="services-page__information container">
+    <div class="services-page__information">
       <div class="services-page__information-content">
         <h1 class="services-page__title">Услуги</h1>
-        <div class="services-page__services-list">
+        <div v-if="!isMobile" class="services-page__services-list">
           <SectionServicesItem
+            v-for="service in converterItems"
+            :key="service.link"
+            class="services-page__services-item"
+            :item="service"
+          />
+        </div>
+        <div v-if="isMobile" class="services-page__services-list">
+          <SectionServicesItemMobile
             v-for="service in converterItems"
             :key="service.link"
             class="services-page__services-item"
@@ -57,13 +66,19 @@ const converterItems = computed(() =>
   }
 
   &__information {
+    @include container;
     display: flex;
     justify-content: center;
     flex-wrap: wrap;
     gap: 20px;
+    width: 100%;
 
     @include desktop {
       flex-wrap: nowrap;
+    }
+
+    @include mobile {
+      display: block;
     }
   }
 
@@ -78,17 +93,36 @@ const converterItems = computed(() =>
     flex-direction: column;
     gap: 20px;
     width: 100%;
+    min-width: 300px;
+  }
+
+  &__services-list {
+    margin-bottom: 20px;
+
+    @include mobile {
+      width: 100%;
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 10px;
+    }
   }
 
   &__services-item {
     margin-top: 20px;
+    width: 100%;
+    max-width: 100%;
   }
 
   &__sticky-banners {
+    max-width: 390px;
     width: 100%;
     height: 100%;
     position: sticky;
     top: 109px;
+
+    @include mobile {
+      max-width: 100%;
+    }
   }
 
   &__company-picture {
