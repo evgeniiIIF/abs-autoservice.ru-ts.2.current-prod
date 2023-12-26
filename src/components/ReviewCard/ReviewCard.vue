@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { IcArrowRight, IcArrowUpRight } from '#components';
 import type { ReviewCardProps } from './ReviewCard.types';
 
 withDefaults(defineProps<ReviewCardProps>(), {
@@ -32,11 +33,13 @@ withDefaults(defineProps<ReviewCardProps>(), {
       <div class="review-card__content-bottom">
         <div class="review-card__review-button">
           <NuxtLink :to="item.review_service[0]?.link" target="_blank">
-            <UIButton with-arrow :has-full-width="size === 'small'">
+            <UINewButton
+              :icon="{ component: size === 'small' ? IcArrowRight : IcArrowUpRight, slot: 'right' }"
+              :has-full-width="size === 'small'"
+              color="dark"
+            >
               <span>Читать весь отзыв</span>
-              <IcArrowRight v-if="size === 'small'" :font-controlled="false" :filled="true" />
-              <IcArrowUpRight v-else :font-controlled="false" :filled="true" />
-            </UIButton>
+            </UINewButton>
           </NuxtLink>
         </div>
         <div v-if="size === 'standard'" class="review-card__review-app-image">
@@ -121,10 +124,6 @@ withDefaults(defineProps<ReviewCardProps>(), {
 
       @include BodySRegular;
       color: var(--black-black-50, #898989);
-    }
-
-    &-button {
-      width: 100%;
     }
   }
 

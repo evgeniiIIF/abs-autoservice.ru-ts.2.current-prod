@@ -17,15 +17,15 @@ const [isModalOpen, openModal, closeModal] = useBooleanState();
       </div>
       <p v-if="descriptions" class="offer-card__description">{{ descriptions }}</p>
     </div>
-    <UIButton
+    <UINewButton
       class="offer-card__button"
       :tag="'button'"
-      :without-fill="button?.fill === 'outline'"
-      :has-full-width="button?.size === 'big'"
+      :fill="button?.fill"
+      :size="button?.size"
       @click.stop="openModal"
     >
       {{ button?.text }}
-    </UIButton>
+    </UINewButton>
     <CallbackFormModal :is-open="isModalOpen" :title-modal="title" @on-close="closeModal" />
   </div>
 </template>
@@ -83,6 +83,10 @@ const [isModalOpen, openModal, closeModal] = useBooleanState();
 
   &__button {
     margin-top: auto;
+
+    @include desktop {
+      align-self: start;
+    }
   }
 }
 </style>

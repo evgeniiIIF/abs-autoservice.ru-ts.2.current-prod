@@ -30,12 +30,12 @@ const [isOpenModal, openModal, closeModal] = useBooleanState();
             <div class="service-info__callback-separator"></div>
             <div class="service-info__callback-row">
               <h3 class="service-info__callback-phone">{{ contactsState.phone }}</h3>
-              <UIButton
+              <UINewButton
                 tag="a"
                 :href="`tel:${contactsState.phone?.match(/\d+/g)?.join('')}`"
                 target="__blank"
                 :has-full-width="!isDesktop"
-                >Позвонить</UIButton
+                >Позвонить</UINewButton
               >
             </div>
           </div>
@@ -48,7 +48,7 @@ const [isOpenModal, openModal, closeModal] = useBooleanState();
                 Цена может быть изменена в зависимости от типа кузова вашего авто
               </p>
             </div>
-            <UIButton :has-full-width="!isDesktop" @click.stop="openModal">Записаться на СТО</UIButton>
+            <UINewButton :has-full-width="!isDesktop" @click.stop="openModal">Записаться на СТО</UINewButton>
           </div>
           <div class="service-info__questions">
             <HasQuestionsBanner />
@@ -150,13 +150,6 @@ const [isOpenModal, openModal, closeModal] = useBooleanState();
     }
 
     &-button {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      color: var(--white, #fff);
-      border: none;
-      background-color: transparent;
-
       svg {
         transition: all 0.3s ease;
       }

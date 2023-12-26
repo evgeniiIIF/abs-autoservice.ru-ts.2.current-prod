@@ -2,6 +2,9 @@
 import { useCalculatorBlockStore } from '~/store/calculatorBlock';
 
 import { callBackFormHttp } from '~/api/http';
+import { IcArrowLeft } from '#components';
+import { IcArrowRight } from '#components';
+
 import AppQuestQuestion1 from './AppQuestQuestion1.vue';
 import AppQuestQuestion2 from './AppQuestQuestion2.vue';
 import AppQuestQuestion3 from './AppQuestQuestion3.vue';
@@ -154,20 +157,14 @@ const goBackQuestion = () => {
       </div>
       <div class="quest__buttons">
         <div v-if="currentStepIndex > 0 && !(currentStepIndex > QUEST_ITEMS.length - 2)" class="quest__button--back">
-          <UIButton @click="goBackQuestion">
-            <span class="button__arrow">
-              <IcArrowLeft />
-            </span>
-            <span class="button__text">Назад</span>
-          </UIButton>
+          <UINewButton :icon="{ component: IcArrowLeft, slot: 'left' }" size="small" @click="goBackQuestion">
+            Назад
+          </UINewButton>
         </div>
         <div v-if="currentStepIndex !== QUEST_ITEMS.length - 1" class="quest__button--next">
-          <UIButton @click="goNextQuestion">
-            <span class="button__text">{{ currentStepIndex < QUEST_ITEMS.length - 2 ? 'Далее' : ' Завершить ' }}</span>
-            <span v-if="currentStepIndex < QUEST_ITEMS.length - 2" class="button__arrow">
-              <IcArrowRight />
-            </span>
-          </UIButton>
+          <UINewButton :icon="{ component: IcArrowRight, slot: 'right' }" size="small" @click="goNextQuestion">
+            {{ currentStepIndex < QUEST_ITEMS.length - 2 ? 'Далее' : ' Завершить ' }}
+          </UINewButton>
         </div>
       </div>
     </div>

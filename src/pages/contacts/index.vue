@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { appRoutes } from '~/appRoutes';
 import { useContactsStore } from '~/store/contacts';
+import { IcPathMap } from '#components';
 
 const { isDesktop } = useMediaSizes();
 const { contactsState } = useContactsStore();
@@ -50,10 +51,15 @@ const workTimeItems = computed(() => contactsState.value.time_work?.split(',').m
                   </li>
                 </ul>
                 <div class="top-info-contacts-page__button">
-                  <UIButton tag="a" :href="contactsState.link_map" target="_blank" rel="noopener">
-                    <p class="button__text">Построить маршрут</p>
-                    <div class="button__icon"><IcPathMap :font-controlled="false" :filled="true" /></div>
-                  </UIButton>
+                  <UINewButton
+                    tag="a"
+                    :icon="{ component: IcPathMap, slot: 'right' }"
+                    :href="contactsState.link_map"
+                    target="_blank"
+                    rel="noopener"
+                  >
+                    Построить маршрут
+                  </UINewButton>
                 </div>
               </div>
               <div class="info-contacts-page__content-bottom bottom-info-contacts-page">
