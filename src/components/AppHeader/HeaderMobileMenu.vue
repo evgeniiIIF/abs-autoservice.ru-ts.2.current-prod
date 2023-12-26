@@ -1,25 +1,43 @@
 <script lang="ts" setup>
-import { enableBodyScroll, disableBodyScroll } from '@/utils/dom';
 import { appRoutes } from '~/appRoutes';
 import { useContactsStore } from '~/store/contacts';
+import { useServicesStore } from '~/store/services';
 
-const route = useRoute();
+interface HeaderMobileMenuEmits {
+  (event: 'closeMobileMenu'): void;
+}
+
+const emits = defineEmits<HeaderMobileMenuEmits>();
+
+const router = useRouter();
 
 const { contactsState } = useContactsStore();
+const { servicesState } = useServicesStore();
 
-const [isOpenMobileMenu, openMobileMenu, closeMobileMenu] = useBooleanState(false);
+const [isOpenServicesMenu, openServicesMenu, closeServicesMenu] = useBooleanState(false);
 
-watch(isOpenMobileMenu, () => {
-  isOpenMobileMenu.value ? disableBodyScroll() : enableBodyScroll();
+const activeServiceId = ref<number | null>(null);
+
+const servicesList = computed(() => {
+  if (!activeServiceId.value) {
+    return servicesState.value.servicesTree;
+  }
+
+  return servicesState.value.servicesTree.find((item) => item.id === activeServiceId.value)?.children;
 });
 
-watch(
-  () => route.path,
-  () => closeMobileMenu(),
-);
+const navItems = [
+  { name: 'Услуги', onClick: openServicesMenu },
+  { name: 'Акции', link: appRoutes.offers().path },
+  { name: 'Об автосервисе', link: appRoutes.contacts().path },
+  // { name: 'Гарантии', link: '' },
+  // { name: 'Преимущества', link: '' },
+  { name: 'Контакты', link: appRoutes.contacts().path },
+];
 </script>
 <template>
-  <header :class="{ 'header-mobile': true, 'js-header-mobile': true, 'header-mobile-menu--open': isOpenMobileMenu }">
+  <div class="header-mobile-menu">
+    <div class="header-mobile-menu__mask" @click="emits('closeMobileMenu')"></div>
     <div class="mobile-header">
       <div class="container">
         <div class="mobile-header__body">
@@ -40,17 +58,45 @@ watch(
               </UIIconButton>
             </div>
             <div class="mobile-header__button mobile-header__button--burger">
-              <UIIconButton color="dark" @click="openMobileMenu">
-                <IcBurger :font-controlled="false" :filled="true" />
+              <UIIconButton color="dark" @click="emits('closeMobileMenu')">
+                <IcClose :font-controlled="false" :filled="true" />
               </UIIconButton>
             </div>
           </div>
         </div>
       </div>
     </div>
-
-    <AppHeaderMobileMenu @closeMobileMenu="closeMobileMenu" />
-  </header>
+    <div class="header-mobile-menu__body">
+      <div class="header-mobile-menu__nav">
+        <AppNavigation v-if="!isOpenServicesMenu" :items="navItems" />
+        <div v-if="isOpenServicesMenu" class="header-mobile-menu__services">
+          <div v-if="!activeServiceId" class="header-mobile-menu__service-item" @click="closeServicesMenu">
+            <IcArrowLeft /><span>Услуги</span>
+          </div>
+          <div v-if="activeServiceId" class="header-mobile-menu__service-item" @click="activeServiceId = null">
+            <IcArrowLeft class="header-mobile-menu__service-item-left" /><span>
+              {{ servicesState.mainServices?.find((item) => item.id === activeServiceId)?.title }}
+            </span>
+          </div>
+          <!-- @ts-nocheck -->
+          <div
+            v-for="service in servicesList"
+            :key="service.id"
+            class="header-mobile-menu__service-item"
+            @click="
+              service.children?.length ? (activeServiceId = service.id) : router.push(appRoutes.services(service.id))
+            "
+          >
+            <span>{{ service.title }}</span>
+            <IcArrowRight v-if="service?.children?.length" class="header-mobile-menu__service-item-right" />
+          </div>
+        </div>
+      </div>
+      <div class="header-mobile-menu__contacts">
+        <AppContacts />
+      </div>
+    </div>
+  </div>
 </template>
 
 <style lang="scss">

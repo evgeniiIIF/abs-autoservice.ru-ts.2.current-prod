@@ -1,7 +1,7 @@
 import type { Service, ServiceItemInfo } from '~/api/http/servicesHttp';
 
 export interface ServiceItem extends ServiceItemInfo {
-  children?: ServiceItemInfo[];
+  children?: ServiceItem[];
 }
 
 export interface ServicesState {
