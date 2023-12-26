@@ -2,10 +2,10 @@
 import { useCallBackFormStore } from '~/store/callBackForm';
 
 import { useMediaSizes } from '@/composables/useMediaSizes';
-import { validateNameInput } from '@/utils/validateNameInput/validateNameInput';
-import { validatePhoneInput } from '@/utils/validatePhoneInput/validatePhoneInput';
+import { validateNameInput, validatePhoneInput } from '@/utils/validators';
 import { useContactsStore } from '~/store/contacts';
 import { callBackFormHttp } from '~/api/http';
+import { appRoutes } from '~/appRoutes';
 import type { CallBackFormProps } from './CallbackForm.types';
 
 const props = defineProps<CallBackFormProps>();
@@ -99,7 +99,10 @@ watch(
             <UINewButton tag="button" type="submit" :is-full-width="true" size="medium">Оставить заявку</UINewButton>
           </div>
         </form>
-        <p class="callback-form__policy">Нажимая кнопку, вы соглашаетесь с нашей Политикой конфиденциальности</p>
+        <p class="callback-form__policy">
+          Нажимая кнопку, вы соглашаетесь с нашей
+          <a :href="appRoutes.privacyPolicy().path">Политикой конфиденциальности</a>
+        </p>
         <div class="callback-form__socials">
           <UIIconButton tag="a" :href="contactsState.social_network?.[0].url" target="_black">
             <IcTelegram :font-controlled="false" :filled="true" />
@@ -109,7 +112,7 @@ watch(
           </UIIconButton>
         </div>
       </div>
-      <AppQuestQuestion4
+      <AppQuestQuestion
         v-if="isSuccess"
         :form-data="{}"
         :title-top="'Спасибо! Ваша заявка отправлена успешно.'"
@@ -215,6 +218,12 @@ watch(
     margin-bottom: 24px;
     @include BodySRegular;
     color: var(--black-black-50, #898989);
+
+    a {
+      display: inline;
+      @include BodySRegular;
+      color: var(--black-black-50, #898989);
+    }
 
     @include desktop {
       margin-bottom: 20px;

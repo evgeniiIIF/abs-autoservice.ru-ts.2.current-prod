@@ -1,8 +1,20 @@
 <script setup lang="ts">
-import { useHomeStore } from '~/store/home';
+import { useReviewStore } from '~/store/reviews';
 
 const { isMobile } = useMediaSizes();
-const { homeState } = useHomeStore();
+const { reviewsState, reviewsEffects } = useReviewStore();
+
+await reviewsEffects.fetchReviewPageInfo();
+
+const isNeedShowAll = ref(false);
+
+const reviewList = computed(() => {
+  if (reviewsState.value.reviews.length <= 6 || (reviewsState.value.reviews.length > 6 && !isNeedShowAll.value)) {
+    return reviewsState.value.reviews.slice(0, 6);
+  }
+
+  return reviewsState.value.reviews;
+});
 </script>
 
 <template>
@@ -12,13 +24,20 @@ const { homeState } = useHomeStore();
       <h1 class="reviews-page__title">Отзывы</h1>
       <div class="reviews-page__list">
         <ReviewCard
-          v-for="review in homeState.review_items"
+          v-for="review in reviewList"
           :key="review.id"
           class="reviews-page__list-item"
           :item="review"
           :size="isMobile ? 'small' : 'standard'"
         />
       </div>
+      <UINewButton
+        v-if="reviewsState.reviews.length > 6 && !isNeedShowAll"
+        class="reviews-page__more-button"
+        @click.stop="isNeedShowAll = true"
+      >
+        Показать Еще
+      </UINewButton>
       <CallbackForm class="reviews-page__form" />
     </div>
   </div>
@@ -46,8 +65,13 @@ const { homeState } = useHomeStore();
     width: 100%;
   }
 
-  &__form {
+  &__more-button {
+    margin: auto;
     margin-top: 40px;
+  }
+
+  &__form {
+    margin-top: 80px;
     margin-bottom: 80px;
   }
 }

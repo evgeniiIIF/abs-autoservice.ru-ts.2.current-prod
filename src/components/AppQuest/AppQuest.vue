@@ -2,15 +2,28 @@
 import { useCalculatorBlockStore } from '~/store/calculatorBlock';
 
 import { callBackFormHttp } from '~/api/http';
-import { IcArrowLeft } from '#components';
-import { IcArrowRight } from '#components';
-
+import { validateNameInput, validatePhoneInput, validateTextInput } from '~/utils/validators';
+import { IcArrowLeft, IcArrowRight } from '#components';
 import AppQuestQuestion1 from './AppQuestQuestion1.vue';
 import AppQuestQuestion2 from './AppQuestQuestion2.vue';
 import AppQuestQuestion3 from './AppQuestQuestion3.vue';
 import AppQuestQuestion4 from './AppQuestQuestion4.vue';
 
 const { calculatorBlockState } = useCalculatorBlockStore();
+
+const formData = ref({
+  auto: '',
+  problem: '',
+  name: '',
+  phone: '',
+});
+
+const formDataErrors = ref({
+  auto: '',
+  problem: '',
+  name: '',
+  phone: '',
+});
 
 const QUEST_ITEMS = [
   {
@@ -66,26 +79,11 @@ const QUEST_ITEMS = [
   },
 ];
 
-const formData = ref({
-  auto: '',
-  problem: '',
-  name: '',
-  phone: '',
-});
 const currentStepIndex = ref(0);
 
 const currentQuestItem = computed(() => {
   return QUEST_ITEMS[currentStepIndex.value];
 });
-
-// const isButtonActive = computed(() => {
-//   currentQuestItem.value.inputProps?.reduce((prev, next) => {
-//     if (formData.value[next.name as keyof typeof formData.value]) {
-//       return true;
-//     }
-//     return false;
-//   }, false);
-// });
 
 // TODO пофиксить эни
 const handleFormDataChange = (value: any) => {
@@ -111,7 +109,30 @@ const handleFormDataSubmit = async () => {
 };
 
 const goNextQuestion = () => {
+  if (currentStepIndex.value === 0) {
+    formDataErrors.value.auto = validateTextInput(formData.value.auto);
+
+    if (formDataErrors.value.auto) {
+      return;
+    }
+  }
+
+  if (currentStepIndex.value === 1) {
+    formDataErrors.value.problem = validateTextInput(formData.value.problem);
+
+    if (formDataErrors.value.problem) {
+      return;
+    }
+  }
+
   if (currentStepIndex.value === 2) {
+    formDataErrors.value.name = validateNameInput(formData.value.name);
+    formDataErrors.value.phone = validatePhoneInput(formData.value.phone);
+
+    if (formDataErrors.value.name || formDataErrors.value.phone) {
+      return;
+    }
+
     handleFormDataSubmit();
     return;
   }
@@ -143,7 +164,6 @@ const goBackQuestion = () => {
       </div>
       <div class="quest__current">
         <Transition name="fade-in" mode="out-in">
-          <!-- @ts-nocheck -->
           <component
             :is="currentQuestItem.component"
             :title="currentQuestItem.title"
@@ -151,6 +171,7 @@ const goBackQuestion = () => {
             :titleTop="currentQuestItem.titleTop"
             :text="currentQuestItem.text"
             :formData="formData"
+            :formDataErrors="formDataErrors"
             @on-change="handleFormDataChange"
           />
         </Transition>

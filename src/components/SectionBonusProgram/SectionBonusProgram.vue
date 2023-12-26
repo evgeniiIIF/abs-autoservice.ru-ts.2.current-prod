@@ -10,7 +10,7 @@ const [isOpenModal, openModal, closeModal] = useBooleanState();
 
 <template>
   <section class="bonus-program">
-    <h1 class="bonus-program__title">Бонусная программа</h1>
+    <h1 class="bonus-program__title">{{ bonusState.bonusPageInfo?.title }}</h1>
     <div v-if="isMobile" class="bonus-program__image ibg">
       <NuxtPicture src="images/bonus-program-card.png" format="webp" />
       <div class="bonus-program__image-ellipse"></div>

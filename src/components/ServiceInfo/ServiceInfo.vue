@@ -137,7 +137,11 @@ const [isOpenModal, openModal, closeModal] = useBooleanState();
         @include BodyMRegular;
         margin-left: 20px;
         padding-left: 20px;
-        color: var(--green-primary);
+        color: var(--black-black-50, #898989);
+
+        &::marker {
+          color: var(--green-primary);
+        }
 
         p {
           color: var(--black-black-50, #898989);

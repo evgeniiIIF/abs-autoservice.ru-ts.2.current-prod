@@ -17,6 +17,7 @@ const onInput = (value: string, name: string) => {
         :label="input.label"
         :placeholder="input.placeholder"
         :value="formData[input.name]"
+        :errorMessage="formDataErrors[input.name]"
         :name="input.name"
         :maxlength="input?.maxLength"
         :pattern="input?.pattern"

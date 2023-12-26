@@ -1,7 +1,9 @@
 <script setup lang="ts">
 import Slider from '@vueform/slider';
+import { useBonusStore } from '~/store/bonus';
 
 const { isDesktop } = useMediaSizes();
+const { bonusState } = useBonusStore();
 
 const bonusSliderPercent = ref(62);
 const howMachSpendCount = computed(() => bonusSliderPercent.value * 1000);
@@ -12,8 +14,8 @@ const bonusAmountCount = computed(() => Math.floor(howMachSpendCount.value * 0.1
   <section class="benefits-calculating">
     <div class="benefits-calculating__body">
       <div class="benefits-calculating__top">
-        <h4 class="benefits-calculating__title">Рассчитайте свою выгоду</h4>
-        <p class="benefits-calculating__subtitle">Сумма, которую бы Вы сэкономили благодаря бонусной программе</p>
+        <h4 class="benefits-calculating__title">{{ bonusState.bonusPageInfo?.calculator.title }}</h4>
+        <p class="benefits-calculating__subtitle">{{ bonusState.bonusPageInfo?.calculator.subtitle }}</p>
       </div>
       <div class="benefits-calculating__middle middle-benefits-calculating">
         <div class="middle-benefits-calculating__top">
@@ -37,10 +39,7 @@ const bonusAmountCount = computed(() => Math.floor(howMachSpendCount.value * 0.1
         </div>
       </div>
       <p class="benefits-calculating__text">
-        *бонусные баллы становятся доступны доступны через 14 дней после покупки и сохраняются втечение 6 месяцев.
-        Бонусная программа не распространяется на приобретение шин и аккумуляторов, услуги тонирования, бронирования
-        автомобиля и на малярно-кузовные работы. Условия бонусной программы могут меняться. Активация карты начинается с
-        первой покупки.
+        {{ bonusState.bonusPageInfo?.calculator.subtext }}
       </p>
     </div>
   </section>

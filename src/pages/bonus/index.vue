@@ -12,6 +12,7 @@ useSeoMeta({
   ogTitle: bonusState.value.bonusPageInfo?.seo['og:title'],
   ogDescription: bonusState.value.bonusPageInfo?.seo['og:description'],
   ogType: bonusState.value.bonusPageInfo?.seo['og:type'] as any,
+  ogImage: bonusState.value.bonusPageInfo?.seo.image,
   twitterTitle: bonusState.value.bonusPageInfo?.seo['twitter:title'],
   twitterDescription: bonusState.value.bonusPageInfo?.seo['twitter:description'],
   twitterCard: bonusState.value.bonusPageInfo?.seo['twitter:card'] as any,

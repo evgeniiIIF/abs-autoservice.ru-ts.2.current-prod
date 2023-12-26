@@ -10,6 +10,7 @@ useSeoMeta({
   description: aboutState.value?.seo?.description,
   ogTitle: aboutState.value?.seo?.['og:title'],
   ogDescription: aboutState.value?.seo?.['og:description'],
+  ogImage: aboutState.value.seo?.image,
   ogType: aboutState.value?.seo?.['og:type'] as any,
   twitterTitle: aboutState.value?.seo?.['twitter:title'],
   twitterDescription: aboutState.value?.seo?.['twitter:description'],
@@ -44,7 +45,7 @@ const bannerBackgroundStyle = computed(() => ({
               v-for="(linkButton, index) in aboutState.text?.link_btn"
               :key="linkButton.title"
               tag="NuxtLink"
-              :fill="index % 2 === 0 ? 'solid' : 'outlined'"
+              :fill="index % 2 === 0 ? 'solid' : 'outline'"
               :to="linkButton.url"
             >
               {{ linkButton.title }}

@@ -4,10 +4,14 @@ import { useHomeStore } from '~/store/home';
 const { homeState } = useHomeStore();
 
 useSeoMeta({
-  title: homeState.value.seo.title,
-  description: homeState.value.seo.description,
-  author: homeState.value.seo.author,
+  title: homeState.value?.seo.title,
+  description: homeState.value?.seo.description,
+  ogTitle: homeState.value?.seo.title,
+  ogDescription: homeState.value?.seo.description,
+  twitterTitle: homeState.value?.seo.title,
+  twitterDescription: homeState.value?.seo.description,
   robots: homeState.value.seo.robots,
+  author: homeState.value.seo.robots,
 });
 </script>
 

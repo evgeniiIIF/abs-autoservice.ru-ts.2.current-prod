@@ -1,15 +1,7 @@
 <script setup lang="ts">
 import { NuxtLink } from '#components';
 
-interface UIButtonProps {
-  tag?: 'a' | 'button' | 'NuxtLink';
-  type?: 'button' | 'submit';
-  fill?: 'solid' | 'outline';
-  color?: 'green' | 'dark';
-  size?: 'small' | 'medium' | 'big';
-  icon?: { component: Component; slot: 'left' | 'right' };
-  isFullWidth?: boolean;
-}
+import type { UIButtonProps } from './UINewButton.types';
 
 withDefaults(defineProps<UIButtonProps>(), {
   type: 'button',
@@ -54,6 +46,7 @@ withDefaults(defineProps<UIButtonProps>(), {
   outline: none;
   color: var(--black-black-00, #fff);
   transition: all 0.3s ease;
+  white-space: nowrap;
   cursor: pointer;
   @include buttonText;
 
