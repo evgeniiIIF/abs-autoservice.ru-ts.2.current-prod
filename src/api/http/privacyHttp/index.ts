@@ -1,0 +1,1 @@
+export { privacyHttp } from './privacyHttp';

@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { useBonusCardStore } from './store/bonusCard';
+import { useBonusStore } from './store/bonus';
 import { useCalculatorBlockStore } from './store/calculatorBlock';
 import { useCallBackFormStore } from './store/callBackForm';
 import { useContactsStore } from './store/contacts';
@@ -11,7 +11,7 @@ const { homeEffects } = useHomeStore();
 const { calculatorBlockEffects } = useCalculatorBlockStore();
 const { contactsEffects } = useContactsStore();
 const { callBackFormEffects } = useCallBackFormStore();
-const { bonusCardEffects } = useBonusCardStore();
+const { bonusEffects } = useBonusStore();
 
 await useAsyncData('global', async () => {
   await Promise.all([
@@ -20,10 +20,11 @@ await useAsyncData('global', async () => {
     contactsEffects.fetchContacts(),
     calculatorBlockEffects.fetchCalculatorBlock(),
     servicesEffects.fetchAllServices(),
-    bonusCardEffects.fetchBonusCard(),
+    bonusEffects.fetchBonusCard(),
   ]);
 });
 
+const response = await useAppFetch<{ code: string; title: string }[]>('/counters');
 await servicesEffects.fetchServicesTree();
 </script>
 
@@ -38,3 +39,4 @@ await servicesEffects.fetchServicesTree();
 .main {
 }
 </style>
+./store/bonus

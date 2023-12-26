@@ -1,9 +1,9 @@
 <script lang="ts" setup>
-import { useBonusCardStore } from '~/store/bonusCard';
+import { useBonusStore } from '~/store/bonus';
 
 const { isMobile } = useMediaSizes();
 
-const { bonusCardState } = useBonusCardStore();
+const { bonusState } = useBonusStore();
 
 const [isModalOpen, openModal, closeModal] = useBooleanState();
 </script>
@@ -13,24 +13,24 @@ const [isModalOpen, openModal, closeModal] = useBooleanState();
     <div class="container">
       <div class="get-card__body">
         <div class="get-card__content">
-          <h3 class="get-card__title">{{ bonusCardState.title }}</h3>
-          <p v-if="!isMobile" class="get-card__text--green">{{ bonusCardState.subtitle }}</p>
-          <p v-if="!isMobile" class="get-card__text">{{ bonusCardState.text }}</p>
+          <h3 class="get-card__title">{{ bonusState.bonusCard?.title }}</h3>
+          <p v-if="!isMobile" class="get-card__text--green">{{ bonusState.bonusCard?.subtitle }}</p>
+          <p v-if="!isMobile" class="get-card__text">{{ bonusState.bonusCard?.text }}</p>
           <div v-if="isMobile" class="get-card__image get-card__image--mobile">
             <NuxtPicture src="images/get-card.png" format="webp" loading="lazy" />
           </div>
           <div class="get-card__button">
             <UIButton @click.stop="openModal">{{
-              isMobile ? 'Получить карту бесплатно' : bonusCardState.btn_title
+              isMobile ? 'Получить карту бесплатно' : bonusState.bonusCard?.btn_title
             }}</UIButton>
           </div>
         </div>
         <div v-if="!isMobile" class="get-card__image">
-          <NuxtPicture :src="bonusCardState.image ?? 'undefined'" format="webp" loading="lazy" />
+          <NuxtPicture :src="bonusState.bonusCard?.image ?? 'undefined'" format="webp" loading="lazy" />
         </div>
       </div>
     </div>
-    <CallbackFormModal :is-open="isModalOpen" :title-modal="bonusCardState.btn_title" @on-close="closeModal" />
+    <CallbackFormModal :is-open="isModalOpen" :title-modal="bonusState.bonusCard?.btn_title" @on-close="closeModal" />
   </section>
 </template>
 
@@ -134,12 +134,6 @@ const [isModalOpen, openModal, closeModal] = useBooleanState();
         width: auto;
       }
     }
-  }
-
-  &__button-text {
-  }
-
-  &__button-text--mobile {
   }
 }
 </style>

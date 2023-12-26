@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { useMediaSizes } from '@/composables/useMediaSizes';
+import { appRoutes } from '~/appRoutes';
 
 const { isMobile } = useMediaSizes();
 
@@ -36,7 +37,12 @@ const { isMobile } = useMediaSizes();
         </div>
         <div class="footer-mobile__c3">
           <div class="footer-mobile__top">
-            <a class="footer-mobile__privacy-policy" href="#" target="_blank" rel="noopener">
+            <a
+              class="footer-mobile__privacy-policy"
+              :href="appRoutes.privacyPolicy().path"
+              target="_blank"
+              rel="noopener"
+            >
               Политика конфиденциальности
             </a>
             <p class="footer-mobile__copyright">© Автосервис ABS-AUTO, 2023</p>
