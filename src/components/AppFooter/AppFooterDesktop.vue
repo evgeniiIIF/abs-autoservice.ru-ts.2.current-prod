@@ -16,12 +16,14 @@ const AUTOSERVICE_1 = [
   { title: 'Отзывы', link: appRoutes.reviews().path },
   { title: 'Бонусная программа', link: appRoutes.bonus().path },
 ];
+
 const AUTOSERVICE_2 = [
   { title: 'Расчёт стоимости', link: 'open-modal' },
   { title: 'Акции', link: appRoutes.offers().path },
   { title: 'Контакты', link: appRoutes.contacts().path },
 ];
 </script>
+
 <template>
   <footer class="footer-desktop">
     <div class="container">
@@ -115,7 +117,14 @@ const AUTOSERVICE_2 = [
             <div class="bottom-footer-desktop__01 copy-bottom-footer-desktop">
               <div class="copy-bottom-footer-desktop__01">© Автосервис ABS-AUTO, 2023</div>
               <div class="copy-bottom-footer-desktop__02">
-                <div class="copy-bottom-footer-desktop__0201">Политика конфиденциальности</div>
+                <a
+                  class="copy-bottom-footer-desktop__0201"
+                  :href="appRoutes.privacyPolicy().path"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  Политика конфиденциальности
+                </a>
                 <div class="copy-bottom-footer-desktop__0202">Карта сайта</div>
               </div>
             </div>
@@ -132,7 +141,7 @@ const AUTOSERVICE_2 = [
   </footer>
 </template>
 
-<style lang="scss">
+<style lang="scss" scoped>
 .footer-desktop {
   margin: 0 20px;
   margin-bottom: 15px;
@@ -153,12 +162,6 @@ const AUTOSERVICE_2 = [
     flex-direction: column;
     align-items: flex-start;
     gap: 60px;
-  }
-
-  &__top {
-  }
-
-  &__bottom {
   }
 }
 
@@ -342,7 +345,9 @@ const AUTOSERVICE_2 = [
   &__0201 {
   }
 
-  &__0202 {
+  &__0201 {
+    color: var(--Black-Black-60, #717171);
+    @include BodyMRegular;
   }
 }
 </style>

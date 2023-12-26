@@ -38,7 +38,8 @@ withDefaults(defineProps<UIButtonProps>(), {
   </component>
 </template>
 
-<style lang="scss">
+// to-do убрать scoped
+<style lang="scss" scoped>
 .button {
   display: flex;
   justify-content: center;

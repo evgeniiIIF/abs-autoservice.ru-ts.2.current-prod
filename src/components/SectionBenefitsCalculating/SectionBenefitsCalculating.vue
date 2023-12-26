@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import Slider from '@vueform/slider';
 
-const { isMoreThanTablet } = useMediaSizes();
+const { isDesktop } = useMediaSizes();
 
 const bonusSliderPercent = ref(62);
 const howMachSpendCount = computed(() => bonusSliderPercent.value * 1000);
@@ -10,40 +10,38 @@ const bonusAmountCount = computed(() => Math.floor(howMachSpendCount.value * 0.1
 
 <template>
   <section class="benefits-calculating">
-    <div class="container">
-      <div class="benefits-calculating__body">
-        <div class="benefits-calculating__top">
-          <h4 class="benefits-calculating__title">Рассчитайте свою выгоду</h4>
-          <p class="benefits-calculating__subtitle">Сумма, которую бы Вы сэкономили благодаря бонусной программе</p>
-        </div>
-        <div class="benefits-calculating__middle middle-benefits-calculating">
-          <div class="middle-benefits-calculating__top">
-            <p v-if="isMoreThanTablet" class="middle-benefits-calculating__top-text">
-              Сумма, которую вы тратите на обслуживание в год
-            </p>
-            <p class="middle-benefits-calculating__top-sum">
-              {{ `${howMachSpendCount}`.replace(/(\d)(?=(\d\d\d)+([^\d]|$))/g, '$1 ') }} ₽
-            </p>
-          </div>
-          <div class="middle-benefits-calculating__slider">
-            <ClientOnly>
-              <Slider v-model="bonusSliderPercent" :lazy="false" :tooltips="false" orientation="horizontal" />
-            </ClientOnly>
-          </div>
-          <div class="middle-benefits-calculating__bottom">
-            <p class="middle-benefits-calculating__bottom-text">Ваша выгода</p>
-            <p class="middle-benefits-calculating__bottom-sum">
-              {{ `${bonusAmountCount}`.replace(/(\d)(?=(\d\d\d)+([^\d]|$))/g, '$1 ') }} ₽
-            </p>
-          </div>
-        </div>
-        <p class="benefits-calculating__text">
-          *бонусные баллы становятся доступны доступны через 14 дней после покупки и сохраняются втечение 6 месяцев.
-          Бонусная программа не распространяется на приобретение шин и аккумуляторов, услуги тонирования, бронирования
-          автомобиля и на малярно-кузовные работы. Условия бонусной программы могут меняться. Активация карты начинается
-          с первой покупки.
-        </p>
+    <div class="benefits-calculating__body">
+      <div class="benefits-calculating__top">
+        <h4 class="benefits-calculating__title">Рассчитайте свою выгоду</h4>
+        <p class="benefits-calculating__subtitle">Сумма, которую бы Вы сэкономили благодаря бонусной программе</p>
       </div>
+      <div class="benefits-calculating__middle middle-benefits-calculating">
+        <div class="middle-benefits-calculating__top">
+          <p v-if="isDesktop" class="middle-benefits-calculating__top-text">
+            Сумма, которую вы тратите на обслуживание в год
+          </p>
+          <p class="middle-benefits-calculating__top-sum">
+            {{ `${howMachSpendCount}`.replace(/(\d)(?=(\d\d\d)+([^\d]|$))/g, '$1 ') }} ₽
+          </p>
+        </div>
+        <div class="middle-benefits-calculating__slider">
+          <ClientOnly>
+            <Slider v-model="bonusSliderPercent" :lazy="false" :tooltips="false" orientation="horizontal" />
+          </ClientOnly>
+        </div>
+        <div class="middle-benefits-calculating__bottom">
+          <p class="middle-benefits-calculating__bottom-text">Ваша выгода</p>
+          <p class="middle-benefits-calculating__bottom-sum">
+            {{ `${bonusAmountCount}`.replace(/(\d)(?=(\d\d\d)+([^\d]|$))/g, '$1 ') }} ₽
+          </p>
+        </div>
+      </div>
+      <p class="benefits-calculating__text">
+        *бонусные баллы становятся доступны доступны через 14 дней после покупки и сохраняются втечение 6 месяцев.
+        Бонусная программа не распространяется на приобретение шин и аккумуляторов, услуги тонирования, бронирования
+        автомобиля и на малярно-кузовные работы. Условия бонусной программы могут меняться. Активация карты начинается с
+        первой покупки.
+      </p>
     </div>
   </section>
 </template>
@@ -65,6 +63,7 @@ const bonusAmountCount = computed(() => Math.floor(howMachSpendCount.value * 0.1
     border-radius: 20px;
     border-top: 1px solid var(--Black-Black-80, #414141);
     background: var(--Black-Black-90, #2a2a2a);
+
     @include desktop {
       display: flex;
       flex-wrap: wrap;
@@ -75,6 +74,7 @@ const bonusAmountCount = computed(() => Math.floor(howMachSpendCount.value * 0.1
 
   &__top {
     margin-bottom: 10px;
+
     @include desktop {
       flex: 0 1 40%;
       margin-right: 50px;

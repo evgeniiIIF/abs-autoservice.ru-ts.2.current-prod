@@ -21,6 +21,7 @@ useSeoMeta({
   twitterDescription: servicesState.value.service?.seo['twitter:description'],
   twitterCard: servicesState.value.service?.seo['twitter:card'] as any,
   robots: servicesState.value.service?.seo.robots,
+  author: servicesState.value.service?.seo.author,
 });
 
 const findServiceById = (
@@ -71,10 +72,6 @@ const breadcrumbItems = computed(
       },
     ].filter(Boolean) as any,
 );
-
-onMounted(() => {
-  console.log();
-});
 </script>
 
 <template>
