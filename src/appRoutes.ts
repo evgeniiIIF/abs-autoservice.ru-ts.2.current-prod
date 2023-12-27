@@ -8,4 +8,5 @@ export const appRoutes = {
   reviews: () => ({ path: '/reviews' }),
   privacyPolicy: () => ({ path: '/privacy-policy' }),
   vacancies: (slug?: string) => ({ path: `/vacancies/${slug || ''}` }),
+  advantages: () => ({ path: `/advantages` }),
 };
