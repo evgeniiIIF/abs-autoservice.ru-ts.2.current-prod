@@ -30,6 +30,7 @@ await useAsyncData('global', async () => {
     servicesEffects.fetchAllServices(),
     bonusEffects.fetchBonusCard(),
     menuEffects.fetchAppHeaderMenu(),
+    menuEffects.fetchAppFooterMenu(),
   ]);
 });
 
@@ -43,7 +44,7 @@ watch(
 </script>
 
 <template>
-  <div ref="nodeRef" class="wrapper">
+  <div class="default-layout">
     <AppHeader />
     <main class="main">
       <slot />
@@ -55,6 +56,5 @@ watch(
 </template>
 
 <style lang="scss">
-.wrapper {
-}
+.default-layout {}
 </style>

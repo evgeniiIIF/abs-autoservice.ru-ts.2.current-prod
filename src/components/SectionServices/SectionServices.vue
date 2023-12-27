@@ -124,31 +124,7 @@ const converterItems = computed(() =>
       &:last-child {
         transform: translateY(325px);
       }
-      // position: sticky;
-      // left: 0;
-
-      // &:nth-child(1) {
-      //   top: $top;
-      // }
-      // &:nth-child(2) {
-      //   top: $top * 2;
-      // }
-      // &:nth-child(3) {
-      //   top: $top * 3;
-      // }
-      // &:nth-child(4) {
-      //   top: $top * 4;
-      // }
-      // &:nth-child(5) {
-      //   top: $top * 5;
-      // }
     }
   }
 }
-
-// @for $i from 1 through 5 {
-//   .section-services__item:nth-child(#{$i}) {
-//     top: $i * 3 + rem;
-//   }
-// }
 </style>

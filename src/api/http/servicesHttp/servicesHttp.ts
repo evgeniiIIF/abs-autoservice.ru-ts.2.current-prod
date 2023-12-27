@@ -1,7 +1,13 @@
 import { useAppFetch } from '#imports';
-import type { GetAllServicesResponse, GetServiceResponse } from './servicesHttp.types';
+import type { GetAllServicesResponse, GetServiceResponse, GetServicesPageInfo } from './servicesHttp.types';
 
 const BASE_PATH = '/services';
+
+const getServicesPageInfo = async () => {
+  const response = await useAppLazyFetch<{ data: GetServicesPageInfo }>(`${BASE_PATH}-page`);
+
+  return response;
+};
 
 const getAllServices = async () => {
   const response = await useAppLazyFetch<GetAllServicesResponse>(`${BASE_PATH}`);
@@ -25,4 +31,5 @@ export const servicesHttp = {
   getAllServices,
   getServiceInfo,
   getSubServices,
+  getServicesPageInfo,
 };

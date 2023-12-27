@@ -1,10 +1,16 @@
 import { useAppFetch } from '#imports';
-import type { GetAppMenuResponse } from './menuHttp.types';
+import type { GetAppMenuResponse, GetAppFooterResponse } from './menuHttp.types';
 
-const BASE_PATH = '/menu';
+const getHeaderMenu = async () => {
+  const response = await useAppFetch<{ data: GetAppMenuResponse }>(`/menu`, {
+    method: 'GET',
+  });
 
-const getAppMenu = async () => {
-  const response = await useAppFetch<{ data: GetAppMenuResponse }>(`${BASE_PATH}`, {
+  return response;
+};
+
+const getFooterMenu = async () => {
+  const response = await useAppFetch<{ data: GetAppFooterResponse }>(`/footer`, {
     method: 'GET',
   });
 
@@ -12,5 +18,6 @@ const getAppMenu = async () => {
 };
 
 export const menuHttp = {
-  getAppMenu,
+  getHeaderMenu,
+  getFooterMenu,
 };

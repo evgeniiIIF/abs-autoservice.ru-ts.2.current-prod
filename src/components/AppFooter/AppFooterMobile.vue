@@ -1,8 +1,10 @@
 <script setup lang="ts">
 import { appRoutes } from '~/appRoutes';
 import { useContactsStore } from '~/store/contacts';
+import { useMenuStore } from '~/store/menu';
 
 const { contactsState } = useContactsStore();
+const { menuState } = useMenuStore();
 
 const workTimeItems = computed(() => contactsState.value.time_work?.split(',').map((item) => item.split(' ')));
 </script>
@@ -40,7 +42,7 @@ const workTimeItems = computed(() => contactsState.value.time_work?.split(',').m
             >
               Политика конфиденциальности
             </a>
-            <p class="footer-mobile__copyright">© Автосервис ABS-AUTO, 2023</p>
+            <p class="footer-mobile__copyright">{{ menuState.footer.copyright }}</p>
             <AppCards />
           </div>
         </div>
@@ -52,17 +54,6 @@ const workTimeItems = computed(() => contactsState.value.time_work?.split(',').m
 <style lang="scss">
 .footer-mobile {
   padding: 30px 0 100px 0;
-  @include media($xl) {
-    padding: 20px 0 30px 0;
-  }
-  @include tablet {
-  }
-
-  @include desktop {
-  }
-
-  @include from(1440px) {
-  }
 
   .container {
     padding: 0 10px;

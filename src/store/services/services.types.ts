@@ -1,4 +1,4 @@
-import type { Service, ServiceItemInfo } from '~/api/http/servicesHttp';
+import type { GetServicesPageInfo, Service, ServiceItemInfo } from '~/api/http/servicesHttp';
 
 export interface ServiceItem extends ServiceItemInfo {
   children?: ServiceItem[];
@@ -9,4 +9,5 @@ export interface ServicesState {
   mainServices: ServiceItemInfo[];
   servicesTree: ServiceItem[];
   service?: Service;
+  servicePageInfo?: Partial<GetServicesPageInfo>;
 }

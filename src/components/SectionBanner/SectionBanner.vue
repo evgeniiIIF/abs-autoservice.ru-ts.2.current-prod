@@ -8,7 +8,6 @@ const { homeState } = useHomeStore();
 const { scrollTo } = useScrollTo();
 
 const [isOpenModal, openModal, closeModal] = useBooleanState();
-const [isHovered, hoverElement, leaveElement] = useBooleanState();
 
 const welcomeState = computed(() => homeState.value.welcome?.[0]);
 
@@ -21,7 +20,7 @@ const scrollToAnchor = () => {
   <div class="banner">
     <div class="container">
       <div class="banner__body">
-        <div class="banner__image ibg" :style="{ filter: isHovered ? 'grayscale(0%)' : 'grayscale(80%)' }">
+        <div class="banner__image ibg">
           <NuxtPicture format="webp" :src="homeState.welcome_img ?? 'undefined'" />
         </div>
         <div class="banner__content">
@@ -47,7 +46,7 @@ const scrollToAnchor = () => {
 
           <div class="banner__buttons">
             <!-- eslint-disable-next-line vuejs-accessibility/mouse-events-have-key-events -->
-            <div class="banner__button banner__button--bg" @mouseover="hoverElement" @mouseleave="leaveElement">
+            <div class="banner__button banner__button--bg">
               <UINewButton size="big" @click="scrollToAnchor">{{ welcomeState?.btn?.[0].title }}</UINewButton>
             </div>
             <div class="banner__button banner__button--bd">

@@ -1,6 +1,4 @@
 <script setup lang="ts">
-// import { useMediaSizes } from '@/composables/useMediaSizes';
-
 import { useHomeStore } from '~/store/home';
 
 const { homeState } = useHomeStore();
