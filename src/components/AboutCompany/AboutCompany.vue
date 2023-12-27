@@ -11,7 +11,8 @@ const descriptionHasFixedHeight = ref(false);
 
 <template>
   <section class="about-company">
-    <div class="container">
+    <div class="about-company__container">
+      <div class="about-company__ellipse"></div>
       <div class="about-company__content">
         <h1 class="about-company__title">{{ aboutContent.title }}</h1>
         <p class="about-company__subtitle">{{ aboutContent.subtitle }}</p>
@@ -49,9 +50,30 @@ const descriptionHasFixedHeight = ref(false);
 
 <style lang="scss">
 .about-company {
-  padding: 40px 0 30px 0;
-  @include tablet {
-    padding: 60px 0 80px 0;
+  padding-bottom: 30px;
+
+  @include desktop {
+    padding-bottom: 80px;
+  }
+
+  &__container {
+    @include container;
+    position: relative;
+  }
+
+  &__ellipse {
+    display: none;
+    @include desktop {
+      display: initial;
+      position: absolute;
+      width: 255px;
+      height: 255px;
+      left: -88px;
+      top: 124px;
+      background: #00a19c;
+      opacity: 0.3;
+      filter: blur(70px);
+    }
   }
 
   &__content {

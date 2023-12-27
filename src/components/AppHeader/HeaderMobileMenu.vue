@@ -163,17 +163,32 @@ const navItems = computed(() =>
     }
   }
 
+  &__services {
+    max-width: 210px;
+  }
+
   &__service-item {
     max-width: 280px;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
     display: flex;
+    align-items: center;
     gap: 14px;
-    padding: 14px;
+    padding: 14px 0;
     border-bottom: 1px solid var(--black-black-80);
     color: var(--white);
     @include BodyXLBold;
+
+    span {
+      width: 80%;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    &:first-child {
+      padding-top: 0;
+    }
   }
 
   &__service-item-right {

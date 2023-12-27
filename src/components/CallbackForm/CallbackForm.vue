@@ -67,6 +67,7 @@ watch(
 
 <template>
   <div class="callback-form">
+    <div class="callback-form__ellipse"></div>
     <div class="callback-form__body">
       <div v-if="!isSuccess" class="callback-form__content">
         <p class="callback-form__title">
@@ -128,8 +129,24 @@ watch(
 <style lang="scss">
 .callback-form {
   max-width: 1200px;
+  position: relative;
+
+  &__ellipse {
+    position: absolute;
+    width: 255px;
+    height: 255px;
+    left: -58px;
+    top: 124px;
+    background: #00a19c;
+    opacity: 0.34;
+    filter: blur(70px);
+    z-index: 0;
+    z-index: 0;
+  }
 
   &__body {
+    position: relative;
+    z-index: 1;
     display: flex;
     padding: 30px 20px;
     border-radius: 20px;

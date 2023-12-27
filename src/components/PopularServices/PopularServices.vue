@@ -27,7 +27,7 @@ const popularServicesItems = computed(() => homeState.value.popular_services_ite
   position: relative;
   padding: 80px 0 20px 0;
 
-  @include tablet {
+  @include desktop {
     padding: 76px 0 40px 0;
   }
 
@@ -42,6 +42,10 @@ const popularServicesItems = computed(() => homeState.value.popular_services_ite
     border-radius: 20px 20px 0 0;
     background: linear-gradient(180deg, #2a2a2a 0%, rgba(17, 18, 18, 0) 100%);
 
+    @include desktop {
+      display: none;
+    }
+
     @include tablet {
       display: none;
     }
@@ -55,11 +59,10 @@ const popularServicesItems = computed(() => homeState.value.popular_services_ite
 
     @include tablet {
       margin-left: 0;
-      @include TitleXSBold;
     }
 
     @include desktop {
-      text-align: inherit;
+      @include TitleSBold;
     }
   }
 

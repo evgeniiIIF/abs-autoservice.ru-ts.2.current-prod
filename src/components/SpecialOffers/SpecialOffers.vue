@@ -7,8 +7,8 @@ const { isDesktop } = useMediaSizes();
 
 <template>
   <section class="special-offers">
-    <div class="container">
-      <h2 class="special-offers__title">Акции и спецпредложения</h2>
+    <div class="special-offers__container">
+      <h2 class="special-offers__title">{{ homeState.offers.title }}</h2>
       <ul class="special-offers__offers">
         <li v-for="offer in homeState.offers_items" :key="offer.id" class="special-offers__item">
           <OfferCard
@@ -32,34 +32,26 @@ const { isDesktop } = useMediaSizes();
 
 <style lang="scss">
 .special-offers {
-  position: relative;
-  padding-bottom: 30px;
+  padding-bottom: 80px;
+  border-bottom: 1px solid var(--black-black-80, #414141);
 
-  @include tablet {
-    padding: 60px 0 80px 0;
-  }
-
-  &::before {
-    position: absolute;
-    bottom: 0;
-    left: 20px;
-    width: calc(100% - 40px);
-    height: 1px;
-    content: '';
-    background-color: var(--black-black-80, #414141);
+  &__container {
+    @include container;
+    position: relative;
   }
 
   &__title {
-    margin-bottom: 20px;
-    @include SubtitleLBold;
     color: var(--white, #fff);
 
-    @include tablet {
+    @include SubtitleLBold;
+
+    @include desktop {
       @include TitleSBold;
     }
   }
 
   &__offers {
+    margin-top: 20px;
     display: flex;
     gap: 20px;
     overflow-x: scroll;

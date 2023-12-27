@@ -19,6 +19,7 @@ useSeoMeta({
   twitterCard: servicesState.value.servicePageInfo?.seo?.['twitter:card'] as any,
   robots: servicesState.value.servicePageInfo?.seo?.robots,
   author: servicesState.value.servicePageInfo?.seo?.author,
+  keywords: servicesState.value.servicePageInfo?.seo?.key_words,
 });
 
 const converterItems = computed(() =>

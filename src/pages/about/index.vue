@@ -17,6 +17,7 @@ useSeoMeta({
   twitterCard: aboutState.value?.seo?.['twitter:card'] as any,
   robots: aboutState.value.seo?.robots,
   author: aboutState.value.seo?.author,
+  keywords: aboutState.value.seo?.key_words,
 });
 
 const { isMobile } = useMediaSizes();

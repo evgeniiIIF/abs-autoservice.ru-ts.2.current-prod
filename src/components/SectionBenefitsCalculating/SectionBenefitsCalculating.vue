@@ -5,9 +5,24 @@ import { useBonusStore } from '~/store/bonus';
 const { isDesktop } = useMediaSizes();
 const { bonusState } = useBonusStore();
 
+const convertPercentInValue = (min: number, max: number, percent: number): number => {
+  return ((max - min) / 100) * percent + min;
+};
+
 const bonusSliderPercent = ref(62);
-const howMachSpendCount = computed(() => bonusSliderPercent.value * 1000);
-const bonusAmountCount = computed(() => Math.floor(howMachSpendCount.value * 0.1155));
+
+const howMachSpendCount = computed(() =>
+  convertPercentInValue(
+    0,
+    Number(bonusState.value.bonusPageInfo?.calculator.size_up) ?? 100000,
+    bonusSliderPercent.value,
+  ).toFixed(0),
+);
+const bonusAmountCount = computed(
+  () => (Number(howMachSpendCount.value) / 100) * (Number(bonusState.value.bonusPageInfo?.calculator.discount) || 0),
+);
+
+watchEffect(() => console.log(Number(bonusState.value.bonusPageInfo?.calculator.discount)));
 </script>
 
 <template>
@@ -20,7 +35,7 @@ const bonusAmountCount = computed(() => Math.floor(howMachSpendCount.value * 0.1
       <div class="benefits-calculating__middle middle-benefits-calculating">
         <div class="middle-benefits-calculating__top">
           <p v-if="isDesktop" class="middle-benefits-calculating__top-text">
-            Сумма, которую вы тратите на обслуживание в год
+            {{ bonusState.bonusPageInfo?.calculator['subtitle-2'] }}
           </p>
           <p class="middle-benefits-calculating__top-sum">
             {{ `${howMachSpendCount}`.replace(/(\d)(?=(\d\d\d)+([^\d]|$))/g, '$1 ') }} ₽

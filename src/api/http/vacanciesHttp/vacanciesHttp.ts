@@ -1,4 +1,5 @@
 import { useAppFetch } from '#imports';
+import mock from '~/public/vacanciesApiData.json';
 import type { VacanciesResponse } from './vacanciesHttp.types';
 
 const fetchVacancies = async () => {
@@ -7,6 +8,11 @@ const fetchVacancies = async () => {
     baseURL: '/vacanciesApiData.json',
   });
 
+  if (response.data.value?.data) {
+    return response;
+  }
+
+  response.data.value = { data: mock.data };
   return response;
 };
 

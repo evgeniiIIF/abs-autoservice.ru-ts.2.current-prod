@@ -1,6 +1,7 @@
 export interface BonusPageSeo {
   title: string;
   description: string;
+  key_words: any;
   author: string;
   robots: string;
   canonical_url: any;
@@ -26,7 +27,11 @@ export interface BonusProgram {
 export interface Calculator {
   title: string;
   subtitle: string;
+  'subtitle-2': string;
   subtext: string;
+  discount: string;
+  size_from: string;
+  size_up: string;
 }
 
 export interface GetBonusPageInfoData {

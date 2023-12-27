@@ -23,6 +23,7 @@ useSeoMeta({
   twitterCard: servicesState.value.service?.seo['twitter:card'] as any,
   robots: servicesState.value.service?.seo.robots,
   author: servicesState.value.service?.seo.author,
+  keywords: servicesState.value.service?.seo?.key_words,
 });
 
 const findServiceById = (

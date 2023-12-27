@@ -18,6 +18,7 @@ useSeoMeta({
   twitterCard: bonusState.value.bonusPageInfo?.seo['twitter:card'] as any,
   robots: bonusState.value.bonusPageInfo?.seo.robots,
   author: bonusState.value.bonusPageInfo?.seo.author,
+  keywords: bonusState.value.bonusPageInfo?.seo.key_words,
 });
 
 const breadcrumbItems = computed(() => [
@@ -30,8 +31,10 @@ const breadcrumbItems = computed(() => [
 
 <template>
   <div class="bonus">
+    <div class="bonus__ellipse-top"></div>
+    <div class="bonus__ellipse-bonus"></div>
     <UIBreadcrumb :items="breadcrumbItems" />
-    <SectionBonusProgram />
+    <SectionBonusProgram class="bonus__program" />
     <SectionBenefitsCalculating class="bonus__calculating" />
     <NuxtPicture
       class="bonus__picture"
@@ -46,7 +49,31 @@ const breadcrumbItems = computed(() => [
 <style lang="scss">
 .bonus {
   @include container;
+  position: relative;
   margin-bottom: 108px;
+
+  &__ellipse-top {
+    position: absolute;
+    width: 255px;
+    height: 255px;
+    right: -88px;
+    top: -104px;
+    background: #00a19c;
+    opacity: 0.34;
+    filter: blur(70px);
+  }
+
+  &__ellipse-bonus {
+    position: absolute;
+    width: 255px;
+    height: 255px;
+    right: 35%;
+    top: 300px;
+    background: #00a19c;
+    opacity: 0.15;
+    filter: blur(70px);
+    z-index: -1;
+  }
 
   &__calculating {
     margin-top: 40px;

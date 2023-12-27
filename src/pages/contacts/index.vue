@@ -156,6 +156,7 @@ const workTimeItems = computed(() => contactsState.value.time_work?.split(',').m
   }
 
   &__list {
+    list-style: none;
     & > *:not(:last-child) {
       padding-bottom: 12px;
       border-bottom: 1px solid var(--Black-Black-60, #717171);
