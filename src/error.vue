@@ -1,8 +1,23 @@
 <script setup lang="ts">
 import { appRoutes } from '~/appRoutes';
+import { useErrorStore } from '@/store/error';
 
+const { errorState, errorEffects } = useErrorStore();
 const router = useRouter();
 const { isMobile } = useMediaSizes();
+
+await errorEffects.fetchError();
+
+useSeoMeta({
+  title: errorState.value.seo?.title,
+  description: errorState.value.seo?.description,
+  ogTitle: errorState.value.seo?.['og:title'],
+  ogDescription: errorState.value.seo?.['og:description'],
+  twitterTitle: errorState.value.seo?.['twitter:title'],
+  twitterDescription: errorState.value.seo?.['twitter:description'],
+  robots: errorState.value.seo?.robots,
+  author: errorState.value.seo?.author,
+});
 
 const getIsHasHistory = () => window.history.length > 2;
 </script>
@@ -14,13 +29,13 @@ const getIsHasHistory = () => window.history.length > 2;
       <div class="error-page__container">
         <div class="error-page__ellipse" />
         <div class="error-page__content">
-          <NuxtPicture class="error-page__picture" src="images/error.png" />
+          <NuxtPicture class="error-page__picture" :src="errorState.image" :alt="errorState.image_alt" />
           <div class="error-page__info">
             <div class="error-page__top">
-              <h1 class="error-page__title">404</h1>
-              <p class="error-page__slogan">Не ошибается тот, кто ничего не делает.</p>
+              <h1 class="error-page__title">{{ errorState.status }}</h1>
+              <p class="error-page__slogan">{{ errorState.subtitle_page }}</p>
             </div>
-            <p class="error-page__subtitle">страница не найдена</p>
+            <p class="error-page__subtitle">{{ errorState.title_page }}</p>
             <div class="error-page__buttons">
               <UINewButton tag="NuxtLink" :to="appRoutes.main()" :size="isMobile ? 'small' : 'big'"
                 >На главную</UINewButton

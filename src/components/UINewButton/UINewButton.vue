@@ -9,6 +9,7 @@ withDefaults(defineProps<UIButtonProps>(), {
   fill: 'solid',
   size: 'medium',
   color: 'green',
+  textColor: 'white',
 });
 </script>
 
@@ -25,6 +26,8 @@ withDefaults(defineProps<UIButtonProps>(), {
       'button--size-big': size === 'big',
       'button--color-green': color === 'green',
       'button--color-dark': color === 'dark',
+      'button--text-color-white': textColor === 'white',
+      'button--text-color-green': textColor === 'green',
     }"
     :type="tag === 'a' ? '' : type"
   >
@@ -99,6 +102,13 @@ withDefaults(defineProps<UIButtonProps>(), {
   &--fill-outline {
     background: transparent;
     border-color: var(--green-primary, #00a19c);
+    &.button--text-color-green {
+      color: var(--green-primary, #00a19c);
+    }
+
+    &.button--text-color-white {
+      color: #fff;
+    }
 
     @include hover {
       border: 2px solid var(--green-green-40, #99d9d7);
