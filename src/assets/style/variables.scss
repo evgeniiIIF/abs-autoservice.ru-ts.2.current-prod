@@ -183,6 +183,13 @@ $transition-1: all 0.3s ease-in-out;
   letter-spacing: -2.4px;
 }
 
+@mixin SubtitleXLRegular{
+  font-size: 24px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 32px; /* 133.333% */
+}
+
 //fonts
 
 $font-main: 'Roboto', 'Arial', sans-serif;

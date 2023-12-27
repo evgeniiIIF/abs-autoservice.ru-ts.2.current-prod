@@ -78,6 +78,7 @@ $during: 0.3s;
 
   &.fade-right {
     justify-content: flex-end;
+    padding: 0;
   }
 
   &__mask {

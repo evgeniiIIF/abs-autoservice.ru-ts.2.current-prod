@@ -7,3 +7,5 @@ export * from './bonus';
 export * from './privacyHttp';
 export * from './menuHttp';
 export * from './reviewsHttp';
+export * from './vacanciesHttp';
+export * from './errorHttp';

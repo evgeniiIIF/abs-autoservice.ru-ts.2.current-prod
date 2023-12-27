@@ -7,4 +7,5 @@ export const appRoutes = {
   bonus: () => ({ path: '/bonus' }),
   reviews: () => ({ path: '/reviews' }),
   privacyPolicy: () => ({ path: '/privacy-policy' }),
+  vacancies: (slug?: string) => ({ path: `/vacancies/${slug || ''}` }),
 };
