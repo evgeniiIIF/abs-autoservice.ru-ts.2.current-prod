@@ -40,7 +40,8 @@ withDefaults(defineProps<ReviewCardProps>(), {
           <UINewButton
             tag="a"
             target="_blank"
-            :link="item.link"
+            rel="noopener noreferrer"
+            :href="item.link"
             :icon="{ component: size === 'small' ? IcArrowRight : IcArrowUpRight, slot: 'right' }"
             :has-full-width="size === 'small'"
             color="dark"
