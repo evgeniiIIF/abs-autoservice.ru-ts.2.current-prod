@@ -18,7 +18,9 @@ const scrollToAnchor = () => {
 
 <template>
   <div class="banner">
-    <div class="container">
+    <div class="banner__container">
+      <div class="banner__ellipse-top"></div>
+      <div class="banner__ellipse-left"></div>
       <div class="banner__body">
         <div class="banner__image ibg">
           <NuxtPicture format="webp" :src="homeState.welcome_img ?? 'undefined'" />
@@ -65,10 +67,32 @@ const scrollToAnchor = () => {
 <style lang="scss">
 .banner {
   background: var(--black-primary-black, #111212);
-  padding: 15px 0 60px;
 
-  @include desktop {
-    padding: 24px 0 40px;
+  &__container {
+    @include container;
+    position: relative;
+  }
+
+  &__ellipse-top {
+    position: absolute;
+    width: 255px;
+    height: 255px;
+    right: -48px;
+    top: -20px;
+    background: #00a19c;
+    opacity: 0.34;
+    filter: blur(70px);
+  }
+
+  &__ellipse-left {
+    position: absolute;
+    width: 255px;
+    height: 255px;
+    left: -28px;
+    top: 120px;
+    background: #00a19c;
+    opacity: 0.34;
+    filter: blur(70px);
   }
 
   &__body {
@@ -122,18 +146,19 @@ const scrollToAnchor = () => {
 
   &__tickers {
     margin-bottom: 20px;
+
     @include desktop {
       margin-bottom: 48px;
     }
   }
 
   &__buttons {
-    color: var(--black-black-00, #fff);
-    @include buttonText;
-
     display: flex;
     flex-wrap: wrap;
     gap: 20px;
+    color: var(--black-black-00, #fff);
+
+    @include buttonText;
   }
 
   .vue3-marquee > .marquee {

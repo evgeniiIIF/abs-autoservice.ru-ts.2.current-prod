@@ -51,7 +51,7 @@ $xxl: 1536px;
 $screen-mobile-to: 768px;
 $screen-tablet-from: 769px;
 $screen-tablet-to: 1024px;
-$screen-desktop-to: 1280px;
+$screen-desktop-from: 1025px;
 
 @mixin mobile {
   @media screen and (max-width: #{$screen-mobile-to}) {

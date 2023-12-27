@@ -2,26 +2,26 @@
 import { Vue3Marquee } from 'vue3-marquee';
 
 const BRAND_ICONS = [
-  { image: 'IcMersLogo' },
-  { image: 'IcBmwLogo' },
-  { image: 'IcLandrowerLogo' },
-  { image: 'IcAudiLogo' },
-  { image: 'IcHyndaiLogo' },
-  { image: 'IcKiaLogo' },
-  { image: 'IcVolkswagenLogo' },
-  { image: 'IcShLogo' },
-  { image: 'IcUnionLogo' },
-  { image: 'IcExeelLogo' },
-  { image: 'IcAcuraLogo' },
-  { image: 'IcMiniLogo' },
-  { image: 'IcHavalLogo' },
-  { image: 'IcNisanLogo' },
-  { image: 'IcRenoLogo' },
-  { image: 'IcToyotaLogo' },
-  { image: 'IcCitroenLogo' },
-  { image: 'IcFordLogo' },
-  { image: 'IcOpelLogo' },
-  { image: 'IcVolvoLogo' },
+  { image: 'IcMersLogo', alt: 'Mercedes-Benz', title: 'Mercedes-Benz' },
+  { image: 'IcBmwLogo', alt: 'BMV', title: 'BMV' },
+  { image: 'IcLandrowerLogo', alt: 'Land Rover', title: 'Land Rover' },
+  { image: 'IcAudiLogo', alt: 'Audi', title: 'Audi' },
+  { image: 'IcHyndaiLogo', alt: 'Hyundai', title: 'Hyundai' },
+  { image: 'IcKiaLogo', alt: 'Kia', title: 'Kia' },
+  { image: 'IcVolkswagenLogo', alt: 'Volkswagen', title: 'Volkswagen' },
+  { image: 'IcShLogo', alt: 'Škoda', title: 'Škoda' },
+  { image: 'IcUnionLogo', alt: 'Union', title: 'Union' },
+  { image: 'IcExeelLogo', alt: 'Exeeo', title: 'Exeeo' },
+  { image: 'IcAcuraLogo', alt: 'Acura', title: 'Acura' },
+  { image: 'IcMiniLogo', alt: 'MINI', title: 'MINI' },
+  { image: 'IcHavalLogo', alt: 'Haval', title: 'Haval' },
+  { image: 'IcNisanLogo', alt: 'Nissan', title: 'Nissan' },
+  { image: 'IcRenoLogo', alt: 'Reno', title: 'Reno' },
+  { image: 'IcToyotaLogo', alt: 'Toyota', title: 'Toyota' },
+  { image: 'IcCitroenLogo', alt: 'Citroen', title: 'Citroen' },
+  { image: 'IcFordLogo', alt: 'Ford', title: 'Ford' },
+  { image: 'IcOpelLogo', alt: 'Opel', title: 'Opel' },
+  { image: 'IcVolvoLogo', alt: 'Volvo', title: 'Volvo' },
 ];
 </script>
 <template>
@@ -32,7 +32,7 @@ const BRAND_ICONS = [
           <Vue3Marquee :duration="24">
             <div v-for="item in BRAND_ICONS" :key="item.image" class="brand-icons-row__item">
               <!-- eslint-disable-next-line vue/require-component-is -->
-              <component :is="item.image" :font-controlled="false" :filled="true" />
+              <component :is="item.image" :font-controlled="false" :filled="true" :title="item.title" :alt="item.alt" />
             </div>
           </Vue3Marquee>
         </ClientOnly>

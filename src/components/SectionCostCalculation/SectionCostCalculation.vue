@@ -8,7 +8,8 @@ const { calculatorBlockState } = useCalculatorBlockStore();
 
 <template>
   <div class="cost-calculation">
-    <div class="container">
+    <div class="cost-calculation__container">
+      <div class="cost-calculation__ellipse"></div>
       <div class="cost-calculation__body">
         <div class="cost-calculation__top">
           <h2 class="cost-calculation__title">{{ calculatorBlockState.title_form }}</h2>
@@ -26,42 +27,59 @@ const { calculatorBlockState } = useCalculatorBlockStore();
 
 <style lang="scss">
 .cost-calculation {
+  &__container {
+    @include container;
+    position: relative;
+  }
+
+  &__ellipse {
+    position: absolute;
+    width: 255px;
+    height: 255px;
+    left: -10px;
+    top: 180px;
+    background: #00a19c;
+    opacity: 0.34;
+    filter: blur(70px);
+  }
+
   &__body {
     position: relative;
     overflow: hidden;
-    padding: 30px 0 40px;
-
-    @include tablet {
-      padding: 60px 0 80px;
-    }
   }
+
   &__top {
     max-width: 688px;
-    margin-bottom: 20px;
-    @include mb(8px);
   }
 
   &__title {
-    @include SubtitleLBold;
     color: var(--1, #fff);
 
-    @include tablet {
+    @include SubtitleLBold;
+
+    @include desktop {
       @include TitleSBold;
     }
   }
+
   &__text {
-    @include SubtitleSRegular;
+    margin-top: 8px;
     color: var(--black-black-50, #898989);
+
+    @include SubtitleSRegular;
   }
 }
 
 .quest {
+  margin-top: 40px;
   background: var(--black-black-90, #2a2a2a);
   border-radius: 16px;
   overflow: hidden;
+
   @include media(650px) {
     position: relative;
   }
+
   @include media(880px) {
     display: flex;
   }
@@ -71,22 +89,27 @@ const { calculatorBlockState } = useCalculatorBlockStore();
     justify-content: space-between;
     align-items: center;
     margin-bottom: 20px;
+
     @include media(880px) {
       max-width: 232px;
       margin-bottom: 36px;
     }
   }
+
   &__text {
     color: var(--black-black-00, #fff);
     @include BodySRegular;
   }
+
   &__content {
     padding: 20px 20px 0;
     margin-bottom: 40px;
+
     @include media(650px) {
       padding-bottom: 20px;
       margin-bottom: 0;
     }
+
     @include media(880px) {
       flex: 1 1 auto;
       padding: 30px 0px 30px 40px;
@@ -95,9 +118,11 @@ const { calculatorBlockState } = useCalculatorBlockStore();
       }
     }
   }
+
   &__current {
     margin-bottom: 50px;
   }
+
   &__image {
     padding-top: 60.6779661%;
 
@@ -108,6 +133,7 @@ const { calculatorBlockState } = useCalculatorBlockStore();
       padding-top: 26.8333333%;
       width: 47%;
     }
+
     @include media(880px) {
       position: relative;
       padding-top: 0;
@@ -122,6 +148,7 @@ const { calculatorBlockState } = useCalculatorBlockStore();
       }
     }
   }
+
   &__buttons {
     display: flex;
     justify-content: space-between;
@@ -135,6 +162,7 @@ const { calculatorBlockState } = useCalculatorBlockStore();
       height: 24px;
     }
   }
+
   &__button--back {
     .button {
       &__arrow {
@@ -142,6 +170,7 @@ const { calculatorBlockState } = useCalculatorBlockStore();
       }
     }
   }
+
   &__button--next {
     .button {
       &__arrow {

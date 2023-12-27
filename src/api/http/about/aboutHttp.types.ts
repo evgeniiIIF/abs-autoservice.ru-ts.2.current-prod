@@ -1,6 +1,7 @@
 export interface AboutSeo {
   title: string;
   description: string;
+  key_words: any;
   author: string;
   robots: string;
   canonical_url: any;

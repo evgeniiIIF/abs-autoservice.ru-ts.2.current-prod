@@ -13,10 +13,13 @@ useSeoMeta({
   description: errorState.value.seo?.description,
   ogTitle: errorState.value.seo?.['og:title'],
   ogDescription: errorState.value.seo?.['og:description'],
+  ogType: errorState.value.seo?.['og:type'] as any,
+  twitterCard: errorState.value.seo?.['twitter:card'] as any,
   twitterTitle: errorState.value.seo?.['twitter:title'],
   twitterDescription: errorState.value.seo?.['twitter:description'],
   robots: errorState.value.seo?.robots,
   author: errorState.value.seo?.author,
+  keywords: errorState.value.seo?.key_words,
 });
 
 const getIsHasHistory = () => window.history.length > 2;

@@ -36,14 +36,6 @@ const [isModalOpen, openModal, closeModal] = useBooleanState();
 
 <style lang="scss">
 .get-card {
-  margin-bottom: 10px;
-
-  @include tablet {
-    margin-bottom: 40px;
-  }
-  @include desktop {
-    margin-bottom: 80px;
-  }
   &__body {
     display: flex;
     padding: 30px 20px;

@@ -110,30 +110,6 @@ watch(
     }
   }
 
-  &__service-item {
-    max-width: 280px;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    display: flex;
-    gap: 14px;
-    padding: 14px;
-    border-bottom: 1px solid var(--black-black-80);
-    color: var(--white);
-    @include BodyXLBold;
-  }
-
-  &__service-item-right {
-    margin-left: auto;
-    width: 24px;
-    height: 24px;
-  }
-
-  &__service-item-left {
-    width: 24px;
-    height: 24px;
-  }
-
   & .mobile-header {
     position: absolute;
     left: -100%;
@@ -197,28 +173,6 @@ watch(
   &__buttons {
     display: flex;
     @include mr(10px);
-  }
-  &__button {
-    // .button {
-    //   padding: 12px;
-    //   border: 1px solid var(--black-black-90, #2a2a2a);
-    //   background: transparent;
-    // }
-  }
-  &__button--phone {
-    // svg {
-    //   width: 24px;
-    //   height: 24px;
-    // }
-  }
-  &__button--burger {
-    // .button {
-    //   background: var(--black-black-90, #2a2a2a);
-    //   svg {
-    //     width: 24px;
-    //     height: 24px;
-    //   }
-    // }
   }
 }
 </style>
