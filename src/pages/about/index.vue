@@ -54,7 +54,12 @@ const bannerBackgroundStyle = computed(() => ({
         </div>
         <div class="about__info-row">
           <div class="about__description" v-html="aboutState.text?.content" />
-          <NuxtPicture class="about__description-image" :src="aboutState.text_img" />
+          <NuxtPicture
+            class="about__description-image"
+            :src="aboutState.text_img"
+            :alt="aboutState.text_img_alt"
+            :title="aboutState.text_img_title"
+          />
         </div>
       </div>
       <div class="about__banner" :style="!isMobile ? bannerBackgroundStyle : undefined">

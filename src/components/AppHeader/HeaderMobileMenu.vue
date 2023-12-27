@@ -29,7 +29,7 @@ const servicesList = computed(() => {
 });
 
 const navItems = computed(() =>
-  menuState.value.top_menu.map((item) => {
+  menuState.value.header.top_menu.map((item) => {
     if (item.url === appRoutes.services().path) {
       return {
         name: item.title,

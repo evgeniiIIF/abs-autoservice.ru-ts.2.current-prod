@@ -11,8 +11,10 @@ const { menuState } = useMenuStore();
 const [isOpenModal, openModal, closeModal] = useBooleanState();
 const [isSearchOpen, openSearch, closeSearch] = useBooleanState();
 
-const navItems = computed(() => menuState.value.top_menu.map((item) => ({ name: item.title, link: item.url })));
-const topNavItems = computed(() => menuState.value.header_menu.map((item) => ({ name: item.title, link: item.url })));
+const navItems = computed(() => menuState.value.header.top_menu.map((item) => ({ name: item.title, link: item.url })));
+const topNavItems = computed(() =>
+  menuState.value.header.header_menu.map((item) => ({ name: item.title, link: item.url })),
+);
 </script>
 
 <template>

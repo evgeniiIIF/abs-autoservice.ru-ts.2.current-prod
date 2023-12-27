@@ -40,7 +40,7 @@ const [isOpenSearchModal, openSearchModal, closeSearchModal] = useBooleanState()
 
   border-radius: 10px 10px 0 0;
   border-top: 1px solid var(--black-black-80, #414141);
-  background-color: var(--black-black-90, #2a2a2a);
+  background-color: var(--green-primary, #2a2a2a);
 
   &__list {
     display: flex;
@@ -53,11 +53,6 @@ const [isOpenSearchModal, openSearchModal, closeSearchModal] = useBooleanState()
     justify-content: center;
     align-items: center;
     padding: 12px 0;
-
-    &--active {
-      border-radius: 10px;
-      background: var(--black-black-80, #414141);
-    }
   }
 }
 </style>

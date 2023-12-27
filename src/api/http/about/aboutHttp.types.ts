@@ -41,6 +41,8 @@ export interface GetAboutPageResponseData {
   slug: string;
   text: Text;
   text_img: string;
+  text_img_alt: string;
+  text_img_title: string;
   guarantee: Guarantee;
   guarantee_img: string;
 }

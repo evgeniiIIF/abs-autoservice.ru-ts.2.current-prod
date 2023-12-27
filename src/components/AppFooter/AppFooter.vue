@@ -5,29 +5,15 @@ const { isDesktop } = useMediaSizes();
 </script>
 
 <template>
-  <AppFooterMobile v-if="!isDesktop" />
-  <AppFooterDesktop v-else />
+  <div class="footer">
+    <AppFooterMobile v-if="!isDesktop" />
+    <AppFooterDesktop v-else />
+  </div>
 </template>
 
 <style lang="scss">
 .footer {
-  padding: 30px 0 100px 0;
-  @include media($xl) {
-    padding: 20px 0 30px 0;
-  }
-  @include tablet {
-  }
-
-  @include desktop {
-  }
-
-  @include from(1440px) {
-  }
-
-  .container {
-    padding: 0 10px;
-    max-width: 100%;
-  }
+  @include container(1820px);
 
   &__body {
     padding: 30px 10px;

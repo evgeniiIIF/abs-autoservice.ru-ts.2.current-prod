@@ -38,6 +38,32 @@ export interface ServiceItemInfo {
   parent_id: null | number;
 }
 
+export interface ServicesSeoPage {
+  title: string;
+  description: string;
+  key_words: any;
+  author: string;
+  robots: string;
+  canonical_url: any;
+  image: string;
+  'og:type': string;
+  'og:title': string;
+  'og:description': string;
+  'twitter:card': string;
+  'twitter:title': string;
+  'twitter:description': string;
+}
+
+export interface GetServicesPageInfo {
+  seo: ServicesSeoPage;
+  is_active: number;
+  title: string;
+  slug: string;
+  image: string;
+  image_alt: string;
+  image_title: string;
+}
+
 export interface GetAllServicesResponse {
   data: ServiceItemInfo[];
 }

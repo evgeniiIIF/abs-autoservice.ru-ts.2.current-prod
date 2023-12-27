@@ -28,6 +28,19 @@ export const servicesStore = defineStore('servicesState', () => {
     state.value.service = service;
   };
 
+  const setServicePageInfo = (info: ServicesState['servicePageInfo']) => {
+    state.value.servicePageInfo = info;
+  };
+
+  const fetchServicesPageInfo = async () => {
+    const response = await servicesHttp.getServicesPageInfo();
+
+    const data = response.data.value?.data;
+    if (data) {
+      setServicePageInfo(data);
+    }
+  };
+
   const fetchAllServices = async () => {
     const { data } = await servicesHttp.getAllServices();
 
@@ -50,7 +63,6 @@ export const servicesStore = defineStore('servicesState', () => {
 
   const fetchServicesTree = async () => {
     const response = await Promise.all(state.value.mainServices.map((item) => servicesHttp.getSubServices(item.id)));
-
     setServicesTree(
       state.value.mainServices.map((service, index) => ({
         ...service,
@@ -64,11 +76,13 @@ export const servicesStore = defineStore('servicesState', () => {
     actions: {
       setAllServices,
       setParentServices,
+      setServicePageInfo,
     },
     effects: {
       fetchAllServices,
       fetchServicesTree,
       fetchService,
+      fetchServicesPageInfo,
     },
   };
 });

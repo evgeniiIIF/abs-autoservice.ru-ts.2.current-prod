@@ -18,7 +18,12 @@ withDefaults(defineProps<ReviewCardProps>(), {
           <AppRating :rating="Number(item?.rating)" />
         </div>
         <div class="review-card__review-app-image">
-          <NuxtPicture :src="item.review_service[0]?.icon ?? 'undefined'" loading="lazy" alt="Приложение" />
+          <NuxtPicture
+            :src="item.review_service[0]?.icon ?? 'undefined'"
+            loading="lazy"
+            :alt="item.review_service[0].name"
+            :title="item.review_service[0].name"
+          />
         </div>
       </div>
     </div>
@@ -32,18 +37,23 @@ withDefaults(defineProps<ReviewCardProps>(), {
       <div class="review-card__review-text" v-html="item?.content"></div>
       <div class="review-card__content-bottom">
         <div class="review-card__review-button">
-          <NuxtLink :to="item.review_service[0]?.link" target="_blank">
-            <UINewButton
-              :icon="{ component: size === 'small' ? IcArrowRight : IcArrowUpRight, slot: 'right' }"
-              :has-full-width="size === 'small'"
-              color="dark"
-            >
-              <span>Читать весь отзыв</span>
-            </UINewButton>
-          </NuxtLink>
+          <UINewButton
+            tag="a"
+            target="_blank"
+            :link="item.link"
+            :icon="{ component: size === 'small' ? IcArrowRight : IcArrowUpRight, slot: 'right' }"
+            :has-full-width="size === 'small'"
+            color="dark"
+          >
+            <span>Читать весь отзыв</span>
+          </UINewButton>
         </div>
         <div v-if="size === 'standard'" class="review-card__review-app-image">
-          <NuxtPicture :src="item.review_service[0]?.icon ?? 'undefined'" alt="Приложение" />
+          <NuxtPicture
+            :src="item.review_service[0]?.icon ?? 'undefined'"
+            :alt="item.review_service[0].name"
+            :title="item.review_service[0].name"
+          />
         </div>
       </div>
     </div>

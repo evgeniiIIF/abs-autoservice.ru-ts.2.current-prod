@@ -1,293 +1,210 @@
 <script setup lang="ts">
 import { appRoutes } from '~/appRoutes';
 import { useContactsStore } from '~/store/contacts';
+import { useMenuStore } from '~/store/menu';
 import { useServicesStore } from '~/store/services';
 
 const { contactsState } = useContactsStore();
 const { servicesState } = useServicesStore();
+const { menuState } = useMenuStore();
 
 const workTimeItems = computed(() => contactsState.value.time_work?.split(',').map((item) => item.split(' ')));
 const addressItems = computed(() => contactsState.value.address?.split(','));
-
-const [isOpenModal, openModal, closeModal] = useBooleanState();
-
-const AUTOSERVICE_1 = [
-  { title: 'Об автосервисе', link: appRoutes.about().path },
-  { title: 'Отзывы', link: appRoutes.reviews().path },
-  { title: 'Бонусная программа', link: appRoutes.bonus().path },
-];
-
-const AUTOSERVICE_2 = [
-  { title: 'Расчёт стоимости', link: 'open-modal' },
-  { title: 'Акции', link: appRoutes.offers().path },
-  { title: 'Контакты', link: appRoutes.contacts().path },
-];
 </script>
 
 <template>
   <footer class="footer-desktop">
-    <div class="container">
-      <div class="footer-desktop__body">
-        <div class="footer-desktop__top top-footer-desktop">
-          <nav class="top-footer-desktop__nav">
-            <div class="top-footer-desktop__col">
-              <h5 class="top-footer-desktop__title">Услуги</h5>
-              <ul class="top-footer-desktop__list">
-                <li v-for="item in servicesState.mainServices" :key="item.title" class="top-footer-desktop__list-item">
-                  <NuxtLink class="top-footer-desktop__nav-link" :to="appRoutes.services(item.id)">{{
-                    item.title
-                  }}</NuxtLink>
-                </li>
-              </ul>
-            </div>
-            <div class="top-footer-desktop__col">
-              <h5 class="top-footer-desktop__title">Автосервис</h5>
-              <div class="top-footer-desktop__nav--0202">
-                <ul class="top-footer-desktop__list">
-                  <li v-for="item in AUTOSERVICE_1" :key="item.title" class="top-footer-desktop__list-item">
-                    <NuxtLink class="top-footer-desktop__nav-link" :to="item.link">{{ item.title }}</NuxtLink>
-                  </li>
-                </ul>
-                <ul class="top-footer-desktop__list">
-                  <li v-for="item in AUTOSERVICE_2" :key="item.title" class="top-footer-desktop__list-item">
-                    <template v-if="item.link === 'open-modal'">
-                      <button type="button" class="top-footer-desktop__nav-link" :is-wrapper="true" @click="openModal">
-                        {{ item.title }}
-                      </button>
-                      <UIModal position="center" :is-open="isOpenModal" @onClose="closeModal">
-                        <AppQuest />
-                      </UIModal>
-                    </template>
-                    <NuxtLink v-else class="top-footer-desktop__nav-link" :to="item.link">{{ item.title }}</NuxtLink>
-                  </li>
-                </ul>
-              </div>
-            </div>
-            <p class="top-footer-desktop__nav-text">
-              Все цены, указанные на сайте приведены как справочная информация и не являются публичной офертой,
-              определяемой положениями статьи 437 Гражданского кодекса Российской Федерации и могут быть изменены в
-              любое время без предупреждения.
-            </p>
+    <div class="footer-desktop__content">
+      <div class="footer-desktop__info">
+        <div class="footer-desktop__navigation">
+          <nav class="footer-desktop__service-nav">
+            <div class="footer-desktop__service-title">Услуги</div>
+            <ul class="footer-desktop__service-list">
+              <li
+                v-for="service in servicesState.mainServices"
+                :key="service.id"
+                class="footer-desktop__service-list-item"
+              >
+                <NuxtLink :to="appRoutes.services(service.id)">
+                  {{ service.title }}
+                </NuxtLink>
+              </li>
+            </ul>
           </nav>
-          <div class="top-footer-desktop__contacts contacts-top-footer-desktop">
-            <div class="top-footer-desktop__col">
-              <h5 class="top-footer-desktop__title">Контакты</h5>
-              <ul class="top-footer-desktop__list">
-                <li class="top-footer-desktop__list-item">
-                  <a
-                    :href="`tel:${contactsState.phone?.match(/\d+/g)?.join('')}`"
-                    class="contacts-top-footer-desktop__phone"
-                    >{{ contactsState.phone }}</a
-                  >
-                </li>
-                <li class="top-footer-desktop__list-item">
-                  <address class="contacts-top-footer-desktop__address">
-                    <div class="contacts-top-footer-desktop__city">{{ addressItems?.[0] }}</div>
-                    <div class="contacts-top-footer-desktop__street">{{ addressItems?.[1] }}</div>
-                  </address>
-                </li>
-                <li class="top-footer-desktop__list-item">
-                  <a :href="`mailto:${contactsState.mail}`" class="contacts-top-footer-desktop__email">{{
-                    contactsState.mail
-                  }}</a>
-                </li>
-                <li class="top-footer-desktop__list-item">
-                  <div class="contacts-top-footer-desktop__working-hours working-hours">
-                    <div class="working-hours__circles circles-working-hours">
-                      <div v-for="circleItem in 6" :key="circleItem" class="circles-working-hours__item"></div>
-                    </div>
-                    <div class="working-hours__row">
-                      <div class="working-hours__item">
-                        <div class="working-hours__title">{{ workTimeItems?.[0][0] }}</div>
-                        <div class="working-hours__time">{{ workTimeItems?.[0][1] }}</div>
-                      </div>
-                      <div class="working-hours__item">
-                        <div class="working-hours__title">{{ workTimeItems?.[1][1] }}</div>
-                        <div class="working-hours__time">{{ workTimeItems?.[1][2] }}</div>
-                      </div>
-                    </div>
-                  </div>
-                </li>
-              </ul>
-            </div>
+          <nav class="footer-desktop__app-nav">
+            <div class="footer-desktop__app-title">Автосервис</div>
+            <ul class="footer-desktop__app-list">
+              <li
+                v-for="item in menuState.footer.autoservice_menu"
+                :key="item.title"
+                class="footer-desktop__app-list-item"
+              >
+                <NuxtLink :to="item.link">
+                  {{ item.title }}
+                </NuxtLink>
+              </li>
+            </ul>
+          </nav>
+        </div>
+        <p class="footer-desktop__description">
+          {{ menuState.footer.footer_content }}
+        </p>
+      </div>
+      <div class="footer-desktop__contacts">
+        <div class="footer-desktop__contacts-title">Контакты</div>
+        <a
+          class="footer-desktop__contacts-phone"
+          :href="`tel:${contactsState.phone?.match(/\d+/g)?.join('')}`"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          {{ contactsState.phone }}
+        </a>
+        <div class="footer-desktop__contacts-city">{{ addressItems?.[0] }}</div>
+        <div class="footer-desktop__contacts-address">{{ addressItems?.[1] }}</div>
+        <a class="footer-desktop__contacts-mail" :href="`mailto:${contactsState.mail}`">{{ contactsState.mail }}</a>
+        <div class="footer-desktop__contacts-chart">
+          <div v-for="circleItem in 6" :key="circleItem" class="footer-desktop__contacts-chart-item" />
+        </div>
+        <div class="footer-desktop__contacts-work-time">
+          <div class="footer-desktop__contacts-work-block">
+            <div class="footer-desktop__contacts-work-period">{{ workTimeItems?.[0][0] }}</div>
+            <div class="footer-desktop__contacts-work-value">{{ workTimeItems?.[0][1] }}</div>
+          </div>
+          <div class="footer-desktop__contacts-work-block">
+            <div class="footer-desktop__contacts-work-period">{{ workTimeItems?.[1][1] }}</div>
+            <div class="footer-desktop__contacts-work-value">{{ workTimeItems?.[1][2] }}</div>
           </div>
         </div>
-        <div class="footer-desktop__bottom bottom-footer-desktop">
-          <div class="bottom-footer-desktop__body">
-            <div class="bottom-footer-desktop__01 copy-bottom-footer-desktop">
-              <div class="copy-bottom-footer-desktop__01">© Автосервис ABS-AUTO, 2023</div>
-              <div class="copy-bottom-footer-desktop__02">
-                <a
-                  class="copy-bottom-footer-desktop__0201"
-                  :href="appRoutes.privacyPolicy().path"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  Политика конфиденциальности
-                </a>
-                <div class="copy-bottom-footer-desktop__0202">Карта сайта</div>
-              </div>
-            </div>
-            <div class="bottom-footer-desktop__02">
-              <AppCards />
-            </div>
-            <div class="bottom-footer-desktop__03">
-              <AppSocial />
-            </div>
+      </div>
+    </div>
+    <div class="footer-desktop__bottom">
+      <div class="footer-desktop__bottom-items">
+        <div class="footer-desktop__bottom-item">
+          <div class="footer-desktop__copy-right">{{ menuState.footer.copyright }}</div>
+          <div class="footer-desktop__bottom-links">
+            <NuxtLink v-for="item in menuState.footer.official_links" :key="item.link" :to="item.link" target="_black">
+              {{ item.title }}
+            </NuxtLink>
           </div>
+        </div>
+        <div class="footer-desktop__bottom-item">
+          <AppCards />
+        </div>
+        <div class="footer-desktop__bottom-item">
+          <AppSocial />
         </div>
       </div>
     </div>
   </footer>
 </template>
 
-<style lang="scss" scoped>
+<style lang="scss">
 .footer-desktop {
-  margin: 0 20px;
-  margin-bottom: 15px;
+  padding: 60px 0 32px 0;
   border-radius: 40px;
   background: var(--Black-Black-90, #2a2a2a);
 
-  @include media($xxl) {
-    margin: 0 50px;
-    margin-bottom: 15px;
-  }
-  .container {
-    padding: 0 50px;
-  }
-
-  &__body {
-    padding: 50px 0 32px 0;
-    display: inline-flex;
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 60px;
-  }
-}
-
-.top-footer-desktop {
-  display: flex;
-  align-items: flex-start;
-  gap: 112px;
-
-  &__nav {
+  &__content,
+  &__bottom {
+    max-width: 1200px;
+    width: 100%;
+    margin: 0 auto;
     display: flex;
-    align-items: flex-start;
-    align-content: flex-start;
-    gap: 20px 98px;
-    flex-wrap: wrap;
-    flex: 1 1 796px;
   }
 
-  &__col {
+  &__content {
+    justify-content: space-between;
+  }
+
+  &__bottom {
+    margin-top: 50px;
+  }
+
+  &__navigation {
     display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 20px;
+    gap: 98px;
+    max-width: 976px;
   }
 
-  &__title {
-    color: var(--Black-Black-60, #717171);
+  &__service-title,
+  &__app-title,
+  &__contacts-title {
+    color: var(--black-black-60);
+
     @include TitleXSRegular;
   }
 
-  &__list {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 20px;
+  &__service-list,
+  &__app-list {
     list-style: none;
   }
 
-  &__list-item {
-    button {
-      background: none;
-      border: none;
-      outline: none;
+  &__app-list {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    column-gap: 60px;
+  }
+
+  &__service-list-item,
+  &__app-list-item {
+    margin-top: 20px;
+
+    a {
+      color: var(--white);
+
+      @include BodyLRegular;
     }
   }
 
-  &__nav-link {
-    cursor: pointer;
-    color: var(--Black-Black-00, #fff);
-    @include BodyLRegular;
-    &:hover {
-      color: darken($color: #fff, $amount: 15%);
-    }
-  }
+  &__description {
+    max-width: 794px;
+    margin-top: 20px;
+    color: var(--black-black-60);
 
-  &__nav--0202 {
-    display: flex;
-    align-items: flex-start;
-    gap: 60px;
-  }
-
-  &__nav-text {
-    color: var(--Black-Black-60, #717171);
     @include BodySRegular;
   }
 
   &__contacts {
-    flex: 0 1 285px;
+    max-width: 350px;
   }
-}
-.contacts-top-footer-desktop {
-  &__phone {
-    color: var(--Black-Black-00, #fff);
+
+  &__contacts-phone {
+    margin-top: 20px;
+    color: var(--white);
+
     @include TitleXSRegular;
   }
 
-  &__address {
-  }
-  &__city {
-    color: var(--Black-Black-60, #717171);
+  &__contacts-city {
+    margin-top: 20px;
+    color: var(--black-black-60);
+
     @include BodyMRegular;
   }
-  &__street {
-    color: var(--Black-Black-00, #fff);
+
+  &__contacts-address {
+    margin-top: 10px;
+    color: var(--white);
+
     @include BodyXLRegular;
   }
 
-  &__email {
+  &__contacts-mail {
+    margin-top: 20px;
     color: var(--Black-Black-00, #fff);
-    @include BodyXLRegular;
     text-decoration: underline;
-  }
-}
-.working-hours {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  gap: 10px;
 
-  &__row {
+    @include BodyXLRegular;
+  }
+
+  &__contacts-chart {
+    margin-top: 20px;
     display: flex;
-    align-items: flex-start;
-    gap: 24px;
+    gap: 4px;
   }
 
-  &__item {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 2px;
-  }
-
-  &__title {
-    color: var(--Black-Black-60, #717171);
-    @include BodyMRegular;
-  }
-
-  &__time {
-    color: var(--Black-Black-00, #fff);
-    @include BodyLRegular;
-  }
-}
-.circles-working-hours {
-  display: flex;
-  gap: 4px;
-
-  &__item {
+  &__contacts-chart-item {
     width: 12px;
     height: 12px;
     border-radius: 50%;
@@ -299,60 +216,58 @@ const AUTOSERVICE_2 = [
     }
   }
 
-  &__item--incomplete-inner {
-    width: 100%;
-    height: 50%;
-    background: var(--Green-Primary, #00a19c);
-  }
-}
-
-.bottom-footer-desktop {
-  &__body {
+  &__contacts-work-time {
+    margin-top: 10px;
     display: flex;
+    gap: 24px;
     align-items: center;
-    gap: 236px;
-    color: var(--Black-Black-60, #717171);
+  }
+
+  &__contacts-work-period {
+    color: var(--black-black-60);
+
     @include BodyMRegular;
   }
 
-  &__01 {
+  &__contacts-work-value {
+    color: var(--white);
+
+    @include BodyLRegular;
   }
 
-  &__02 {
-    .cards {
-      display: flex;
-      padding: 8px 12px;
-      align-items: center;
-      gap: 9px;
+  &__bottom-items {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+  }
+
+  &__bottom-item {
+    &:nth-child(2) {
+      width: 132px;
+    }
+
+    &:nth-child(3) {
+      margin-right: 24px;
     }
   }
 
-  &__03 {
-  }
-}
-.container {
-}
-.copy-bottom-footer-desktop {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  gap: 10px;
+  &__copy-right {
+    color: var(--black-black-60);
 
-  &__01 {
-  }
-
-  &__02 {
-    display: flex;
-    align-items: flex-start;
-    gap: 20px;
-  }
-
-  &__0201 {
-  }
-
-  &__0201 {
-    color: var(--Black-Black-60, #717171);
     @include BodyMRegular;
+  }
+
+  &__bottom-links {
+    margin-top: 10px;
+    display: flex;
+    gap: 24px;
+
+    a {
+      color: var(--black-black-60);
+      text-decoration: underline;
+
+      @include BodyMRegular;
+    }
   }
 }
 </style>

@@ -3,11 +3,22 @@ import { appRoutes } from '~/appRoutes';
 import { useServicesStore } from '~/store/services';
 
 const { isMobile } = useMediaSizes();
-const { servicesState } = useServicesStore();
+const { servicesState, servicesEffects } = useServicesStore();
+
+await servicesEffects.fetchServicesPageInfo();
 
 useSeoMeta({
-  title: 'Услуги',
-  description: servicesState.value.mainServices.map((item) => item.title).join(', '),
+  title: servicesState.value.servicePageInfo?.seo?.title ?? 'Услуги',
+  description: servicesState.value.servicePageInfo?.seo?.description,
+  ogImage: servicesState.value.servicePageInfo?.seo?.image,
+  ogTitle: servicesState.value.servicePageInfo?.seo?.['og:title'],
+  ogDescription: servicesState.value.servicePageInfo?.seo?.['og:description'],
+  ogType: servicesState.value.servicePageInfo?.seo?.['og:type'] as any,
+  twitterTitle: servicesState.value.servicePageInfo?.seo?.['twitter:title'],
+  twitterDescription: servicesState.value.servicePageInfo?.seo?.['twitter:description'],
+  twitterCard: servicesState.value.servicePageInfo?.seo?.['twitter:card'] as any,
+  robots: servicesState.value.servicePageInfo?.seo?.robots,
+  author: servicesState.value.servicePageInfo?.seo?.author,
 });
 
 const converterItems = computed(() =>
@@ -29,7 +40,7 @@ const converterItems = computed(() =>
     <UIBreadcrumb :items="[{ name: 'Услуги', link: appRoutes.services().path }]" />
     <div class="services-page__information">
       <div class="services-page__information-content">
-        <h1 class="services-page__title">Услуги</h1>
+        <h1 class="services-page__title">{{ servicesState.servicePageInfo?.title ?? 'Услуги' }}</h1>
         <div v-if="!isMobile" class="services-page__services-list">
           <SectionServicesItem
             v-for="service in converterItems"
