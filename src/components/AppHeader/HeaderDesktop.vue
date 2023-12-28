@@ -187,6 +187,7 @@ const topNavItems = computed(() =>
 
     svg {
       width: 240px;
+      height: 34px;
     }
   }
   &__nav-button {
