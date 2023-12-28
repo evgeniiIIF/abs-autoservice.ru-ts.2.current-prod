@@ -228,13 +228,11 @@ const [isOpenModal, openModal, closeModal] = useBooleanState();
   }
 
   &__aside {
-    order: -1;
 
     @include desktop {
       position: sticky;
       top: 109px;
       height: 100%;
-      order: 0;
     }
   }
 
