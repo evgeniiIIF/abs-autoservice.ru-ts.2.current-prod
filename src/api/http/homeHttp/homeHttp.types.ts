@@ -77,7 +77,7 @@ export interface HomeData {
   about: HomeAbout;
   about_img: string;
   reviews: HomeReviews;
-  company_image: {
+  company_image?: {
     image: string[];
     image_alt: string;
     image_title: string;

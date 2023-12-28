@@ -67,12 +67,11 @@ const converterItems = computed(() =>
     @include SubtitleLBold;
     color: var(--1, #fff);
 
-    @include tablet {
-      @include TitleSBold;
-    }
     @include desktop {
       position: sticky;
       top: 160px;
+
+      @include TitleSBold;
     }
   }
 

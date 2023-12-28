@@ -15,6 +15,15 @@ export interface ContactsPage {
   copyright: string;
   time_work: string;
   social_network: ContactsPageSocial[];
+  logo?: {
+    logo_path?: string;
+    logo_mob_path?: string;
+    alt?: string;
+    title?: string;
+  };
+  favicon?: {
+    path: string;
+  };
 }
 export interface ContactsResponse {
   data: ContactsPage;

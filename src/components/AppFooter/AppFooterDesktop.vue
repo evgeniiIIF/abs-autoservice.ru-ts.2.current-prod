@@ -59,7 +59,7 @@ const workTimeItems = computed(() => contactsState.value.time_work?.split(',').m
         >
           {{ contactsState.phone }}
         </a>
-        <div class="footer-desktop__contacts-city">Адресс</div>
+        <div class="footer-desktop__contacts-city">Адрес</div>
         <div v-if="contactsState.name" class="footer-desktop__contacts-address">{{ contactsState.name }}</div>
         <div class="footer-desktop__contacts-address">{{ contactsState.address }}</div>
         <a class="footer-desktop__contacts-mail" :href="`mailto:${contactsState.mail}`">{{ contactsState.mail }}</a>

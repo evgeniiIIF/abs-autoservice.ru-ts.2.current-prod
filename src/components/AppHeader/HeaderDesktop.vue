@@ -40,7 +40,11 @@ const topNavItems = computed(() =>
 
     <div class="header-desktop__body">
       <NuxtLink :to="appRoutes.main()" class="header-desktop__logo">
-        <IcLogoDesktop :font-controlled="false" :filled="true" />
+        <NuxtImg
+          :src="contactsState?.logo?.logo_path"
+          :alt="contactsState?.logo?.alt"
+          :title="contactsState?.logo?.title"
+        />
       </NuxtLink>
       <div class="header-desktop__nav">
         <div class="header-desktop__nav-button">
@@ -185,7 +189,7 @@ const topNavItems = computed(() =>
       margin-right: 105px;
     }
 
-    svg {
+    img {
       width: 240px;
       height: 34px;
     }
