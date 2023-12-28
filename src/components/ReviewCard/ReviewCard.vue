@@ -101,18 +101,27 @@ withDefaults(defineProps<ReviewCardProps>(), {
       align-items: flex-end;
 
       &-image {
-        max-width: 80px;
-        padding: 8px 16px;
-        background-color: var(--black-black-04, #f6f6f6);
+        background: var(--black-black-50, #898989);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        max-width: 120px;
+        width: 100%;
+        padding: 8px 8px;
         border-radius: 10px;
+
+        @include mobile {
+          max-width: 80px;
+        }
 
         picture {
           display: flex;
         }
 
         img {
-          width: 50px;
-          height: 16px;
+          width: 100%;
+          height: auto;
+          object-fit: cover;
         }
       }
     }

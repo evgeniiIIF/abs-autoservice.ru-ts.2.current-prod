@@ -9,6 +9,7 @@ export interface ContactsPageSocial {
 export interface ContactsPage {
   mail: string;
   phone: string;
+  name?: string;
   address: string;
   link_map: string;
   copyright: string;
