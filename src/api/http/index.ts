@@ -9,3 +9,4 @@ export * from './menuHttp';
 export * from './reviewsHttp';
 export * from './vacanciesHttp';
 export * from './errorHttp';
+export * from './partnersHttp';
