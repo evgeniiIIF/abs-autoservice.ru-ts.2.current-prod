@@ -29,16 +29,18 @@ const servicesList = computed(() => {
 });
 
 const navItems = computed(() =>
-  menuState.value.header.top_menu.map((item) => {
-    if (item.url === appRoutes.services().path) {
-      return {
-        name: item.title,
-        onClick: openServicesMenu,
-      };
-    }
+  menuState.value.header.top_menu
+    .filter((item) => item.is_active)
+    .map((item) => {
+      if (item.url === appRoutes.services().path) {
+        return {
+          name: item.title,
+          onClick: openServicesMenu,
+        };
+      }
 
-    return { name: item.title, link: item.url };
-  }),
+      return { name: item.title, link: item.url };
+    }),
 );
 </script>
 

@@ -11,9 +11,15 @@ const { menuState } = useMenuStore();
 const [isOpenModal, openModal, closeModal] = useBooleanState();
 const [isSearchOpen, openSearch, closeSearch] = useBooleanState();
 
-const navItems = computed(() => menuState.value.header.top_menu.map((item) => ({ name: item.title, link: item.url })));
+const navItems = computed(() =>
+  menuState.value.header.top_menu
+    .filter((item) => item.is_active)
+    .map((item) => ({ name: item.title, link: item.url })),
+);
 const topNavItems = computed(() =>
-  menuState.value.header.header_menu.map((item) => ({ name: item.title, link: item.url })),
+  menuState.value.header.header_menu
+    .filter((item) => item.is_active)
+    .map((item) => ({ name: item.title, link: item.url })),
 );
 </script>
 
@@ -180,7 +186,7 @@ const topNavItems = computed(() =>
     }
 
     svg {
-      width: 100%;
+      width: 240px;
     }
   }
   &__nav-button {
