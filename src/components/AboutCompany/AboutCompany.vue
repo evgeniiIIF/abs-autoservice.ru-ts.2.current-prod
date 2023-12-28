@@ -149,7 +149,7 @@ const descriptionHasFixedHeight = ref(false);
     &-service {
       a {
         position: relative;
-        z-index: 1000;
+        z-index: 1;
         display: flex;
         flex-direction: column;
         align-items: center;
