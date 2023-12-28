@@ -68,6 +68,7 @@ const popularServicesItems = computed(() => homeState.value.popular_services_ite
 
   &__services {
     display: grid;
+    list-style: none;
     grid-template-columns: repeat(2, 1fr);
     gap: 10px;
 
