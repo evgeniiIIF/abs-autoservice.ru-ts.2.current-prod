@@ -17,13 +17,32 @@ const descriptionHasFixedHeight = ref(false);
         <h1 class="about-company__title">{{ aboutContent.title }}</h1>
         <p class="about-company__subtitle">{{ aboutContent.subtitle }}</p>
         <ul class="about-company__review-services">
-          <li v-for="reviewService in 2" :key="reviewService" class="about-company__review-service">
-            <NuxtPicture src="/images/yandex-review.png" loading="lazy" alt="Яндекс" />
-            <div class="about-company__review-service-rating">
-              <IcStarRating v-for="star in 5" :key="star" :font-controlled="false" :filled="true" />
-            </div>
+          <li class="about-company__review-service">
+            <a href="https://yandex.ru/profile/1080339034" target="_blank" rel="noopener noreferrer">
+              <div class="about-company__review-service-icon">
+                <NuxtImg src="/images/about-services/icon-yandex.svg" loading="lazy" alt="Яндекс" />
+              </div>
+              <div class="about-company__review-service-rating">
+                <IcStarRating v-for="star in 5" :key="star" :font-controlled="false" :filled="true" />
+              </div>
+            </a>
+          </li>
+          <li class="about-company__review-service">
+            <a
+              href="https://2gis.ru/stavropol/firm/8022565117231510/tab/reviews"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <div class="about-company__review-service-icon">
+                <NuxtImg src="/images/about-services/icon-2gis.svg" loading="lazy" alt="Яндекс" />
+              </div>
+              <div class="about-company__review-service-rating">
+                <IcStarRating v-for="star in 5" :key="star" :font-controlled="false" :filled="true" />
+              </div>
+            </a>
           </li>
         </ul>
+
         <div
           ref="descriptionRef"
           class="about-company__description"
@@ -128,32 +147,40 @@ const descriptionHasFixedHeight = ref(false);
     }
 
     &-service {
-      max-width: 130px;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      padding: 16px;
-      gap: 16px;
-      background: var(--linear, linear-gradient(180deg, rgba(42, 42, 42, 0) 0%, rgba(42, 42, 42, 0.4) 100%));
-      border: 1px solid var(--black-black-90, #2a2a2a);
-      border-radius: 20px;
-
-      @include desktop {
-        max-width: 220px;
-        flex-direction: inherit;
-        justify-content: space-between;
-      }
-
-      picture {
+      a {
+        position: relative;
+        z-index: 1000;
         display: flex;
-      }
-
-      img {
-        width: 100%;
+        flex-direction: column;
+        align-items: center;
+        padding: 16px;
+        gap: 16px;
+        background: var(--linear, linear-gradient(180deg, rgba(42, 42, 42, 0) 0%, rgba(42, 42, 42, 0.4) 100%));
+        border: 1px solid var(--black-black-90, #2a2a2a);
+        border-radius: 20px;
+        @include desktop {
+          flex-direction: inherit;
+          justify-content: space-between;
+        }
       }
 
       &-rating {
         display: flex;
+        svg {
+          width: 12px;
+          height: 12px;
+          @include desktop {
+            width: 24px;
+            height: 24px;
+          }
+        }
+      }
+    }
+
+    &-service-icon {
+      width: 89px;
+      img {
+        width: 100%;
       }
     }
   }
