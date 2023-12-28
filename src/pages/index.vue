@@ -20,7 +20,12 @@ useSeoMeta({
     <SectionBanner class="main-page__banner" />
     <SpecialOffers class="main-page__offers" />
     <SectionCostCalculation id="section-cost-calculation" class="main-page__calculator" />
-    <CompanyPicture class="main-page__picture" image="/images/company-1.png" alt="АБС автосервис ставрополь" />
+    <CompanyPicture
+      class="main-page__picture"
+      :image="homeState.company_image?.image?.[0] ?? '/images/company-1.png'"
+      :alt="homeState.company_image.image_alt"
+      :title="homeState.company_image.image_title"
+    />
     <PopularServices class="main-page__popular-services" />
     <SectionCallback class="main-page__callback" />
     <SectionGetCard class="main-page__card" />

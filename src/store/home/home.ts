@@ -43,6 +43,7 @@ export const homeStore = defineStore('homeStore', () => {
   const setAboutImg = (data: string) => (state.value.about_img = data);
   const setReviews = (data: HomeReviews) => (state.value.reviews = data);
   const setReviewsItems = (data: HomeReviewItem[]) => (state.value.review_items = data);
+  const setCompanyImage = (data: HomeData['company_image']) => (state.value.company_image = data);
 
   const fetchHome = async () => {
     try {
@@ -59,6 +60,7 @@ export const homeStore = defineStore('homeStore', () => {
       if (data?.about_img) setAboutImg(data.about_img);
       if (data?.reviews) setReviews(data.reviews);
       if (data?.review_items) setReviewsItems(data.review_items);
+      if (data?.company_image) setCompanyImage(data.company_image);
     } catch (error) {
       console.log(error);
     }
