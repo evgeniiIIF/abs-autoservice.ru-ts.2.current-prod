@@ -23,11 +23,15 @@ useSeoMeta({
 const { isMobile } = useMediaSizes();
 const breadcrumbItems = [{ name: 'Об автосервисе', link: '/about' }];
 
-const [isModalOpen, openModal, closeModal] = useBooleanState();
+const [isModalOpen, useOpenModal, closeModal] = useBooleanState();
 
 const bannerBackgroundStyle = computed(() => ({
   background: `url(${aboutState.value.guarantee_img}) center center`,
 }));
+
+const openModal = (isModal: boolean) => {
+  if (isModal) useOpenModal();
+};
 </script>
 
 <template>
@@ -45,9 +49,10 @@ const bannerBackgroundStyle = computed(() => ({
             <UINewButton
               v-for="(linkButton, index) in aboutState.text?.link_btn"
               :key="linkButton.title"
-              tag="NuxtLink"
+              :tag="linkButton.title === 'Реквизиты' ? 'button' : 'NuxtLink'"
               :fill="index % 2 === 0 ? 'solid' : 'outline'"
               :to="linkButton.url"
+              @click.stop="openModal(linkButton.title === 'Реквизиты')"
             >
               {{ linkButton.title }}
             </UINewButton>
@@ -79,7 +84,7 @@ const bannerBackgroundStyle = computed(() => ({
         </div>
       </div>
     </div>
-    <CallbackFormModal :is-open="isModalOpen" @on-close="closeModal" />
+    <RequisitesModal :is-open="isModalOpen" position="center" @on-close="closeModal" />
   </div>
 </template>
 
