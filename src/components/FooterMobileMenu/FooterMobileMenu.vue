@@ -1,8 +1,15 @@
 <script setup lang="ts">
 import { appRoutes } from '~/appRoutes';
+import { useContactsStore } from '~/store/contacts';
+
+const { contactsState } = useContactsStore();
 
 const [isCAllbackOpenModal, openCAllbackModal, closeCallbackModal] = useBooleanState();
 const [isOpenSearchModal, openSearchModal, closeSearchModal] = useBooleanState();
+
+const socialWhatsappItem = computed(() => {
+  return contactsState.value.social_network?.find((item) => item.title === 'Whatsapp');
+});
 </script>
 
 <template>
@@ -20,9 +27,10 @@ const [isOpenSearchModal, openSearchModal, closeSearchModal] = useBooleanState()
         </NuxtLink>
       </li>
       <li class="footer-mobile-menu__item">
-        <NuxtLink :to="appRoutes.reviews()">
-          <IcStar :font-controlled="false" :filled="true" />
-        </NuxtLink>
+        <a :href="socialWhatsappItem?.url" target="_blank" rel="noopener noreferrer">
+          <!-- <IcWhatsapp :font-controlled="false" :filled="true" /> -->
+          <img :src="socialWhatsappItem?.icon_social" :alt="socialWhatsappItem?.title" />
+        </a>
       </li>
     </ul>
     <CallbackFormModal :is-open="isCAllbackOpenModal" @on-close="closeCallbackModal" />

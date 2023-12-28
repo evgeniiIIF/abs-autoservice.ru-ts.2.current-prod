@@ -129,6 +129,8 @@ const navItems = computed(() =>
     left: -100%;
     top: 0;
     z-index: 1;
+    width: 100%;
+    max-width: 320px;
     height: inherit;
     background: rgba(42, 42, 42, 0.95);
 
@@ -253,6 +255,7 @@ const navItems = computed(() =>
     display: flex;
     align-items: center;
     justify-content: space-between;
+
     padding: 8px 0;
   }
   &__logo {
