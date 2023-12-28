@@ -51,7 +51,7 @@ export const servicesStore = defineStore('servicesState', () => {
       const [one, thu, tree, fore, five, ...also] = parentServices;
       setParentServices([thu, tree, fore, one, five, ...also]);
     }
-  };
+  };  
 
   const fetchService = async (id: number) => {
     const { data } = await servicesHttp.getServiceInfo(id);

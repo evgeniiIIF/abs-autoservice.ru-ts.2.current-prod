@@ -57,18 +57,5 @@ const breadcrumbItems = [{ name: 'Привемущетва', link: appRoutes.adv
       @include mb(80px);
     }
   }
-
-  &__special-offers {
-  }
-
-  &__bonus-program {
-  }
-
-  &__warranty {
-  }
-
-  &__calculate {
-  }
 }
 </style>
-`
