@@ -51,7 +51,11 @@ const navItems = computed(() =>
       <div class="container">
         <div class="mobile-header__body">
           <NuxtLink class="mobile-header__logo" :to="appRoutes.main()">
-            <IcLogoMobile :font-controlled="false" :filled="true" />
+            <NuxtImg
+              :src="contactsState.logo?.logo_mob_path ?? 'undefined'"
+              :alt="contactsState.logo?.alt"
+              :title="contactsState.logo?.title"
+            />
           </NuxtLink>
           <div class="mobile-header__buttons">
             <div class="mobile-header__button mobile-header__button--phone">
@@ -249,6 +253,14 @@ const navItems = computed(() =>
 
   .container {
     padding: 0 10px;
+  }
+
+  &__logo {
+    width: 143px;
+    img {
+      width: 100%;
+      height: auto;
+    }
   }
 }
 
