@@ -113,9 +113,10 @@ watch(
           </UIIconButton>
         </div>
       </div>
-      <AppQuestQuestion
+      <AppQuestQuestion4
         v-if="isSuccess"
         :form-data="{}"
+        :form-data-errors="{}"
         :title-top="'Спасибо! Ваша заявка отправлена успешно.'"
         :text="'Специалист свяжется с Вами в ближайшее время.'"
       />

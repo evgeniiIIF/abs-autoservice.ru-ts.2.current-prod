@@ -34,7 +34,7 @@ const workTimeItems = computed(() => contactsState.value.time_work?.split(',').m
             <div class="footer-desktop__app-title">Автосервис</div>
             <ul class="footer-desktop__app-list">
               <li
-                v-for="item in menuState.footer.autoservice_menu"
+                v-for="item in menuState.footer.autoservice_menu?.filter((item) => item.is_active)"
                 :key="item.title"
                 class="footer-desktop__app-list-item"
               >
@@ -83,7 +83,12 @@ const workTimeItems = computed(() => contactsState.value.time_work?.split(',').m
         <div class="footer-desktop__bottom-item">
           <div class="footer-desktop__copy-right">{{ menuState.footer.copyright }}</div>
           <div class="footer-desktop__bottom-links">
-            <NuxtLink v-for="item in menuState.footer.official_links" :key="item.link" :to="item.link" target="_black">
+            <NuxtLink
+              v-for="item in menuState.footer.official_links?.filter((item) => item.is_active)"
+              :key="item.link"
+              :to="item.link"
+              target="_black"
+            >
               {{ item.title }}
             </NuxtLink>
           </div>
