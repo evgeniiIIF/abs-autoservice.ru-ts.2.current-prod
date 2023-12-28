@@ -48,7 +48,8 @@ export const servicesStore = defineStore('servicesState', () => {
 
     if (parentServices?.length) {
       setAllServices(data.value?.data ?? []);
-      setParentServices(parentServices ?? []);
+      const [one, thu, tree, fore, five, ...also] = parentServices;
+      setParentServices([thu, tree, fore, one, five, ...also]);
     }
   };
 

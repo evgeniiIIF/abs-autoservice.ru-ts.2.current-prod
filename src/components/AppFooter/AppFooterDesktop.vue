@@ -9,7 +9,6 @@ const { servicesState } = useServicesStore();
 const { menuState } = useMenuStore();
 
 const workTimeItems = computed(() => contactsState.value.time_work?.split(',').map((item) => item.split(' ')));
-const addressItems = computed(() => contactsState.value.address?.split(','));
 </script>
 
 <template>
@@ -60,8 +59,9 @@ const addressItems = computed(() => contactsState.value.address?.split(','));
         >
           {{ contactsState.phone }}
         </a>
-        <div class="footer-desktop__contacts-city">{{ addressItems?.[0] }}</div>
-        <div class="footer-desktop__contacts-address">{{ addressItems?.[1] }}</div>
+        <div class="footer-desktop__contacts-city">Адресс</div>
+        <div v-if="contactsState.name" class="footer-desktop__contacts-address">{{ contactsState.name }}</div>
+        <div class="footer-desktop__contacts-address">{{ contactsState.address }}</div>
         <a class="footer-desktop__contacts-mail" :href="`mailto:${contactsState.mail}`">{{ contactsState.mail }}</a>
         <div class="footer-desktop__contacts-chart">
           <div v-for="circleItem in 6" :key="circleItem" class="footer-desktop__contacts-chart-item" />
