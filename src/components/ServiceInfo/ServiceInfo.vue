@@ -54,6 +54,21 @@ const [isOpenModal, openModal, closeModal] = useBooleanState();
             <HasQuestionsBanner />
           </div>
         </div>
+        <div class="service-info__callback service-info__callback--mobile">
+          <h2 class="service-info__callback-title">Для записи в автосервис ABS-AUTO</h2>
+          <p class="service-info__callback-subtitle">звоните нам по телефону</p>
+          <div class="service-info__callback-separator"></div>
+          <div class="service-info__callback-row">
+            <h3 class="service-info__callback-phone">{{ contactsState.phone }}</h3>
+            <UINewButton
+              tag="a"
+              :href="`tel:${contactsState.phone?.match(/\d+/g)?.join('')}`"
+              target="__blank"
+              :has-full-width="!isDesktop"
+              >Позвонить</UINewButton
+            >
+          </div>
+        </div>
       </div>
     </div>
     <CallbackFormModal :is-open="isOpenModal" :title-modal="servicesState.service?.title" @on-close="closeModal" />
@@ -171,9 +186,18 @@ const [isOpenModal, openModal, closeModal] = useBooleanState();
     border-radius: 20px;
     border: 1px solid var(--black-black-90, #2a2a2a);
     background: var(--linear, linear-gradient(180deg, rgba(42, 42, 42, 0) 0%, rgba(42, 42, 42, 0.4) 100%));
+    display: none;
 
     @include desktop {
       padding: 40px;
+      display: initial;
+    }
+
+    &--mobile {
+      display: initial;
+      @include desktop {
+        display: none;
+      }
     }
 
     &-title {
@@ -228,7 +252,6 @@ const [isOpenModal, openModal, closeModal] = useBooleanState();
   }
 
   &__aside {
-
     @include desktop {
       position: sticky;
       top: 109px;
