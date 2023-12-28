@@ -143,6 +143,7 @@ const descriptionHasFixedHeight = ref(false);
     &-services {
       grid-area: reviews;
       display: flex;
+      list-style: none;
       gap: 20px;
     }
 
