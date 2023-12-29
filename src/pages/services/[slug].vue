@@ -2,7 +2,7 @@
 import { useMediaSizes } from '@/composables/useMediaSizes';
 import { appRoutes } from '~/appRoutes';
 import { useServicesStore } from '~/store/services';
-import type { ServiceItem } from '~/store/services/services.types';
+import { findServiceById, findServiceBySlug } from '~/utils/services';
 
 const route = useRoute();
 const { isDesktop } = useMediaSizes();
@@ -26,26 +26,8 @@ useSeoMeta({
   keywords: servicesState.value.service?.seo?.key_words,
 });
 
-const findServiceById = (
-  id: number,
-  categoryList: ServiceItem[],
-  start: ServiceItem | undefined = undefined,
-): ServiceItem | undefined => {
-  return categoryList?.reduce((prev, next) => {
-    if (next.id === id) {
-      return next;
-    }
-
-    if (next?.id !== id) {
-      return findServiceById(id, next?.children ?? [], prev);
-    }
-
-    return prev;
-  }, start);
-};
-
 const serviceTreeCurrentItem = computed(() =>
-  findServiceById(Number(route.params.slug), servicesState.value.servicesTree),
+  findServiceBySlug(route.params.slug as string, servicesState.value.servicesTree),
 );
 
 const serviceTreeParentItem = computed(() => {

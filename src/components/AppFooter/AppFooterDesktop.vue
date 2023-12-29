@@ -24,7 +24,7 @@ const workTimeItems = computed(() => contactsState.value.time_work?.split(',').m
                 :key="service.id"
                 class="footer-desktop__service-list-item"
               >
-                <NuxtLink :to="appRoutes.services(service.id)">
+                <NuxtLink :to="appRoutes.services(service.slug)">
                   {{ service.title }}
                 </NuxtLink>
               </li>

@@ -11,10 +11,10 @@ const converterItems = computed(() =>
     image: service.image,
     title: service.title,
     text: service.children?.length ? `${service.children?.length} услуг` : '',
-    link: appRoutes.services(service.id).path,
+    link: appRoutes.services(service.slug).path,
     subcategories: service.children?.map((subService) => ({
       title: subService.title,
-      link: appRoutes.services(subService.id).path,
+      link: appRoutes.services(subService.slug).path,
     })),
   })),
 );

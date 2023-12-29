@@ -97,7 +97,7 @@ const navItems = computed(() =>
             :key="service.id"
             class="header-mobile-menu__service-item"
             @click="
-              service.children?.length ? (activeServiceId = service.id) : router.push(appRoutes.services(service.id))
+              service.children?.length ? (activeServiceId = service.id) : router.push(appRoutes.services(service.slug))
             "
           >
             <span>{{ service.title }}</span>

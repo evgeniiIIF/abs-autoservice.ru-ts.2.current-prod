@@ -34,6 +34,7 @@ export interface HomePopularServicesItem {
   title: string;
   image_icon: string;
   price: number;
+  slug: string;
 }
 
 export interface HomeAbout {

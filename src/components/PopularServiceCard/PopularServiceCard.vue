@@ -18,7 +18,7 @@ const [isModalOpen, openModal, closeModal] = useBooleanState();
         'popular-service-card--size-small': size === 'small',
       },
     ]"
-    :to="appRoutes.services(service.id)"
+    :to="appRoutes.services(service.slug)"
   >
     <NuxtPicture
       class="popular-service-card__picture"

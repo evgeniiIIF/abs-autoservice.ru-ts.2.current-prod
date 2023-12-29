@@ -46,7 +46,7 @@ useClickOutside(rootNode, () => emits('onClose'));
       :class="['app-search-service__dropdown', { 'app-search-service__dropdown--size-content': size === 'content' }]"
     >
       <div v-for="item in list" :key="item.id" class="app-search-service__dropdown-item" @click.stop="$emit('onClose')">
-        <NuxtLink class="app-search-service__dropdown-link" :to="appRoutes.services(item.id)">
+        <NuxtLink class="app-search-service__dropdown-link" :to="appRoutes.services(item.slug)">
           {{ item.title }}
         </NuxtLink>
       </div>

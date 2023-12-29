@@ -49,6 +49,8 @@ export const homeStore = defineStore('homeStore', () => {
     try {
       const response = await homeHttp.fetchHome();
       const data = response.data.value?.data;
+
+      console.log(data);
       if (data?.seo) setSeo(data.seo);
       if (data?.welcome) setWelcome(data.welcome);
       if (data?.welcome_img) setWelcomeImg(data.welcome_img);

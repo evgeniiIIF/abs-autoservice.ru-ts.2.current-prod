@@ -11,7 +11,7 @@ const popularServices = computed(() =>
   homeState.value.popular_services_items.map((service) => ({
     id: service.id,
     title: service.title,
-    link: appRoutes.services(service.id).path,
+    link: appRoutes.services(service.slug).path,
     price: service?.price,
   })),
 );
