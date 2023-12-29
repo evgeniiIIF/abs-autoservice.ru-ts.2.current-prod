@@ -9,7 +9,14 @@ const [isModalOpen, openModal, closeModal] = useBooleanState();
 <template>
   <div class="offer-card">
     <div class="offer-card__picture-wrapper">
-      <NuxtPicture class="offer-card__picture" :src="image ?? 'undefined'" loading="lazy" format="webp" />
+      <NuxtPicture
+        class="offer-card__picture"
+        :src="image?.image_path ?? 'undefined'"
+        loading="lazy"
+        format="webp"
+        :alt="image?.image_alt"
+        :title="image?.image_title"
+      />
     </div>
     <div class="offer-card__info">
       <div class="offer-card__title">

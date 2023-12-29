@@ -10,7 +10,11 @@ export interface OffersListItem {
   is_active: number;
   description: string;
   btn: OfferBtn;
-  image: string;
+  image?: {
+    image_path?: string;
+    image_al?: string;
+    image_title?: string;
+  };
 }
 
 export interface GetOffersListResponse {

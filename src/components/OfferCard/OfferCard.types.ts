@@ -2,7 +2,11 @@ export type OfferCard = {
   id?: number;
   title?: string;
   descriptions?: string;
-  image?: string;
+  image?: {
+    image_path?: string;
+    image_alt?: string;
+    image_title?: string;
+  };
   link?: string;
   button?: {
     text?: string;
