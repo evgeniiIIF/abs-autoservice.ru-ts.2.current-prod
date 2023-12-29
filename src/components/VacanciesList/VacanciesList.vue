@@ -1,35 +1,21 @@
 <script setup lang="ts">
 import type { VacanciesListProps, VacanciesListItem } from './VacanciesList.types';
 
-const [isOpenModal, useOpenModal, closeModal] = useBooleanState(false);
+const [isOpenModal, handleOpenModal, closeModal] = useBooleanState(false);
 
 withDefaults(defineProps<Partial<VacanciesListProps>>(), {
   hasButtons: false,
 });
 
 const currentItem = ref<Partial<VacanciesListItem>>({});
+
 const openModal = (item: VacanciesListItem) => {
   currentItem.value = item;
-  console.log(currentItem.value);
-
-  useOpenModal();
+  handleOpenModal();
 };
 </script>
 
 <template>
-  <!-- <ul class="vacancies-list">
-    <li v-for="item in items" :key="item.id" class="vacancies-list__item">
-      <NuxtLink class="vacancies-list__item-link" :to="appRoutes.vacancies(item.slug).path">
-        <h5 class="vacancies-list__item-title">{{ item.title }}</h5>
-        <div v-if="hasButtons" class="vacancies-list__item-row">
-          <div class="vacancies-list__item-row-text">подробнее</div>
-          <UIIconButton fill="outline" color="green">
-            <IcArrowButtonIconRight :font-controlled="false" :filled="true" />
-          </UIIconButton>
-        </div>
-      </NuxtLink>
-    </li>
-  </ul> -->
   <ul class="vacancies-list">
     <li v-for="item in items" :key="item.id" class="vacancies-list__item">
       <div class="vacancies-list__item-link" @click="openModal(item)">
@@ -70,10 +56,12 @@ const openModal = (item: VacanciesListItem) => {
       .vacancies-list__item-title {
         color: var(--Green-Primary, #00a19c);
       }
+
       .vacancies-list__item-row-text {
         color: #fff;
         text-decoration: underline;
       }
+
       .icon-button {
         background: var(--Green-Primary, #00a19c);
       }

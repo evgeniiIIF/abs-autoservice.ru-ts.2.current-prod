@@ -20,7 +20,12 @@ const [isOpenModal, openModal, closeModal] = useBooleanState();
       <div class="service-info__wrapper">
         <div class="service-info__content">
           <div class="service-info__info">
-            <NuxtPicture class="service-info__picture" :src="servicesState.service?.image ?? 'undefined'" />
+            <NuxtPicture
+              class="service-info__picture"
+              :src="servicesState.service?.image?.image_path ?? 'undefined'"
+              :alt="servicesState.service?.image?.image_alt ?? ''"
+              :title="servicesState.service?.image.image_title"
+            />
             <h1 v-if="isDesktop" class="service-info__title">{{ servicesState.service?.title }}</h1>
             <div class="service-info__description" v-html="servicesState.service?.full_text"></div>
           </div>

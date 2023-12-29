@@ -3,8 +3,6 @@ import { useContactsStore } from './store/contacts';
 
 const { contactsState } = useContactsStore();
 
-console.log(contactsState.value.favicon?.path ?? '');
-
 useHead({
   link: [
     {

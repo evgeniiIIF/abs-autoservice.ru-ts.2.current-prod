@@ -2,6 +2,7 @@
 import { useMediaSizes } from '@/composables/useMediaSizes';
 import { appRoutes } from '~/appRoutes';
 import { useServicesStore } from '~/store/services';
+
 import { findServiceById, findServiceBySlug } from '~/utils/services';
 
 const route = useRoute();
@@ -14,7 +15,7 @@ await servicesEffects.fetchService(route.params.slug as unknown as number);
 useSeoMeta({
   title: servicesState.value.service?.seo.title,
   description: servicesState.value.service?.seo.description,
-  ogImage: servicesState.value.service?.image,
+  ogImage: servicesState.value.service?.seo.image,
   ogTitle: servicesState.value.service?.seo['og:title'],
   ogDescription: servicesState.value.service?.seo['og:description'],
   ogType: servicesState.value.service?.seo['og:type'] as any,

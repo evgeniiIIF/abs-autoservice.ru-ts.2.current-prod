@@ -8,7 +8,9 @@ const { servicesState } = useServicesStore();
 
 const converterItems = computed(() =>
   servicesState.value.servicesTree.map((service) => ({
-    image: service.image,
+    image: service.image.image_path,
+    image_title: service.image.image_title,
+    image_alt: service.image.image_alt,
     title: service.title,
     text: service.children?.length ? `${service.children?.length} услуг` : '',
     link: appRoutes.services(service.slug).path,
