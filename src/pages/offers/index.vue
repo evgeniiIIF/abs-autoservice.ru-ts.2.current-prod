@@ -5,18 +5,31 @@ import { useOfferStore } from '~/store/offer';
 const { offerState, offerEffects } = useOfferStore();
 const { isMobile } = useMediaSizes();
 
-await offerEffects.fetchOffersList();
+await useAsyncData('offers-page', async () => {
+  await Promise.all([offerEffects.fetchOffersList(), offerEffects.fetchOffersPageInfo()]);
+});
 
 useSeoMeta({
-  title: 'Акции и спецпредложения',
-  description: offerState.value.offers.map((item) => item.title).join(', '),
+  title: offerState.value.offerPageInfo?.seo.title,
+  description: offerState.value.offerPageInfo?.seo.description,
+  ogTitle: offerState.value.offerPageInfo?.seo['og:title'],
+  ogDescription: offerState.value.offerPageInfo?.seo['og:description'],
+  ogType: offerState.value.offerPageInfo?.seo['og:type'] as any,
+  ogImage: offerState.value.offerPageInfo?.seo.image,
+  twitterTitle: offerState.value.offerPageInfo?.seo['twitter:title'],
+  twitterDescription: offerState.value.offerPageInfo?.seo['twitter:description'],
+  twitterCard: offerState.value.offerPageInfo?.seo['twitter:card'] as any,
+  robots: offerState.value.offerPageInfo?.seo.robots,
+  author: offerState.value.offerPageInfo?.seo.author,
+  keywords: offerState.value.offerPageInfo?.seo.key_words,
 });
+
 </script>
 
 <template>
   <div class="offers">
-    <UIBreadcrumb :items="[{ name: 'Акции и спецпредложения', link: '' }]" />
-    <h1 class="offers__title container">Акции и спецпредложения</h1>
+    <UIBreadcrumb :items="[{ name: offerState.offerPageInfo?.title ?? 'Акции и спецпредложения', link: '' }]" />
+    <h1 class="offers__title container">{{ offerState.offerPageInfo?.title ?? 'Акции и спецпредложения' }}</h1>
     <div class="container">
       <div class="offers__list">
         <OfferCard

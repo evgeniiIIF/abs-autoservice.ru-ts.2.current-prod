@@ -14,6 +14,19 @@ export const offerStore = defineStore('offerStore', () => {
     state.value.offers = offers ?? [];
   };
 
+  const setOffersPageInfo = (info?: OffersState['offerPageInfo']) => {
+    state.value.offerPageInfo = info;
+  };
+
+  const fetchOffersPageInfo = async () => {
+    const response = await offersHttp.getOffersPageInfo();
+
+    const data = response.data.value?.data;
+    if (data) {
+      setOffersPageInfo(data);
+    }
+  };
+
   const fetchOffersList = async () => {
     const { data, error } = await offersHttp.getOffersList();
 
@@ -27,6 +40,7 @@ export const offerStore = defineStore('offerStore', () => {
     actions: {},
     effects: {
       fetchOffersList,
+      fetchOffersPageInfo,
     },
   };
 });
