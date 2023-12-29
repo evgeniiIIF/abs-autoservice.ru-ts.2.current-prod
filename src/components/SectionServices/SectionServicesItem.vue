@@ -7,7 +7,13 @@ defineProps<SectionServicesItemProps>();
 <template>
   <div class="section-service-item">
     <div class="section-service-item__image">
-      <NuxtPicture :src="item.image ?? 'undefined'" format="webp" loading="lazy" />
+      <NuxtPicture
+        :src="item.image ?? 'undefined'"
+        :alt="item.image_alt ?? ''"
+        :title="item.image_title"
+        format="webp"
+        loading="lazy"
+      />
     </div>
     <div class="section-service-item__content">
       <NuxtLink class="section-service-item__title" :to="item.link">{{ item.title }}</NuxtLink>

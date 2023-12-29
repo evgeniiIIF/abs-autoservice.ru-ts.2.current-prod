@@ -22,8 +22,17 @@ export interface Service {
   is_active: number;
   preview_text: string;
   full_text: string;
-  image_icon: any;
-  image: string;
+  image_icon: {
+    image_path: string;
+    image_alt: string;
+    image_title: string;
+  };
+
+  image: {
+    image_path: string;
+    image_alt: string;
+    image_title: string;
+  };
   parent_id: number;
   price: number;
 }
@@ -34,9 +43,19 @@ export interface ServiceItemInfo {
   slug: string;
   is_active: number;
   preview_text: string;
-  image_icon: any;
-  image: string;
   parent_id: null | number;
+
+  image_icon: {
+    image_path: string;
+    image_alt: string;
+    image_title: string;
+  };
+
+  image: {
+    image_path: string;
+    image_alt: string;
+    image_title: string;
+  };
 }
 
 export interface ServicesSeoPage {

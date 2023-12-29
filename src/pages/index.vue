@@ -23,8 +23,8 @@ useSeoMeta({
     <CompanyPicture
       class="main-page__picture"
       :image="homeState.company_image?.image?.[0] ?? '/images/company-1.png'"
-      :alt="homeState.company_image.image_alt"
-      :title="homeState.company_image.image_title"
+      :alt="homeState.company_image?.image_alt ?? ''"
+      :title="homeState.company_image?.image_title"
     />
     <PopularServices class="main-page__popular-services" />
     <SectionCallback class="main-page__callback" />

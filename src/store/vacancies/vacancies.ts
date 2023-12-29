@@ -17,8 +17,6 @@ export const vacanciesStore = defineStore('vacanciesStore', () => {
   const fetchVacancies = async () => {
     const response = await vacanciesHttp.fetchVacancies();
 
-    console.log(response);
-
     const data = response.data.value?.data;
 
     if (data) {

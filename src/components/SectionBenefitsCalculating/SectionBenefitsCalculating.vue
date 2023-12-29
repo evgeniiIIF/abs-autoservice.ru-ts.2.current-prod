@@ -21,8 +21,6 @@ const howMachSpendCount = computed(() =>
 const bonusAmountCount = computed(
   () => (Number(howMachSpendCount.value) / 100) * (Number(bonusState.value.bonusPageInfo?.calculator.discount) || 0),
 );
-
-watchEffect(() => console.log(Number(bonusState.value.bonusPageInfo?.calculator.discount)));
 </script>
 
 <template>

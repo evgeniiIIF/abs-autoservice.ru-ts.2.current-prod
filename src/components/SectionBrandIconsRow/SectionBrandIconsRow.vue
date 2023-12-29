@@ -7,7 +7,6 @@ const { partnersState, partnersEffects } = usePartnersStore();
 await partnersEffects.fetchPartners();
 
 const BRAND_ICONS = computed(() => partnersState.value.data);
-console.log(BRAND_ICONS.value);
 </script>
 <template>
   <div class="brand-icons-row">
