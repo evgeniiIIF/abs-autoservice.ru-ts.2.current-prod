@@ -11,6 +11,7 @@ export default defineNuxtConfig({
     'nuxt-swiper',
     '@nuxt/image',
     'nuxt-viewport',
+    'nuxt-simple-sitemap',
   ],
 
   googleFonts: {
@@ -71,6 +72,9 @@ export default defineNuxtConfig({
     public: {
       apiBaseUrl: process.env.NUXT_PUBLIC_API_BASE_URL,
     },
+  },
+  site: {
+    url: process.env.NUXT_PUBLICK_BASE_APP_URL,
   },
   viewport: {
     breakpoints: {
