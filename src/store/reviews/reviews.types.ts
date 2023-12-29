@@ -1,5 +1,6 @@
-import type { GetReviewsPageInfo } from '~/api/http';
+import type { GetReviewsPageData, GetReviewListItem } from '~/api/http';
 
 export interface ReviewsState {
-  reviews: GetReviewsPageInfo[];
+  reviews: GetReviewListItem[];
+  reviewsPageInfo: Partial<GetReviewsPageData>;
 }
