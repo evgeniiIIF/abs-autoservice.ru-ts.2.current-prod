@@ -6,7 +6,11 @@ export interface BonusCard {
   btn_title: string;
   btn_is_modal: boolean;
   btn_is_active: boolean;
-  image: string;
+  image?: {
+    image_path?: string;
+    image_alt?: string;
+    image_title?: string;
+  };
 }
 
 export interface BonusCardResponse {

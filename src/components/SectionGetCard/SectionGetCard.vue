@@ -26,7 +26,13 @@ const [isModalOpen, openModal, closeModal] = useBooleanState();
           </div>
         </div>
         <div v-if="!isMobile" class="get-card__image">
-          <NuxtPicture :src="bonusState.bonusCard?.image ?? 'undefined'" format="webp" loading="lazy" />
+          <NuxtPicture
+            :src="bonusState.bonusCard?.image?.image_path ?? 'undefined'"
+            format="webp"
+            loading="lazy"
+            :alt="bonusState.bonusCard?.image?.image_alt"
+            :title="bonusState.bonusCard?.image?.image_title"
+          />
         </div>
       </div>
     </div>
