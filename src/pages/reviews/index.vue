@@ -4,7 +4,9 @@ import { useReviewStore } from '~/store/reviews';
 const { isMobile } = useMediaSizes();
 const { reviewsState, reviewsEffects } = useReviewStore();
 
-await reviewsEffects.fetchReviewPageInfo();
+await useAsyncData('review-page', async () => {
+  await Promise.all([reviewsEffects.fetchReviewPageInfo(), reviewsEffects.fetchReviewList()]);
+});
 
 const isNeedShowAll = ref(false);
 
@@ -14,6 +16,24 @@ const reviewList = computed(() => {
   }
 
   return reviewsState.value.reviews;
+});
+
+const reviewsSeo = computed(() => {
+  return reviewsState.value.reviewsPageInfo.seo;
+});
+
+useSeoMeta({
+  title: reviewsSeo.value?.title,
+  description: reviewsSeo.value?.description,
+  ogTitle: reviewsSeo.value?.['og:title'],
+  ogDescription: reviewsSeo.value?.['og:description'],
+  ogType: reviewsSeo.value?.['og:type'] as any,
+  twitterCard: reviewsSeo.value?.['twitter:card'] as any,
+  twitterTitle: reviewsSeo.value?.['twitter:title'],
+  twitterDescription: reviewsSeo.value?.['twitter:description'],
+  robots: reviewsSeo.value?.robots,
+  author: reviewsSeo.value?.author,
+  keywords: reviewsSeo.value?.key_words,
 });
 </script>
 
