@@ -13,14 +13,14 @@ const { isMobile } = useMediaSizes();
 
 <template>
   <div class="contacts" :class="{ 'contacts--in-mobile-menu': inMobileMenu }">
-    <a class="contacts__phone" :href="`tel:${contactsState.phone?.match(/\d+/g)?.join('')}`">{{
-      contactsState.phone
+    <a class="contacts__phone" :href="`tel:${contactsState.data?.phone?.match(/\d+/g)?.join('')}`">{{
+      contactsState.data?.phone
     }}</a>
     <div class="contacts__callback">
       <UINewButton :is-full-width="isMobile" @click="openModal">Заказать звонок</UINewButton>
       <CallbackFormModal :is-open="isOpenModal" @on-close="closeModal" />
     </div>
-    <a class="contacts__email" :href="`mailto:${contactsState.mail}`">{{ contactsState.mail }}</a>
+    <a class="contacts__email" :href="`mailto:${contactsState.data?.mail}`">{{ contactsState.data?.mail }}</a>
     <ul class="contacts__socials">
       <AppSocial />
     </ul>

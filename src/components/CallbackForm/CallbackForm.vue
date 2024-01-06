@@ -105,10 +105,10 @@ watch(
           <a :href="appRoutes.privacyPolicy().path">Политикой конфиденциальности</a>
         </p>
         <div class="callback-form__socials">
-          <UIIconButton tag="a" :href="contactsState.social_network?.[0].url" target="_black">
+          <UIIconButton tag="a" :href="contactsState.data?.social_network?.[0].url" target="_black">
             <IcTelegram :font-controlled="false" :filled="true" />
           </UIIconButton>
-          <UIIconButton tag="a" :href="contactsState.social_network?.[1].url" target="_black">
+          <UIIconButton tag="a" :href="contactsState.data?.social_network?.[1].url" target="_black">
             <IcWhatsapp :font-controlled="false" :filled="true" />
           </UIIconButton>
         </div>

@@ -8,7 +8,7 @@ const [isCAllbackOpenModal, openCAllbackModal, closeCallbackModal] = useBooleanS
 const [isOpenSearchModal, openSearchModal, closeSearchModal] = useBooleanState();
 
 const socialWhatsappItem = computed(() => {
-  return contactsState.value.social_network?.find((item) => item.title === 'Whatsapp');
+  return contactsState.value.data?.social_network?.find((item) => item.title === 'Whatsapp');
 });
 </script>
 
