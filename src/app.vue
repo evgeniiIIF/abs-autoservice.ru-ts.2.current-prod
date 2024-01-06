@@ -9,7 +9,7 @@ useHead({
       rel: 'icon',
       type: 'image/png',
       sizes: '192x192',
-      href: contactsState.value.favicon?.path ?? '',
+      href: contactsState.value.data?.favicon?.path ?? '',
     },
   ],
 });

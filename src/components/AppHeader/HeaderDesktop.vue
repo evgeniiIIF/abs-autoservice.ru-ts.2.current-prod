@@ -28,7 +28,7 @@ const topNavItems = computed(() =>
     <div :class="['header-desktop__top', 'header-desktop-top', { 'header-desktop-top--invisible': y > 100 }]">
       <address class="header-desktop-top__address">
         <div class="header-desktop-top__address-icon"><IcNavigation :font-controlled="false" :filled="true" /></div>
-        <p class="header-desktop-top__address-text">{{ contactsState.address }}</p>
+        <p class="header-desktop-top__address-text">{{ contactsState.data?.address }}</p>
       </address>
       <div class="header-desktop-top__nav">
         <AppNavigation :items="topNavItems" />
@@ -41,9 +41,9 @@ const topNavItems = computed(() =>
     <div class="header-desktop__body">
       <NuxtLink :to="appRoutes.main()" class="header-desktop__logo">
         <NuxtImg
-          :src="contactsState?.logo?.logo_path"
-          :alt="contactsState?.logo?.alt"
-          :title="contactsState?.logo?.title"
+          :src="contactsState.data?.logo?.logo_path"
+          :alt="contactsState.data?.logo?.alt"
+          :title="contactsState.data?.logo?.title"
         />
       </NuxtLink>
       <div class="header-desktop__nav">
@@ -58,7 +58,7 @@ const topNavItems = computed(() =>
       <div class="header-desktop__contacts contacts-header-desktop">
         <div class="contacts-header-desktop__feedback feedback">
           <div class="feedback__tel">
-            <UITel :phoneNumber="contactsState.phone ?? ''" />
+            <UITel :phoneNumber="contactsState.data?.phone ?? ''" />
           </div>
           <button type="button" class="feedback__button">обратный звонок</button>
         </div>

@@ -52,9 +52,9 @@ const navItems = computed(() =>
         <div class="mobile-header__body">
           <NuxtLink class="mobile-header__logo" :to="appRoutes.main()">
             <NuxtImg
-              :src="contactsState.logo?.logo_mob_path ?? 'undefined'"
-              :alt="contactsState.logo?.alt"
-              :title="contactsState.logo?.title"
+              :src="contactsState.data?.logo?.logo_mob_path ?? 'undefined'"
+              :alt="contactsState.data?.logo?.alt"
+              :title="contactsState.data?.logo?.title"
             />
           </NuxtLink>
           <div class="mobile-header__buttons">
@@ -63,7 +63,7 @@ const navItems = computed(() =>
                 color="dark"
                 fill="outline"
                 tag="a"
-                :href="`tel:${contactsState.phone?.match(/\d+/g)?.join('')}`"
+                :href="`tel:${contactsState.data?.phone?.match(/\d+/g)?.join('')}`"
                 target="_blank"
                 rel="noopener noreferrer"
               >

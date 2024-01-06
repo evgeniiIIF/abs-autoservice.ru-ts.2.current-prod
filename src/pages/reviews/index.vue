@@ -39,9 +39,9 @@ useSeoMeta({
 
 <template>
   <div class="reviews-page">
-    <UIBreadcrumb :items="[{ name: 'Отзывы', link: '' }]" />
+    <UIBreadcrumb :items="[{ name: reviewsState.reviewsPageInfo.title ?? '', link: '' }]" />
     <div class="container">
-      <h1 class="reviews-page__title">Отзывы</h1>
+      <h1 class="reviews-page__title">{{ reviewsState.reviewsPageInfo.title }}</h1>
       <div class="reviews-page__list">
         <ReviewCard
           v-for="review in reviewList"

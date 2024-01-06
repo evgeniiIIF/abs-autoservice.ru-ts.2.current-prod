@@ -6,7 +6,7 @@ import { useMenuStore } from '~/store/menu';
 const { contactsState } = useContactsStore();
 const { menuState } = useMenuStore();
 
-const workTimeItems = computed(() => contactsState.value.time_work?.split(',').map((item) => item.split(' ')));
+const workTimeItems = computed(() => contactsState.value.data?.time_work?.split(',').map((item) => item.split(' ')));
 </script>
 
 <template>

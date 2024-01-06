@@ -34,10 +34,10 @@ const [isOpenModal, openModal, closeModal] = useBooleanState();
             <p class="service-info__callback-subtitle">звоните нам по телефону</p>
             <div class="service-info__callback-separator"></div>
             <div class="service-info__callback-row">
-              <h3 class="service-info__callback-phone">{{ contactsState.phone }}</h3>
+              <h3 class="service-info__callback-phone">{{ contactsState.data?.phone }}</h3>
               <UINewButton
                 tag="a"
-                :href="`tel:${contactsState.phone?.match(/\d+/g)?.join('')}`"
+                :href="`tel:${contactsState.data?.phone?.match(/\d+/g)?.join('')}`"
                 target="__blank"
                 :has-full-width="!isDesktop"
                 >Позвонить</UINewButton
@@ -64,10 +64,10 @@ const [isOpenModal, openModal, closeModal] = useBooleanState();
           <p class="service-info__callback-subtitle">звоните нам по телефону</p>
           <div class="service-info__callback-separator"></div>
           <div class="service-info__callback-row">
-            <h3 class="service-info__callback-phone">{{ contactsState.phone }}</h3>
+            <h3 class="service-info__callback-phone">{{ contactsState.data?.phone }}</h3>
             <UINewButton
               tag="a"
-              :href="`tel:${contactsState.phone?.match(/\d+/g)?.join('')}`"
+              :href="`tel:${contactsState.data?.phone?.match(/\d+/g)?.join('')}`"
               target="__blank"
               :has-full-width="!isDesktop"
               >Позвонить</UINewButton

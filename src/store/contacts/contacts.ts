@@ -3,20 +3,35 @@ import { defineStore } from 'pinia';
 
 import { contactsPageHttp } from '~/api/http';
 
-import type { ContactsPage } from '~/api/http/contacts/contactsHttp.types';
+import type { ContactsPageState } from '~/api/http/contacts/contactsHttp.types';
 
-const DEFAULT_STATE: Partial<ContactsPage> = {};
+const DEFAULT_STATE: Partial<ContactsPageState> = {};
 
 export const contactsStore = defineStore('contactsStore', () => {
   const state = ref(DEFAULT_STATE);
 
-  const setContacts = (data: ContactsPage) => (state.value = data);
+  const setContacts = (data: ContactsPageState['data']) => (state.value.data = data);
+  const setContactsWithSeoAndTitle = (data: ContactsPageState['dataWithSeoAndTitle']) =>
+    (state.value.dataWithSeoAndTitle = data);
 
   const fetchContacts = async () => {
     const response = await contactsPageHttp.fetchContactsPage();
 
     const data = response.data.value?.data;
-    if (data) setContacts(data);
+
+    if (data) {
+      setContacts(data);
+    }
+  };
+
+  const fetchContactsWithSeoAndTitle = async () => {
+    const response = await contactsPageHttp.fetchContactsPageWithSeoAndTitle();
+
+    const data = response.data.value?.data;
+
+    if (data) {
+      setContactsWithSeoAndTitle(data);
+    }
   };
 
   return {
@@ -24,6 +39,7 @@ export const contactsStore = defineStore('contactsStore', () => {
     actions: {},
     effects: {
       fetchContacts,
+      fetchContactsWithSeoAndTitle,
     },
   };
 });

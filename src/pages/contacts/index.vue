@@ -6,14 +6,31 @@ import { IcPathMap } from '#components';
 const { isDesktop } = useMediaSizes();
 const { contactsState } = useContactsStore();
 
-useSeoMeta({
-  title: 'Контакты',
-  description: contactsState.value.address,
+const contactsSeo = computed(() => {
+  return contactsState.value.dataWithSeoAndTitle?.seo;
 });
 
-const breadcrumbItems = [{ name: 'Контакты', link: appRoutes.contacts().path }];
+console.log(contactsSeo.value);
 
-const workTimeItems = computed(() => contactsState.value.time_work?.split(',').map((item) => item.split(' ')));
+const breadcrumbItems = [
+  { name: contactsState.value.dataWithSeoAndTitle?.title ?? 'Контакты', link: appRoutes.contacts().path },
+];
+
+const workTimeItems = computed(() => contactsState.value.data?.time_work?.split(',').map((item) => item.split(' ')));
+
+useSeoMeta({
+  title: contactsSeo.value?.title,
+  description: contactsSeo.value?.description,
+  ogTitle: contactsSeo.value?.['og:title'],
+  ogDescription: contactsSeo.value?.['og:description'],
+  ogType: contactsSeo.value?.['og:type'] as any,
+  twitterCard: contactsSeo.value?.['twitter:card'] as any,
+  twitterTitle: contactsSeo.value?.['twitter:title'],
+  twitterDescription: contactsSeo.value?.['twitter:description'],
+  robots: contactsSeo.value?.robots,
+  author: contactsSeo.value?.author,
+  keywords: contactsSeo.value?.key_words,
+});
 </script>
 
 <template>
@@ -24,7 +41,7 @@ const workTimeItems = computed(() => contactsState.value.time_work?.split(',').m
     <section class="contacts-page__contacts-info info-contacts-page">
       <div class="container">
         <div class="info-contacts-page__body">
-          <h1 class="info-contacts-page__title">Контакты</h1>
+          <h1 class="info-contacts-page__title">{{ contactsState.dataWithSeoAndTitle?.title }}</h1>
           <div class="info-contacts-page__row">
             <div class="info-contacts-page__content">
               <div class="info-contacts-page__content-top top-info-contacts-page">
@@ -32,29 +49,29 @@ const workTimeItems = computed(() => contactsState.value.time_work?.split(',').m
                   <li class="top-info-contacts-page__item item-top-info-contacts-page">
                     <p class="item-top-info-contacts-page__title">Звоните</p>
                     <a
-                      :href="`tel:${contactsState.phone?.match(/\d+/g)?.join('')}`"
+                      :href="`tel:${contactsState.data?.phone?.match(/\d+/g)?.join('')}`"
                       class="item-top-info-contacts-page__text item-top-info-contacts-page__text--phone"
-                      >{{ contactsState.phone }}</a
+                      >{{ contactsState.data?.phone }}</a
                     >
                   </li>
                   <li class="top-info-contacts-page__item item-top-info-contacts-page">
                     <p class="item-top-info-contacts-page__title">Пишите</p>
                     <a
-                      :href="`mailto:${contactsState.mail}`"
+                      :href="`mailto:${contactsState.data?.mail}`"
                       class="item-top-info-contacts-page__text item-top-info-contacts-page__text--email"
-                      >{{ contactsState.mail }}</a
+                      >{{ contactsState.data?.mail }}</a
                     >
                   </li>
                   <li class="top-info-contacts-page__item item-top-info-contacts-page">
                     <p class="item-top-info-contacts-page__title">Приезжайте</p>
-                    <address class="item-top-info-contacts-page__text">{{ contactsState.address }}</address>
+                    <address class="item-top-info-contacts-page__text">{{ contactsState.data?.address }}</address>
                   </li>
                 </ul>
                 <div class="top-info-contacts-page__button">
                   <UINewButton
                     tag="a"
                     :icon="{ component: IcPathMap, slot: 'right' }"
-                    :href="contactsState.link_map"
+                    :href="contactsState.data?.link_map"
                     target="_blank"
                     rel="noopener"
                   >

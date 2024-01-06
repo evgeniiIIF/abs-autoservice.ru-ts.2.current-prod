@@ -26,6 +26,7 @@ await useAsyncData('global', async () => {
     callBackFormEffects.fetchCallBackForm(),
     homeEffects.fetchHome(),
     contactsEffects.fetchContacts(),
+    contactsEffects.fetchContactsWithSeoAndTitle(),
     calculatorBlockEffects.fetchCalculatorBlock(),
     servicesEffects.fetchAllServices(),
     bonusEffects.fetchBonusCard(),
@@ -56,5 +57,6 @@ watch(
 </template>
 
 <style lang="scss">
-.default-layout {}
+.default-layout {
+}
 </style>
