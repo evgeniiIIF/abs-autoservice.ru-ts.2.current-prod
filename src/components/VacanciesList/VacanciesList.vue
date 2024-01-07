@@ -1,5 +1,6 @@
 <script setup lang="ts">
-import type { VacanciesListProps, VacanciesListItem } from './VacanciesList.types';
+import type { VacanciesItem } from '~/api/http';
+import type { VacanciesListProps } from './VacanciesList.types';
 
 const [isOpenModal, handleOpenModal, closeModal] = useBooleanState(false);
 
@@ -7,9 +8,9 @@ withDefaults(defineProps<Partial<VacanciesListProps>>(), {
   hasButtons: false,
 });
 
-const currentItem = ref<Partial<VacanciesListItem>>({});
+const currentItem = ref<VacanciesItem | null>(null);
 
-const openModal = (item: VacanciesListItem) => {
+const openModal = (item: VacanciesItem) => {
   currentItem.value = item;
   handleOpenModal();
 };
@@ -17,8 +18,8 @@ const openModal = (item: VacanciesListItem) => {
 
 <template>
   <ul class="vacancies-list">
-    <li v-for="item in items" :key="item.id" class="vacancies-list__item">
-      <div class="vacancies-list__item-link" @click="openModal(item)">
+    <li v-for="item in items" :key="item.title" class="vacancies-list__item">
+      <div class="vacancies-list__item-link" @click.stop="openModal(item)">
         <h5 class="vacancies-list__item-title">{{ item.title }}</h5>
         <div v-if="hasButtons" class="vacancies-list__item-row">
           <div class="vacancies-list__item-row-text">подробнее</div>
@@ -28,14 +29,13 @@ const openModal = (item: VacanciesListItem) => {
         </div>
       </div>
     </li>
-    <VacanciesListModal :isOpen="isOpenModal" :item="currentItem" @onClose="closeModal" />
+    <VacanciesListModal v-if="currentItem" :isOpen="isOpenModal" :item="currentItem" @onClose="closeModal" />
   </ul>
 </template>
 
 <style lang="scss">
 .vacancies-list {
   list-style: none;
-
   & > * {
     padding: 20px 0px;
     border-bottom: 1px solid var(--Black-Black-80, #414141);

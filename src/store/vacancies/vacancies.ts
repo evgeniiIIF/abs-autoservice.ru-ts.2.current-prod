@@ -2,15 +2,14 @@ import { ref } from 'vue';
 import { defineStore } from 'pinia';
 
 import { vacanciesHttp } from '~/api/http';
+import type { VacanciesState } from './vacancies.types';
 
-import type { VacanciesResponse } from '~/api/http/vacanciesHttp/vacanciesHttp.types';
-
-const DEFAULT_STATE: Partial<VacanciesResponse> = {};
+const DEFAULT_STATE: Partial<VacanciesState> = {};
 
 export const vacanciesStore = defineStore('vacanciesStore', () => {
   const state = ref(DEFAULT_STATE);
 
-  const setVacancies = (data: VacanciesResponse) => {
+  const setVacancies = (data: VacanciesState) => {
     state.value = data;
   };
 
@@ -20,7 +19,10 @@ export const vacanciesStore = defineStore('vacanciesStore', () => {
     const data = response.data.value?.data;
 
     if (data) {
-      setVacancies(data);
+      setVacancies({
+        ...data.data,
+        vacancies_items: data.vacancies_item,
+      });
     }
   };
 

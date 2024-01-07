@@ -1,7 +1,7 @@
-import type { VacanciesListItem } from '@/components/VacanciesList/VacanciesList.types';
+import type { VacanciesItem } from '~/api/http';
 
 export interface VacanciesListItemModalProps {
-  item: VacanciesListItem;
+  item: VacanciesItem;
 }
 
 export interface VacanciesListItemModalEmits {

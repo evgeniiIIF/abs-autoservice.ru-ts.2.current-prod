@@ -94,10 +94,6 @@ $during: 0.3s;
   &__container {
     position: relative;
     max-width: inherit;
-    padding: 0 10px;
-
-    .fade-in & {
-    }
   }
 
   &__close {

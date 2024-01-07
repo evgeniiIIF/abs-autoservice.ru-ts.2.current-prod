@@ -47,8 +47,9 @@ const getIsHasHistory = () => window.history.length > 2;
                 :size="isMobile ? 'small' : 'big'"
                 fill="outline"
                 @click.stop="getIsHasHistory() ? router.back() : router.push(appRoutes.main())"
-                >Назад</UINewButton
               >
+                Назад
+              </UINewButton>
             </div>
           </div>
         </div>

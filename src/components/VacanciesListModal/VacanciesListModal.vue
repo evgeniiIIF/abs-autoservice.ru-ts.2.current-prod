@@ -1,7 +1,8 @@
 <script setup lang="ts">
-import type { VacanciesListModalProps } from './VacanciesListModal.types';
+import type { VacanciesListModalProps, VacanciesListModalEmits } from './VacanciesListModal.types';
 
 defineProps<VacanciesListModalProps>();
+defineEmits<VacanciesListModalEmits>();
 </script>
 
 <template>

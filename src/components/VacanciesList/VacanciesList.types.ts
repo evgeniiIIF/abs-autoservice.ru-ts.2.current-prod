@@ -1,9 +1,6 @@
-export interface VacanciesListItem {
-  title?: string;
-  id?: number;
-  slug?: string;
-}
+import type { VacanciesItem } from '~/api/http';
+
 export interface VacanciesListProps {
-  items: VacanciesListItem[];
+  items: VacanciesItem[];
   hasButtons?: boolean;
 }
