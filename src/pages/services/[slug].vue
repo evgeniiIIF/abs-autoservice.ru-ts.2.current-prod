@@ -49,11 +49,11 @@ const breadcrumbItems = computed(
       },
       serviceTreeParentItem.value?.id && {
         name: serviceTreeParentItem.value.title,
-        link: appRoutes.services(serviceTreeParentItem.value.id).path,
+        link: appRoutes.services(serviceTreeParentItem.value.slug).path,
       },
       {
         name: serviceTreeCurrentItem.value?.title,
-        link: appRoutes.services(serviceTreeCurrentItem.value?.id).path,
+        link: appRoutes.services(serviceTreeCurrentItem.value?.slug).path,
       },
     ].filter(Boolean) as any,
 );
