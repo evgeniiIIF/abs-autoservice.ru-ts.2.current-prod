@@ -40,7 +40,7 @@ const listItems = [
       </ul>
       <div class="requisites__buttons">
         <UINewButton>Скачать PDF</UINewButton>
-        <UINewButton fill="outline" textColor="green">Закрыть</UINewButton>
+        <UINewButton fill="outline" textColor="green" @click="$emit('onClose')">Закрыть</UINewButton>
       </div>
     </div>
   </UIModal>

@@ -23,14 +23,17 @@ useSeoMeta({
 const { isMobile } = useMediaSizes();
 const breadcrumbItems = [{ name: 'Об автосервисе', link: '/about' }];
 
-const [isModalOpen, useOpenModal, closeModal] = useBooleanState();
+const [isRequisitesModalOpen, handleOpenModal, closeModal] = useBooleanState();
+const [isCallbackModalOpen, openCallbackModal, closeCallbackModal] = useBooleanState();
 
 const bannerBackgroundStyle = computed(() => ({
   background: `url(${aboutState.value.guarantee_img}) center center`,
 }));
 
-const openModal = (isModal: boolean) => {
-  if (isModal) useOpenModal();
+const openRequisitesModal = (isModal: boolean) => {
+  console.log(isModal);
+
+  if (isModal) handleOpenModal();
 };
 </script>
 
@@ -52,7 +55,7 @@ const openModal = (isModal: boolean) => {
               :tag="linkButton.title === 'Реквизиты' ? 'button' : 'NuxtLink'"
               :fill="index % 2 === 0 ? 'solid' : 'outline'"
               :to="linkButton.url"
-              @click.stop="openModal(linkButton.title === 'Реквизиты')"
+              @click.stop="openRequisitesModal(linkButton.title === 'Реквизиты')"
             >
               {{ linkButton.title }}
             </UINewButton>
@@ -78,13 +81,18 @@ const openModal = (isModal: boolean) => {
             {{ aboutState.guarantee?.title }}
           </h2>
           <div class="about__banner-subtitle" v-html="aboutState.guarantee?.content" />
-          <UINewButton class="about__banner-button" :is-full-width="isMobile" @click.stop="openModal">
+          <UINewButton class="about__banner-button" :is-full-width="isMobile" @click.stop="openCallbackModal">
             {{ aboutState.guarantee?.title_btn }}
           </UINewButton>
         </div>
       </div>
     </div>
-    <RequisitesModal :is-open="isModalOpen" position="center" @on-close="closeModal" />
+    <RequisitesModal :is-open="isRequisitesModalOpen" position="center" @on-close="closeModal" />
+    <CallbackFormModal
+      :is-open="isCallbackModalOpen"
+      position="center"
+      @on-close="closeCallbackModal"
+    ></CallbackFormModal>
   </div>
 </template>
 
