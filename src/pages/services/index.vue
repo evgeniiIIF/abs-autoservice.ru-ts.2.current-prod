@@ -74,6 +74,7 @@ const converterItems = computed(() =>
 
 <style lang="scss">
 .services-page {
+  overflow: hidden;
   &__title {
     @include TitleMBold;
     color: var(--white);
@@ -89,10 +90,6 @@ const converterItems = computed(() =>
 
     @include desktop {
       flex-wrap: nowrap;
-    }
-
-    @include mobile {
-      display: block;
     }
   }
 

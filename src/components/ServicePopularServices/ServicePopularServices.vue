@@ -38,6 +38,9 @@ const popularServices = computed(() =>
           nextEl: '.service-popular-services__slider-button-next',
         }"
         :breakpoints="{
+          1200: {
+            slidesPerView: 4,
+          },
           1024: {
             slidesPerView: 3,
           },
@@ -85,8 +88,6 @@ const popularServices = computed(() =>
   }
 
   &__slide {
-    max-width: 240px;
-
     @include tablet {
       max-width: inherit;
     }
