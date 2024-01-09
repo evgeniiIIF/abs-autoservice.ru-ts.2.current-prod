@@ -34,13 +34,13 @@ const [isOpenModal, openModal, closeModal] = useBooleanState();
             <p class="service-info__callback-subtitle">звоните нам по телефону</p>
             <div class="service-info__callback-separator"></div>
             <div class="service-info__callback-row">
-              <h3 class="service-info__callback-phone">{{ contactsState.data?.phone }}</h3>
-              <UINewButton
-                tag="a"
+              <a
+                class="service-info__callback-phone"
                 :href="`tel:${contactsState.data?.phone?.match(/\d+/g)?.join('')}`"
-                target="__blank"
-                :has-full-width="!isDesktop"
-                >Позвонить</UINewButton
+                >{{ contactsState.data?.phone }}</a
+              >
+              <UINewButton @click="openModal" target="__blank" :has-full-width="!isDesktop"
+                >Заказать звонок</UINewButton
               >
             </div>
           </div>
@@ -64,13 +64,17 @@ const [isOpenModal, openModal, closeModal] = useBooleanState();
           <p class="service-info__callback-subtitle">звоните нам по телефону</p>
           <div class="service-info__callback-separator"></div>
           <div class="service-info__callback-row">
-            <h3 class="service-info__callback-phone">{{ contactsState.data?.phone }}</h3>
+            <a
+              class="service-info__callback-phone"
+              :href="`tel:${contactsState.data?.phone?.match(/\d+/g)?.join('')}`"
+              >{{ contactsState.data?.phone }}</a
+            >
             <UINewButton
-              tag="a"
+              @click="openModal"
               :href="`tel:${contactsState.data?.phone?.match(/\d+/g)?.join('')}`"
               target="__blank"
               :has-full-width="!isDesktop"
-              >Позвонить</UINewButton
+              >Заказать звонок</UINewButton
             >
           </div>
         </div>
@@ -195,7 +199,7 @@ const [isOpenModal, openModal, closeModal] = useBooleanState();
 
     @include desktop {
       padding: 40px;
-      display: initial;
+      display: block;
     }
 
     &--mobile {
