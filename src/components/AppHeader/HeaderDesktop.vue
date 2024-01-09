@@ -60,7 +60,7 @@ const topNavItems = computed(() =>
           <div class="feedback__tel">
             <UITel :phoneNumber="contactsState.data?.phone ?? ''" />
           </div>
-          <button type="button" class="feedback__button">обратный звонок</button>
+          <button type="button" class="feedback__button" @click="openModal">обратный звонок</button>
         </div>
         <div class="contacts-header-desktop__button">
           <UINewButton size="big" @click="openModal">Записаться на сервис</UINewButton>
