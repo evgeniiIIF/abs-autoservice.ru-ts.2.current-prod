@@ -24,6 +24,7 @@ body {
   height: inherit;
   background: var(--black-primary-black, #111212);
   height: 100%;
+  overflow-x: hidden;
 }
 
 div#__nuxt {

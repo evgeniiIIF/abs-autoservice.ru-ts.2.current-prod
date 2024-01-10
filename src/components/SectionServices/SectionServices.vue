@@ -32,7 +32,7 @@ const converterItems = computed(() =>
         <div class="section-services__list">
           <div v-for="item in converterItems" :key="item.title" class="section-services__item">
             <SectionServicesItemMobile v-if="isMobile" :item="item" />
-            <SectionServicesItem v-else :item="item" />
+            <SectionServicesItem v-else :item="item" :style="{ height: '380px' }" />
           </div>
         </div>
       </div>
@@ -49,6 +49,10 @@ const converterItems = computed(() =>
     @include desktop {
       display: flex;
       padding: 80px 0;
+      margin-bottom: 70px;
+    }
+
+    @include tablet {
       margin-bottom: 370px;
     }
   }
@@ -86,6 +90,7 @@ const converterItems = computed(() =>
 
     @include tablet {
       margin: 0;
+
       display: block;
 
       @include mb(20px);
@@ -107,23 +112,29 @@ const converterItems = computed(() =>
 
     @include tablet {
       position: sticky;
-      padding: 0;
+      top: 100px;
+      overflow: hidden;
+      z-index: 1;
+
+      @for $i from 0 through 5 {
+        &:nth-of-type(#{$i}) {
+          top: calc(50px + #{$i} * 30px);
+          transform: translateY(calc((#{$i} * 50px)));
+        }
+      }
     }
 
     @include desktop {
-      display: block;
       position: sticky;
-      top: 70px;
-      margin-bottom: -26px;
+      top: 100px;
+      overflow: hidden;
+      z-index: 1;
 
-      @for $i from 0 through 4 {
+      @for $i from 0 through 5 {
         &:nth-of-type(#{$i}) {
-          transform: translateY(calc((#{$i} * 70px)));
+          top: calc(100px + #{$i} * 50px);
+          /* transform: translateY(calc((#{$i} * 50px))); */
         }
-      }
-
-      &:last-child {
-        transform: translateY(325px);
       }
     }
   }
