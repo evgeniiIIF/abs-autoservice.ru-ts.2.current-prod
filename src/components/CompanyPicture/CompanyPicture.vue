@@ -18,6 +18,7 @@ defineProps<CompanyPictureProps>();
 
 <style lang="scss">
 .company-picture {
+  overflow: hidden;
   &__container {
     @include container;
     position: relative;

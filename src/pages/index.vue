@@ -42,6 +42,7 @@ useSeoMeta({
 
   &__banner {
     padding-top: 15px;
+    overflow: hidden;
 
     @include media(1280px) {
       padding-top: 44px;
