@@ -38,10 +38,7 @@ useSeoMeta({
 
 <style lang="scss">
 .main-page {
-  overflow: hidden;
-  @include desktop {
-    overflow: initial;
-  }
+  overflow: initial;
 
   &__banner {
     padding-top: 15px;
