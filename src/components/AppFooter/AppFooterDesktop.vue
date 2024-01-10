@@ -60,9 +60,13 @@ const workTimeItems = computed(() => contactsState.value.data?.time_work?.split(
           {{ contactsState.data?.phone }}
         </a>
         <div class="footer-desktop__contacts-city">Адрес</div>
-        <div v-if="contactsState.data?.name" class="footer-desktop__contacts-address">{{ contactsState.data?.name }}</div>
+        <div v-if="contactsState.data?.name" class="footer-desktop__contacts-address">
+          {{ contactsState.data?.name }}
+        </div>
         <div class="footer-desktop__contacts-address">{{ contactsState.data?.address }}</div>
-        <a class="footer-desktop__contacts-mail" :href="`mailto:${contactsState.data?.mail}`">{{ contactsState.data?.mail }}</a>
+        <a class="footer-desktop__contacts-mail" :href="`mailto:${contactsState.data?.mail}`">{{
+          contactsState.data?.mail
+        }}</a>
         <div class="footer-desktop__contacts-chart">
           <div v-for="circleItem in 6" :key="circleItem" class="footer-desktop__contacts-chart-item" />
         </div>

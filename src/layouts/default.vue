@@ -35,7 +35,7 @@ await useAsyncData('global', async () => {
   ]);
 });
 
-const response = await useAppFetch<{ code: string; title: string }[]>('/counters');
+// const response = await useAppFetch<{ code: string; title: string }[]>('/counters');
 await servicesEffects.fetchServicesTree();
 
 watch(

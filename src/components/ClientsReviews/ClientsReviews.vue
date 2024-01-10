@@ -16,7 +16,7 @@ const reviewItems = computed(() => homeState.value.review_items);
 
 <template>
   <section class="clients-reviews">
-    <div class="container">
+    <div class="clients-reviews__container">
       <div class="clients-reviews__content-top">
         <h2 class="clients-reviews__title">{{ reviewsTitle }}</h2>
         <div class="clients-reviews__slider-navigation">
@@ -58,14 +58,8 @@ const reviewItems = computed(() => homeState.value.review_items);
     padding: 60px 0 85px 0;
   }
 
-  &::before {
-    position: absolute;
-    top: 0;
-    left: 20px;
-    width: calc(100% - 40px);
-    height: 1px;
-    background-color: var(--black-black-80, #414141);
-    content: '';
+  &__container {
+    @include container;
   }
 
   &__content-top {

@@ -36,7 +36,7 @@ defineProps<SectionServicesItemProps>();
 .section-service-item {
   display: flex;
   gap: 20px;
-  padding: 10px;
+  padding: 20px;
 
   border-radius: 40px;
   border: 1px solid var(--black-black-80, #414141);
@@ -44,7 +44,6 @@ defineProps<SectionServicesItemProps>();
 
   @include desktop {
     height: auto;
-    padding: 20px;
   }
 
   &__image {

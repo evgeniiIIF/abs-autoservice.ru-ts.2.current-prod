@@ -110,13 +110,17 @@ useSeoMeta({
         </div>
       </div>
     </section>
-    <div v-if="isDesktop" class="contacts-page__call-back">
+    <div v-if="isDesktop" class="contacts-page__callback">
       <SectionCallback />
     </div>
   </div>
 </template>
 
 <style lang="scss">
+.contacts-page__callback {
+  margin-bottom: 80px;
+}
+
 .info-contacts-page {
   &__title {
     margin-bottom: 20px;
@@ -167,6 +171,7 @@ useSeoMeta({
   border-radius: 20px;
   border: 1px solid #2a2a2a;
   background: var(--Black-Black-90, #2a2a2a);
+
   @include desktop {
     padding: 30px 40px 40px;
     border-radius: 40px;

@@ -45,18 +45,14 @@ const scrollToAnchor = () => {
               </div>
             </template>
           </div>
-
           <div class="banner__buttons">
-            <!-- eslint-disable-next-line vuejs-accessibility/mouse-events-have-key-events -->
-            <div class="banner__button banner__button--bg">
-              <UINewButton size="big" @click="scrollToAnchor">{{ welcomeState?.btn?.[0].title }}</UINewButton>
-            </div>
-            <div class="banner__button banner__button--bd">
-              <UINewButton size="big" fill="outline" :withoutFill="true" @click="openModal">
-                {{ welcomeState?.btn?.[1].title }}
-              </UINewButton>
-              <CallbackFormModal :is-open="isOpenModal" @on-close="closeModal" />
-            </div>
+            <UINewButton size="big" :is-full-width="isMobile" @click="scrollToAnchor">
+              {{ welcomeState?.btn?.[0].title }}
+            </UINewButton>
+            <UINewButton size="big" fill="outline" :is-full-width="isMobile" @click="openModal">
+              {{ welcomeState?.btn?.[1].title }}
+            </UINewButton>
+            <CallbackFormModal :is-open="isOpenModal" @on-close="closeModal" />
           </div>
         </div>
       </div>
@@ -185,15 +181,6 @@ const scrollToAnchor = () => {
     backdrop-filter: blur(10px);
     @include SubtitleSRegular;
     color: var(--black-black-10, #e5e5e5);
-  }
-}
-
-@keyframes tickers {
-  0% {
-    transform: translateX(100%);
-  }
-  100% {
-    transform: translateX(-100%);
   }
 }
 </style>

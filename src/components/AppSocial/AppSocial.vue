@@ -33,9 +33,11 @@ const { contactsState } = useContactsStore();
     }
 
     img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
+      width: 24px;
+      height: 24px;
+      min-width: 24px;
+      min-height: 24px;
+      object-fit: contain;
     }
   }
 }

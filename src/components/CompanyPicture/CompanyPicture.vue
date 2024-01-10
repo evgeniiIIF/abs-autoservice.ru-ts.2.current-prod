@@ -5,12 +5,14 @@ interface CompanyPictureProps {
 }
 
 defineProps<CompanyPictureProps>();
+
+const { isDesktop } = useMediaSizes();
 </script>
 
 <template>
   <div class="company-picture">
     <div class="company-picture__container">
-      <div class="company-picture__ellipse"></div>
+      <div v-if="isDesktop" class="company-picture__ellipse"></div>
       <NuxtPicture :src="image" loading="lazy" :alt="alt" />
     </div>
   </div>
@@ -18,7 +20,6 @@ defineProps<CompanyPictureProps>();
 
 <style lang="scss">
 .company-picture {
-  overflow: hidden;
   &__container {
     @include container;
     position: relative;

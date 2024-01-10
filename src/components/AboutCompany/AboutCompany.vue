@@ -70,15 +70,16 @@ const descriptionHasFixedHeight = ref(false);
 
 <style lang="scss">
 .about-company {
-  padding-bottom: 30px;
-
-  @include desktop {
-    padding-bottom: 80px;
-  }
-
   &__container {
     @include container;
     position: relative;
+
+    padding-bottom: 30px;
+
+    @include desktop {
+      padding-bottom: 80px;
+    }
+    border-bottom: 1px solid var(--black-black-80, #414141);
   }
 
   &__ellipse {
@@ -160,6 +161,7 @@ const descriptionHasFixedHeight = ref(false);
         background: var(--linear, linear-gradient(180deg, rgba(42, 42, 42, 0) 0%, rgba(42, 42, 42, 0.4) 100%));
         border: 1px solid var(--black-black-90, #2a2a2a);
         border-radius: 20px;
+
         @include desktop {
           flex-direction: inherit;
           justify-content: space-between;

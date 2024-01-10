@@ -32,12 +32,12 @@ const { isDesktop } = useMediaSizes();
 
 <style lang="scss">
 .special-offers {
-  padding-bottom: 80px;
-  border-bottom: 1px solid var(--black-black-80, #414141);
-
   &__container {
     @include container;
+
     position: relative;
+    padding-bottom: 80px;
+    border-bottom: 1px solid var(--black-black-80, #414141);
   }
 
   &__title {

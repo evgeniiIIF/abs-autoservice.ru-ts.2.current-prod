@@ -68,7 +68,7 @@ const [isModalOpen, openModal, closeModal] = useBooleanState();
 
     .popular-service-card__picture {
       margin: 0 auto;
-      width: 115px;
+      max-width: 110px;
       height: 80px;
     }
 
