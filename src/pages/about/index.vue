@@ -31,8 +31,6 @@ const bannerBackgroundStyle = computed(() => ({
 }));
 
 const openRequisitesModal = (isModal: boolean) => {
-  console.log(isModal);
-
   if (isModal) handleOpenModal();
 };
 </script>

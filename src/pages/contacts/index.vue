@@ -10,8 +10,6 @@ const contactsSeo = computed(() => {
   return contactsState.value.dataWithSeoAndTitle?.seo;
 });
 
-console.log(contactsSeo.value);
-
 const breadcrumbItems = [
   { name: contactsState.value.dataWithSeoAndTitle?.title ?? 'Контакты', link: appRoutes.contacts().path },
 ];

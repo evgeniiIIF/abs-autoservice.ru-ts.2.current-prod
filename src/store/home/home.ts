@@ -1,10 +1,9 @@
 import { ref } from 'vue';
 import { defineStore } from 'pinia';
-import { homeHttp } from '@/api/http';
+import { homeHttp, type Seo } from '@/api/http';
 
 import type {
   HomeData,
-  HomeSeo,
   HomeWelcome,
   HomeOffers,
   HomePopularServices,
@@ -16,7 +15,7 @@ import type {
 import type { OffersListItem } from '~/api/http/offersHttp';
 
 const DEFAULT_STATE: HomeData = {
-  seo: {} as HomeSeo,
+  seo: {} as Seo,
   welcome: [],
   welcome_img: '',
   offers: {} as HomeOffers,
@@ -32,7 +31,7 @@ const DEFAULT_STATE: HomeData = {
 export const homeStore = defineStore('homeStore', () => {
   const state = ref(DEFAULT_STATE);
 
-  const setSeo = (data: HomeSeo) => (state.value.seo = data);
+  const setSeo = (data: Seo) => (state.value.seo = data);
   const setWelcome = (data: HomeWelcome[]) => (state.value.welcome = data);
   const setWelcomeImg = (data: string) => (state.value.welcome_img = data);
   const setOffers = (data: HomeOffers) => (state.value.offers = data);

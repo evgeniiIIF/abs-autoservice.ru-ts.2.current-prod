@@ -1,26 +1,19 @@
 <script setup lang="ts">
+import { useAboutStore } from '~/store/about';
 import type { RequisitesModalProps, RequisitesModalEmits } from './RequisitesModal.types';
 
 defineProps<RequisitesModalProps>();
 defineEmits<RequisitesModalEmits>();
 
-const listItems = [
-  { title: 'Полное официальное наименование автосервиса', text: `ОБЩЕСТВО С ОГРАНИЧЕННОЙ ОТВЕТСТВЕННОСТЬЮ "АБС-АВТО"` },
-  { title: 'Английское название', text: 'ABS-AUTO' },
-  { title: 'Юридический адрес', text: 'г. Ставрополь, ул. Доваторцев 47Б' },
-  { title: 'ОКОПФ', text: 'Общества с ограниченной ответственностью' },
-  {
-    title: 'ОКОГУ',
-    text: 'Организации, учрежденные юридическими лицами или гражданами, или юридическими лицами и гражданами совместно',
-  },
-  { title: 'Корр. счет', text: '30101810145250000974 в ГУ Банка России по ЦФО' },
-  { title: 'Р/С', text: '30232810100000000004' },
-  { title: 'БИК', text: '044525974' },
-  { title: 'ИНН/КПП', text: '2311118190/263501001' },
-  { title: 'ОГРН', text: '1092311003663' },
-  { title: 'Код ОКПО', text: '61964605' },
-  { title: 'Дата присвоения ОГРН', text: '28.11.2002 г.' },
-];
+const { aboutState } = useAboutStore();
+
+const listItems = computed(() => {
+  if (aboutState.value.requisites) {
+    return Object.entries(aboutState.value.requisites).map(([key, value]) => ({ title: key, text: value }));
+  }
+
+  return [];
+});
 </script>
 
 <template>
@@ -39,7 +32,9 @@ const listItems = [
         </li>
       </ul>
       <div class="requisites__buttons">
-        <UINewButton>Скачать PDF</UINewButton>
+        <UINewButton v-if="aboutState.requisites_file" tag="a" target="_blanc" :href="aboutState.requisites_file">
+          Скачать PDF
+        </UINewButton>
         <UINewButton fill="outline" textColor="green" @click="$emit('onClose')">Закрыть</UINewButton>
       </div>
     </div>

@@ -32,6 +32,10 @@ export interface GetAboutPageResponseData {
   text_img_title: string;
   guarantee: Guarantee;
   guarantee_img: string;
+  requisites: {
+    [x: string]: string;
+  };
+  requisites_file: string;
 }
 
 export interface GetAboutPageResponse {
