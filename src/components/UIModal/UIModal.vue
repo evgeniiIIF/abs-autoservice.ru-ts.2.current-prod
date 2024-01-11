@@ -79,6 +79,13 @@ $during: 0.3s;
   &.fade-right {
     justify-content: flex-end;
     padding: 0;
+    align-items: start;
+    @include tablet {
+      align-items: stretch;
+    }
+    @include desktop {
+      align-items: stretch;
+    }
   }
 
   &__mask {

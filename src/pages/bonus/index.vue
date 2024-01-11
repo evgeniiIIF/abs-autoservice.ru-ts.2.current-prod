@@ -49,8 +49,12 @@ const breadcrumbItems = computed(() => [
 <style lang="scss">
 .bonus {
   @include container;
+  overflow: hidden;
   position: relative;
   margin-bottom: 108px;
+  @include desktop {
+    overflow: initial;
+  }
 
   &__ellipse-top {
     position: absolute;

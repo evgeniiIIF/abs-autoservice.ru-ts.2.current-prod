@@ -14,7 +14,9 @@ const { isDesktop } = useMediaSizes();
 <style lang="scss">
 .footer {
   @include container(1820px);
-
+  @include desktop {
+    padding-bottom: 30px;
+  }
   &__body {
     padding: 30px 10px;
     background: var(--black-black-90, #2a2a2a);
