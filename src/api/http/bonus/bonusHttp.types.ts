@@ -1,18 +1,4 @@
-export interface BonusPageSeo {
-  title: string;
-  description: string;
-  key_words: any;
-  author: string;
-  robots: string;
-  canonical_url: any;
-  image: string;
-  'og:type': string;
-  'og:title': string;
-  'og:description': string;
-  'twitter:card': string;
-  'twitter:title': string;
-  'twitter:description': string;
-}
+import type { Seo } from '../shared';
 
 export interface Bonus {
   btn_is_active: boolean;
@@ -35,7 +21,7 @@ export interface Calculator {
 }
 
 export interface GetBonusPageInfoData {
-  seo: BonusPageSeo;
+  seo: Seo;
   title: string;
   slug: string;
   bonus: Bonus;

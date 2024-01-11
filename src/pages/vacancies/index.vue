@@ -2,10 +2,25 @@
 import { useVacanciesStore } from '~/store/vacancies';
 import { appRoutes } from '~/appRoutes';
 
-const { vacanciesEffects } = useVacanciesStore();
+const { vacanciesEffects, vacanciesState } = useVacanciesStore();
 await vacanciesEffects.fetchVacancies();
 
 const { isMobile } = useMediaSizes();
+
+useSeoMeta({
+  title: vacanciesState.value?.seo?.title ?? 'Услуги',
+  description: vacanciesState.value?.seo?.description,
+  ogImage: vacanciesState.value?.seo?.image,
+  ogTitle: vacanciesState.value.seo?.['og:title'],
+  ogDescription: vacanciesState.value.seo?.['og:description'],
+  ogType: vacanciesState.value.seo?.['og:type'] as any,
+  twitterTitle: vacanciesState.value.seo?.['twitter:title'],
+  twitterDescription: vacanciesState.value.seo?.['twitter:description'],
+  twitterCard: vacanciesState.value.seo?.['twitter:card'] as any,
+  robots: vacanciesState.value.seo?.robots,
+  author: vacanciesState.value.seo?.author,
+  keywords: vacanciesState.value.seo?.key_words,
+});
 
 const breadcrumbItems = [{ name: 'Вакансии', link: appRoutes.vacancies().path }];
 </script>

@@ -1,3 +1,5 @@
+import type { Seo } from '../shared';
+
 export interface OfferBtn {
   btn_link?: string;
   btn_title: string;
@@ -17,24 +19,8 @@ export interface OffersListItem {
   };
 }
 
-export interface OffersSeoPage {
-  title: string;
-  description: string;
-  key_words: any;
-  author: string;
-  robots: string;
-  canonical_url: any;
-  image: string;
-  'og:type': string;
-  'og:title': string;
-  'og:description': string;
-  'twitter:card': string;
-  'twitter:title': string;
-  'twitter:description': string;
-}
-
 export interface GetOffersPageInfo {
-  seo: OffersSeoPage;
+  seo: Seo;
   title: string;
   slug: string;
   is_active: number;

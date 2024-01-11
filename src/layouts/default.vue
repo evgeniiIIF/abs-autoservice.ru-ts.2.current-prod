@@ -35,8 +35,18 @@ await useAsyncData('global', async () => {
   ]);
 });
 
-// const response = await useAppFetch<{ code: string; title: string }[]>('/counters');
+const response = await useAppFetch<{
+  data: {
+    script?: { id?: string; innerHTML?: string; key?: string; src?: string; type?: string }[];
+    noscript?: { innerHTML?: string }[];
+  };
+}>('/counters');
 await servicesEffects.fetchServicesTree();
+
+useHead({
+  script: response.data.value?.data.script,
+  noscript: response.data.value?.data.noscript,
+});
 
 watch(
   () => route.fullPath,

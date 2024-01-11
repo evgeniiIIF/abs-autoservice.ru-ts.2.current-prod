@@ -10,3 +10,4 @@ export * from './reviewsHttp';
 export * from './vacanciesHttp';
 export * from './errorHttp';
 export * from './partnersHttp';
+export * from './shared';

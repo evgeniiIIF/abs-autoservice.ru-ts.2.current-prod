@@ -1,18 +1,4 @@
-export interface AboutSeo {
-  title: string;
-  description: string;
-  key_words: any;
-  author: string;
-  robots: string;
-  canonical_url: any;
-  image: string;
-  'og:type': string;
-  'og:title': string;
-  'og:description': string;
-  'twitter:card': string;
-  'twitter:title': string;
-  'twitter:description': string;
-}
+import type { Seo } from '../shared';
 
 export interface LinkBtn {
   is_active: boolean;
@@ -37,7 +23,7 @@ export interface Guarantee {
 }
 
 export interface GetAboutPageResponseData {
-  seo: AboutSeo;
+  seo: Seo;
   title: string;
   slug: string;
   text: Text;

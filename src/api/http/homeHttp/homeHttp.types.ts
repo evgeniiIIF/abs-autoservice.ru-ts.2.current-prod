@@ -1,12 +1,6 @@
 import type { OffersListItem } from '~/api/http/offersHttp';
+import type { Seo } from '../shared';
 
-export interface HomeSeo {
-  title: string;
-  description: string;
-  author: string;
-  robots: any;
-  canonical_url: any;
-}
 export interface HomeBtn {
   link: string;
   title: string;
@@ -68,7 +62,7 @@ export interface HomeReviewItem {
 }
 
 export interface HomeData {
-  seo: HomeSeo;
+  seo: Seo;
   welcome: HomeWelcome[];
   welcome_img: string;
   offers: HomeOffers;

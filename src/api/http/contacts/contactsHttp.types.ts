@@ -1,3 +1,5 @@
+import type { Seo } from '../shared';
+
 export interface ContactsPageSocial {
   url: string;
   title: string;
@@ -26,22 +28,6 @@ export interface ContactsPage {
   };
 }
 
-// with seo and title
-export interface Seo {
-  title: string;
-  description: string;
-  key_words: any;
-  author: string;
-  robots: string;
-  canonical_url: any;
-  image: string;
-  'og:type': string;
-  'og:title': string;
-  'og:description': string;
-  'twitter:card': string;
-  'twitter:title': string;
-  'twitter:description': string;
-}
 export interface ContactsPageWithSeoAndTitle {
   seo: Seo;
   title: string;

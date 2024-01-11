@@ -17,11 +17,13 @@ export const vacanciesStore = defineStore('vacanciesStore', () => {
     const response = await vacanciesHttp.fetchVacancies();
 
     const data = response.data.value?.data;
+    const seo = response.data.value?.seo;
 
     if (data) {
       setVacancies({
         ...data.data,
         vacancies_items: data.vacancies_item,
+        seo,
       });
     }
   };
