@@ -11,4 +11,14 @@ defineEmits<VacanciesListModalEmits>();
   </UIModal>
 </template>
 
-<style lang="scss"></style>
+<style lang="scss">
+.vacancies-list-modal {
+  padding: 100px 0;
+  @include tablet {
+    padding: 0;
+  }
+  @include desktop {
+    padding: 0;
+  }
+}
+</style>

@@ -73,8 +73,12 @@ const descriptionHasFixedHeight = ref(false);
   &__container {
     @include container;
     position: relative;
-
-    padding-bottom: 30px;
+    @include mobile {
+      padding-bottom: 30px;
+    }
+    @include tablet {
+      padding-bottom: 30px;
+    }
 
     @include desktop {
       padding-bottom: 80px;

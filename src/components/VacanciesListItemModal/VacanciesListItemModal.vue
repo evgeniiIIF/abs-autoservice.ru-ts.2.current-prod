@@ -28,7 +28,7 @@ const handleConnectButtonClick = () => {
 
 const handleTabItemClick = (tab: string) => {
   activeTab.value = tab;
-}
+};
 </script>
 
 <template>
@@ -101,7 +101,6 @@ const handleTabItemClick = (tab: string) => {
   &__middle {
     padding-top: 20px;
     margin-bottom: 40px;
-    overflow-y: scroll;
   }
 
   &__tabs {
