@@ -10,14 +10,24 @@ const [isOpenSearchModal, openSearchModal, closeSearchModal] = useBooleanState()
 const [isOpenContactsMenu, openContactsMenu, closeContactsMenu] = useBooleanState();
 const [isShowTooltip, showTooltip, hideTooltip] = useBooleanState(false);
 
+const menuRef = ref<HTMLDivElement | null>(null);
+
 watch(y, () => {
   if (directions.top) showTooltip();
   if (directions.bottom) hideTooltip();
 });
+
+watch(isOpenContactsMenu, () => {
+  menuRef.value?.classList.add('footer-mobile-menu--animated');
+
+  setTimeout(() => {
+    menuRef.value?.classList.remove('footer-mobile-menu--animated');
+  }, 200);
+});
 </script>
 
 <template>
-  <div ref="menuRef" class="footer-mobile-menu js-footer-mobile-menu">
+  <div ref="menuRef" class="footer-mobile-menu">
     <ul v-if="!isOpenContactsMenu" class="footer-mobile-menu__list">
       <li class="footer-mobile-menu__item" @click.stop="openContactsMenu">
         <IcChat :font-controlled="false" :filled="true" />
@@ -71,17 +81,31 @@ watch(y, () => {
 </template>
 
 <style lang="scss">
+@keyframes move {
+  from {
+    bottom: -100px;
+  }
+  to {
+    bottom: 0px;
+  }
+}
 .footer-mobile-menu {
   position: fixed;
   left: 0;
   bottom: 0;
   width: 100%;
   z-index: $z-header;
-  min-height: 60px;
+  min-height: 50px;
 
   border-radius: 10px 10px 0 0;
   border-top: 1px solid var(--black-black-80, #414141);
   background-color: var(--green-primary, #2a2a2a);
+
+  &--animated {
+    animation-duration: 0.2s;
+    animation-name: move;
+    animation-timing-function: linear;
+  }
 
   &__list {
     display: flex;
@@ -95,6 +119,7 @@ watch(y, () => {
     flex-wrap: wrap;
     align-items: center;
     padding: 12px 0;
+    cursor: pointer;
 
     svg {
       @include svg-color(var(--white));
@@ -110,6 +135,7 @@ watch(y, () => {
     height: 0px;
     overflow: hidden;
     transition: 0.3s all;
+    user-select: none;
 
     @include BodyXSRegular;
 
