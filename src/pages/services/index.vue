@@ -74,7 +74,6 @@ const converterItems = computed(() =>
 
 <style lang="scss">
 .services-page {
-  overflow: hidden;
   &__title {
     @include TitleMBold;
     color: var(--white);
@@ -96,6 +95,10 @@ const converterItems = computed(() =>
   &__information-content {
     @include desktop {
       max-width: 895px;
+    }
+
+    @include mobile {
+      width: 100%;
     }
   }
 
@@ -130,6 +133,10 @@ const converterItems = computed(() =>
     height: 100%;
     position: sticky;
     top: 109px;
+
+    @include tablet {
+      max-width: 100%;
+    }
 
     @include mobile {
       max-width: 100%;
