@@ -20,6 +20,28 @@ const converterItems = computed(() =>
     })),
   })),
 );
+
+const cardHeight = ref<number>();
+
+const calculateHeight = () => {
+  const cards = document.querySelectorAll('.section-service-item');
+  cardHeight.value = undefined;
+
+  cards.forEach((item) => {
+    if (item.getBoundingClientRect().height > (cardHeight.value || 0)) {
+      cardHeight.value = item.getBoundingClientRect().height;
+    }
+  });
+};
+
+onMounted(() => {
+  calculateHeight();
+  window.addEventListener('resize', calculateHeight);
+});
+
+onUnmounted(() => {
+  window.removeEventListener('resize', calculateHeight);
+});
 </script>
 
 <template>
@@ -32,7 +54,7 @@ const converterItems = computed(() =>
         <div class="section-services__list">
           <div v-for="item in converterItems" :key="item.title" class="section-services__item">
             <SectionServicesItemMobile v-if="isMobile" :item="item" />
-            <SectionServicesItem v-else :item="item" :style="{ height: '380px' }" />
+            <SectionServicesItem v-else :item="item" :style="{ height: `${cardHeight}px` }" />
           </div>
         </div>
       </div>
@@ -116,10 +138,9 @@ const converterItems = computed(() =>
       overflow: hidden;
       z-index: 1;
 
-      @for $i from 0 through 5 {
+      @for $i from 0 through 15 {
         &:nth-of-type(#{$i}) {
           top: calc(50px + #{$i} * 30px);
-          transform: translateY(calc((#{$i} * 50px)));
         }
       }
     }
@@ -130,10 +151,9 @@ const converterItems = computed(() =>
       overflow: hidden;
       z-index: 1;
 
-      @for $i from 0 through 5 {
+      @for $i from 0 through 15 {
         &:nth-of-type(#{$i}) {
           top: calc(100px + #{$i} * 50px);
-          /* transform: translateY(calc((#{$i} * 50px))); */
         }
       }
     }

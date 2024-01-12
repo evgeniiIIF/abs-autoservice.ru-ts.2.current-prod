@@ -77,6 +77,7 @@ defineProps<SectionServicesItemProps>();
     text-align: center;
     text-decoration: underline;
     @include BodyXSRegular;
+
     @include tablet {
       font-size: 21px;
       line-height: 29px;
@@ -94,16 +95,17 @@ defineProps<SectionServicesItemProps>();
 
   &__item {
     display: flex;
-
-    padding: 8px 16px;
+    padding: 4px 12px;
     justify-content: center;
     align-items: center;
     border-radius: 10px;
     background: var(--black-black-90, #2a2a2a);
   }
+
   &__item-title {
     @include BodyLRegular;
     color: var(--black-black-20, #cbcccc);
+    font-size: 13px;
   }
 }
 </style>
