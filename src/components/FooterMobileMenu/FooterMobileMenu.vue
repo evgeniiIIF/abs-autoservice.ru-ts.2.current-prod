@@ -11,8 +11,8 @@ const [isOpenContactsMenu, openContactsMenu, closeContactsMenu] = useBooleanStat
 const [isShowTooltip, showTooltip, hideTooltip] = useBooleanState(false);
 
 watch(y, () => {
-  if (directions.top) hideTooltip();
-  if (directions.bottom) showTooltip();
+  if (directions.top) showTooltip();
+  if (directions.bottom) hideTooltip();
 });
 </script>
 
