@@ -63,7 +63,13 @@ const workTimeItems = computed(() => contactsState.value.data?.time_work?.split(
         <div v-if="contactsState.data?.name" class="footer-desktop__contacts-address">
           {{ contactsState.data?.name }}
         </div>
+
         <div class="footer-desktop__contacts-address">{{ contactsState.data?.address }}</div>
+        <div class="footer-desktop__contacts-button">
+          <UINewButton tag="NuxtLink" :href="contactsState.data?.link_map" target="_blank" rel="noopener">
+            Построить маршрут
+          </UINewButton>
+        </div>
         <a class="footer-desktop__contacts-mail" :href="`mailto:${contactsState.data?.mail}`">{{
           contactsState.data?.mail
         }}</a>
@@ -197,6 +203,11 @@ const workTimeItems = computed(() => contactsState.value.data?.time_work?.split(
     color: var(--white);
 
     @include BodyXLRegular;
+  }
+
+  &__contacts-button {
+    margin-top: 20px;
+    width: fit-content;
   }
 
   &__contacts-mail {
