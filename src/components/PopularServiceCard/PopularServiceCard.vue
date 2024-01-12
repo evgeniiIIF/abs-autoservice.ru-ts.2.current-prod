@@ -28,7 +28,12 @@ const [isModalOpen, openModal, closeModal] = useBooleanState();
     />
     <div class="popular-service-card__content">
       <p class="popular-service-card__title">{{ service.title }}</p>
-      <UINewButton v-if="size === 'standard'" class="popular-service-card__button" size="small" @click.stop="openModal">
+      <UINewButton
+        v-if="size === 'standard'"
+        class="popular-service-card__button"
+        size="small"
+        @click.stop.prevent="openModal"
+      >
         Записаться
       </UINewButton>
     </div>
