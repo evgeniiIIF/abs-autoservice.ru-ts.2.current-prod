@@ -75,7 +75,7 @@ onUnmounted(() => {
     }
 
     @include tablet {
-      margin-bottom: 370px;
+      margin-bottom: 70px;
     }
   }
   &__title-wrapper {

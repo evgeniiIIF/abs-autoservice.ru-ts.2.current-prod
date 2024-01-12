@@ -106,6 +106,26 @@ defineProps<SectionServicesItemProps>();
     @include BodyLRegular;
     color: var(--black-black-20, #cbcccc);
     font-size: 13px;
+    transition: 0.2s all;
+    position: relative;
+
+    &::before {
+      content: '';
+      position: absolute;
+      bottom: 4px;
+      height: 1px;
+      width: 100%;
+      background: var(--white);
+      opacity: 0;
+      transition: 0.2s all;
+    }
+
+    @include hover {
+      color: var(--white);
+      &::before {
+        opacity: 1;
+      }
+    }
   }
 }
 </style>
