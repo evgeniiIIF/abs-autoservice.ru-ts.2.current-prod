@@ -23,8 +23,7 @@ defineProps<GuaranteeCardProps>();
   background: linear-gradient(180deg, rgba(42, 42, 42, 0) 0%, rgba(42, 42, 42, 0.4) 100%),
     linear-gradient(180deg, #2a2a2a 0%, rgba(42, 42, 42, 0) 100%);
   border-radius: 20px;
-  border: 1px solid;
-  border-image-source: linear-gradient(180deg, #2A2A2A 0%, rgba(42, 42, 42, 0) 100%);
+  border: 1px solid #2a2a2a;
 
   &__picture {
     display: block;
