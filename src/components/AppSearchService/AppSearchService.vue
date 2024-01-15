@@ -59,6 +59,7 @@ useClickOutside(rootNode, () => emits('onClose'));
 .app-search-service {
   width: 100%;
   position: relative;
+  z-index: 11;
 
   &__input {
     position: absolute;
@@ -89,6 +90,7 @@ useClickOutside(rootNode, () => emits('onClose'));
     width: 34px !important;
     height: 34px !important;
     @include svg-color(var(--white));
+    cursor: pointer;
   }
 
   &__input-field {
