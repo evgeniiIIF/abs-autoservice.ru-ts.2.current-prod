@@ -107,7 +107,7 @@ const workTimeItems = computed(() => contactsState.value.data?.time_work?.split(
           <AppCards />
         </div>
         <div class="footer-desktop__bottom-item">
-          <AppSocial />
+          <AppSocial fill="outline" />
         </div>
       </div>
     </div>
@@ -174,7 +174,7 @@ const workTimeItems = computed(() => contactsState.value.data?.time_work?.split(
 
   &__description {
     max-width: 794px;
-    margin-top: 20px;
+    margin-top: 40px;
     color: var(--black-black-60);
 
     @include BodySRegular;
@@ -267,7 +267,7 @@ const workTimeItems = computed(() => contactsState.value.data?.time_work?.split(
     }
 
     &:nth-child(3) {
-      margin-right: 24px;
+      flex: 0 0 293px;
     }
   }
 
