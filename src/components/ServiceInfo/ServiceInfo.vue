@@ -39,7 +39,7 @@ const [isOpenModal, openModal, closeModal] = useBooleanState();
                 :href="`tel:${contactsState.data?.phone?.match(/\d+/g)?.join('')}`"
                 >{{ contactsState.data?.phone }}</a
               >
-              <UINewButton @click="openModal" target="__blank" :has-full-width="!isDesktop"
+              <UINewButton target="__blank" :has-full-width="!isDesktop" @click="openModal"
                 >Заказать звонок</UINewButton
               >
             </div>
@@ -50,7 +50,7 @@ const [isOpenModal, openModal, closeModal] = useBooleanState();
             <div class="service-info__price-info">
               <h2 class="service-info__price-count">{{ servicesState.service?.price }} ₽</h2>
               <p class="service-info__price-footnote">
-                Цена может быть изменена в зависимости от типа кузова вашего авто
+                {{ servicesState.service?.preview_text ?? 'Цена мажет отличатся в зависимости от марки и модели авто' }}
               </p>
             </div>
             <UINewButton :has-full-width="!isDesktop" @click.stop="openModal">Записаться на СТО</UINewButton>
@@ -70,10 +70,10 @@ const [isOpenModal, openModal, closeModal] = useBooleanState();
               >{{ contactsState.data?.phone }}</a
             >
             <UINewButton
-              @click="openModal"
               :href="`tel:${contactsState.data?.phone?.match(/\d+/g)?.join('')}`"
               target="__blank"
               :has-full-width="!isDesktop"
+              @click="openModal"
               >Заказать звонок</UINewButton
             >
           </div>
@@ -269,6 +269,7 @@ const [isOpenModal, openModal, closeModal] = useBooleanState();
   }
 
   &__price {
+    max-width: 505px;
     padding: 20px;
     margin-bottom: 20px;
     border: 1px solid var(--black-black-90, #2a2a2a);
