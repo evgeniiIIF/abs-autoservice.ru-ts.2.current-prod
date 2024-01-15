@@ -258,7 +258,7 @@ const openRequisitesModal = (isModal: boolean) => {
 
   &__banner {
     position: relative;
-    margin-top: 172px;
+    margin-top: 80px;
     width: 100%;
     padding: 40px 80px;
     border-radius: 40px;
