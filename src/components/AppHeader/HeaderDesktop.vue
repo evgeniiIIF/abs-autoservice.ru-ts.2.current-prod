@@ -14,12 +14,21 @@ const [isSearchOpen, openSearch, closeSearch] = useBooleanState();
 const navItems = computed(() =>
   menuState.value.header.top_menu
     .filter((item) => item.is_active)
-    .map((item) => ({ name: item.title, link: item.url })),
+    .map((item) => ({
+      name: item.title,
+      link: item.url,
+      dropdown: item.dropdown
+        ?.filter((subitem) => subitem.is_active)
+        ?.map((subitem) => ({ name: subitem.title, link: subitem.url })),
+    })),
 );
 const topNavItems = computed(() =>
   menuState.value.header.header_menu
     .filter((item) => item.is_active)
-    .map((item) => ({ name: item.title, link: item.url })),
+    .map((item) => ({
+      name: item.title,
+      link: item.url,
+    })),
 );
 </script>
 
@@ -194,6 +203,7 @@ const topNavItems = computed(() =>
       height: 34px;
     }
   }
+
   &__nav-button {
     display: flex;
     align-items: center;
@@ -213,6 +223,7 @@ const topNavItems = computed(() =>
       &__list {
         display: flex;
       }
+
       &__link {
         padding: 30px 8px 32px 8px;
         border-bottom: 2px solid transparent;
@@ -241,6 +252,7 @@ const topNavItems = computed(() =>
     }
   }
 }
+
 .contacts-header-desktop {
   display: flex;
 
