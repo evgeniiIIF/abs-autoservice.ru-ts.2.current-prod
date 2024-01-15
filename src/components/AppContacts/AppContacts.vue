@@ -22,7 +22,7 @@ const { isMobile } = useMediaSizes();
     </div>
     <a class="contacts__email" :href="`mailto:${contactsState.data?.mail}`">{{ contactsState.data?.mail }}</a>
     <ul class="contacts__socials">
-      <AppSocial />
+      <AppSocial fill="outline" />
     </ul>
   </div>
 </template>

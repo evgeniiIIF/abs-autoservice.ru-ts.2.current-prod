@@ -1,12 +1,25 @@
 <script setup lang="ts">
 import { useContactsStore } from '~/store/contacts';
+import type { AppSocialProps } from './AppSocial.types';
+
+withDefaults(defineProps<AppSocialProps>(), {
+  fill: 'solid',
+});
 
 const { contactsState } = useContactsStore();
 </script>
 <template>
   <ul class="social">
     <li v-for="social in contactsState.data?.social_network" :key="social.url" class="social__item">
-      <a class="social__link" :href="social.url" target="_blank" rel="noopener">
+      <a
+        :class="{
+          social__link: true,
+          'social__link--fill-outline': fill === 'outline',
+        }"
+        :href="social.url"
+        target="_blank"
+        rel="noopener"
+      >
         <img :src="social.icon_social" :alt="social.title" />
       </a>
     </li>
@@ -39,6 +52,9 @@ const { contactsState } = useContactsStore();
       min-height: 24px;
       object-fit: contain;
     }
+  }
+  &__link--fill-outline {
+    border: 1px solid var(--Black-Black-80, #414141);
   }
 }
 </style>
