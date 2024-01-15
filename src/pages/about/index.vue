@@ -1,5 +1,7 @@
 <script setup lang="ts">
 import { useAboutStore } from '~/store/about';
+import { SwiperNavigation, SwiperPagination } from '#imports';
+import 'swiper/css/pagination';
 
 const { aboutState, aboutEffects } = useAboutStore();
 
@@ -27,7 +29,7 @@ const [isRequisitesModalOpen, handleOpenModal, closeModal] = useBooleanState();
 const [isCallbackModalOpen, openCallbackModal, closeCallbackModal] = useBooleanState();
 
 const bannerBackgroundStyle = computed(() => ({
-  background: `url(${aboutState.value.guarantee_img}) center center`,
+  background: `url(${aboutState.value.guarantee_img?.img_path}) center center`,
 }));
 
 const openRequisitesModal = (isModal: boolean) => {
@@ -41,11 +43,29 @@ const openRequisitesModal = (isModal: boolean) => {
       <UIBreadcrumb :items="breadcrumbItems" />
     </div>
     <div class="about__container">
+      <h1 class="about__title">{{ aboutState.text?.title }}</h1>
       <div class="about__info-content">
         <div class="about__info-ellipse" />
-        <div class="about__info-row">
-          <h1 class="about__title">{{ aboutState.text?.title }}</h1>
-          <p class="about__subtitle">{{ aboutState.text?.subtitle }}</p>
+        <Swiper
+          class="about__slider"
+          :modules="[SwiperPagination, SwiperNavigation]"
+          :pagination="{
+            el: '.about__slider-pagination',
+            clickable: true,
+          }"
+        >
+          <SwiperSlide v-for="slide in aboutState.text_img?.img_path" :key="slide">
+            <NuxtPicture
+              class="about__description-image"
+              :src="slide"
+              :alt="aboutState.text_img?.img_alt"
+              :title="aboutState.text_img?.img_title"
+            />
+          </SwiperSlide>
+          <div class="about__slider-pagination" />
+        </Swiper>
+        <div class="about__description">
+          <div class="about__description-content" v-html="aboutState.text?.content"></div>
           <div class="about__info-link-buttons">
             <UINewButton
               v-for="(linkButton, index) in aboutState.text?.link_btn"
@@ -59,20 +79,25 @@ const openRequisitesModal = (isModal: boolean) => {
             </UINewButton>
           </div>
         </div>
-        <div class="about__info-row">
-          <div class="about__description" v-html="aboutState.text?.content" />
-          <NuxtPicture
-            class="about__description-image"
-            :src="aboutState.text_img"
-            :alt="aboutState.text_img_alt"
-            :title="aboutState.text_img_title"
-          />
-        </div>
+      </div>
+      <div v-if="aboutState.advantages?.length" class="about__advantages">
+        <GuaranteeCard
+          v-for="item in aboutState.advantages.filter((item) => item.is_active)"
+          :key="item.title"
+          class="about__advantages__item"
+          :title="item.title"
+          :description="item.descriptions"
+          :image="{
+            img_alt: item.icon.icon_alt,
+            img_title: item.icon.icon_title,
+            img_path: item.icon.icon_path,
+          }"
+        />
       </div>
       <div class="about__banner" :style="!isMobile ? bannerBackgroundStyle : undefined">
         <div class="about__banner-ellipse" />
         <div v-if="isMobile" class="about__banner-image-block">
-          <NuxtPicture class="about__banner-image" :src="aboutState.guarantee_img" />
+          <NuxtPicture class="about__banner-image" :src="aboutState?.guarantee_img?.img_path" />
         </div>
         <div class="about__banner-content">
           <h2 class="about__banner-title">
@@ -103,6 +128,7 @@ const openRequisitesModal = (isModal: boolean) => {
   }
 
   &__info-content {
+    margin-top: 20px;
     position: relative;
     display: flex;
     justify-content: space-between;
@@ -127,20 +153,6 @@ const openRequisitesModal = (isModal: boolean) => {
     filter: blur(70px);
   }
 
-  &__info-row {
-    &:first-child {
-      @include desktop {
-        max-width: 400px;
-      }
-    }
-
-    &:last-child {
-      @include desktop {
-        max-width: 700px;
-      }
-    }
-  }
-
   &__title {
     color: var(--white);
 
@@ -161,6 +173,25 @@ const openRequisitesModal = (isModal: boolean) => {
     }
   }
 
+  &__slider-pagination {
+    display: flex;
+    justify-content: center;
+    gap: 4px;
+    position: relative;
+    bottom: 30px;
+
+    .swiper-pagination-bullet {
+      background: var(--Black-Black-80, #414141);
+      opacity: 1;
+      width: 6px;
+      height: 6px;
+
+      &-active {
+        background: var(--Green-Primary, #00a19c);
+      }
+    }
+  }
+
   &__info-link-buttons {
     display: flex;
     gap: 20px;
@@ -171,26 +202,32 @@ const openRequisitesModal = (isModal: boolean) => {
     }
   }
 
+  &__swiper {
+    order: 3;
+  }
+
   &__description {
     color: var(--white);
+
+    @include desktop {
+      max-width: 40%;
+      order: 1;
+    }
 
     @include BodyMRegular;
 
     p {
-      margin-bottom: 20px;
       @include BodyLRegular;
     }
   }
 
   &__description-image {
-    margin-top: 60px;
     display: block;
     width: 100%;
     height: 400px;
 
     @include mobile {
       height: 200px;
-      margin-top: 20px;
     }
 
     img {
@@ -202,6 +239,20 @@ const openRequisitesModal = (isModal: boolean) => {
       @include mobile {
         border-radius: 20px;
       }
+    }
+  }
+
+  &__advantages {
+    margin-top: 80px;
+    display: grid;
+    gap: 20px;
+
+    @include desktop {
+      grid-template-columns: repeat(5, 1fr);
+    }
+
+    @include tablet {
+      grid-template-columns: repeat(3, 1fr);
     }
   }
 
@@ -277,6 +328,19 @@ const openRequisitesModal = (isModal: boolean) => {
       top: -50px;
       right: 110px;
     }
+  }
+
+  .swiper {
+    padding-bottom: 10px;
+    order: 2;
+
+    @include desktop {
+      order: 1;
+    }
+  }
+
+  .swiper-wrapper {
+    padding-bottom: 4px;
   }
 }
 </style>

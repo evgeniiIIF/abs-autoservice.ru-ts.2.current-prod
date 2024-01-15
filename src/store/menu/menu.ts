@@ -27,7 +27,6 @@ export const menuStore = defineStore('menuStore', () => {
     const response = await menuHttp.getHeaderMenu();
 
     const data = response.data.value?.data;
-    console.log(data);
 
     if (data) {
       setHeaderMenu(data);

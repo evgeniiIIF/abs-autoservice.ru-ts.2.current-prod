@@ -22,16 +22,34 @@ export interface Guarantee {
   title_btn: string;
 }
 
+export interface Advantage {
+  is_active: boolean;
+  title: string;
+  descriptions: string;
+  icon: {
+    icon_path: string;
+    icon_alt: string;
+    icon_title: string;
+  };
+}
+
 export interface GetAboutPageResponseData {
   seo: Seo;
   title: string;
   slug: string;
   text: Text;
-  text_img: string;
-  text_img_alt: string;
-  text_img_title: string;
+  text_img: {
+    img_path: string[];
+    img_alt: string;
+    img_title: string;
+  };
+  advantages: Advantage[];
   guarantee: Guarantee;
-  guarantee_img: string;
+  guarantee_img: {
+    img_path: string;
+    img_alt: string;
+    img_title: string;
+  };
   requisites: {
     [x: string]: string;
   };

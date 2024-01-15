@@ -8,6 +8,8 @@ const fetchAboutPage = async () => {
     method: 'GET',
   });
 
+  console.log(response.data.value?.data);
+
   return response;
 };
 
