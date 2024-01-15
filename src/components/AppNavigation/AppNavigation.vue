@@ -1,6 +1,6 @@
 <script setup lang="ts">
 interface AppNavigationProps {
-  items: { name: string; link?: string; onClick?: () => void }[];
+  items: { name: string; link?: string; onClick?: () => void; dropdown?: { name: string; link?: string }[] }[];
 }
 defineProps<AppNavigationProps>();
 </script>
@@ -8,11 +8,14 @@ defineProps<AppNavigationProps>();
 <template>
   <nav class="nav">
     <ul class="nav__list">
-      <li v-for="item in items" :key="item.name" class="nav__item">
-        <NuxtLink class="nav__link" active-class="nav__link--active" :to="item.link" @click="item?.onClick">{{
-          item.name
-        }}</NuxtLink>
-      </li>
+      <AppNavigationItem
+        v-for="item in items"
+        :key="item.name"
+        class="nav__item"
+        :name="item.name"
+        :link="item.link"
+        :dropdown="item.dropdown"
+      />
     </ul>
   </nav>
 </template>

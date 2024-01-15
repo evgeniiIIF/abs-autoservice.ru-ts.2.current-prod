@@ -2,6 +2,7 @@ export interface TopMenu {
   url: string;
   title: string;
   is_active: boolean;
+  dropdown?: TopMenu[];
 }
 
 export interface HeaderMenu {
