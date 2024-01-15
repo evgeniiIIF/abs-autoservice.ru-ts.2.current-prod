@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { useAboutStore } from '~/store/about';
-import { SwiperNavigation, SwiperPagination } from '#imports';
+import { SwiperNavigation, SwiperPagination, SwiperEffectCreative } from '#imports';
 import 'swiper/css/pagination';
 
 const { aboutState, aboutEffects } = useAboutStore();
@@ -48,10 +48,21 @@ const openRequisitesModal = (isModal: boolean) => {
         <div class="about__info-ellipse" />
         <Swiper
           class="about__slider"
-          :modules="[SwiperPagination, SwiperNavigation]"
+          :modules="[SwiperPagination, SwiperNavigation, SwiperEffectCreative]"
           :pagination="{
             el: '.about__slider-pagination',
             clickable: true,
+          }"
+          :grabCursor="true"
+          :effect="'creative'"
+          :creativeEffect="{
+            prev: {
+              shadow: true,
+              translate: [0, 0, -400],
+            },
+            next: {
+              translate: ['100%', 0, 0],
+            },
           }"
         >
           <SwiperSlide v-for="slide in aboutState.text_img?.img_path" :key="slide">
@@ -225,6 +236,7 @@ const openRequisitesModal = (isModal: boolean) => {
     display: block;
     width: 100%;
     height: 400px;
+    border-radius: 0;
 
     @include mobile {
       height: 200px;
@@ -234,6 +246,7 @@ const openRequisitesModal = (isModal: boolean) => {
       width: 100%;
       height: 100%;
       object-fit: cover;
+
       border-radius: 40px;
 
       @include mobile {
