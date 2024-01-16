@@ -36,6 +36,7 @@ const converterItems = computed(() =>
     })),
   })),
 );
+// console.log(servicesState.value.servicePageInfo?.image);
 </script>
 
 <template>
