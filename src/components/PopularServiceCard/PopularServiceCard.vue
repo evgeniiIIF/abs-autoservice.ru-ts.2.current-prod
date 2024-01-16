@@ -52,7 +52,19 @@ const [isModalOpen, openModal, closeModal] = useBooleanState();
 
   &--size-standard {
     background: var(--linear, linear-gradient(180deg, rgba(42, 42, 42, 0) 0%, rgba(42, 42, 42, 0.4) 100%));
+    height: 100%;
     padding: 12px;
+
+    .popular-service-card__content {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      height: 100%;
+      padding: 12px 0;
+    }
+    .popular-service-card__title {
+      flex: 1 1 auto;
+    }
 
     @include hover {
       background: var(--black-black-90, #2a2a2a);
@@ -102,7 +114,7 @@ const [isModalOpen, openModal, closeModal] = useBooleanState();
   }
 
   &__button {
-    margin-top: 30px;
+    margin-top: 4px;
   }
 }
 </style>
