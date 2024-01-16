@@ -49,7 +49,7 @@ const [isModalOpen, openModal, closeModal] = useBooleanState();
     background: linear-gradient(180deg, #2a2a2a 0%, rgba(17, 18, 18, 0) 23%);
     overflow: hidden;
     @include desktop {
-      padding: 60px 27px 0 60px;
+      padding: 40px 27px 0 40px;
     }
   }
 
@@ -107,6 +107,7 @@ const [isModalOpen, openModal, closeModal] = useBooleanState();
     color: var(--1, #fff);
 
     @include desktop {
+      max-width: none;
       @include TitleSBold;
       color: var(--black-black-00, #fff);
     }

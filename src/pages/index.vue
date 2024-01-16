@@ -29,7 +29,11 @@ useSeoMeta({
     <PopularServices class="main-page__popular-services" />
     <SectionCallback class="main-page__callback" />
     <SectionGetCard class="main-page__card" />
-    <CompanyPicture :image="homeState.about_img" alt="АБС автосервис ставрополь" />
+    <CompanyPicture
+      :image="homeState.about_img"
+      :alt="homeState.about_image_alt"
+      :title="homeState.about_image_title"
+    />
     <AboutCompany class="main-page__about" />
     <ClientsReviews />
     <SectionServices />
@@ -91,9 +95,11 @@ useSeoMeta({
 
   &__card {
     margin-top: 20px;
+    margin-bottom: 10px;
 
     @include desktop {
       margin-top: 80px;
+      margin-bottom: 80px;
     }
   }
 
