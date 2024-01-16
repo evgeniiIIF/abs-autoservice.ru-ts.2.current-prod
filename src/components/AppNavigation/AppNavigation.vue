@@ -15,6 +15,7 @@ defineProps<AppNavigationProps>();
         :name="item.name"
         :link="item.link"
         :dropdown="item.dropdown"
+        @click="item.onClick"
       />
     </ul>
   </nav>

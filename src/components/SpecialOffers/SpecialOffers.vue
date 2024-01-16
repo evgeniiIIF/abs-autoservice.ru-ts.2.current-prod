@@ -38,6 +38,9 @@ const { isDesktop } = useMediaSizes();
     position: relative;
     padding-bottom: 80px;
     border-bottom: 1px solid var(--black-black-80, #414141);
+    @include mobile {
+      padding-bottom: 30px;
+    }
   }
 
   &__title {
