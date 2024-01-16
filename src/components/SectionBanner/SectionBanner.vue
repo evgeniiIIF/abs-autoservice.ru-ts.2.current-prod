@@ -23,7 +23,12 @@ const scrollToAnchor = () => {
       <div class="banner__ellipse-left"></div>
       <div class="banner__body">
         <div class="banner__image ibg">
-          <NuxtPicture format="webp" :src="homeState.welcome_img ?? 'undefined'" />
+          <NuxtPicture
+            format="webp"
+            :src="homeState.welcome_image ?? 'undefined'"
+            :alt="homeState.welcome[0].welcome_image_alt ?? ''"
+            :title="homeState.welcome[0].welcome_image_title ?? ''"
+          />
         </div>
         <div class="banner__content">
           <h1 class="banner__title">{{ welcomeState?.title }}</h1>

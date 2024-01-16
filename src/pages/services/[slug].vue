@@ -66,8 +66,9 @@ const breadcrumbItems = computed(
     <CompanyPicture
       v-if="isDesktop"
       class="service-page__company-picture"
-      image="/images/company-2.png"
-      alt="Зал автосервиса"
+      :image="servicesState.servicePageInfo?.image ?? 'undefined'"
+      :alt="servicesState.servicePageInfo?.image_alt ?? ''"
+      :title="servicesState.servicePageInfo?.image_title ?? ''"
     />
     <ServicePopularServices />
     <CallbackForm class="service-page__fallback-form container" />

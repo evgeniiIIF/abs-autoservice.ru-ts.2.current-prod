@@ -13,6 +13,8 @@ export interface HomeWelcome {
   title: string;
   description: string;
   advantage_tags: string[];
+  welcome_image_alt: string;
+  welcome_image_title: string;
 }
 
 export interface HomeOffers {
@@ -64,13 +66,15 @@ export interface HomeReviewItem {
 export interface HomeData {
   seo: Seo;
   welcome: HomeWelcome[];
-  welcome_img: string;
+  welcome_image: string;
   offers: HomeOffers;
   offers_items: OffersListItem[];
   popular_services: HomePopularServices;
   popular_services_items: HomePopularServicesItem[];
   about: HomeAbout;
   about_img: string;
+  about_image_alt: string;
+  about_image_title: string;
   reviews: HomeReviews;
   company_image?: {
     image: string[];

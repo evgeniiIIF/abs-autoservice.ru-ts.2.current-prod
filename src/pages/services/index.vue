@@ -66,7 +66,12 @@ const converterItems = computed(() =>
         <HasQuestionsBanner class="services-page__sticky-banner" />
       </div>
     </div>
-    <CompanyPicture class="services-page__company-picture" image="/images/company-2.png" alt="Зал автосервиса" />
+    <CompanyPicture
+      class="services-page__company-picture"
+      :image="servicesState.servicePageInfo?.image ?? 'undefined'"
+      :alt="servicesState.servicePageInfo?.image_alt ?? ''"
+      :title="servicesState.servicePageInfo?.image_title ?? ''"
+    />
     <ServicePopularServices />
     <CallbackForm class="services-page__callback-form container" />
   </div>
