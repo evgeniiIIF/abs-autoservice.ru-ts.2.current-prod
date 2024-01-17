@@ -45,22 +45,26 @@ defineProps<BonusAnimationCardsProps>();
   }
 
   &__card--back {
-    animation: card-back-init-animate-back 2s ease 0s 1;
+    border-radius: 28px;
+    opacity: 0.8;
+    box-shadow: 0px 16px 24px 0px rgba(42, 42, 42, 0.15);
+    filter: blur(1.5px);
+    animation: card-back-init-animate-back 1s ease 0s 1;
 
     transform: rotate(-14deg) translate(14px, -55px);
   }
 
   &__card--front {
-    animation: card-back-init-animate-front 2s ease 0s 1;
+    animation: card-back-init-animate-front 1s ease 0s 1;
   }
 }
 
 @keyframes card-back-init-animate-back {
   0% {
-    transform: rotate(-50deg) translate(300px, -300px);
+    transform: rotate(-50deg) translate(300px, -300px) skew(60deg, -60deg);
   }
   60% {
-    transform: rotate(0deg);
+    transform: rotate(20deg) translate(0px, 30px);
   }
   100% {
     transform: rotate(-14deg) translate(14px, -55px);
@@ -68,10 +72,10 @@ defineProps<BonusAnimationCardsProps>();
 }
 @keyframes card-back-init-animate-front {
   0% {
-    transform: rotate(-50deg) translate(300px, -300px);
+    transform: rotate(-50deg) translate(300px, -300px) skew(60deg, -60deg);
   }
   60% {
-    transform: rotate(0deg);
+    transform: rotate(-20deg) translate(0px, -50px);
   }
 
   100% {
