@@ -29,6 +29,28 @@ useSeoMeta({
   author: contactsSeo.value?.author,
   keywords: contactsSeo.value?.key_words,
 });
+
+useSchemaOrg([
+  {
+    '@type': 'AutoRepair',
+    name: 'ABS-AUTO Service',
+    url: 'https://sto.abs-autoservice.ru/',
+    address: {
+      '@type': 'AutoRepair',
+      addressRegion: 'Ставропольский край',
+      addressLocality: 'Ставрополь',
+      streetAddress: 'ул. Доваторцев, дом 47Б',
+      telephone: contactsState.value.data?.phone,
+      email: contactsState.value.data?.mail,
+      location: {
+        '@type': 'GeoCoordinates',
+        latitude: '45.011535074585',
+        longitude: '41.9290724999999',
+      },
+      openingHours: contactsState.value.data?.time_work,
+    },
+  },
+]);
 </script>
 
 <template>

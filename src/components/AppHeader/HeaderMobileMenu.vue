@@ -105,7 +105,13 @@ const navItems = computed(() =>
               service.children?.length ? (activeServiceId = service.id) : router.push(appRoutes.services(service.slug))
             "
           >
-            <span>{{ service.title }}</span>
+            <span
+              :class="[
+                'header-mobile-menu__service-item-title',
+                { 'header-mobile-menu__service-item-title--with-icon': service?.children?.length },
+              ]"
+              >{{ service.title }}</span
+            >
             <IcArrowRight v-if="service?.children?.length" class="header-mobile-menu__service-item-right" />
           </div>
         </div>
@@ -122,7 +128,6 @@ const navItems = computed(() =>
   position: absolute;
   left: -100%;
   top: 0;
-  width: 100%;
   height: 100vh;
   transition: all 0s ease 0.2s;
 
@@ -140,8 +145,8 @@ const navItems = computed(() =>
     left: -100%;
     top: 0;
     z-index: 1;
-    width: 100%;
-    max-width: 320px;
+    width: 80%;
+    min-width: 320px;
     height: inherit;
     background: rgba(42, 42, 42, 0.95);
 
@@ -149,6 +154,10 @@ const navItems = computed(() =>
     transition: all 0.2s ease 0s;
     overflow-x: hidden;
     overflow-y: auto;
+
+    @include mobile {
+      width: 100%;
+    }
   }
 
   &__nav {
@@ -174,14 +183,14 @@ const navItems = computed(() =>
         }
       }
     }
-  }
 
-  &__services {
-    max-width: 210px;
+    @include mobile {
+      padding: 0 !important;
+      margin-bottom: 40px;
+    }
   }
 
   &__service-item {
-    max-width: 280px;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -193,14 +202,18 @@ const navItems = computed(() =>
     color: var(--white);
     @include BodyXLBold;
 
-    span {
-      width: 80%;
-      overflow: hidden;
-      text-overflow: ellipsis;
-    }
-
     &:first-child {
       padding-top: 0;
+    }
+  }
+
+  &__service-item-title {
+    width: 100%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+
+    &--with-icon {
+      width: 80%;
     }
   }
 
@@ -287,28 +300,6 @@ const navItems = computed(() =>
   &__buttons {
     display: flex;
     @include mr(10px);
-  }
-  &__button {
-    // .button {
-    //   padding: 12px;
-    //   border: 1px solid var(--black-black-90, #2a2a2a);
-    //   background: transparent;
-    // }
-  }
-  &__button--phone {
-    // svg {
-    //   width: 24px;
-    //   height: 24px;
-    // }
-  }
-  &__button--burger {
-    // .button {
-    //   background: var(--black-black-90, #2a2a2a);
-    //   svg {
-    //     width: 24px;
-    //     height: 24px;
-    //   }
-    // }
   }
 }
 </style>

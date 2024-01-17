@@ -12,6 +12,7 @@ export default defineNuxtConfig({
     '@nuxt/image',
     'nuxt-viewport',
     'nuxt-simple-sitemap',
+    'nuxt-schema-org',
   ],
 
   googleFonts: {
