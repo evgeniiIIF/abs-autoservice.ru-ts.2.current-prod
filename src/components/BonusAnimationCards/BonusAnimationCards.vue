@@ -21,6 +21,30 @@ defineProps<BonusAnimationCardsProps>();
 </template>
 
 <style lang="scss">
+@keyframes card-back-init-animate-back {
+  0% {
+    transform: rotate(-50deg) translate(300px, -300px) skew(60deg, -60deg);
+  }
+  60% {
+    transform: rotate(20deg) translate(0px, 30px);
+  }
+  100% {
+    transform: rotate(-14deg) translate(14px, -55px);
+  }
+}
+@keyframes card-back-init-animate-front {
+  0% {
+    transform: rotate(-50deg) translate(300px, -300px) skew(60deg, -60deg);
+  }
+  60% {
+    transform: rotate(-20deg) translate(0px, -50px);
+  }
+
+  100% {
+    transform: rotate(0deg);
+  }
+}
+
 .bonus-animation-cards {
   position: relative;
   width: 100%;
@@ -56,30 +80,6 @@ defineProps<BonusAnimationCardsProps>();
 
   &__card--front {
     animation: card-back-init-animate-front 1s ease 0s 1;
-  }
-}
-
-@keyframes card-back-init-animate-back {
-  0% {
-    transform: rotate(-50deg) translate(300px, -300px) skew(60deg, -60deg);
-  }
-  60% {
-    transform: rotate(20deg) translate(0px, 30px);
-  }
-  100% {
-    transform: rotate(-14deg) translate(14px, -55px);
-  }
-}
-@keyframes card-back-init-animate-front {
-  0% {
-    transform: rotate(-50deg) translate(300px, -300px) skew(60deg, -60deg);
-  }
-  60% {
-    transform: rotate(-20deg) translate(0px, -50px);
-  }
-
-  100% {
-    transform: rotate(0deg);
   }
 }
 </style>

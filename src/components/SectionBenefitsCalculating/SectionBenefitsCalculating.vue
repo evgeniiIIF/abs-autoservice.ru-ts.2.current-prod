@@ -68,8 +68,6 @@ const bonusAmountCount = computed(
 }
 
 .benefits-calculating {
-  margin: 0 -10px;
-
   &__body {
     padding: 30px 20px;
     border-radius: 20px;

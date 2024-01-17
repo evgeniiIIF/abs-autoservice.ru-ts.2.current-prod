@@ -39,7 +39,12 @@ const navItems = computed(() =>
         };
       }
 
-      return { name: item.title, link: item.url };
+      return [
+        { name: item.title, link: item.url },
+        ...(item.dropdown
+          ?.filter((subitem) => subitem.is_active)
+          ?.map((subitem) => ({ name: subitem.title, link: subitem.url })) ?? []),
+      ];
     }),
 );
 </script>
@@ -81,7 +86,7 @@ const navItems = computed(() =>
     </div>
     <div class="header-mobile-menu__body">
       <div class="header-mobile-menu__nav">
-        <AppNavigation v-if="!isOpenServicesMenu" :items="navItems" />
+        <AppNavigation v-if="!isOpenServicesMenu" :items="navItems.flat()" />
         <div v-if="isOpenServicesMenu" class="header-mobile-menu__services">
           <div v-if="!activeServiceId" class="header-mobile-menu__service-item" @click="closeServicesMenu">
             <IcArrowLeft /><span>Услуги</span>
