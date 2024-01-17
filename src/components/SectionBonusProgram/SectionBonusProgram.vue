@@ -1,11 +1,12 @@
 <script setup lang="ts">
 import { useBonusStore } from '~/store/bonus';
 
-const { isMobile } = useMediaSizes();
+const { isMobile, isDesktop } = useMediaSizes();
 
 const { bonusState } = useBonusStore();
 
 const [isOpenModal, openModal, closeModal] = useBooleanState();
+const [isAnimationActiveCards, goAnimation, stopAnimation] = useBooleanState();
 </script>
 
 <template>
@@ -15,21 +16,49 @@ const [isOpenModal, openModal, closeModal] = useBooleanState();
       <NuxtPicture src="images/bonus-program-card.png" format="webp" />
       <div class="bonus-program__image-ellipse"></div>
     </div>
-    <div class="bonus-program__items">
-      <div v-for="item in bonusState.bonusPageInfo?.bonus_program" :key="item.title" class="bonus-program__item">
-        <p class="bonus-program__item-title">{{ item.title }}</p>
-        <p class="bonus-program__item-text">{{ item.description }}</p>
+    <div class="bonus-program__body">
+      <div class="bonus-program__content">
+        <div class="bonus-program__items">
+          <div v-for="item in bonusState.bonusPageInfo?.bonus_program" :key="item.title" class="bonus-program__item">
+            <p class="bonus-program__item-title">{{ item.title }}</p>
+            <p class="bonus-program__item-text">{{ item.description }}</p>
+          </div>
+        </div>
+        <!-- eslint-disable-next-line vuejs-accessibility/mouse-events-have-key-events -->
+        <UINewButton
+          class="bonus-program__button"
+          :is-full-width="isMobile"
+          @click="openModal()"
+          @mouseover="goAnimation"
+          @mouseleave="stopAnimation"
+        >
+          Получить карту
+        </UINewButton>
+        <CallbackFormModal :is-open="isOpenModal" title-modal="Получить карту" @on-close="closeModal" />
+      </div>
+
+      <div v-if="isDesktop" class="bonus-program__cards">
+        <BonusAnimationCards :isAnimationActive="isAnimationActiveCards" />
       </div>
     </div>
-    <UINewButton class="bonus-program__button" :is-full-width="isMobile" @click="openModal()">
-      Получить карту
-    </UINewButton>
-    <CallbackFormModal :is-open="isOpenModal" title-modal="Получить карту" @on-close="closeModal" />
   </section>
 </template>
 
 <style lang="scss">
 .bonus-program {
+  &__body {
+    display: flex;
+  }
+  &__content {
+    @include desktop {
+      margin-right: 70px;
+    }
+  }
+
+  &__cards {
+    flex: 1 1 auto;
+  }
+
   &__title {
     margin-bottom: 20px;
     color: var(--1, #fff);
