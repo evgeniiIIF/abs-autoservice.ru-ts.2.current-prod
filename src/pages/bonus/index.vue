@@ -56,6 +56,10 @@ const breadcrumbItems = computed(() => [
     overflow: initial;
   }
 
+  &__program {
+    margin-bottom: 40px;
+  }
+
   &__ellipse-top {
     position: absolute;
     width: 255px;
@@ -80,7 +84,7 @@ const breadcrumbItems = computed(() => [
   }
 
   &__calculating {
-    margin-top: 40px;
+    // margin-top: 40px;
   }
 
   &__picture {
