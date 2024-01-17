@@ -40,15 +40,15 @@ useSchemaOrg([
       addressRegion: 'Ставропольский край',
       addressLocality: 'Ставрополь',
       streetAddress: 'ул. Доваторцев, дом 47Б',
-      telephone: contactsState.value.data?.phone,
-      email: contactsState.value.data?.mail,
       location: {
         '@type': 'GeoCoordinates',
         latitude: '45.011535074585',
         longitude: '41.9290724999999',
       },
-      openingHours: contactsState.value.data?.time_work,
     },
+    telephone: +`${contactsState.value.data?.phone?.match(/\d+/g)?.join('')}`,
+    email: contactsState.value.data?.mail,
+    openingHours: contactsState.value.data?.time_work,
   },
 ]);
 </script>

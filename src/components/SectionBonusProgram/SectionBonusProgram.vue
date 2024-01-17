@@ -37,7 +37,8 @@ const [isAnimationActiveCards, goAnimation, stopAnimation] = useBooleanState();
         <CallbackFormModal :is-open="isOpenModal" title-modal="Получить карту" @on-close="closeModal" />
       </div>
 
-      <div v-if="isDesktop" class="bonus-program__cards">
+      <!-- eslint-disable-next-line vuejs-accessibility/mouse-events-have-key-events -->
+      <div v-if="isDesktop" class="bonus-program__cards" @mouseover="goAnimation" @mouseleave="stopAnimation">
         <BonusAnimationCards :isAnimationActive="isAnimationActiveCards" />
       </div>
     </div>
