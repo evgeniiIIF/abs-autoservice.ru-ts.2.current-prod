@@ -154,6 +154,7 @@ const bonusAmountCount = computed(
   }
 
   &__slider {
+    min-height: 10px;
     margin-bottom: 30px;
   }
 
