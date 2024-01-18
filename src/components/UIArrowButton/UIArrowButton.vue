@@ -22,6 +22,7 @@ defineProps<UIArrowButton>();
   border: 1px solid var(--black-black-90, #2a2a2a);
   background: var(--black-black-90, #2a2a2a);
   cursor: pointer;
+  transition: 0.3s all;
 
   &--arrow-left {
     border-radius: 10px 0 0 10px;
@@ -29,6 +30,10 @@ defineProps<UIArrowButton>();
 
   &--arrow-right {
     border-radius: 0 10px 10px 0;
+  }
+
+  @include hover {
+    background: var(--black-black-80, #2a2a2a);
   }
 }
 </style>

@@ -43,10 +43,6 @@ withDefaults(defineProps<UIButtonProps>(), {
   transition: all 0.3s ease;
   cursor: pointer;
 
-  @include hover {
-    background: var(--green-green-90, #1aaba6);
-  }
-
   &:focus {
     border: 2px solid var(--green-green-40, #99d9d7);
   }
@@ -70,6 +66,10 @@ withDefaults(defineProps<UIButtonProps>(), {
   &--fill-solid {
     &.icon-button--color-green {
       background: var(--green-primary, #00a19c);
+
+      @include hover {
+        background: var(--green-green-90, #1aaba6);
+      }
     }
 
     &.icon-button--color-dark {

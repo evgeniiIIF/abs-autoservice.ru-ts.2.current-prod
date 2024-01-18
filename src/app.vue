@@ -12,10 +12,69 @@ useHead({
   ],
   link: [
     {
+      rel: 'apple-touch-icon',
+      sizes: '57x57',
+      href: contactsState.value.data?.favicon?.path,
+    },
+    {
+      rel: 'apple-touch-icon',
+      sizes: '60x60',
+      href: contactsState.value.data?.favicon?.path,
+    },
+    {
+      rel: 'apple-touch-icon',
+      sizes: '72x72',
+      href: contactsState.value.data?.favicon?.path,
+    },
+    {
+      rel: 'apple-touch-icon',
+      sizes: '76x76',
+      href: contactsState.value.data?.favicon?.path,
+    },
+    {
+      rel: 'apple-touch-icon',
+      sizes: '114x114',
+      href: contactsState.value.data?.favicon?.path,
+    },
+    {
+      rel: 'apple-touch-icon',
+      sizes: '120x120',
+      href: contactsState.value.data?.favicon?.path,
+    },
+    {
+      rel: 'apple-touch-icon',
+      sizes: '144x144',
+      href: contactsState.value.data?.favicon?.path,
+    },
+    {
+      rel: 'apple-touch-icon',
+      sizes: '152x152',
+      href: contactsState.value.data?.favicon?.path,
+    },
+    {
+      rel: 'apple-touch-icon',
+      sizes: '180x180',
+      href: contactsState.value.data?.favicon?.path,
+    },
+    {
       rel: 'icon',
-      type: 'image/png',
       sizes: '192x192',
-      href: contactsState.value.data?.favicon?.path ?? '',
+      href: contactsState.value.data?.favicon?.path,
+    },
+    {
+      rel: 'icon',
+      sizes: '32x32',
+      href: contactsState.value.data?.favicon?.path,
+    },
+    {
+      rel: 'icon',
+      sizes: '96x96',
+      href: contactsState.value.data?.favicon?.path,
+    },
+    {
+      rel: 'icon',
+      sizes: '16x16',
+      href: contactsState.value.data?.favicon?.path,
     },
   ],
 });

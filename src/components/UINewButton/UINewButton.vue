@@ -53,10 +53,6 @@ withDefaults(defineProps<UIButtonProps>(), {
   cursor: pointer;
   @include buttonText;
 
-  @include hover {
-    background: var(--green-green-90, #1aaba6);
-  }
-
   &:focus {
     border: 2px solid var(--green-green-40, #99d9d7);
   }
@@ -92,10 +88,18 @@ withDefaults(defineProps<UIButtonProps>(), {
   &--fill-solid {
     &.button--color-green {
       background: var(--green-primary, #00a19c);
+
+      @include hover {
+        background: var(--green-green-90, #1aaba6);
+      }
     }
 
     &.button--color-dark {
       background: var(--black-black-90, #2a2a2a);
+
+      @include hover {
+        background: var(--black-black-80, #2a2a2a);
+      }
     }
   }
 
