@@ -7,7 +7,7 @@ useHead({
   meta: [
     {
       name: 'yandex-verification',
-      content: '90a24cae833c653e',
+      content: '340fa8faf29e96ac',
     },
   ],
   link: [
