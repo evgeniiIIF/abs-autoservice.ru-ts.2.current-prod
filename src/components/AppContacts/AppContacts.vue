@@ -13,7 +13,7 @@ const { isMobile } = useMediaSizes();
 
 <template>
   <div class="contacts" :class="{ 'contacts--in-mobile-menu': inMobileMenu }">
-    <a class="contacts__phone" :href="`tel:${contactsState.data?.phone?.match(/\d+/g)?.join('')}`">{{
+    <a class="contacts__phone" :href="`tel:${contactsState.data?.phone?.match(/\d+/g)?.join('').trim()}`">{{
       contactsState.data?.phone
     }}</a>
     <div class="contacts__callback">

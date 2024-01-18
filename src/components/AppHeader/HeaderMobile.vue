@@ -36,7 +36,7 @@ watch(
                 color="dark"
                 fill="outline"
                 tag="a"
-                :href="`tel:${contactsState.data?.phone?.match(/\d+/g)?.join('')}`"
+                :href="`tel:${contactsState.data?.phone?.match(/\d+/g)?.join('').trim()}`"
                 target="_blank"
                 rel="noopener noreferrer"
               >

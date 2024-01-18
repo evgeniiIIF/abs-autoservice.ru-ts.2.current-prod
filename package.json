@@ -18,6 +18,7 @@
     "@nuxtjs/eslint-config-typescript": "^12.1.0",
     "@nuxtjs/eslint-module": "^4.1.0",
     "@nuxtjs/google-fonts": "^3.0.2",
+    "@nuxtjs/html-validator": "^1.6.0",
     "@nuxtjs/i18n": "^7.3.1",
     "@types/lodash.debounce": "^4.0.9",
     "@types/node": "^20.8.7",

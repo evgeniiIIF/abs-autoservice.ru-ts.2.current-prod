@@ -97,7 +97,7 @@ const workTimeItems = computed(() => contactsState.value.data?.time_work?.split(
               v-for="item in menuState.footer.official_links?.filter((item) => item.is_active)"
               :key="item.link"
               :to="item.link"
-              target="_black"
+              target="_blank"
             >
               {{ item.title }}
             </NuxtLink>

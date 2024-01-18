@@ -6,7 +6,7 @@ const { menuState } = useMenuStore();
 
 <template>
   <ul class="cards">
-    <li v-for="card in menuState.footer.icons" :key="card.name" class="cards__item" :alt="card.name">
+    <li v-for="card in menuState.footer.icons" :key="card.name" class="cards__item">
       <img :src="card.original_url" :alt="card.file_name" :title="card.file_name" />
     </li>
   </ul>

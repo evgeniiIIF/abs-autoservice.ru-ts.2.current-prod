@@ -131,7 +131,7 @@ const scrollToAnchor = () => {
   &__title {
     max-width: 290px;
     margin-bottom: 10px;
-    color: var(--1, #fff);
+    color: var(--white, #fff);
 
     @include TitleXSBold;
 

@@ -49,7 +49,7 @@ onUnmounted(() => {
     <div class="container">
       <div class="section-services__body">
         <div class="section-services__title-wrapper">
-          <h3 class="section-services__title">Услуги</h3>
+          <p class="section-services__title">Услуги</p>
         </div>
         <div class="section-services__list">
           <div v-for="item in converterItems" :key="item.title" class="section-services__item">
@@ -93,7 +93,7 @@ onUnmounted(() => {
 
   &__title {
     @include SubtitleLBold;
-    color: var(--1, #fff);
+    color: var(--white, #fff);
 
     @include desktop {
       position: sticky;

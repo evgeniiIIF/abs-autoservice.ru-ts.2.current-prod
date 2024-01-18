@@ -13,7 +13,9 @@ const { contactsState } = useContactsStore();
     <p class="call-us-banner__subtitle">звоните нам по телефону</p>
     <div class="call-us-banner__contacts">
       <p class="call-us-banner__phone">{{ contactsState.data?.phone }}</p>
-      <UINewButton tag="a" :href="`tel:${contactsState.data?.phone?.match(/\d+/g)?.join('')}`">Позвонить</UINewButton>
+      <UINewButton tag="a" :href="`tel:${contactsState.data?.phone?.match(/\d+/g)?.join('').trim()}`"
+        >Позвонить</UINewButton
+      >
     </div>
   </div>
 </template>

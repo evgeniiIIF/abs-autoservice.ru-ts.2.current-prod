@@ -38,7 +38,7 @@ const { vacanciesState } = useVacanciesStore();
 
   &__title {
     margin-bottom: 20px;
-    color: var(--1, #fff);
+    color: var(--white, #fff);
     @include TitleSBold;
   }
 

@@ -21,7 +21,7 @@ defineProps<QuestionProps>();
 
   &__title {
     @include SubtitleLBold;
-    color: var(--1, #fff);
+    color: var(--white, #fff);
 
     @include desktop {
       @include TitleSBold;

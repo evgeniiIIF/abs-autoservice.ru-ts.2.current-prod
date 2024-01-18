@@ -93,7 +93,7 @@ const bonusAmountCount = computed(
 
   &__title {
     margin-bottom: 10px;
-    color: var(--1, #fff);
+    color: var(--white, #fff);
     @include SubtitleLBold;
 
     @include tablet {

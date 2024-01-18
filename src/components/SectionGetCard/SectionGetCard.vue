@@ -13,7 +13,7 @@ const [isModalOpen, openModal, closeModal] = useBooleanState();
     <div class="container">
       <div class="get-card__body">
         <div class="get-card__content">
-          <h3 class="get-card__title">{{ bonusState.bonusCard?.title }}</h3>
+          <p class="get-card__title">{{ bonusState.bonusCard?.title }}</p>
           <p v-if="!isMobile" class="get-card__text--green">{{ bonusState.bonusCard?.subtitle }}</p>
           <p v-if="!isMobile" class="get-card__text">{{ bonusState.bonusCard?.text }}</p>
           <div v-if="isMobile" class="get-card__image get-card__image--mobile">
@@ -104,7 +104,7 @@ const [isModalOpen, openModal, closeModal] = useBooleanState();
     max-width: 460px;
     margin-bottom: 20px;
     @include SubtitleLBold;
-    color: var(--1, #fff);
+    color: var(--white, #fff);
 
     @include desktop {
       max-width: none;

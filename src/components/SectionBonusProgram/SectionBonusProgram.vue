@@ -62,7 +62,7 @@ const [isAnimationActiveCards, goAnimation, stopAnimation] = useBooleanState();
 
   &__title {
     margin-bottom: 20px;
-    color: var(--1, #fff);
+    color: var(--white, #fff);
     @include SubtitleLBold;
 
     @include desktop {

@@ -29,7 +29,7 @@ const onInput = (e: Event) => {
     line-height: 20px; /* 142.857% */
     color: #b3baba;
     border: 1px solid var(--7, #a7b0b0);
-    background: var(--1, #fff);
+    background: var(--white, #fff);
   }
   &__icon {
     position: absolute;

@@ -69,7 +69,7 @@ useSchemaOrg([
                   <li class="top-info-contacts-page__item item-top-info-contacts-page">
                     <p class="item-top-info-contacts-page__title">Звоните</p>
                     <a
-                      :href="`tel:${contactsState.data?.phone?.match(/\d+/g)?.join('')}`"
+                      :href="`tel:${contactsState.data?.phone?.match(/\d+/g)?.join('').trim()}`"
                       class="item-top-info-contacts-page__text item-top-info-contacts-page__text--phone"
                       >{{ contactsState.data?.phone }}</a
                     >
@@ -144,7 +144,7 @@ useSchemaOrg([
 .info-contacts-page {
   &__title {
     margin-bottom: 20px;
-    color: var(--1, #fff);
+    color: var(--white, #fff);
     @include TitleSBold;
   }
 

@@ -6,7 +6,7 @@ defineProps<ServicePopularServiceCard>();
 
 <template>
   <NuxtLink class="service-popular-service-card" :to="link">
-    <h3 class="service-popular-service-card__title">{{ title }}</h3>
+    <p class="service-popular-service-card__title">{{ title }}</p>
     <p class="service-popular-service-card__price">от {{ price }} ₽</p>
   </NuxtLink>
 </template>

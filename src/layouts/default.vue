@@ -38,14 +38,14 @@ await useAsyncData('global', async () => {
 const response = await useAppFetch<{
   data: {
     script?: { id?: string; innerHTML?: string; key?: string; src?: string; type?: string }[];
-    noscript?: { innerHTML?: string }[];
+    noscript?: { id: string; noscript?: string }[];
   };
 }>('/counters');
 await servicesEffects.fetchServicesTree();
 
 useHead({
-  script: response.data.value?.data.script,
-  noscript: response.data.value?.data.noscript,
+  script: response.data.value?.data.script?.map(({ id, ...item }) => ({ ...item })),
+  noscript: response.data.value?.data.noscript?.map(({ id, ...item }) => ({ innerHTML: item.noscript })),
 });
 
 watch(

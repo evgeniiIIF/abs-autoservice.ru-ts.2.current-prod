@@ -36,7 +36,7 @@ const [isOpenModal, openModal, closeModal] = useBooleanState();
             <div class="service-info__callback-row">
               <a
                 class="service-info__callback-phone"
-                :href="`tel:${contactsState.data?.phone?.match(/\d+/g)?.join('')}`"
+                :href="`tel:${contactsState.data?.phone?.match(/\d+/g)?.join('').trim()}`"
                 >{{ contactsState.data?.phone }}</a
               >
               <UINewButton target="__blank" :has-full-width="!isDesktop" @click="openModal"
@@ -66,11 +66,11 @@ const [isOpenModal, openModal, closeModal] = useBooleanState();
           <div class="service-info__callback-row">
             <a
               class="service-info__callback-phone"
-              :href="`tel:${contactsState.data?.phone?.match(/\d+/g)?.join('')}`"
+              :href="`tel:${contactsState.data?.phone?.match(/\d+/g)?.join('').trim()}`"
               >{{ contactsState.data?.phone }}</a
             >
             <UINewButton
-              :href="`tel:${contactsState.data?.phone?.match(/\d+/g)?.join('')}`"
+              :href="`tel:${contactsState.data?.phone?.match(/\d+/g)?.join('').trim()}`"
               target="__blank"
               :has-full-width="!isDesktop"
               @click="openModal"

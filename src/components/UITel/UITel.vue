@@ -16,7 +16,7 @@ const phoneLink = computed(() => {
 </script>
 
 <template>
-  <a class="tel" :href="`tel:${phoneLink}`">
+  <a class="tel" :href="`tel:${phoneLink?.trim()}`">
     {{ phoneNumber }}
   </a>
 </template>

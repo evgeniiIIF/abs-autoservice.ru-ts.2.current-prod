@@ -17,6 +17,7 @@ export default defineNuxtConfig({
     'nuxt-simple-sitemap',
     'nuxt-schema-org',
     'nuxt-delay-hydration',
+    '@nuxtjs/html-validator'
   ],
   delayHydration: {
     // enables nuxt-delay-hydration in dev mode for testing

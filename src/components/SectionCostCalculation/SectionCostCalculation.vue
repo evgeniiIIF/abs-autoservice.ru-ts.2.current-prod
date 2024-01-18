@@ -53,7 +53,7 @@ const { calculatorBlockState } = useCalculatorBlockStore();
   }
 
   &__title {
-    color: var(--1, #fff);
+    color: var(--white, #fff);
 
     @include SubtitleLBold;
 

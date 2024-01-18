@@ -29,7 +29,7 @@ withDefaults(defineProps<ReviewCardProps>(), {
     </div>
     <div class="review-card__content">
       <div class="review-card__content-top">
-        <h3 class="review-card__review-name">{{ item?.name }}</h3>
+        <p class="review-card__review-name">{{ item?.name }}</p>
         <div v-if="size === 'standard'" class="review-card__review-rating">
           <IcStarRating v-for="star in Number(item?.rating)" :key="star" :font-controlled="false" :filled="true" />
         </div>
