@@ -108,7 +108,12 @@ const openRequisitesModal = (isModal: boolean) => {
       <div class="about__banner" :style="!isMobile ? bannerBackgroundStyle : undefined">
         <div class="about__banner-ellipse" />
         <div v-if="isMobile" class="about__banner-image-block">
-          <NuxtPicture class="about__banner-image" :src="aboutState?.guarantee_img?.img_path" />
+          <NuxtPicture
+            class="about__banner-image"
+            :src="aboutState?.guarantee_img?.img_path"
+            :alt="aboutState?.guarantee_img?.img_alt"
+            :title="aboutState?.guarantee_img?.img_title"
+          />
         </div>
         <div class="about__banner-content">
           <h2 class="about__banner-title">

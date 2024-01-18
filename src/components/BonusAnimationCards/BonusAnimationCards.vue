@@ -12,10 +12,10 @@ defineProps<BonusAnimationCardsProps>();
     }"
   >
     <div class="bonus-animation-cards__card bonus-animation-cards__card--back ibg">
-      <NuxtPicture src="images/bonus-card.png" format="webp" />
+      <NuxtPicture src="images/bonus-card.png" format="webp" alt="бонусная карта" />
     </div>
     <div class="bonus-animation-cards__card bonus-animation-cards__card--front ibg">
-      <NuxtPicture src="images/bonus-card.png" format="webp" />
+      <NuxtPicture src="images/bonus-card.png" format="webp" alt="бонусная карта" />
     </div>
   </div>
 </template>

@@ -17,7 +17,7 @@ const [isModalOpen, openModal, closeModal] = useBooleanState();
           <p v-if="!isMobile" class="get-card__text--green">{{ bonusState.bonusCard?.subtitle }}</p>
           <p v-if="!isMobile" class="get-card__text">{{ bonusState.bonusCard?.text }}</p>
           <div v-if="isMobile" class="get-card__image get-card__image--mobile">
-            <NuxtPicture src="images/get-card.png" format="webp" loading="lazy" />
+            <NuxtPicture src="images/get-card.png" format="webp" loading="lazy" :alt="bonusState.bonusCard?.title" />
           </div>
           <div class="get-card__button">
             <UINewButton :is-full-width="isMobile" @click.stop="openModal">{{

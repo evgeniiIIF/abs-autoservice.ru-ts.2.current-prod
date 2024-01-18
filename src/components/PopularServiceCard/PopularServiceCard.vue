@@ -25,6 +25,7 @@ const [isModalOpen, openModal, closeModal] = useBooleanState();
       :src="service.image_icon ?? 'undefined'"
       format="webp,png,jpg"
       loading="lazy"
+      :alt="service.title"
     />
     <div class="popular-service-card__content">
       <p class="popular-service-card__title">{{ service.title }}</p>

@@ -131,7 +131,12 @@ watch(
         :text="'Специалист свяжется с Вами в ближайшее время.'"
       />
       <div v-if="!(isMobile || isSuccess)" class="callback-form__image">
-        <NuxtPicture src="/images/callback-form.png" format="webp,png,jpg" loading="lazy" />
+        <NuxtPicture
+          src="/images/callback-form.png"
+          format="webp,png,jpg"
+          loading="lazy"
+          alt="обслуживания и ремонта автомобиля"
+        />
       </div>
     </div>
   </div>

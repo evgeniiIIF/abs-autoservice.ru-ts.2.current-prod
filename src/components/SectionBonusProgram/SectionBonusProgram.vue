@@ -13,7 +13,7 @@ const [isAnimationActiveCards, goAnimation, stopAnimation] = useBooleanState();
   <section class="bonus-program">
     <h1 class="bonus-program__title">{{ bonusState.bonusPageInfo?.title }}</h1>
     <div v-if="isMobile" class="bonus-program__image ibg">
-      <NuxtPicture src="images/bonus-program-card.png" format="webp" />
+      <NuxtPicture src="images/bonus-program-card.png" format="webp" :alt="bonusState.bonusPageInfo?.title" />
       <div class="bonus-program__image-ellipse"></div>
     </div>
     <div class="bonus-program__body">

@@ -190,7 +190,7 @@ const goBackQuestion = () => {
       </div>
     </div>
     <div class="quest__image ibg">
-      <NuxtPicture src="images/quest.png" format="webp" loading="lazy" />
+      <NuxtPicture src="images/quest.png" alt="ремонта автомобиля" format="webp" loading="lazy" />
     </div>
   </form>
 </template>
