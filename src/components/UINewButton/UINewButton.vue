@@ -29,7 +29,7 @@ withDefaults(defineProps<UIButtonProps>(), {
       'button--text-color-white': textColor === 'white',
       'button--text-color-green': textColor === 'green',
     }"
-    :type="tag === 'a' ? '' : type"
+    :type="tag === 'a' ? undefined : type"
   >
     <component :is="icon?.component" v-if="icon?.slot === 'left'" />
     <slot />
