@@ -25,7 +25,7 @@ withDefaults(defineProps<UIButtonProps>(), {
       'icon-button--color-green': color === 'green',
       'icon-button--color-dark': color === 'dark',
     }"
-    :type="tag === 'a' ? '' : 'button'"
+    :type="tag === 'a' ? undefined : 'button'"
   >
     <slot />
   </component>

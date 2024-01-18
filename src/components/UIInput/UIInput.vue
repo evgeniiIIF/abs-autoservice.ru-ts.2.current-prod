@@ -3,6 +3,9 @@ import { vMaska } from 'maska';
 import type { UIInputEmits, UIInputProps } from '@/components/UIInput/UIInput.types';
 
 defineProps<UIInputProps>();
+defineOptions({
+  inheritAttrs: false,
+});
 const emits = defineEmits<UIInputEmits>();
 
 const onInputHandler = (event: Event): void => {

@@ -43,7 +43,7 @@ withDefaults(defineProps<ReviewCardProps>(), {
             rel="noopener noreferrer"
             :href="item.link"
             :icon="{ component: size === 'small' ? IcArrowRight : IcArrowUpRight, slot: 'right' }"
-            :has-full-width="size === 'small'"
+            :is-full-width="size === 'small'"
             color="dark"
           >
             <span>Читать весь отзыв</span>

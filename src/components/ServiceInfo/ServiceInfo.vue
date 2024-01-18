@@ -39,9 +39,7 @@ const [isOpenModal, openModal, closeModal] = useBooleanState();
                 :href="`tel:${contactsState.data?.phone?.match(/\d+/g)?.join('').trim()}`"
                 >{{ contactsState.data?.phone }}</a
               >
-              <UINewButton target="__blank" :has-full-width="!isDesktop" @click="openModal"
-                >Заказать звонок</UINewButton
-              >
+              <UINewButton target="__blank" :is-full-width="!isDesktop" @click="openModal">Заказать звонок</UINewButton>
             </div>
           </div>
         </div>
@@ -53,7 +51,7 @@ const [isOpenModal, openModal, closeModal] = useBooleanState();
                 {{ servicesState.service?.preview_text ?? 'Цена мажет отличатся в зависимости от марки и модели авто' }}
               </p>
             </div>
-            <UINewButton :has-full-width="!isDesktop" @click.stop="openModal">Записаться на СТО</UINewButton>
+            <UINewButton :is-full-width="!isDesktop" @click.stop="openModal">Записаться на СТО</UINewButton>
           </div>
           <div class="service-info__questions">
             <HasQuestionsBanner />
@@ -72,7 +70,7 @@ const [isOpenModal, openModal, closeModal] = useBooleanState();
             <UINewButton
               :href="`tel:${contactsState.data?.phone?.match(/\d+/g)?.join('').trim()}`"
               target="__blank"
-              :has-full-width="!isDesktop"
+              :is-full-width="!isDesktop"
               @click="openModal"
               >Заказать звонок</UINewButton
             >

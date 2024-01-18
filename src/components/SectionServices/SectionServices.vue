@@ -54,7 +54,7 @@ onUnmounted(() => {
         <div class="section-services__list">
           <div v-for="item in converterItems" :key="item.title" class="section-services__item">
             <SectionServicesItemMobile v-if="isMobile" :item="item" />
-            <SectionServicesItem v-else :item="item" :style="{ height: `${cardHeight}px` }" />
+            <SectionServicesItem v-else :item="item" :style="{ height: cardHeight ? `${cardHeight}px` : null }" />
           </div>
         </div>
       </div>

@@ -53,7 +53,7 @@ const workTimeItems = computed(() => contactsState.value.data?.time_work?.split(
         <div class="footer-desktop__contacts-title">Контакты</div>
         <a
           class="footer-desktop__contacts-phone"
-          :href="`tel:${contactsState.data?.phone?.match(/\d+/g)?.join('')}`"
+          :href="`tel:${contactsState.data?.phone?.match(/\d+/g)?.join('').trim()}`"
           target="_blank"
           rel="noopener noreferrer"
         >
