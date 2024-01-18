@@ -2,6 +2,9 @@
 export default defineNuxtConfig({
   srcDir: 'src',
   devtools: true,
+  nitro: {
+    compressPublicAssets: true,
+  },
   modules: [
     '@pinia/nuxt',
     '@nuxtjs/google-fonts',
@@ -13,8 +16,13 @@ export default defineNuxtConfig({
     'nuxt-viewport',
     'nuxt-simple-sitemap',
     'nuxt-schema-org',
+    'nuxt-delay-hydration',
   ],
-
+  delayHydration: {
+    // enables nuxt-delay-hydration in dev mode for testing
+    debug: process.env.NODE_ENV === 'development',
+    mode: 'mount',
+  },
   googleFonts: {
     overwriting: true,
     preload: true,
