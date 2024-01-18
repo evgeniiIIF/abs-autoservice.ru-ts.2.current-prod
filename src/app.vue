@@ -4,6 +4,12 @@ import { useContactsStore } from './store/contacts';
 const { contactsState } = useContactsStore();
 
 useHead({
+  meta: [
+    {
+      name: 'yandex-verification',
+      content: '90a24cae833c653e',
+    },
+  ],
   link: [
     {
       rel: 'icon',
