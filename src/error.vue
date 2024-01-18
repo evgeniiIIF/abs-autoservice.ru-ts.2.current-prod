@@ -32,7 +32,7 @@ const getIsHasHistory = () => window.history.length > 2;
       <div class="error-page__container">
         <div class="error-page__ellipse" />
         <div class="error-page__content">
-          <NuxtPicture class="error-page__picture" :src="errorState.image" :alt="errorState.image_alt" />
+          <NuxtPicture class="error-page__picture" :src="errorState.image" :alt="errorState.image_alt" loading="lazy" />
           <div class="error-page__info">
             <div class="error-page__top">
               <h1 class="error-page__title">{{ errorState.status }}</h1>

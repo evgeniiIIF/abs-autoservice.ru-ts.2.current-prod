@@ -78,6 +78,7 @@ export default defineNuxtConfig({
   },
   site: {
     url: process.env.NUXT_PUBLICK_BASE_APP_URL,
+    name: process.env.NUXT_PUBLICK_BASE_APP_URL,
   },
   viewport: {
     breakpoints: {
