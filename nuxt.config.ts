@@ -2,6 +2,12 @@
 export default defineNuxtConfig({
   srcDir: 'src',
   devtools: true,
+  features: {
+    inlineStyles: false,
+  },
+  experiments: {
+    extractCSS: false,
+  },
   nitro: {
     compressPublicAssets: true,
   },
@@ -15,15 +21,9 @@ export default defineNuxtConfig({
     '@nuxt/image',
     'nuxt-viewport',
     'nuxt-simple-sitemap',
-    'nuxt-schema-org',
-    'nuxt-delay-hydration',
+    'nuxt-schema-org', 
     '@nuxtjs/html-validator'
   ],
-  delayHydration: {
-    // enables nuxt-delay-hydration in dev mode for testing
-    debug: process.env.NODE_ENV === 'development',
-    mode: 'init',
-  },
   googleFonts: {
     overwriting: true,
     preload: true,
